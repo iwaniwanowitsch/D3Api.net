@@ -29,7 +29,7 @@ namespace D3apiData
                 if (value == null)
                     return;
                 _cachePath = value;
-                OnPropertyChanged("Save");
+                OnPropertyChanged("PropertyChanged");
             }
         }
 
@@ -45,7 +45,7 @@ namespace D3apiData
             set
             {
                 _locale = value;
-                OnPropertyChanged("Save");
+                OnPropertyChanged("PropertyChanged");
             }
         }
 
@@ -79,7 +79,7 @@ namespace D3apiData
             {
                 _collectMode = value;
                 OnPropertyChanged("CollectMode");
-                OnPropertyChanged("Save");
+                OnPropertyChanged("PropertyChanged");
             }
         }
 

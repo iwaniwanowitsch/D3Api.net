@@ -9,7 +9,7 @@ namespace D3apiData
     class D3Api
     {
         private readonly ISerializer<Properties> _serializer = new SerializerXML<Properties>();
-        private const string _configfile = @"config.xml";
+        private const string Configfile = @"config.xml";
         private D3Data _data;
 
         internal D3WebClient Webclient { get; set; }
@@ -36,7 +36,7 @@ namespace D3apiData
                 SaveConfig();
             }
             Config.PropertyChanged += new PropertyChangedEventHandler((o, args) => { if (args.PropertyName == "CollectMode") _data = new D3Data(Config); });
-            Config.PropertyChanged += new PropertyChangedEventHandler((o, args) => { if (args.PropertyName == "Save") SaveConfig(); });
+            Config.PropertyChanged += new PropertyChangedEventHandler((o, args) => { if (args.PropertyName == "PropertyChanged") SaveConfig(); });
             Webclient = new D3WebClient();
             _data = new D3Data(Config);
         }
@@ -45,7 +45,7 @@ namespace D3apiData
         /// explicitely save config to file
         /// </summary>
         public void SaveConfig() {
-            _serializer.Serialize(Config,_configfile);
+            _serializer.Serialize(Config,Configfile);
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace D3apiData
         public void LoadConfig()
         {
             try { 
-                Config = _serializer.Deserialize(_configfile);
+                Config = _serializer.Deserialize(Configfile);
             }
             catch (InvalidOperationException)
             {

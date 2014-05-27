@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace D3apiData.API
 {
-    interface ID3Collector
+    public interface ID3Collector
     {
         Stream CollectStreamFromUrl(string url);
 

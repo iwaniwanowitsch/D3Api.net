@@ -41,7 +41,7 @@ namespace D3apiData.API
         private const string Apipath = "/api/d3/";
 
         private string _battletag = "";
-        private readonly ID3Collector _collector;
+        private ID3Collector _collector;
 
         /// <summary>
         /// default constructor
@@ -73,16 +73,16 @@ namespace D3apiData.API
             switch (mode)
             {
                 case CollectMode.Online:
-                    _collector = new OnlineCollector(new D3WebClient());
+                    Collector = new OnlineCollector(new D3WebClient());
                     break;
                 case CollectMode.Offline:
-                    _collector = new CacheCollector(properties.CachePath);
+                    Collector = new CacheCollector(properties.CachePath);
                     break;
                 case CollectMode.TryCacheThenOnline:
-                    _collector = new TryCacheThenOnlineCollector(new CacheCollector(properties.CachePath), new OnlineCollector(new D3WebClient()));
+                    Collector = new TryCacheThenOnlineCollector(new CacheCollector(properties.CachePath), new OnlineCollector(new D3WebClient()));
                     break;
                 case CollectMode.OnlineWithCache:
-                    _collector = new OnlineWithCacheCollector(new CacheCollector(properties.CachePath), new OnlineCollector(new D3WebClient()));
+                    Collector = new OnlineWithCacheCollector(new CacheCollector(properties.CachePath), new OnlineCollector(new D3WebClient()));
                     break;
             }
         }
@@ -94,6 +94,20 @@ namespace D3apiData.API
         {
             get { return _battletag; }
             set { _battletag = value; }
+        }
+
+
+        /// <summary>
+        /// data collector for d3 api
+        /// </summary>
+        public ID3Collector Collector
+        {
+            get { return _collector; }
+            set
+            {
+                if(value != null)
+                    _collector = value;
+            }
         }
 
         /// <summary>
@@ -117,7 +131,7 @@ namespace D3apiData.API
         /// <returns>object from api</returns>
         public T GetApiType<T>(ApiTypes type, string id) where T : class, IBaseObject
         {
-            using (var stream = _collector.CollectStreamFromUrl(_urlLookup[type](id)))
+            using (var stream = Collector.CollectStreamFromUrl(_urlLookup[type](id)))
                 return JsonUtility.ObjectFromJsonStream<T>(stream);
         }
 
@@ -129,7 +143,7 @@ namespace D3apiData.API
         /// <returns>object from api</returns>
         public T GetApiType<T>(string url) where T : class, IBaseObject
         {
-            using (var stream = _collector.CollectStreamFromUrl(url))
+            using (var stream = Collector.CollectStreamFromUrl(url))
                 return JsonUtility.ObjectFromJsonStream<T>(stream);
         }
 
@@ -213,7 +227,7 @@ namespace D3apiData.API
         /// <returns></returns>
         public D3Icon GetSkillIconById(string iconid, SkillIconSizes size = SkillIconSizes.Medium)
         {
-            using (var stream = _collector.CollectStreamFromUrl(_urlLookup[ApiTypes.IconSkill]((int)size + "/" + iconid)))
+            using (var stream = Collector.CollectStreamFromUrl(_urlLookup[ApiTypes.IconSkill]((int)size + "/" + iconid)))
                 return new D3Icon(stream);
         }
 
@@ -225,7 +239,7 @@ namespace D3apiData.API
         /// <returns></returns>
         public D3Icon GetItemIconById(string iconid, ItemIconSizes size = ItemIconSizes.Large)
         {
-            using (var stream = _collector.CollectStreamFromUrl(_urlLookup[ApiTypes.IconItem](size.ToString().ToLower() + "/" + iconid)))
+            using (var stream = Collector.CollectStreamFromUrl(_urlLookup[ApiTypes.IconItem](size.ToString().ToLower() + "/" + iconid)))
                 return new D3Icon(stream);
         }
     }
