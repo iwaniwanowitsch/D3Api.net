@@ -242,5 +242,15 @@ namespace D3apiData.API
             using (var stream = Collector.CollectStreamFromUrl(_urlLookup[ApiTypes.IconItem](size.ToString().ToLower() + "/" + iconid)))
                 return new D3Icon(stream);
         }
+
+        /// <summary>
+        /// gets Item object from api by tooltip params
+        /// </summary>
+        /// <param name="tooltip"></param>
+        /// <returns></returns>
+        public Item GetItemByTooltipParams(string tooltip)
+        {
+            return GetItemById(tooltip.Split(new[] {"/"}, StringSplitOptions.None)[1]);
+        }
     }
 }

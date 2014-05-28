@@ -23,8 +23,9 @@ namespace D3apiData
             //api.Data.Battletag = "iwaniwanow#2854";
             //var hero = api.Data.GetHeroById("41139248");
             //var icon = api.Data.GetItemIconById("unique_helm_014_x1_demonhunter_male");
-            api.Config.CollectMode = CollectMode.TryCacheThenOnline;
-            var item = api.Data.GetItemById("Unique_Ring_107_x1");
+            //api.Config.CollectMode = CollectMode.TryCacheThenOnline;
+            //api.Data.Battletag = "iwaniwanow#2854";
+            var item = api.Data.GetItemByTooltipParams("item/ClYIy-bypQwSBwgEFaLQXCIdyfq8oB1-dlWhHZsGAMsddEWniR3z1Ue0MIsCOI4CQABQElgEYJMCgAFGpQF0RaeJrQF-VrMutQHJW5KkuAGm0s_XAcABBxjEwualBFAIWAI");
             Console.WriteLine(item.Name);
 
             Console.ReadLine();
