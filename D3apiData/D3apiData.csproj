@@ -33,8 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>Referenzen\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Json.net\Bin\Net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -48,11 +49,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\ApiEnumerates.cs" />
+    <Compile Include="API\ApiId.cs" />
     <Compile Include="API\ApiTypes.cs" />
+    <Compile Include="API\UrlConstruction\IconUrlConstructionProvider.cs" />
+    <Compile Include="API\UrlConstruction\ArtisanUrlConstructionProvider.cs" />
+    <Compile Include="API\UrlConstruction\FollowerUrlConstructionProvider.cs" />
+    <Compile Include="API\UrlConstruction\ItemUrlConstructionProvider.cs" />
+    <Compile Include="API\UrlConstruction\HeroUrlConstructionProvider.cs" />
+    <Compile Include="API\UrlConstruction\ProfileUrlConstructionProvider.cs" />
+    <Compile Include="API\UrlConstruction\BasicUrlConstructionProvider.cs" />
+    <Compile Include="API\FilepathProviders\BasicFilePathProviderChainMember.cs" />
     <Compile Include="API\CacheCollector.cs" />
     <Compile Include="API\CollectMode.cs" />
     <Compile Include="API\D3Data.cs" />
+    <Compile Include="API\FilepathProviders\DefaultFilePathProvider.cs" />
+    <Compile Include="API\FilepathProviders\IFilePathProvider.cs" />
+    <Compile Include="API\FilepathProviders\IconFilePathProvider.cs" />
+    <Compile Include="API\FilepathProviders\ItemFilePathProvider.cs" />
+    <Compile Include="API\FilepathProviders\HeroFilePathProvider.cs" />
+    <Compile Include="API\UrlConstruction\IUrlConstructionProvider.cs" />
     <Compile Include="API\OnlineWithCacheCollector.cs" />
+    <Compile Include="API\FilepathProviders\ProfileFilePathProvider.cs" />
     <Compile Include="API\TryCacheThenOnlineCollector.cs" />
     <Compile Include="API\ID3Collector.cs" />
     <Compile Include="API\Objects\Artisan\Artisan.cs" />

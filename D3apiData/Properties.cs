@@ -1,8 +1,6 @@
 ﻿
-using D3apiData.API;
-using System;
 using System.ComponentModel;
-using System.Xml.Serialization;
+using D3apiData.API;
 
 namespace D3apiData
 {

@@ -4,8 +4,18 @@ using System.Text;
 
 namespace D3apiData.Helper
 {
+    /// <summary>
+    /// helper class for md5 hashes. static.
+    /// </summary>
     public static class MD5Helper
     {
+
+        /// <summary>
+        /// creates md5 hash from string input
+        /// </summary>
+        /// <param name="textToHash"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public static string GetMd5Hash(string textToHash)
         {
             if (textToHash == null)

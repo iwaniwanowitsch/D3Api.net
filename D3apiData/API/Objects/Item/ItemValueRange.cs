@@ -1,6 +1,7 @@
 ﻿/*
  * taken from: https://github.com/zetoken/D3-API-by-ZTn/blob/master/D3%20API%20by%20ZTn/Items/ItemValueRange.cs
  */
+
 using System;
 using System.Runtime.Serialization;
 

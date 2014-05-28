@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using D3apiData.API.Objects;
 using D3apiData.API.Objects.Artisan;
 using D3apiData.API.Objects.Follower;
@@ -7,8 +8,8 @@ using D3apiData.API.Objects.Hero;
 using D3apiData.API.Objects.Images;
 using D3apiData.API.Objects.Item;
 using D3apiData.API.Objects.Profile;
+using D3apiData.API.UrlConstruction;
 using D3apiData.JSON;
-using D3apiData.WebClient;
 
 namespace D3apiData.API
 {
@@ -17,73 +18,24 @@ namespace D3apiData.API
     /// </summary>
     public class D3Data
     {
-        private readonly Dictionary<Locales, string> _hostLookup = new Dictionary<Locales, string>
-        {
-            { Locales.en_US, "us" },
-            { Locales.en_GB, "eu" },
-            { Locales.es_MX, "us" },
-            { Locales.es_ES, "eu" },
-            { Locales.it_IT, "eu" },
-            { Locales.pt_PT, "eu" },
-            { Locales.pt_BR, "us" },
-            { Locales.fr_FR, "eu" },
-            { Locales.ru_RU, "eu" },
-            { Locales.pl_PL, "eu" },
-            { Locales.de_DE, "eu" },
-            { Locales.ko_KR, "kr" },
-            { Locales.zh_TW, "tw" }
-        };
-
-        private readonly Dictionary<ApiTypes, Func<string, string>> _urlLookup = new Dictionary<ApiTypes, Func<string, string>>();
-
-        private const string Mediahost = ".media.blizzard.com/d3/";
-        private const string Apihost = ".battle.net";
-        private const string Apipath = "/api/d3/";
-
-        private string _battletag = "";
+        private readonly Properties _properties;
         private ID3Collector _collector;
+        private readonly List<IUrlConstructionProvider> _urlConstructors;
 
         /// <summary>
         /// default constructor
         /// </summary>
         /// <param name="properties">must hold correct CollectMode</param>
-        public D3Data(Properties properties, ID3Collector collector)
+        /// <param name="collector"></param>
+        /// <param name="urlConstructors"></param>
+        public D3Data(Properties properties, ID3Collector collector, List<IUrlConstructionProvider> urlConstructors)
         {
-            if (properties == null)
-                throw new ArgumentNullException("properties");
-            if (collector == null)
-                throw new ArgumentNullException("collector");
+            if (properties == null) throw new ArgumentNullException("properties");
+            if (collector == null) throw new ArgumentNullException("collector");
+            if (urlConstructors == null) throw new ArgumentNullException("urlConstructors");
+            _properties = properties;
             _collector = collector;
-
-            var mode = properties.CollectMode;
-            _urlLookup[ApiTypes.Profile] =
-                btag =>
-                    _hostLookup[properties.Locale] + Apihost + Apipath + "profile/" +
-                    Uri.EscapeUriString(FormatBattletag(btag) + "/");
-            _urlLookup[ApiTypes.Hero] =
-                hero =>
-                    _hostLookup[properties.Locale] + Apihost + Apipath + "profile/" +
-                    Uri.EscapeUriString(FormatBattletag(Battletag) + "/hero/" + hero);
-            _urlLookup[ApiTypes.Item] =
-                item => _hostLookup[properties.Locale] + Apihost + Apipath + "data/item/" + Uri.EscapeUriString(item);
-            _urlLookup[ApiTypes.Follower] =
-                follower => _hostLookup[properties.Locale] + Apihost + Apipath + "data/follower/" + Uri.EscapeUriString(follower);
-            _urlLookup[ApiTypes.Artisan] =
-                artisan =>
-                    _hostLookup[properties.Locale] + Apihost + Apipath + "data/artisan/" + Uri.EscapeUriString(artisan);
-            _urlLookup[ApiTypes.IconItem] =
-                itemIcon => _hostLookup[properties.Locale] + Mediahost + "icons/items/" + Uri.EscapeUriString(itemIcon) + ".png";
-            _urlLookup[ApiTypes.IconSkill] =
-                skillIcon => _hostLookup[properties.Locale] + Mediahost + "icons/skills/" + Uri.EscapeUriString(skillIcon) + ".png";
-        }
-
-        /// <summary>
-        /// battletag of user
-        /// </summary>
-        public string Battletag
-        {
-            get { return _battletag; }
-            set { _battletag = value; }
+            _urlConstructors = urlConstructors;
         }
 
 
@@ -100,28 +52,17 @@ namespace D3apiData.API
             }
         }
 
-        /// <summary>
-        /// format battletag to match url format
-        /// </summary>
-        /// <param name="battletag"></param>
-        /// <returns></returns>
-        private string FormatBattletag(string battletag)
-        {
-            Battletag = battletag;
-            return battletag.Replace("#", "-");
-        }
-
 
         /// <summary>
         /// gets object from api by type and id
         /// </summary>
         /// <typeparam name="T">type of returning object</typeparam>
-        /// <param name="type">apitype</param>
         /// <param name="id">identifier of object</param>
         /// <returns>object from api</returns>
-        public T GetApiType<T>(ApiTypes type, string id) where T : class, IBaseObject
+        public T GetApiType<T>(ApiId id) where T : class, IBaseObject
         {
-            using (var stream = Collector.CollectStreamFromUrl(_urlLookup[type](id)))
+            var urlconstructor = _urlConstructors.First(c => c.ApiType == typeof (T));
+            using (var stream = Collector.CollectStreamFromUrl(urlconstructor.ConstructUrlFromId(id,_properties.Locale)))
                 return JsonUtility.ObjectFromJsonStream<T>(stream);
         }
 
@@ -144,29 +85,28 @@ namespace D3apiData.API
         /// <returns></returns>
         public Profile GetProfileByBattletag(string battletag)
         {
-            return GetApiType<Profile>(ApiTypes.Profile, battletag);
+            return GetApiType<Profile>(new ApiId(battletag));
         }
 
         /// <summary>
-        /// gets Hero object from api by id; battletag must be set
+        /// gets Hero object from api by battletag and heroid
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="battletag"></param>
+        /// <param name="heroid"></param>
         /// <returns></returns>
-        public Hero GetHeroById(string id)
+        public Hero GetHeroById(string battletag, string heroid)
         {
-            if (Battletag != "")
-                return GetApiType<Hero>(ApiTypes.Hero, id);
-            throw new ArgumentException("battletag");
+            return GetApiType<Hero>(new ApiId(battletag, heroid));
         }
 
         /// <summary>
         /// gets Item object from api by id
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="itemid"></param>
         /// <returns></returns>
-        public Item GetItemById(string id)
+        public Item GetItemById(string itemid)
         {
-            return GetApiType<Item>(ApiTypes.Item, id);
+            return GetApiType<Item>(new ApiId(itemid));
         }
 
         /// <summary>
@@ -176,7 +116,7 @@ namespace D3apiData.API
         /// <returns></returns>
         public Artisan GetArtisanByName(string artisan)
         {
-            return GetApiType<Artisan>(ApiTypes.Artisan, artisan);
+            return GetApiType<Artisan>(new ApiId(artisan));
         }
 
         /// <summary>
@@ -196,7 +136,7 @@ namespace D3apiData.API
         /// <returns></returns>
         public Follower GetFollowerByName(string follower)
         {
-            return GetApiType<Follower>(ApiTypes.Follower, follower);
+            return GetApiType<Follower>(new ApiId(follower));
         }
 
         /// <summary>
@@ -217,7 +157,9 @@ namespace D3apiData.API
         /// <returns></returns>
         public D3Icon GetSkillIconById(string iconid, SkillIconSizes size = SkillIconSizes.Medium)
         {
-            using (var stream = Collector.CollectStreamFromUrl(_urlLookup[ApiTypes.IconSkill]((int)size + "/" + iconid)))
+            var urlconstructor = _urlConstructors.First(c => c.ApiType == typeof(D3Icon));
+            var apiid = new ApiId("skills/" + (int) size + "/", iconid);
+            using (var stream = Collector.CollectStreamFromUrl(urlconstructor.ConstructUrlFromId(apiid,_properties.Locale)))
                 return new D3Icon(stream);
         }
 
@@ -229,7 +171,10 @@ namespace D3apiData.API
         /// <returns></returns>
         public D3Icon GetItemIconById(string iconid, ItemIconSizes size = ItemIconSizes.Large)
         {
-            using (var stream = Collector.CollectStreamFromUrl(_urlLookup[ApiTypes.IconItem](size.ToString().ToLower() + "/" + iconid)))
+            var urlconstructor = _urlConstructors.First(c => c.ApiType == typeof(D3Icon));
+            var apiid = new ApiId("items/" + size.ToString().ToLower() + "/", iconid);
+            var url = urlconstructor.ConstructUrlFromId(apiid, _properties.Locale);
+            using (var stream = Collector.CollectStreamFromUrl(url))
                 return new D3Icon(stream);
         }
 

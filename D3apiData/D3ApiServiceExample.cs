@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using D3apiData.API;
+using D3apiData.API.FilepathProviders;
+using D3apiData.API.UrlConstruction;
 using D3apiData.Persistence;
 using D3apiData.WebClient;
-using System.ComponentModel;
 
 namespace D3apiData
 {
@@ -10,7 +13,6 @@ namespace D3apiData
     {
         private readonly ISerializer<Properties> _serializer = new SerializerXML<Properties>();
         private const string Configfile = @"config.xml";
-        private D3Data _data;
         private ID3Collector _collector;
 
         public D3WebClient Webclient { get; set; }
@@ -23,10 +25,7 @@ namespace D3apiData
         /// <summary>
         /// all data fetching goes through this object
         /// </summary>
-        public D3Data Data
-        {
-            get { return _data; }
-        }
+        public D3Data Data { get; private set; }
 
         public D3ApiServiceExample()
         {
@@ -36,18 +35,41 @@ namespace D3apiData
                 Config = new Properties(Locales.en_GB,CollectMode.TryCacheThenOnline);
                 SaveConfig();
             }
-            Config.PropertyChanged += new PropertyChangedEventHandler((o, args) => { if (args.PropertyName == "CollectMode") _data = new D3Data(Config, _collector); });
+            Config.PropertyChanged += new PropertyChangedEventHandler((o, args) => {
+                                                                                       if (args.PropertyName !=
+                                                                                           "CollectMode") return;
+                                                                                       SetCollector(Config.CollectMode);
+                                                                                       Data.Collector = _collector;
+            });
             Config.PropertyChanged += new PropertyChangedEventHandler((o, args) => { if (args.PropertyName == "PropertyChanged") SaveConfig(); });
             Webclient = new D3WebClient();
 
             var mode = Config.CollectMode;
-            var cacheCollector = new CacheCollector(Config.CachePath,
-                new HeroFilePathProvider(
-                    new ProfileFilePathProvider(
-                        new ItemFilePathProvider(
-                            new IconFilePathProvider(
-                                new DefaultFilePathProvider())))));
+            SetCollector(mode);
+            
+            var urlConstructorList = new List<IUrlConstructionProvider>
+            {
+                new ProfileUrlConstructionProvider(),
+                new HeroUrlConstructionProvider(),
+                new ItemUrlConstructionProvider(),
+                new ArtisanUrlConstructionProvider(),
+                new FollowerUrlConstructionProvider(),
+                new IconUrlConstructionProvider()
+            };
+            Data = new D3Data(Config, _collector, urlConstructorList);
+        }
+
+        public void SetCollector(CollectMode mode)
+        {
+            var defaultFilePathProvider = new DefaultFilePathProvider(); // end of chain
+            var iconFilePathProvider = new IconFilePathProvider(defaultFilePathProvider);
+            var itemFilePathProvider = new ItemFilePathProvider(iconFilePathProvider);
+            var profileFilePathProvider = new ProfileFilePathProvider(itemFilePathProvider);
+            var heroFilePathProvider = new HeroFilePathProvider(profileFilePathProvider); // begin of chain
+
+            var cacheCollector = new CacheCollector(Config.CachePath, heroFilePathProvider);
             var onlineCollector = new OnlineCollector(Webclient);
+
             switch (mode)
             {
                 case CollectMode.Online:
@@ -63,8 +85,6 @@ namespace D3apiData
                     _collector = new OnlineWithCacheCollector(cacheCollector, onlineCollector);
                     break;
             }
-
-            _data = new D3Data(Config, _collector);
         }
 
         /// <summary>
