@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
 
-namespace D3apiData.API
+namespace D3apiData.API.Collectors
 {
     /// <summary />
     public interface ID3Collector

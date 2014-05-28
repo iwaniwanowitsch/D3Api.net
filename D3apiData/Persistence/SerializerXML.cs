@@ -8,12 +8,12 @@ namespace D3apiData.Persistence
     /// serializes to xml format
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class SerializerXML<T> : ISerializer<T> where T : class
+    public class SerializerXml<T> : ISerializer<T> where T : class
     {
         /// <summary>
         /// empty constructor
         /// </summary>
-        public SerializerXML()
+        public SerializerXml()
         {
 
         }
@@ -27,7 +27,7 @@ namespace D3apiData.Persistence
                 using (Stream stream = File.Open(filepath, FileMode.OpenOrCreate))
                 {
                     if (stream.Length != 0) {
-                        XmlSerializer ser = new XmlSerializer(typeof(T));
+                        var ser = new XmlSerializer(typeof(T));
                         serialized = (T)ser.Deserialize(stream);
                     }
                 }
@@ -46,7 +46,7 @@ namespace D3apiData.Persistence
             {
                 using (Stream stream = File.Open(filepath, FileMode.Create))
                 {
-                    XmlSerializer ser = new XmlSerializer(typeof(T));
+                    var ser = new XmlSerializer(typeof(T));
                     ser.Serialize(stream, obj);
                 }
             }

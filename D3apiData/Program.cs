@@ -1,5 +1,4 @@
 ﻿using System;
-using D3apiData.API;
 
 namespace D3apiData
 {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using D3apiData.API.Collectors;
 using D3apiData.API.Objects;
 using D3apiData.API.Objects.Artisan;
 using D3apiData.API.Objects.Follower;
@@ -18,22 +19,21 @@ namespace D3apiData.API
     /// </summary>
     public class D3Data
     {
-        private readonly Properties _properties;
+        private readonly Locales _locale;
         private ID3Collector _collector;
         private readonly List<IUrlConstructionProvider> _urlConstructors;
 
         /// <summary>
         /// default constructor
         /// </summary>
-        /// <param name="properties">must hold correct CollectMode</param>
+        /// <param name="locale"></param>
         /// <param name="collector"></param>
         /// <param name="urlConstructors"></param>
-        public D3Data(Properties properties, ID3Collector collector, List<IUrlConstructionProvider> urlConstructors)
+        public D3Data(Locales locale, ID3Collector collector, List<IUrlConstructionProvider> urlConstructors)
         {
-            if (properties == null) throw new ArgumentNullException("properties");
             if (collector == null) throw new ArgumentNullException("collector");
             if (urlConstructors == null) throw new ArgumentNullException("urlConstructors");
-            _properties = properties;
+            _locale = locale;
             _collector = collector;
             _urlConstructors = urlConstructors;
         }
@@ -62,7 +62,7 @@ namespace D3apiData.API
         public T GetApiType<T>(ApiId id) where T : class, IBaseObject
         {
             var urlconstructor = _urlConstructors.First(c => c.ApiType == typeof (T));
-            using (var stream = Collector.CollectStreamFromUrl(urlconstructor.ConstructUrlFromId(id,_properties.Locale)))
+            using (var stream = Collector.CollectStreamFromUrl(urlconstructor.ConstructUrlFromId(id,_locale)))
                 return JsonUtility.ObjectFromJsonStream<T>(stream);
         }
 
@@ -159,7 +159,7 @@ namespace D3apiData.API
         {
             var urlconstructor = _urlConstructors.First(c => c.ApiType == typeof(D3Icon));
             var apiid = new ApiId("skills/" + (int) size + "/", iconid);
-            using (var stream = Collector.CollectStreamFromUrl(urlconstructor.ConstructUrlFromId(apiid,_properties.Locale)))
+            using (var stream = Collector.CollectStreamFromUrl(urlconstructor.ConstructUrlFromId(apiid, _locale)))
                 return new D3Icon(stream);
         }
 
@@ -173,7 +173,7 @@ namespace D3apiData.API
         {
             var urlconstructor = _urlConstructors.First(c => c.ApiType == typeof(D3Icon));
             var apiid = new ApiId("items/" + size.ToString().ToLower() + "/", iconid);
-            var url = urlconstructor.ConstructUrlFromId(apiid, _properties.Locale);
+            var url = urlconstructor.ConstructUrlFromId(apiid,_locale);
             using (var stream = Collector.CollectStreamFromUrl(url))
                 return new D3Icon(stream);
         }

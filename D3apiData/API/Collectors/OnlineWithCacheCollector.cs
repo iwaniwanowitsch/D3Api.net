@@ -2,14 +2,14 @@
 using System.IO;
 using System.Threading.Tasks;
 
-namespace D3apiData.API
+namespace D3apiData.API.Collectors
 {
-    class TryCacheThenOnlineCollector : ID3Collector
+    class OnlineWithCacheCollector : ID3Collector
     {
         private readonly CacheCollector _cacheCollector;
         private readonly OnlineCollector _onlineCollector;
 
-        public TryCacheThenOnlineCollector(CacheCollector cacheCollector, OnlineCollector onlineCollector)
+        public OnlineWithCacheCollector(CacheCollector cacheCollector, OnlineCollector onlineCollector)
         {
             if (cacheCollector == null)
                 throw new ArgumentNullException("cacheCollector");
@@ -22,18 +22,15 @@ namespace D3apiData.API
 
         public Stream CollectStreamFromUrl(string url)
         {
-            var cached = _cacheCollector.CollectStreamFromUrl(url);
-            if (cached != null)
-                return cached;
             using (var onlineStream = _onlineCollector.CollectStreamFromUrl(url))
             {
-                return File.Open(_cacheCollector.CacheFileFromStream(onlineStream,url), FileMode.Open);
+                return File.Open(_cacheCollector.CacheFileFromStream(onlineStream, url), FileMode.Open);
             }
         }
 
         public Task<Stream> CollectStreamFromUrlAsync(string url)
         {
-            return new Task<Stream>(() => CollectStreamFromUrl(url));
+            return Task<Stream>.Factory.StartNew(() => CollectStreamFromUrl(url));
         }
     }
 }

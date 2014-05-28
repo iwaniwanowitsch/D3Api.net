@@ -7,7 +7,7 @@ using D3apiData.API.Objects;
 using D3apiData.JSON;
 using D3apiData.Persistence;
 
-namespace D3apiData.API
+namespace D3apiData.API.Collectors
 {
     class CacheCollector : ID3Collector
     {
@@ -60,7 +60,7 @@ namespace D3apiData.API
 
         public Task<Stream> CollectStreamFromUrlAsync(string url)
         {
-            return new Task<Stream>(() => CollectStreamFromUrl(url));
+            return Task<Stream>.Factory.StartNew(() => CollectStreamFromUrl(url));
         }
 
         public string CacheFileFromStream(Stream stream, string url)

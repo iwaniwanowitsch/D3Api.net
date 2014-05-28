@@ -3,7 +3,7 @@ using System.IO;
 using System.Threading.Tasks;
 using D3apiData.WebClient;
 
-namespace D3apiData.API
+namespace D3apiData.API.Collectors
 {
     class OnlineCollector : ID3Collector
     {

@@ -7,7 +7,7 @@ namespace D3apiData
     /// <summary>
     /// structure to take Config data
     /// </summary>
-    public class Properties : INotifyPropertyChanged
+    public class PropertiesExample : INotifyPropertyChanged
     {
         private CollectMode _collectMode;
         private Locales _locale;
@@ -84,7 +84,7 @@ namespace D3apiData
         /// <summary>
         /// constructor with default values
         /// </summary>
-        public Properties()
+        public PropertiesExample()
         {
             _cachePath = @"cache\";
             _locale = Locales.en_GB;
@@ -96,7 +96,7 @@ namespace D3apiData
         /// </summary>
         /// <param name="locale"></param>
         /// <param name="collectMode"></param>
-        public Properties(Locales locale, CollectMode collectMode)
+        public PropertiesExample(Locales locale, CollectMode collectMode)
             : this()
         {
             _locale = locale;

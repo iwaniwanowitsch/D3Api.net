@@ -50,7 +50,6 @@
   <ItemGroup>
     <Compile Include="API\ApiEnumerates.cs" />
     <Compile Include="API\ApiId.cs" />
-    <Compile Include="API\ApiTypes.cs" />
     <Compile Include="API\UrlConstruction\IconUrlConstructionProvider.cs" />
     <Compile Include="API\UrlConstruction\ArtisanUrlConstructionProvider.cs" />
     <Compile Include="API\UrlConstruction\FollowerUrlConstructionProvider.cs" />
@@ -59,7 +58,7 @@
     <Compile Include="API\UrlConstruction\ProfileUrlConstructionProvider.cs" />
     <Compile Include="API\UrlConstruction\BasicUrlConstructionProvider.cs" />
     <Compile Include="API\FilepathProviders\BasicFilePathProviderChainMember.cs" />
-    <Compile Include="API\CacheCollector.cs" />
+    <Compile Include="API\Collectors\CacheCollector.cs" />
     <Compile Include="API\CollectMode.cs" />
     <Compile Include="API\D3Data.cs" />
     <Compile Include="API\FilepathProviders\DefaultFilePathProvider.cs" />
@@ -68,10 +67,10 @@
     <Compile Include="API\FilepathProviders\ItemFilePathProvider.cs" />
     <Compile Include="API\FilepathProviders\HeroFilePathProvider.cs" />
     <Compile Include="API\UrlConstruction\IUrlConstructionProvider.cs" />
-    <Compile Include="API\OnlineWithCacheCollector.cs" />
+    <Compile Include="API\Collectors\OnlineWithCacheCollector.cs" />
     <Compile Include="API\FilepathProviders\ProfileFilePathProvider.cs" />
-    <Compile Include="API\TryCacheThenOnlineCollector.cs" />
-    <Compile Include="API\ID3Collector.cs" />
+    <Compile Include="API\Collectors\TryCacheThenOnlineCollector.cs" />
+    <Compile Include="API\Collectors\ID3Collector.cs" />
     <Compile Include="API\Objects\Artisan\Artisan.cs" />
     <Compile Include="API\Objects\Artisan\ArtisanLevel.cs" />
     <Compile Include="API\Objects\Artisan\ArtisanTier.cs" />
@@ -120,7 +119,7 @@
     <Compile Include="API\Objects\Profile\ProfileProgress.cs" />
     <Compile Include="API\Objects\Profile\ProfileTimeplayed.cs" />
     <Compile Include="API\Objects\TestObject.cs" />
-    <Compile Include="API\OnlineCollector.cs" />
+    <Compile Include="API\Collectors\OnlineCollector.cs" />
     <Compile Include="D3ApiServiceExample.cs" />
     <Compile Include="Helper\MD5Helper.cs" />
     <Compile Include="JSON\JsonUtility.cs" />
@@ -128,7 +127,7 @@
     <Compile Include="Persistence\ISerializer.cs" />
     <Compile Include="Persistence\StreamSerializer.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Properties.cs" />
+    <Compile Include="PropertiesExample.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Persistence\SerializerXML.cs" />
     <Compile Include="WebClient\D3WebClient.cs" />

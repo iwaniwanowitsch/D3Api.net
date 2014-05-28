@@ -18,8 +18,8 @@ namespace D3apiData.API
         }
 
         /// <summary />
-        /// <param name="id"></param>
-        /// <param name="id2"></param>
+        /// <param name="id">battletag | icon type</param>
+        /// <param name="id2">heroid | icon id</param>
         /// <exception cref="ArgumentNullException"></exception>
         public ApiId(string id, string id2)
         {

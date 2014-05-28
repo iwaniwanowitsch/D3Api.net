@@ -5,7 +5,10 @@ using System.Threading.Tasks;
 
 namespace D3apiData.WebClient
 {
-    class D3WebClient
+    /// <summary>
+    /// class to capsule http access
+    /// </summary>
+    public class D3WebClient
     {
 
         /// <summary>
@@ -84,7 +87,7 @@ namespace D3apiData.WebClient
         /// <returns></returns>
         public Task<Stream> GetStreamAsync(string url)
         {
-            return new Task<Stream>(() => GetStreamSync(url));
+            return Task<Stream>.Factory.StartNew(() => GetStreamSync(url));
         }
 
         /// <summary>

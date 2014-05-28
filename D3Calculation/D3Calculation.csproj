@@ -41,9 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CalculatorStats\DamageStats.cs" />
-    <Compile Include="CalculatorStats\DamageTypes.cs" />
+    <Compile Include="BonusDamageCalc\IBonusDamageCalculator.cs" />
     <Compile Include="DamageCalculator.cs" />
+    <Compile Include="ItemValueRangeExtension.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

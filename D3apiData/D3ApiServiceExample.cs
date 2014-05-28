@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using D3apiData.API;
+using D3apiData.API.Collectors;
 using D3apiData.API.FilepathProviders;
 using D3apiData.API.UrlConstruction;
 using D3apiData.Persistence;
@@ -9,30 +10,37 @@ using D3apiData.WebClient;
 
 namespace D3apiData
 {
-    class D3ApiServiceExample
+    /// <summary>
+    /// possible implementation of a d3api
+    /// </summary>
+    public class D3ApiServiceExample
     {
-        private readonly ISerializer<Properties> _serializer = new SerializerXML<Properties>();
+        private readonly ISerializer<PropertiesExample> _serializer = new SerializerXml<PropertiesExample>();
         private const string Configfile = @"config.xml";
         private ID3Collector _collector;
 
+        /// <summary>
+        /// webclient to use for fetching http data
+        /// </summary>
         public D3WebClient Webclient { get; set; }
 
         /// <summary>
         /// change properties in this object
         /// </summary>
-        public Properties Config { get; set; }
+        public PropertiesExample Config { get; set; }
 
         /// <summary>
         /// all data fetching goes through this object
         /// </summary>
         public D3Data Data { get; private set; }
 
+        /// <summary />
         public D3ApiServiceExample()
         {
             LoadConfig();
             if (Config == null)
             {
-                Config = new Properties(Locales.en_GB,CollectMode.TryCacheThenOnline);
+                Config = new PropertiesExample(Locales.en_GB,CollectMode.TryCacheThenOnline);
                 SaveConfig();
             }
             Config.PropertyChanged += new PropertyChangedEventHandler((o, args) => {
@@ -56,9 +64,13 @@ namespace D3apiData
                 new FollowerUrlConstructionProvider(),
                 new IconUrlConstructionProvider()
             };
-            Data = new D3Data(Config, _collector, urlConstructorList);
+            Data = new D3Data(Config.Locale, _collector, urlConstructorList);
         }
 
+        /// <summary>
+        /// sets collector from collectmode
+        /// </summary>
+        /// <param name="mode"></param>
         public void SetCollector(CollectMode mode)
         {
             var defaultFilePathProvider = new DefaultFilePathProvider(); // end of chain

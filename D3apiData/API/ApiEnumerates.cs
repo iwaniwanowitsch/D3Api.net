@@ -39,7 +39,7 @@
     /// <summary>
     /// skill icon sizes
     /// </summary>
-    public enum SkillIconSizes : int
+    public enum SkillIconSizes
     {
         /// <summary />
         Small = 21,
