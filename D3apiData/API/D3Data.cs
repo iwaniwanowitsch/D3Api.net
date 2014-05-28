@@ -47,8 +47,14 @@ namespace D3apiData.API
         /// default constructor
         /// </summary>
         /// <param name="properties">must hold correct CollectMode</param>
-        public D3Data(Properties properties)
+        public D3Data(Properties properties, ID3Collector collector)
         {
+            if (properties == null)
+                throw new ArgumentNullException("properties");
+            if (collector == null)
+                throw new ArgumentNullException("collector");
+            _collector = collector;
+
             var mode = properties.CollectMode;
             _urlLookup[ApiTypes.Profile] =
                 btag =>
@@ -69,22 +75,6 @@ namespace D3apiData.API
                 itemIcon => _hostLookup[properties.Locale] + Mediahost + "icons/items/" + Uri.EscapeUriString(itemIcon) + ".png";
             _urlLookup[ApiTypes.IconSkill] =
                 skillIcon => _hostLookup[properties.Locale] + Mediahost + "icons/skills/" + Uri.EscapeUriString(skillIcon) + ".png";
-
-            switch (mode)
-            {
-                case CollectMode.Online:
-                    Collector = new OnlineCollector(new D3WebClient());
-                    break;
-                case CollectMode.Offline:
-                    Collector = new CacheCollector(properties.CachePath);
-                    break;
-                case CollectMode.TryCacheThenOnline:
-                    Collector = new TryCacheThenOnlineCollector(new CacheCollector(properties.CachePath), new OnlineCollector(new D3WebClient()));
-                    break;
-                case CollectMode.OnlineWithCache:
-                    Collector = new OnlineWithCacheCollector(new CacheCollector(properties.CachePath), new OnlineCollector(new D3WebClient()));
-                    break;
-            }
         }
 
         /// <summary>

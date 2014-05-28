@@ -4,7 +4,7 @@ using D3apiData.API.Objects.Item;
 namespace D3apiData.API.Objects.Artisan
 {
     /// <summary>
-    /// D3Api: Reagant
+    /// D3ApiServiceExample: Reagant
     /// </summary>
     [DataContract]
     public class Reagent : ErrorObject

@@ -3,7 +3,7 @@
 namespace D3apiData.API.Objects.Skill
 {
     /// <summary>
-    /// D3Api: Skill
+    /// D3ApiServiceExample: Skill
     /// </summary>
     [DataContract]
     public class Skill : ErrorObject

@@ -3,7 +3,7 @@
 namespace D3apiData.API.Objects
 {
     /// <summary>
-    /// D3Api: basic error class, all api object will inherit
+    /// D3ApiServiceExample: basic error class, all api object will inherit
     /// </summary>
     [DataContract]
     public class ErrorObject : IBaseObject

@@ -3,7 +3,7 @@
 namespace D3apiData.API.Objects.Item
 {
     /// <summary>
-    /// D3Api: SocketedGems
+    /// D3ApiServiceExample: SocketedGems
     /// </summary>
     [DataContract]
     public class SocketedGems : ErrorObject

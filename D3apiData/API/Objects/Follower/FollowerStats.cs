@@ -3,7 +3,7 @@
 namespace D3apiData.API.Objects.Follower
 {
     /// <summary>
-    /// D3Api: FollowerStats
+    /// D3ApiServiceExample: FollowerStats
     /// </summary>
     [DataContract]
     public class FollowerStats : ErrorObject

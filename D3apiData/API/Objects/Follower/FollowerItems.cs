@@ -4,7 +4,7 @@ using D3apiData.API.Objects.Item;
 namespace D3apiData.API.Objects.Follower
 {
     /// <summary>
-    /// D3Api: FollowerItems
+    /// D3ApiServiceExample: FollowerItems
     /// </summary>
     [DataContract]
     public class FollowerItems : ErrorObject

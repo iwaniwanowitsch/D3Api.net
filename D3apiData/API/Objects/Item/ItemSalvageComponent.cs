@@ -3,7 +3,7 @@
 namespace D3apiData.API.Objects.Item
 {
     /// <summary>
-    /// D3Api: ItemSalvageComponent
+    /// D3ApiServiceExample: ItemSalvageComponent
     /// </summary>
     [DataContract]
     public class ItemSalvageComponent : ErrorObject

@@ -3,7 +3,7 @@
 namespace D3apiData.API.Objects.Item
 {
     /// <summary>
-    /// D3Api: RandomAffix
+    /// D3ApiServiceExample: RandomAffix
     /// </summary>
     [DataContract]
     public class RandomAffix : ErrorObject

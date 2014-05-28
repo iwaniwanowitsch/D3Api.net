@@ -4,7 +4,7 @@ using D3apiData.API.Objects.Item;
 namespace D3apiData.API.Objects.Hero
 {
     /// <summary>
-    /// D3Api: HeroItems
+    /// D3ApiServiceExample: HeroItems
     /// </summary>
     [DataContract]
     public class HeroItems : ErrorObject

@@ -4,7 +4,7 @@ using D3apiData.API.Objects.Item;
 namespace D3apiData.API.Objects.Artisan
 {
     /// <summary>
-    /// D3Api: Recipe
+    /// D3ApiServiceExample: Recipe
     /// </summary>
     [DataContract]
     public class Recipe : ErrorObject

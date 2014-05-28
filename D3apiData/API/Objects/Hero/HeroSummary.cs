@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 namespace D3apiData.API.Objects.Hero
 {
     /// <summary>
-    /// D3Api: HeroSummary
+    /// D3ApiServiceExample: HeroSummary
     /// </summary>
     [DataContract]
     public class HeroSummary : ErrorObject

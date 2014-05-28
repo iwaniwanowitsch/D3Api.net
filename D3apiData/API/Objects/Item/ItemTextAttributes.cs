@@ -3,7 +3,7 @@
 namespace D3apiData.API.Objects.Item
 {
     /// <summary>
-    /// D3Api: ItemTextAttributes
+    /// D3ApiServiceExample: ItemTextAttributes
     /// </summary>
     [DataContract]
     public class ItemTextAttributes : ErrorObject

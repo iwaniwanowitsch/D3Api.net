@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace D3apiData.API.Objects.Item
 {
     /// <summary>
-    /// D3Api: Set
+    /// D3ApiServiceExample: Set
     /// </summary>
     [DataContract]
     public class Set : ErrorObject

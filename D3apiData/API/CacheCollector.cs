@@ -6,18 +6,118 @@ using System.Threading.Tasks;
 using D3apiData.API.Objects;
 using D3apiData.JSON;
 using D3apiData.Persistence;
+using D3apiData.Helper;
 
 namespace D3apiData.API
 {
+    public interface IFilePathProvider
+    {
+        void AppendFilePathBuilder(string url, StringBuilder builder);
+    }
+
+    public abstract class BasicFilePathProviderChainMember : IFilePathProvider
+    {
+        protected string Path = string.Empty;
+
+        private IFilePathProvider _nextMember;
+
+        public BasicFilePathProviderChainMember(IFilePathProvider nextMember)
+        {
+            if (nextMember == null) throw new ArgumentNullException("nextMember");
+            _nextMember = nextMember;
+        }
+
+        public virtual void AppendFilePathBuilder(string url, StringBuilder builder)
+        {
+            if (!CanAppendFilePathBuilder(url))
+            {
+                _nextMember.AppendFilePathBuilder(url, builder);
+                return;
+            }
+            DoAppendFilePathBuilder(url, builder);
+        }
+
+        protected virtual bool CanAppendFilePathBuilder(string url){
+            return url.Contains(Path);
+        }
+
+        protected abstract void DoAppendFilePathBuilder(string url, StringBuilder builder);
+    }
+
+    public class HeroFilePathProvider : BasicFilePathProviderChainMember
+    {
+        public HeroFilePathProvider(IFilePathProvider nextMember) : base(nextMember) { base.Path = "/hero/"; }
+
+        protected override void DoAppendFilePathBuilder(string url, StringBuilder builder)
+        {
+            var split = url.Split(new[] { Path }, StringSplitOptions.None);
+            builder.Append(@"hero\");
+            builder.Append(split[1].Replace("/", "\\"));
+            builder.Append(".json");
+        }
+    }
+
+    public class ProfileFilePathProvider : BasicFilePathProviderChainMember
+    {
+        public ProfileFilePathProvider(IFilePathProvider nextMember) : base(nextMember) { base.Path = "/profile/"; }
+
+        protected override void DoAppendFilePathBuilder(string url, StringBuilder builder)
+        {
+            var split = url.Split(new[] { Path }, StringSplitOptions.None);
+            builder.Append(@"profile\");
+            builder.Append(split[1].Replace("/", ""));
+            builder.Append(".json");
+        }
+    }
+
+    public class ItemFilePathProvider : BasicFilePathProviderChainMember
+    {
+        public ItemFilePathProvider(IFilePathProvider nextMember) : base(nextMember) { base.Path = "/item/"; }
+
+        protected override void DoAppendFilePathBuilder(string url, StringBuilder builder)
+        {
+            var split = url.Split(new[] { Path }, StringSplitOptions.None);
+            builder.Append(@"item\");
+            builder.Append(split[1].Length <= 32 ? split[1] : MD5Helper.GetMd5Hash(split[1]));
+            builder.Append(".json");
+        }
+    }
+
+    public class IconFilePathProvider : BasicFilePathProviderChainMember
+    {
+        public IconFilePathProvider(IFilePathProvider nextMember) : base(nextMember) { base.Path = "/icons/"; }
+
+        protected override void DoAppendFilePathBuilder(string url, StringBuilder builder)
+        {
+            builder.Append(@"icons\");
+            var split = url.Split(new[] { Path }, StringSplitOptions.None);
+            builder.Append(split[1].Replace("/", "\\"));
+        }
+    }
+
+    public class DefaultFilePathProvider : IFilePathProvider
+    {
+        public void AppendFilePathBuilder(string url, StringBuilder builder)
+        {
+            builder.Append(MD5Helper.GetMd5Hash(url));
+            builder.Append(".json");
+        }
+    }
+
+
     class CacheCollector : ID3Collector
     {
         private readonly string _cachepath;
         private readonly ISerializer<Stream> _serializer;
+        private readonly IFilePathProvider _filePathProvider;
 
-        public CacheCollector(string cachepath)
+        public CacheCollector(string cachepath, IFilePathProvider filePathProvider)
         {
             if (cachepath == null)
                 throw new ArgumentNullException("cachepath");
+            if (filePathProvider == null)
+                throw new ArgumentNullException("filePathProvider");
+            _filePathProvider = filePathProvider;
             _cachepath = cachepath;
             _serializer = new StreamSerializer();
         }
@@ -36,60 +136,12 @@ namespace D3apiData.API
             {
                 // couldnt convert url to uri. no host.
             }
-
-            if (url.Contains("/hero/"))
-            {
-                var split = url.Split(new[] { "/hero/" }, StringSplitOptions.None);
-                stringBuilder.Append(@"hero\");
-                stringBuilder.Append(split[1].Replace("/", "\\"));
-                stringBuilder.Append(".json");
-            }
-            else if (url.Contains("/profile/"))
-            {
-                var split = url.Split(new[] { "/profile/" }, StringSplitOptions.None);
-                stringBuilder.Append(@"profile\");
-                stringBuilder.Append(split[1].Replace("/", ""));
-                stringBuilder.Append(".json");
-            }
-            else if (url.Contains("/item/"))
-            {
-                var split = url.Split(new[] { "/item/" }, StringSplitOptions.None);
-                stringBuilder.Append(@"item\");
-                stringBuilder.Append(split[1].Length <= 32 ? split[1] : GetMd5Hash(split[1]));
-                stringBuilder.Append(".json");
-            }
-            else if (url.Contains("/icons/"))
-            {
-                stringBuilder.Append(@"icons\");
-                var split = url.Split(new[] { "/icons/" }, StringSplitOptions.None);
-                stringBuilder.Append(split[1].Replace("/", "\\"));
-            }
-            else
-            {
-                stringBuilder.Append(GetMd5Hash(url));
-                stringBuilder.Append(".json");
-            }
+            _filePathProvider.AppendFilePathBuilder(url, stringBuilder);
+            
             return stringBuilder.ToString();
         }
 
-        public string GetMd5Hash(string textToHash)
-        {
-            if (textToHash == null) 
-                throw new ArgumentNullException("textToHash");
-            //Prüfen ob Daten übergeben wurden.
-            if (string.IsNullOrEmpty(textToHash))
-            {
-                return string.Empty;
-            }
-
-            //MD5 Hash aus dem String berechnen. Dazu muss der string in ein Byte[]
-            //zerlegt werden. Danach muss das Resultat wieder zurück in ein string.
-            MD5 md5 = new MD5CryptoServiceProvider();
-            var tToHash = Encoding.Default.GetBytes(textToHash);
-            var result = md5.ComputeHash(tToHash);
-
-            return BitConverter.ToString(result).Replace("-", "").ToLower();
-        }
+        
 
         public Stream CollectStreamFromUrl(string url)
         {

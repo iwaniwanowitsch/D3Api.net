@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 namespace D3apiData.API.Objects.Item
 {
     /// <summary>
-    /// D3Api: ItemValueRange
+    /// D3ApiServiceExample: ItemValueRange
     /// </summary>
     [DataContract]
     public class ItemValueRange : ErrorObject

@@ -6,7 +6,7 @@ namespace D3apiData.API.Objects.Profile
 {
 
     /// <summary>
-    /// D3Api: Profile
+    /// D3ApiServiceExample: Profile
     /// </summary>
     [DataContract]
     public class Profile : ErrorObject

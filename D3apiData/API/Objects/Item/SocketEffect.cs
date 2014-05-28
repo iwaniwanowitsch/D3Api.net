@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace D3apiData.API.Objects.Item
 {
     /// <summary>
-    /// D3Api: SocketEffect
+    /// D3ApiServiceExample: SocketEffect
     /// </summary>
     [DataContract]
     public class SocketEffect : ErrorObject

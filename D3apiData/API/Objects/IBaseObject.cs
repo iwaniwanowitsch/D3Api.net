@@ -1,7 +1,7 @@
 ﻿namespace D3apiData.API.Objects
 {
     /// <summary>
-    /// D3Api: basic interface of all api objects
+    /// D3ApiServiceExample: basic interface of all api objects
     /// </summary>
     public interface IBaseObject
     {

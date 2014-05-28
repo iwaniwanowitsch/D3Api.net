@@ -4,7 +4,7 @@ namespace D3apiData.API.Objects.Artisan
 {
 
     /// <summary>
-    /// D3Api: ArtisanLevel
+    /// D3ApiServiceExample: ArtisanLevel
     /// </summary>
     [DataContract]
     public class ArtisanLevel : ErrorObject

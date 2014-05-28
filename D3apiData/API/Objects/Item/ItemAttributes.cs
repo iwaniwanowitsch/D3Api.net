@@ -11,7 +11,7 @@ using Newtonsoft.Json.Linq;
 namespace D3apiData.API.Objects.Item
 {
     /// <summary>
-    /// D3Api: ItemAttributes, all attributes!
+    /// D3ApiServiceExample: ItemAttributes, all attributes!
     /// </summary>
     [DataContract]
     public class ItemAttributes : ErrorObject

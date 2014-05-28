@@ -3,7 +3,7 @@
 namespace D3apiData.API.Objects.Profile
 {
     /// <summary>
-    /// D3Api: ProfileKills
+    /// D3ApiServiceExample: ProfileKills
     /// </summary>
     [DataContract]
     public class ProfileKills : ErrorObject

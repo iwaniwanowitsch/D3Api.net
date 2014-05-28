@@ -3,7 +3,7 @@
 namespace D3apiData.API.Objects.Skill
 {
     /// <summary>
-    /// D3Api: FollowerSkill
+    /// D3ApiServiceExample: FollowerSkill
     /// </summary>
     [DataContract]
     public class FollowerSkill : ErrorObject

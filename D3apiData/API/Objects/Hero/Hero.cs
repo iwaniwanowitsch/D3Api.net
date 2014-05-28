@@ -4,7 +4,7 @@ using D3apiData.API.Objects.Skill;
 namespace D3apiData.API.Objects.Hero
 {
     /// <summary>
-    /// D3Api: Hero
+    /// D3ApiServiceExample: Hero
     /// </summary>
     [DataContract]
     public class Hero : HeroSummary

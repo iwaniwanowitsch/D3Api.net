@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 namespace D3apiData.API.Objects.Item
 {
     /// <summary>
-    /// D3Api: Affix
+    /// D3ApiServiceExample: Affix
     /// </summary>
     [DataContract]
     public class Affix : ErrorObject

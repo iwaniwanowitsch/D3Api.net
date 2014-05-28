@@ -7,7 +7,7 @@ namespace D3apiData
     {
         static void Main(string[] args)
         {
-            var api = new D3Api();
+            var api = new D3ApiServiceExample();
             //Console.WriteLine(data.Config.Locale);
 
             /*ItemNamesCollector collector = new ItemNamesCollector(data.Webclient);
@@ -23,7 +23,7 @@ namespace D3apiData
             //api.Data.Battletag = "iwaniwanow#2854";
             //var hero = api.Data.GetHeroById("41139248");
             //var icon = api.Data.GetItemIconById("unique_helm_014_x1_demonhunter_male");
-            //api.Config.CollectMode = CollectMode.TryCacheThenOnline;
+            api.Config.CollectMode = CollectMode.Offline;
             //api.Data.Battletag = "iwaniwanow#2854";
             var item = api.Data.GetItemByTooltipParams("item/ClYIy-bypQwSBwgEFaLQXCIdyfq8oB1-dlWhHZsGAMsddEWniR3z1Ue0MIsCOI4CQABQElgEYJMCgAFGpQF0RaeJrQF-VrMutQHJW5KkuAGm0s_XAcABBxjEwualBFAIWAI");
             Console.WriteLine(item.Name);

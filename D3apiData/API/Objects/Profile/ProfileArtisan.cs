@@ -3,7 +3,7 @@
 namespace D3apiData.API.Objects.Profile
 {
     /// <summary>
-    /// D3Api: ProfileArtisan
+    /// D3ApiServiceExample: ProfileArtisan
     /// </summary>
     [DataContract]
     public class ProfileArtisan

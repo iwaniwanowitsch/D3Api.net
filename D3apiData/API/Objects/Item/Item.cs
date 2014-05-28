@@ -4,7 +4,7 @@ namespace D3apiData.API.Objects.Item
 {
 
     /// <summary>
-    /// D3Api: Item
+    /// D3ApiServiceExample: Item
     /// </summary>
     [DataContract]
     public class Item : ItemSummary

@@ -3,7 +3,7 @@
 namespace D3apiData.API.Objects.Item
 {
     /// <summary>
-    /// D3Api: SetRank
+    /// D3ApiServiceExample: SetRank
     /// </summary>
     [DataContract]
     public class SetRank : ErrorObject

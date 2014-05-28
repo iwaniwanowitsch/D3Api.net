@@ -3,7 +3,7 @@
 namespace D3apiData.API.Objects.Hero
 {
     /// <summary>
-    /// D3Api: HeroProgress
+    /// D3ApiServiceExample: HeroProgress
     /// </summary>
     [DataContract]
     public class HeroProgress : ErrorObject

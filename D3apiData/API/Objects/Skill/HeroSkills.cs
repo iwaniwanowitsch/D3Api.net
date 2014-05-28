@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 namespace D3apiData.API.Objects.Skill
 {
     /// <summary>
-    /// D3Api: HeroSkills
+    /// D3ApiServiceExample: HeroSkills
     /// </summary>
     [DataContract]
     public class HeroSkills : ErrorObject

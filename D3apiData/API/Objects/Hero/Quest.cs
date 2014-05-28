@@ -3,7 +3,7 @@
 namespace D3apiData.API.Objects.Hero
 {
     /// <summary>
-    /// D3Api: Quest
+    /// D3ApiServiceExample: Quest
     /// </summary>
     [DataContract]
     public class Quest : ErrorObject

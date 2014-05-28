@@ -3,7 +3,7 @@
 namespace D3apiData.API.Objects.Artisan
 {
     /// <summary>
-    /// D3Api: ArtisanTraining
+    /// D3ApiServiceExample: ArtisanTraining
     /// </summary>
     [DataContract]
     public class ArtisanTraining : ErrorObject

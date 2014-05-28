@@ -3,7 +3,7 @@
 namespace D3apiData.API.Objects.Hero
 {
     /// <summary>
-    /// D3Api: HeroClass enum
+    /// D3ApiServiceExample: HeroClass enum
     /// </summary>
     [DataContract]
     public enum HeroClass

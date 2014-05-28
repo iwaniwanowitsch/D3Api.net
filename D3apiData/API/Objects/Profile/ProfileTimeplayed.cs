@@ -3,7 +3,7 @@
 namespace D3apiData.API.Objects.Profile
 {
     /// <summary>
-    /// D3Api: ProfileTimeplayed, relative to absolute
+    /// D3ApiServiceExample: ProfileTimeplayed, relative to absolute
     /// </summary>
     [DataContract]
     public class ProfileTimeplayed : ErrorObject

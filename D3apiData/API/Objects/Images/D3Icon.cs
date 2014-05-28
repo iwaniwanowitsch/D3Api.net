@@ -4,7 +4,7 @@ using System.IO;
 namespace D3apiData.API.Objects.Images
 {
     /// <summary>
-    /// D3Api: D3Icon, used to capsule icon images
+    /// D3ApiServiceExample: D3Icon, used to capsule icon images
     /// </summary>
     public class D3Icon
     {

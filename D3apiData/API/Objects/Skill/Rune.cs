@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 namespace D3apiData.API.Objects.Skill
 {
     /// <summary>
-    /// D3Api: Rune
+    /// D3ApiServiceExample: Rune
     /// </summary>
     [DataContract]
     public class Rune : ErrorObject

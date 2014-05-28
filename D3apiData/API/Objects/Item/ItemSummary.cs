@@ -4,7 +4,7 @@ using D3apiData.API.Objects.Artisan;
 namespace D3apiData.API.Objects.Item
 {
     /// <summary>
-    /// D3Api: ItemSummary
+    /// D3ApiServiceExample: ItemSummary
     /// </summary>
     [DataContract]
     public class ItemSummary : ErrorObject

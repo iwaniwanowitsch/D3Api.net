@@ -3,7 +3,7 @@
 namespace D3apiData.API.Objects.Profile
 {
     /// <summary>
-    /// D3Api: ProfileProgress
+    /// D3ApiServiceExample: ProfileProgress
     /// </summary>
     [DataContract]
     public class ProfileProgress : ErrorObject

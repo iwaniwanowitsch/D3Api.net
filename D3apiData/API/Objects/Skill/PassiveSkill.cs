@@ -3,7 +3,7 @@
 namespace D3apiData.API.Objects.Skill
 {
     /// <summary>
-    /// D3Api: PassiveSkill
+    /// D3ApiServiceExample: PassiveSkill
     /// </summary>
     [DataContract]
     public class PassiveSkill : ErrorObject

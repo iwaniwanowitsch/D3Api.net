@@ -33,9 +33,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Json.net\Bin\Net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Referenzen\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -105,7 +104,8 @@
     <Compile Include="API\Objects\Profile\ProfileTimeplayed.cs" />
     <Compile Include="API\Objects\TestObject.cs" />
     <Compile Include="API\OnlineCollector.cs" />
-    <Compile Include="D3Api.cs" />
+    <Compile Include="D3ApiServiceExample.cs" />
+    <Compile Include="Helper\MD5Helper.cs" />
     <Compile Include="JSON\JsonUtility.cs" />
     <Compile Include="Locales.cs" />
     <Compile Include="Persistence\ISerializer.cs" />

@@ -3,7 +3,7 @@
 namespace D3apiData.API.Objects.Item
 {
     /// <summary>
-    /// D3Api: ItemType
+    /// D3ApiServiceExample: ItemType
     /// </summary>
     [DataContract]
     public class ItemType : ErrorObject

@@ -6,13 +6,14 @@ using System.ComponentModel;
 
 namespace D3apiData
 {
-    class D3Api
+    class D3ApiServiceExample
     {
         private readonly ISerializer<Properties> _serializer = new SerializerXML<Properties>();
         private const string Configfile = @"config.xml";
         private D3Data _data;
+        private ID3Collector _collector;
 
-        internal D3WebClient Webclient { get; set; }
+        public D3WebClient Webclient { get; set; }
 
         /// <summary>
         /// change properties in this object
@@ -27,7 +28,7 @@ namespace D3apiData
             get { return _data; }
         }
 
-        public D3Api()
+        public D3ApiServiceExample()
         {
             LoadConfig();
             if (Config == null)
@@ -35,10 +36,35 @@ namespace D3apiData
                 Config = new Properties(Locales.en_GB,CollectMode.TryCacheThenOnline);
                 SaveConfig();
             }
-            Config.PropertyChanged += new PropertyChangedEventHandler((o, args) => { if (args.PropertyName == "CollectMode") _data = new D3Data(Config); });
+            Config.PropertyChanged += new PropertyChangedEventHandler((o, args) => { if (args.PropertyName == "CollectMode") _data = new D3Data(Config, _collector); });
             Config.PropertyChanged += new PropertyChangedEventHandler((o, args) => { if (args.PropertyName == "PropertyChanged") SaveConfig(); });
             Webclient = new D3WebClient();
-            _data = new D3Data(Config);
+
+            var mode = Config.CollectMode;
+            var cacheCollector = new CacheCollector(Config.CachePath,
+                new HeroFilePathProvider(
+                    new ProfileFilePathProvider(
+                        new ItemFilePathProvider(
+                            new IconFilePathProvider(
+                                new DefaultFilePathProvider())))));
+            var onlineCollector = new OnlineCollector(Webclient);
+            switch (mode)
+            {
+                case CollectMode.Online:
+                    _collector = onlineCollector;
+                    break;
+                case CollectMode.Offline:
+                    _collector = cacheCollector;
+                    break;
+                case CollectMode.TryCacheThenOnline:
+                    _collector = new TryCacheThenOnlineCollector(cacheCollector, onlineCollector);
+                    break;
+                case CollectMode.OnlineWithCache:
+                    _collector = new OnlineWithCacheCollector(cacheCollector, onlineCollector);
+                    break;
+            }
+
+            _data = new D3Data(Config, _collector);
         }
 
         /// <summary>
