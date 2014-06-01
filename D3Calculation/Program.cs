@@ -19,19 +19,35 @@ namespace D3Calculation
         {
             do
             {
-                //Console.Write("Battletag: ");
-                //var battletag = Console.ReadLine();
-                //Console.Write("HeroId: ");
-                //var heroid = Console.ReadLine();
+                Console.Clear();
                 var battletag = "iwaniwanow#2854";
-                var heroid = "1";
 
                 var d3api = new D3ApiServiceExample();
                 d3api.Config.CollectMode = CollectMode.Online;
 
                 var myprofile = d3api.Data.GetProfileByBattletag(battletag);
 
-                var myhero = d3api.Data.GetHeroById(battletag, myprofile.Heroes[Convert.ToInt32(heroid)].Id.ToString());
+                Console.WriteLine("Profile: {0}", battletag);
+                for (var i = 0; i < myprofile.Heroes.Length; i++)
+                {
+                    Console.WriteLine("({0}) {1}",i,myprofile.Heroes[i].Name);
+                }
+                Console.WriteLine("({0}) {1}", myprofile.Heroes.Length, "Exit");
+                int heroid;
+                try
+                {
+                    var key = Console.ReadKey(true).KeyChar - '0';
+                    if (key == myprofile.Heroes.Length)
+                        return;
+                    heroid = key;
+                }
+                catch (FormatException)
+                {
+                    continue;
+                }
+                Console.WriteLine();
+
+                var myhero = d3api.Data.GetHeroById(battletag, myprofile.Heroes[heroid].Id.ToString());
 
                 var damageCalculator = new DamageCalculator(d3api.Data);
                 var damageData = damageCalculator.GetHeroDamage(myhero);
@@ -45,6 +61,10 @@ namespace D3Calculation
                 Console.WriteLine("vs Elites Bonus Damage: {0:0.##}", damageData.DpsWithBoni(false,true,true));
                 Console.WriteLine("Cooldown Reduction: {0:0.##}%",damageData.CooldownReduction*100);
                 Console.WriteLine("Resource Cost Reduction: {0:0.##}%", damageData.ResourceCostReduction * 100);
+                Console.WriteLine("Main Stats: {0:0.##}",damageData.MainStats);
+                Console.WriteLine("Critical Hit Damage: {0:0.##}%", damageData.CdPercent * 100);
+                Console.WriteLine("Critical Hit Chance: {0:0.##}%", damageData.CcPercent * 100);
+                Console.WriteLine("Attacks per second: {0:0.##}", myhero.Stats.AttackSpeed * (1 + damageData.AtkSpdPercent));
             } while (Console.ReadKey().Key != ConsoleKey.Escape);
         }
     }

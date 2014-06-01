@@ -99,7 +99,7 @@ namespace D3Calculation
                                (1 + setAtkSpdPercent/(1 + atkSpdPercent))*
                                (1 + setMainStats/(100 + mainStats));
 
-            return new HeroDamageData(profileDps, correctedDps, elementalBonusValue, elementalBonusName, vsElitesPercent + setVsElitesPercent, 0, 1 - cooldownReduction * setCooldownReduction, resourceCostReduction + setResourceCostReduction);
+            return new HeroDamageData(profileDps, correctedDps, elementalBonusValue, elementalBonusName, vsElitesPercent + setVsElitesPercent, 0, 1 - cooldownReduction * setCooldownReduction, resourceCostReduction + setResourceCostReduction, ccPercent+setCcPercent, cdPercent+setCdPercent, atkSpdPercent+setAtkSpdPercent, mainStats+setMainStats);
         }
     }
 }
