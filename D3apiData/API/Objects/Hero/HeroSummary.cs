@@ -18,7 +18,7 @@ namespace D3apiData.API.Objects.Hero
             {"demon-hunter", HeroClass.Demonhunter},
             {"monk", HeroClass.Monk},
             {"witch-doctor", HeroClass.Witchdoctor},
-            {"wizzard", HeroClass.Wizard}
+            {"wizard", HeroClass.Wizard}
         };
 
         /// <summary />

@@ -674,6 +674,18 @@ namespace D3apiData.API.Objects.Item
         //"Power_Damage_Percent_Bonus"
         //"Power_Duration_Increase"
 
+        /// <summary>
+        /// cooldown reduction
+        /// </summary>
+        [DataMember(Name = "Power_Cooldown_Reduction_Percent_All", EmitDefaultValue = false)] 
+        public ItemValueRange PowerCooldownReductionPercentAll;
+
+        /// <summary>
+        /// resource cost reduction
+        /// </summary>
+        [DataMember(Name = "Resource_Cost_Reduction_Percent_All", EmitDefaultValue = false)]
+        public ItemValueRange ResourceCostReductionPercentAll;
+
         /// <summary />
         [DataMember(Name = "Power_Resource_Reduction#Monk_SweepingWind", EmitDefaultValue = false)]
         public ItemValueRange PowerResourceReductionMonkSweepingWind;
