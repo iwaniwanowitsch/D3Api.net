@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Hilfsrechnung\Toughness-Berechnung_V1_0.xlsx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\D3apiData\D3apiData.csproj">
