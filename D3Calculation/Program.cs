@@ -1,15 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using D3apiData;
 using D3apiData.API;
-using D3apiData.API.Objects.Hero;
-using D3apiData.API.Objects.Item;
-using D3Calculation.BonusDamageCalc;
-using D3Calculation.SetCalc;
 
 namespace D3Calculation
 {
@@ -20,12 +11,19 @@ namespace D3Calculation
             do
             {
                 Console.Clear();
-                var battletag = "iwaniwanow#2854";
+                //var battletag = "iwaniwanow#2854";
+                Console.SetCursorPosition(0,0);
+                Console.Write("Enter Battletag: ");
+                var battletag = Console.ReadLine();
 
                 var d3api = new D3ApiServiceExample();
                 d3api.Config.CollectMode = CollectMode.Online;
 
                 var myprofile = d3api.Data.GetProfileByBattletag(battletag);
+                if (myprofile.IsErrorObject()) { 
+                    Console.WriteLine("Invalid battletag. Press key to try again");
+                    continue;
+                }
 
                 Console.WriteLine("Profile: {0}", battletag);
                 for (var i = 0; i < myprofile.Heroes.Length; i++)
@@ -45,7 +43,7 @@ namespace D3Calculation
                 {
                     continue;
                 }
-                Console.WriteLine();
+                Console.Clear();
 
                 var myhero = d3api.Data.GetHeroById(battletag, myprofile.Heroes[heroid].Id.ToString());
 
