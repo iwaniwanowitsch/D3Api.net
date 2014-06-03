@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="BonusDamageCalc\IAttributeFetcher.cs" />
     <Compile Include="DamageCalculator.cs" />
+    <Compile Include="EhpCalculator.cs" />
     <Compile Include="HeroDamageData.cs" />
     <Compile Include="HeroItemsFetcher.cs" />
     <Compile Include="EnumerableExtension.cs" />
@@ -60,6 +61,9 @@
       <Project>{42AEDB63-1943-4FF2-97DF-E206A90A3952}</Project>
       <Name>D3apiData</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Hilfsrechnung\links.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
