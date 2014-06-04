@@ -15,15 +15,17 @@ namespace D3apiData.API.Collectors
         private readonly ISerializer<Stream> _serializer;
         private readonly IFilePathProvider _filePathProvider;
 
-        public CacheCollector(string cachepath, IFilePathProvider filePathProvider)
+        public CacheCollector(string cachepath, IFilePathProvider filePathProvider, ISerializer<Stream> serializer)
         {
             if (cachepath == null)
                 throw new ArgumentNullException("cachepath");
             if (filePathProvider == null)
                 throw new ArgumentNullException("filePathProvider");
+            if (serializer == null)
+                throw new ArgumentNullException("serializer");
             _filePathProvider = filePathProvider;
             _cachepath = cachepath;
-            _serializer = new StreamSerializer();
+            _serializer = serializer;
         }
 
         public string GetFilepathFromUrl(string url)
@@ -42,8 +44,6 @@ namespace D3apiData.API.Collectors
             _filePathProvider.AppendFilePathBuilder(url, stringBuilder);
             return stringBuilder.ToString();
         }
-
-        
 
         public Stream CollectStreamFromUrl(string url)
         {

@@ -1,14 +1,15 @@
-﻿using System;
+﻿using D3apiData.Persistence;
+using System;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace D3apiData.WebClient
+namespace D3apiData.Persistence
 {
     /// <summary>
     /// class to capsule http access
     /// </summary>
-    public class D3WebClient
+    public class D3WebClient : ISerializer<Stream>
     {
 
         /// <summary>
@@ -60,38 +61,6 @@ namespace D3apiData.WebClient
         }
 
         /// <summary>
-        /// gets stream from url via httprequest
-        /// </summary>
-        /// <param name="url"></param>
-        /// <returns></returns>
-        public Stream GetStreamSync(string url)
-        {
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create(checkURL(url));
-            httpWebRequest.Credentials = CredentialCache.DefaultCredentials;
-            //httpWebRequest.Proxy = new WebProxy("127.0.0.1:3128");
-            var httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-            if(httpWebResponse.StatusCode != HttpStatusCode.OK)
-                throw new HttpListenerException();
-            using (var responseStream = httpWebResponse.GetResponseStream())
-            {
-                var memStream = new MemoryStream();
-                if (responseStream != null) responseStream.CopyTo(memStream);
-                memStream.Position = 0;
-                return memStream;
-            }
-        }
-
-        /// <summary>
-        /// async <see cref="GetStreamSync"/>
-        /// </summary>
-        /// <param name="url"></param>
-        /// <returns></returns>
-        public Task<Stream> GetStreamAsync(string url)
-        {
-            return Task<Stream>.Factory.StartNew(() => GetStreamSync(url));
-        }
-
-        /// <summary>
         /// checks url for validity (only formal)
         /// </summary>
         /// <param name="url"></param>
@@ -104,6 +73,33 @@ namespace D3apiData.WebClient
                 return result;
             else
                 throw new ArgumentException("not a valid url");
+        }
+
+        /// <summary>
+        /// gets stream from url via httprequest
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public Stream Deserialize(string url)
+        {
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(checkURL(url));
+            httpWebRequest.Credentials = CredentialCache.DefaultCredentials;
+            //httpWebRequest.Proxy = new WebProxy("127.0.0.1:3128");
+            var httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+            if (httpWebResponse.StatusCode != HttpStatusCode.OK)
+                throw new HttpListenerException();
+            using (var responseStream = httpWebResponse.GetResponseStream())
+            {
+                var memStream = new MemoryStream();
+                if (responseStream != null) responseStream.CopyTo(memStream);
+                memStream.Position = 0;
+                return memStream;
+            }
+        }
+
+        public void Serialize(Stream obj, string filepath)
+        {
+            throw new NotSupportedException();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using D3apiData.Persistence;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -105,7 +106,7 @@ namespace D3apiData.WebClient
         private void GrabAllLinks(string root, string path, IEnumerable<string> containings, ICollection<string> visited, ICollection<string> results)
         {
             string sitecontent;
-            using(var stream = _client.GetStreamSync(root + path))
+            using(var stream = _client.Deserialize(root + path))
                 using(var reader = new StreamReader(stream))
                     sitecontent = reader.ReadToEnd();
             foreach (var containing in containings)

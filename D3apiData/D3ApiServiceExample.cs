@@ -79,7 +79,9 @@ namespace D3apiData
             var profileFilePathProvider = new ProfileFilePathProvider(itemFilePathProvider);
             var heroFilePathProvider = new HeroFilePathProvider(profileFilePathProvider); // begin of chain
 
-            var cacheCollector = new CacheCollector(Config.CachePath, heroFilePathProvider);
+            var cacheFileSerializer = new StreamSerializer();
+
+            var cacheCollector = new CacheCollector(Config.CachePath, heroFilePathProvider, cacheFileSerializer);
             var onlineCollector = new OnlineCollector(Webclient);
 
             switch (mode)
