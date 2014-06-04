@@ -24,7 +24,7 @@ namespace D3apiData.API.Collectors
         {
             using (var onlineStream = _onlineCollector.CollectStreamFromUrl(url))
             {
-                return File.Open(_cacheCollector.CacheFileFromStream(onlineStream, url), FileMode.Open);
+                return File.Open(_cacheCollector.CacheFilepathFromStream(onlineStream, url), FileMode.Open);
             }
         }
 

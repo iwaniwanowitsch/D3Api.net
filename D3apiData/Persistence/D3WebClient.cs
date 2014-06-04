@@ -97,7 +97,12 @@ namespace D3apiData.Persistence
             }
         }
 
-        public void Serialize(Stream obj, string filepath)
+        /// <summary>
+        /// not supported, one way serialization
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="url"></param>
+        public void Serialize(Stream obj, string url)
         {
             throw new NotSupportedException();
         }

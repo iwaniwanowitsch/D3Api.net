@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 using D3apiData.API;
 using D3apiData.API.Objects.Hero;
 using D3apiData.API.Objects.Item;
-using D3Calculation.BonusDamageCalc;
-using D3Calculation.SetCalc;
+using D3Calculation.AttributeFetchers;
+using D3Calculation.ItemFetchers;
 
 namespace D3Calculation
 {
@@ -162,7 +162,7 @@ namespace D3Calculation
             var resourceCostReduction = resourceCostReductionFetcher.GetBonusDamage(ItemList);
 
             // hero setAttributes list
-            var setAttributesFetcher = new SetAttributesCalculator();
+            var setAttributesFetcher = new SetAttributesFetcher();
             var setAttributes = setAttributesFetcher.GetSetAttributes(ItemList);
             // hero stats from sets only
             var setMainStats = _mainStatFetcher.GetBonusDamage(setAttributes);
@@ -200,14 +200,14 @@ namespace D3Calculation
             return new HeroDamageData(profileDps, correctedDps, elementalBonusValue, elementalBonusName, vsElitesPercent + setVsElitesPercent, 0, 1 - cooldownReduction * setCooldownReduction, resourceCostReduction + setResourceCostReduction, ccPercent+setCcPercent, cdPercent+setCdPercent, atkSpdPercent+setAtkSpdPercent, mainStats+setMainStats);
         }
 
-        public double GetDps(double weapon1MinDmg, double weapon1MaxDmg, double weapon1Aps, double weapon2MinDmg, double weapon2MaxDmg, double weapon2Aps, double bonusDamageMin, double bonusDamageMax, double primaryAttribute, double attackSpeed, double criticalHitChance, double criticalHitDamage, double passiveDamage)
+        public static double GetDps(double weapon1MinDmg, double weapon1MaxDmg, double weapon1Aps, double weapon2MinDmg, double weapon2MaxDmg, double weapon2Aps, double bonusDamageMin, double bonusDamageMax, double primaryAttribute, double attackSpeed, double criticalHitChance, double criticalHitDamage, double passiveDamage)
         {
             var weaponDmg = ((weapon1MinDmg + weapon1MaxDmg) / 2 + (weapon2MinDmg + weapon2MaxDmg) / 2) / 2 + (bonusDamageMin + bonusDamageMax) / 2;
             var aps = 2 * weapon1Aps * weapon2Aps / (weapon1Aps + weapon2Aps);
             return weaponDmg * aps * (1 + primaryAttribute / 100) * (1 + attackSpeed) * (1 + criticalHitChance * criticalHitDamage) * (1 + passiveDamage);
         }
 
-        public double GetDps(double weaponMinDmg, double weaponMaxDmg, double weaponAps, double bonusDamageMin, double bonusDamageMax, double primaryAttribute, double attackSpeed, double criticalHitChance, double criticalHitDamage, double passiveDamage)
+        public static double GetDps(double weaponMinDmg, double weaponMaxDmg, double weaponAps, double bonusDamageMin, double bonusDamageMax, double primaryAttribute, double attackSpeed, double criticalHitChance, double criticalHitDamage, double passiveDamage)
         {
             var weaponDmg = (weaponMinDmg + weaponMaxDmg) / 2 + (bonusDamageMin + bonusDamageMax) / 2;
             return weaponDmg * weaponAps * (1 + primaryAttribute / 100) * (1 + attackSpeed) * (1 + criticalHitChance * criticalHitDamage) * (1 + passiveDamage);

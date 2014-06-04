@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using D3apiData.API.Objects.Item;
 
-namespace D3Calculation.SetCalc
+namespace D3Calculation.ItemFetchers
 {
-    public class SetAttributesCalculator : ISetAttributesCalculator
+    public class SetAttributesFetcher : ISetAttributesFetcher
     {
         public IEnumerable<ItemAttributes> GetSetAttributes(IEnumerable<Item> items)
         {
@@ -26,7 +26,7 @@ namespace D3Calculation.SetCalc
         }
     }
 
-    interface ISetAttributesCalculator
+    interface ISetAttributesFetcher
     {
         IEnumerable<ItemAttributes> GetSetAttributes(IEnumerable<Item> items);
     }

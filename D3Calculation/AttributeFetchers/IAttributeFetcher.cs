@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using D3apiData.API.Objects.Item;
 
-namespace D3Calculation.BonusDamageCalc
+namespace D3Calculation.AttributeFetchers
 {
     public class ResourceCostReductionFetcher : BasicAttributeAdditiveFetcher
     {

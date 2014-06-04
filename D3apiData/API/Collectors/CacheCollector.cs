@@ -63,7 +63,7 @@ namespace D3apiData.API.Collectors
             return Task<Stream>.Factory.StartNew(() => CollectStreamFromUrl(url));
         }
 
-        public string CacheFileFromStream(Stream stream, string url)
+        public string CacheFilepathFromStream(Stream stream, string url)
         {
             string filePath;
             try

@@ -41,16 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BonusDamageCalc\IAttributeFetcher.cs" />
+    <Compile Include="AttributeFetchers\IAttributeFetcher.cs" />
     <Compile Include="DamageCalculator.cs" />
     <Compile Include="EhpCalculator.cs" />
     <Compile Include="HeroDamageData.cs" />
-    <Compile Include="HeroItemsFetcher.cs" />
+    <Compile Include="ItemFetchers\HeroItemsFetcher.cs" />
     <Compile Include="EnumerableExtension.cs" />
     <Compile Include="ItemValueRangeExtension.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SetCalc\ISetAttributesCalculator.cs" />
+    <Compile Include="ItemFetchers\ISetAttributesCalculator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

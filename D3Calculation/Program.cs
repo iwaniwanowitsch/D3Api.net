@@ -2,8 +2,9 @@
 using D3apiData;
 using D3apiData.API;
 using D3apiData.API.Objects.Hero;
-using D3Calculation.BonusDamageCalc;
+using D3Calculation.AttributeFetchers;
 using System.Collections.Generic;
+using D3Calculation.ItemFetchers;
 
 namespace D3Calculation
 {
@@ -11,6 +12,8 @@ namespace D3Calculation
     {
         static void Main(string[] args)
         {
+            //ConfigureContainer;
+            //var damageCalculator = container.Resolve<IDamageCalculator>();
             do
             {
                 Console.Clear();
