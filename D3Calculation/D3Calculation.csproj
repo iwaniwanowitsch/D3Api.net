@@ -45,8 +45,8 @@
     <Compile Include="DamageCalculator.cs" />
     <Compile Include="EhpCalculator.cs" />
     <Compile Include="HeroDamageData.cs" />
-    <Compile Include="ItemFetchers\HeroItemsFetcher.cs" />
     <Compile Include="EnumerableExtension.cs" />
+    <Compile Include="ItemFetchers\HeroItemsFetcher.cs" />
     <Compile Include="ItemValueRangeExtension.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
