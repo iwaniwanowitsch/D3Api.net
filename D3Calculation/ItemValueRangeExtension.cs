@@ -21,7 +21,7 @@ namespace D3Calculation
             return (range.Min + range.Max)/2;
         }
 
-        public static double MinMax(this ItemValueRange range)
+        public static double GetValue(this ItemValueRange range)
         {
             return range.MinMaxEquals() ? range.Min : range.MinMaxAvg();
         }

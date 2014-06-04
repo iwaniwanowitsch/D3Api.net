@@ -44,8 +44,7 @@ namespace D3Calculation
                 _itemList = value;
             }
         }
-
-        /* 
+        
         public HeroDamageData GetHeroDamage(int heroLvl)
         {
             // stats fetchers
@@ -55,6 +54,8 @@ namespace D3Calculation
             var vsElitesPercentFetcher = new ElitesBonusDamageFetcher();
             var cooldownReductionFetcher = new CooldownReductionFetcher();
             var resourceCostReductionFetcher = new ResourceCostReductionFetcher();
+            var minDamageFetcher = new MinDamageFetcher();
+            var deltaDamageFetcher = new DeltaDamageFetcher();
 
             // hero stats, without sets
             var mainStats = _mainStatFetcher.GetBonusDamage(ItemList) + heroLvl * 3 + MainStatsDefaultConst;
@@ -64,9 +65,11 @@ namespace D3Calculation
             var vsElitesPercent = vsElitesPercentFetcher.GetBonusDamage(ItemList);
             var cooldownReduction = cooldownReductionFetcher.GetBonusDamage(ItemList);
             var resourceCostReduction = resourceCostReductionFetcher.GetBonusDamage(ItemList);
+            var minDamage = minDamageFetcher.GetBonusDamage(ItemList);
+            var deltaDamage = deltaDamageFetcher.GetBonusDamage(ItemList);
 
             // hero setAttributes list
-            var setAttributesFetcher = new SetAttributesCalculator();
+            var setAttributesFetcher = new SetAttributesFetcher();
             var setAttributes = setAttributesFetcher.GetSetAttributes(ItemList);
             // hero stats from sets only
             var setMainStats = _mainStatFetcher.GetBonusDamage(setAttributes);
@@ -76,6 +79,8 @@ namespace D3Calculation
             var setVsElitesPercent = vsElitesPercentFetcher.GetBonusDamage(setAttributes);
             var setCooldownReduction = cooldownReductionFetcher.GetBonusDamage(setAttributes);
             var setResourceCostReduction = resourceCostReductionFetcher.GetBonusDamage(setAttributes);
+            var setMinDamage = minDamageFetcher.GetBonusDamage(setAttributes);
+            var setDeltaDamage = deltaDamageFetcher.GetBonusDamage(setAttributes);
 
             // elemental damage
             var attributesList = ItemList.Select(o => o.AttributesRaw).Concat(setAttributes);
@@ -102,13 +107,16 @@ namespace D3Calculation
             var weaponMinDmgFetcher = new MinWeaponDamageFetcher();
             var weaponDeltaDmgFetcher = new DeltaWeaponDamageFetcher();
             var weaponApsFetcher = new ApsWeaponFetcher();
-            var weaponApsPercentFetcher = new ApsPercentFetcher();
+            var weaponApsPercentFetcher = new ApsPercentWeaponFetcher();
 
             double weaponMinDmg;
             double weaponDeltaDmg;
             double weaponAps;
             double weaponApsPercent;
             double weaponDps = 0;
+
+            // bonus dmg
+            var bonusDmgAvg = ((minDamage + setMinDamage) + (minDamage + setMinDamage) + (deltaDamage + setDeltaDamage))/2;
 
             if (weaponCount == 1)
             {
@@ -119,7 +127,7 @@ namespace D3Calculation
                 weaponAps = weaponApsFetcher.GetBonusDamage(weapon);
                 weaponApsPercent = weaponApsPercentFetcher.GetBonusDamage(weapon);
 
-                weaponDps = (2 * weaponMinDmg + weaponDeltaDmg) / 2 * weaponAps * (1 + weaponApsPercent);
+                weaponDps = ((weaponMinDmg + weaponMinDmg + weaponDeltaDmg) / 2 + bonusDmgAvg) * weaponAps * (1 + weaponApsPercent);
             }
             else if (weaponCount == 2) {
                 var weapon1 = ItemList.Where(o => o.AttacksPerSecond != null).ToArray()[0];
@@ -127,20 +135,19 @@ namespace D3Calculation
                 // weapon dmg
                 weaponMinDmg = weaponMinDmgFetcher.GetBonusDamage(new List<Item> { weapon1 }) + weaponMinDmgFetcher.GetBonusDamage(new List<Item> { weapon2 });
                 weaponDeltaDmg = weaponDeltaDmgFetcher.GetBonusDamage(new List<Item> { weapon1 }) + weaponDeltaDmgFetcher.GetBonusDamage(new List<Item> { weapon2 });
-                var weapon1Aps = weaponApsFetcher.GetBonusDamage(new List<Item> { weapon1 });
-                var weapon2Aps = weaponApsFetcher.GetBonusDamage(new List<Item> { weapon1 });
-                var weapon1Dps = weapon1Aps * (1 + weaponApsPercentFetcher.GetBonusDamage(new List<Item> { weapon1 }));
-                var weapon2Dps = weapon2Aps * (1 + weaponApsPercentFetcher.GetBonusDamage(new List<Item> { weapon2 }));
-                weaponDps = 2 * weapon1Dps * weapon2Dps / (weapon1Dps + weapon2Dps);
+                var weapon1AtkSpd = weaponApsFetcher.GetBonusDamage(new List<Item> { weapon1 }) * (1 + weaponApsPercentFetcher.GetBonusDamage(new List<Item> { weapon1 }));
+                var weapon2AtkSpd = weaponApsFetcher.GetBonusDamage(new List<Item> { weapon2 }) * (1 + weaponApsPercentFetcher.GetBonusDamage(new List<Item> { weapon2 }));
+                var weaponAtkSpd = 2 * weapon1AtkSpd * weapon2AtkSpd / (weapon1AtkSpd + weapon2AtkSpd);
+                //var weaponAtkSpd = (weapon1AtkSpd + weapon2AtkSpd)/2;
 
-                weaponDps = (weaponMinDmg + 2 * 62 + weaponMinDmg + weaponDeltaDmg + 2 * 132) / 4 * weaponDps;
-            }
+                weaponDps = ((weaponMinDmg + weaponMinDmg + weaponDeltaDmg) / 4 + bonusDmgAvg) * weaponAtkSpd;
+            } 
 
-            var correctedDps = weaponDps * (1 + atkSpdPercent + setAtkSpdPercent) * (1 + (ccPercent + setCcPercent) * (cdPercent + setCdPercent)) * (1 + (mainStats + setMainStats) / 100);
+            var correctedDps = weaponDps * (1 + atkSpdPercent + setAtkSpdPercent + 0.15) * (1 + (ccPercent + setCcPercent) * (cdPercent + setCdPercent)) * (1 + (mainStats + setMainStats) / 100);
 
             return new HeroDamageData(correctedDps, correctedDps, elementalBonusValue, elementalBonusName, vsElitesPercent + setVsElitesPercent, 0, 1 - cooldownReduction * setCooldownReduction, resourceCostReduction + setResourceCostReduction, ccPercent + setCcPercent, cdPercent + setCdPercent, atkSpdPercent + setAtkSpdPercent, mainStats + setMainStats);
         }
-        */
+        
 
         public HeroDamageData GetHeroDamage(int heroLvl, double profileDps)
         {

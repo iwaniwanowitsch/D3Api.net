@@ -58,7 +58,7 @@ namespace D3Calculation
                 var itemListFetcher = new HeroItemsFetcher(d3api.Data);
                 var itemList = itemListFetcher.GetItemsList(myhero);
 
-                Dictionary<HeroClass, IAttributeFetcher> heroMainStatFetcherLookup = new Dictionary<HeroClass, IAttributeFetcher>
+                var heroMainStatFetcherLookup = new Dictionary<HeroClass, IAttributeFetcher>
                 {
                     {HeroClass.Barbarian, new StrengthFetcher()},
                     {HeroClass.Crusader, new StrengthFetcher()},
@@ -72,7 +72,7 @@ namespace D3Calculation
 
                 var damageCalculator = new DamageCalculator(itemList,mainStatFetcher);
 
-                var damageData = damageCalculator.GetHeroDamage(myhero.Level,myhero.Stats.Damage);
+                var damageData = damageCalculator.GetHeroDamage(myhero.Level);
 
                 Console.WriteLine(myhero.Name);
                 Console.WriteLine("Profile Damage: {0:0.##}", damageData.ProfileDps);
