@@ -39,18 +39,28 @@ namespace D3Calculation.BonusDamageCalc
         }
     }
 
-    public class MaxWeaponDamageFetcher : BasicAttributeAdditiveFetcher
+    public class ApsPercentWeaponFetcher : BasicAttributeAdditiveFetcher 
     {
         protected override ItemValueRange GetBonusDamage(ItemAttributes attributes)
         {
-            return 
-                attributes.damageWeaponMin_Arcane +
-                attributes.damageWeaponMin_Cold +
-                attributes.damageWeaponMin_Fire +
-                attributes.damageWeaponMin_Holy +
-                attributes.damageWeaponMin_Lightning +
-                attributes.damageWeaponMin_Physical +
-                attributes.damageWeaponMin_Poison +
+            return attributes.attacksPerSecondItemPercent;
+        }
+    }
+
+    public class ApsWeaponFetcher : BasicAttributeAdditiveFetcher
+    {
+
+        protected override ItemValueRange GetBonusDamage(ItemAttributes attributes)
+        {
+            return attributes.attacksPerSecondItem;
+        }
+    }
+
+    public class DeltaWeaponDamageFetcher : BasicAttributeAdditiveFetcher
+    {
+        protected override ItemValueRange GetBonusDamage(ItemAttributes attributes)
+        {
+            return
                 attributes.damageWeaponDelta_Arcane +
                 attributes.damageWeaponDelta_Cold +
                 attributes.damageWeaponDelta_Fire +

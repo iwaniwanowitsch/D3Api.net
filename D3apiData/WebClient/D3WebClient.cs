@@ -68,6 +68,7 @@ namespace D3apiData.WebClient
         {
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(checkURL(url));
             httpWebRequest.Credentials = CredentialCache.DefaultCredentials;
+            httpWebRequest.Proxy = new WebProxy("127.0.0.1:3128");
             var httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
             if(httpWebResponse.StatusCode != HttpStatusCode.OK)
                 throw new HttpListenerException();

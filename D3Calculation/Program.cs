@@ -1,6 +1,9 @@
 ﻿using System;
 using D3apiData;
 using D3apiData.API;
+using D3apiData.API.Objects.Hero;
+using D3Calculation.BonusDamageCalc;
+using System.Collections.Generic;
 
 namespace D3Calculation
 {
@@ -12,7 +15,7 @@ namespace D3Calculation
             {
                 Console.Clear();
                 //var battletag = "iwaniwanow#2854";
-                Console.SetCursorPosition(0,0);
+                Console.SetCursorPosition(0, 0);
                 Console.Write("Enter Battletag: ");
                 var battletag = Console.ReadLine();
 
@@ -20,7 +23,8 @@ namespace D3Calculation
                 d3api.Config.CollectMode = CollectMode.Online;
 
                 var myprofile = d3api.Data.GetProfileByBattletag(battletag);
-                if (myprofile.IsErrorObject()) { 
+                if (myprofile.IsErrorObject())
+                {
                     Console.WriteLine("Invalid battletag. Press key to try again");
                     continue;
                 }
@@ -28,7 +32,7 @@ namespace D3Calculation
                 Console.WriteLine("Profile: {0}", battletag);
                 for (var i = 0; i < myprofile.Heroes.Length; i++)
                 {
-                    Console.WriteLine("({0}) {1}",i,myprofile.Heroes[i].Name);
+                    Console.WriteLine("({0}) {1}", i, myprofile.Heroes[i].Name);
                 }
                 Console.WriteLine("({0}) {1}", myprofile.Heroes.Length, "Exit");
                 int heroid;
@@ -47,19 +51,36 @@ namespace D3Calculation
 
                 var myhero = d3api.Data.GetHeroById(battletag, myprofile.Heroes[heroid].Id.ToString());
 
-                var damageCalculator = new DamageCalculator(d3api.Data);
-                var damageData = damageCalculator.GetHeroDamage(myhero);
+                // hero items list
+                var itemListFetcher = new HeroItemsFetcher(d3api.Data);
+                var itemList = itemListFetcher.GetItemsList(myhero);
+
+                Dictionary<HeroClass, IAttributeFetcher> heroMainStatFetcherLookup = new Dictionary<HeroClass, IAttributeFetcher>
+                {
+                    {HeroClass.Barbarian, new StrengthFetcher()},
+                    {HeroClass.Crusader, new StrengthFetcher()},
+                    {HeroClass.Demonhunter, new DexterityFetcher()},
+                    {HeroClass.Monk, new DexterityFetcher()},
+                    {HeroClass.Witchdoctor, new IntelligenceFetcher()},
+                    {HeroClass.Wizard, new IntelligenceFetcher()}
+                };
+
+                var mainStatFetcher = heroMainStatFetcherLookup[myhero.HeroClass];
+
+                var damageCalculator = new DamageCalculator(itemList,mainStatFetcher);
+
+                var damageData = damageCalculator.GetHeroDamage(myhero.Level,myhero.Stats.Damage);
 
                 Console.WriteLine(myhero.Name);
                 Console.WriteLine("Profile Damage: {0:0.##}", damageData.ProfileDps);
                 Console.WriteLine("Corrected Damage (with Set boni): {0:0.##}", damageData.CorrectedDps);
                 Console.WriteLine("{0} Elemental Bonus Damage: {1:0.##}%", damageData.ElementalType, damageData.ElementalDmgPercent * 100);
-                Console.WriteLine("Elemental Damage: {0:0.##}", damageData.DpsWithBoni(false,true,false));
+                Console.WriteLine("Elemental Damage: {0:0.##}", damageData.DpsWithBoni(false, true, false));
                 Console.WriteLine("Damage vs Elites Bonus: {0:0.##}%", damageData.VsElitesDmgPercent * 100);
-                Console.WriteLine("vs Elites Bonus Damage: {0:0.##}", damageData.DpsWithBoni(false,true,true));
-                Console.WriteLine("Cooldown Reduction: {0:0.##}%",damageData.CooldownReduction*100);
+                Console.WriteLine("vs Elites Bonus Damage: {0:0.##}", damageData.DpsWithBoni(false, true, true));
+                Console.WriteLine("Cooldown Reduction: {0:0.##}%", damageData.CooldownReduction * 100);
                 Console.WriteLine("Resource Cost Reduction: {0:0.##}%", damageData.ResourceCostReduction * 100);
-                Console.WriteLine("Main Stats: {0:0.##}",damageData.MainStats);
+                Console.WriteLine("Main Stats: {0:0.##}", damageData.MainStats);
                 Console.WriteLine("Critical Hit Damage: {0:0.##}%", damageData.CdPercent * 100);
                 Console.WriteLine("Critical Hit Chance: {0:0.##}%", damageData.CcPercent * 100);
                 Console.WriteLine("Attacks per second: {0:0.##}", myhero.Stats.AttackSpeed * (1 + damageData.AtkSpdPercent));
