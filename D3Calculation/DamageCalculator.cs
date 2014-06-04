@@ -1,12 +1,6 @@
 ﻿using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using D3apiData.API;
-using D3apiData.API.Objects.Hero;
 using D3apiData.API.Objects.Item;
 using D3Calculation.AttributeFetchers;
 using D3Calculation.ItemFetchers;
@@ -114,6 +108,7 @@ namespace D3Calculation
             double weaponAps;
             double weaponApsPercent;
             double weaponDps = 0;
+            var correctedDps = 0.0;
 
             // bonus dmg
             var bonusDmgAvg = ((minDamage + setMinDamage) + (minDamage + setMinDamage) + (deltaDamage + setDeltaDamage))/2;
@@ -128,6 +123,7 @@ namespace D3Calculation
                 weaponApsPercent = weaponApsPercentFetcher.GetBonusDamage(weapon);
 
                 weaponDps = ((weaponMinDmg + weaponMinDmg + weaponDeltaDmg) / 2 + bonusDmgAvg) * weaponAps * (1 + weaponApsPercent);
+                correctedDps = weaponDps * (1 + atkSpdPercent + setAtkSpdPercent) * (1 + (ccPercent + setCcPercent) * (cdPercent + setCdPercent)) * (1 + (mainStats + setMainStats) / 100);
             }
             else if (weaponCount == 2) {
                 var weapon1 = ItemList.Where(o => o.AttacksPerSecond != null).ToArray()[0];
@@ -141,9 +137,8 @@ namespace D3Calculation
                 //var weaponAtkSpd = (weapon1AtkSpd + weapon2AtkSpd)/2;
 
                 weaponDps = ((weaponMinDmg + weaponMinDmg + weaponDeltaDmg) / 4 + bonusDmgAvg) * weaponAtkSpd;
-            } 
-
-            var correctedDps = weaponDps * (1 + atkSpdPercent + setAtkSpdPercent + 0.15) * (1 + (ccPercent + setCcPercent) * (cdPercent + setCdPercent)) * (1 + (mainStats + setMainStats) / 100);
+                correctedDps = weaponDps * (1 + atkSpdPercent + setAtkSpdPercent + 0.15) * (1 + (ccPercent + setCcPercent) * (cdPercent + setCdPercent)) * (1 + (mainStats + setMainStats) / 100);
+            }
 
             return new HeroDamageData(correctedDps, correctedDps, elementalBonusValue, elementalBonusName, vsElitesPercent + setVsElitesPercent, 0, 1 - cooldownReduction * setCooldownReduction, resourceCostReduction + setResourceCostReduction, ccPercent + setCcPercent, cdPercent + setCdPercent, atkSpdPercent + setAtkSpdPercent, mainStats + setMainStats);
         }
