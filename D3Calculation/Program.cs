@@ -71,8 +71,10 @@ namespace D3Calculation
                 var mainStatFetcher = heroMainStatFetcherLookup[myhero.HeroClass];
 
                 var damageCalculator = new DamageCalculator(itemList,mainStatFetcher);
+                var ehpCalculator = new EhpCalculator(itemList,myhero.HeroClass);
 
-                var damageData = damageCalculator.GetHeroDamage(myhero.Level);
+                var damageData = damageCalculator.GetHeroDamage(myhero.Level,myhero.Stats.Damage);
+                var ehp = ehpCalculator.GetEhp(myhero.Level);
 
                 Console.WriteLine(myhero.Name);
                 Console.WriteLine("Profile Damage: {0:0.##}", damageData.ProfileDps);
@@ -87,6 +89,7 @@ namespace D3Calculation
                 Console.WriteLine("Critical Hit Damage: {0:0.##}%", damageData.CdPercent * 100);
                 Console.WriteLine("Critical Hit Chance: {0:0.##}%", damageData.CcPercent * 100);
                 Console.WriteLine("Attacks per second: {0:0.##}", myhero.Stats.AttackSpeed * (1 + damageData.AtkSpdPercent));
+                Console.WriteLine("eHp: {0:0.##}", ehp);
             } while (Console.ReadKey().Key != ConsoleKey.Escape);
         }
     }

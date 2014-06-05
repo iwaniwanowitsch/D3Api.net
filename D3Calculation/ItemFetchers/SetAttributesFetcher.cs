@@ -4,9 +4,9 @@ using D3apiData.API.Objects.Item;
 
 namespace D3Calculation.ItemFetchers
 {
-    public class SetAttributesFetcher : ISetAttributesFetcher
+    public static class SetAttributesFetcher
     {
-        public IEnumerable<ItemAttributes> GetSetAttributes(IEnumerable<Item> items)
+        public static IEnumerable<ItemAttributes> GetSetAttributes(IEnumerable<Item> items)
         {
             var setItems = items.Where(o => o.Set != null);
             var royal = items.Count(o => o.AttributesRaw.AttributeSetItemDiscount != null) > 0;

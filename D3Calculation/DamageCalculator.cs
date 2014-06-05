@@ -63,8 +63,7 @@ namespace D3Calculation
             var deltaDamage = deltaDamageFetcher.GetBonusDamage(ItemList);
 
             // hero setAttributes list
-            var setAttributesFetcher = new SetAttributesFetcher();
-            var setAttributes = setAttributesFetcher.GetSetAttributes(ItemList);
+            var setAttributes = SetAttributesFetcher.GetSetAttributes(ItemList);
             // hero stats from sets only
             var setMainStats = _mainStatFetcher.GetBonusDamage(setAttributes);
             var setAtkSpdPercent = atkSpdPercentFetcher.GetBonusDamage(setAttributes);
@@ -102,13 +101,15 @@ namespace D3Calculation
             var weaponDeltaDmgFetcher = new DeltaWeaponDamageFetcher();
             var weaponApsFetcher = new ApsWeaponFetcher();
             var weaponApsPercentFetcher = new ApsPercentWeaponFetcher();
+            var weaponPercentDamageFetcher = new PercentWeaponDamageFetcher();
 
             double weaponMinDmg;
             double weaponDeltaDmg;
             double weaponAps;
             double weaponApsPercent;
             double weaponDps = 0;
-            var correctedDps = 0.0;
+            double correctedDps = 0.0;
+            double weaponPercentDamage = 0.0; 
 
             // bonus dmg
             var bonusDmgAvg = ((minDamage + setMinDamage) + (minDamage + setMinDamage) + (deltaDamage + setDeltaDamage))/2;
@@ -121,18 +122,22 @@ namespace D3Calculation
                 weaponDeltaDmg = weaponDeltaDmgFetcher.GetBonusDamage(weapon);
                 weaponAps = weaponApsFetcher.GetBonusDamage(weapon);
                 weaponApsPercent = weaponApsPercentFetcher.GetBonusDamage(weapon);
+                weaponPercentDamage = weaponPercentDamageFetcher.GetBonusDamage(weapon);
 
-                weaponDps = ((weaponMinDmg + weaponMinDmg + weaponDeltaDmg) / 2 + bonusDmgAvg) * weaponAps * (1 + weaponApsPercent);
+                weaponDps = ((weaponMinDmg + weaponMinDmg + weaponDeltaDmg) * (1 + weaponPercentDamage) / 2 + bonusDmgAvg) * weaponAps * (1 + weaponApsPercent);
                 correctedDps = weaponDps * (1 + atkSpdPercent + setAtkSpdPercent) * (1 + (ccPercent + setCcPercent) * (cdPercent + setCdPercent)) * (1 + (mainStats + setMainStats) / 100);
             }
             else if (weaponCount == 2) {
                 var weapon1 = ItemList.Where(o => o.AttacksPerSecond != null).ToArray()[0];
                 var weapon2 = ItemList.Where(o => o.AttacksPerSecond != null).ToArray()[1];
                 // weapon dmg
-                weaponMinDmg = weaponMinDmgFetcher.GetBonusDamage(new List<Item> { weapon1 }) + weaponMinDmgFetcher.GetBonusDamage(new List<Item> { weapon2 });
-                weaponDeltaDmg = weaponDeltaDmgFetcher.GetBonusDamage(new List<Item> { weapon1 }) + weaponDeltaDmgFetcher.GetBonusDamage(new List<Item> { weapon2 });
+                var weapon1PercentDamage = weaponPercentDamageFetcher.GetBonusDamage(new List<Item> { weapon1 });
+                var weapon2PercentDamage = weaponPercentDamageFetcher.GetBonusDamage(new List<Item> { weapon2 });
+                weaponMinDmg = weaponMinDmgFetcher.GetBonusDamage(new List<Item> { weapon1 }) * (1 + weapon1PercentDamage) + weaponMinDmgFetcher.GetBonusDamage(new List<Item> { weapon2 }) * (1 + weapon2PercentDamage);
+                weaponDeltaDmg = weaponDeltaDmgFetcher.GetBonusDamage(new List<Item> { weapon1 }) * (1 + weapon1PercentDamage) + weaponDeltaDmgFetcher.GetBonusDamage(new List<Item> { weapon2 }) * (1 + weapon2PercentDamage);
                 var weapon1AtkSpd = weaponApsFetcher.GetBonusDamage(new List<Item> { weapon1 }) * (1 + weaponApsPercentFetcher.GetBonusDamage(new List<Item> { weapon1 }));
                 var weapon2AtkSpd = weaponApsFetcher.GetBonusDamage(new List<Item> { weapon2 }) * (1 + weaponApsPercentFetcher.GetBonusDamage(new List<Item> { weapon2 }));
+                
                 var weaponAtkSpd = 2 * weapon1AtkSpd * weapon2AtkSpd / (weapon1AtkSpd + weapon2AtkSpd);
                 //var weaponAtkSpd = (weapon1AtkSpd + weapon2AtkSpd)/2;
 
@@ -164,8 +169,7 @@ namespace D3Calculation
             var resourceCostReduction = resourceCostReductionFetcher.GetBonusDamage(ItemList);
 
             // hero setAttributes list
-            var setAttributesFetcher = new SetAttributesFetcher();
-            var setAttributes = setAttributesFetcher.GetSetAttributes(ItemList);
+            var setAttributes = SetAttributesFetcher.GetSetAttributes(ItemList);
             // hero stats from sets only
             var setMainStats = _mainStatFetcher.GetBonusDamage(setAttributes);
             var setAtkSpdPercent = atkSpdPercentFetcher.GetBonusDamage(setAttributes);
@@ -206,7 +210,7 @@ namespace D3Calculation
         {
             var weaponDmg = ((weapon1MinDmg + weapon1MaxDmg) / 2 + (weapon2MinDmg + weapon2MaxDmg) / 2) / 2 + (bonusDamageMin + bonusDamageMax) / 2;
             var aps = 2 * weapon1Aps * weapon2Aps / (weapon1Aps + weapon2Aps);
-            return weaponDmg * aps * (1 + primaryAttribute / 100) * (1 + attackSpeed) * (1 + criticalHitChance * criticalHitDamage) * (1 + passiveDamage);
+            return weaponDmg * aps * (1 + primaryAttribute / 100) * (1 + attackSpeed + 0.15) * (1 + criticalHitChance * criticalHitDamage) * (1 + passiveDamage);
         }
 
         public static double GetDps(double weaponMinDmg, double weaponMaxDmg, double weaponAps, double bonusDamageMin, double bonusDamageMax, double primaryAttribute, double attackSpeed, double criticalHitChance, double criticalHitDamage, double passiveDamage)
