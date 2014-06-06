@@ -124,7 +124,7 @@ namespace D3Calculation
                 weaponApsPercent = weaponApsPercentFetcher.GetBonusDamage(weapon);
                 weaponPercentDamage = weaponPercentDamageFetcher.GetBonusDamage(weapon);
 
-                weaponDps = ((weaponMinDmg + weaponMinDmg + weaponDeltaDmg) * (1 + weaponPercentDamage) / 2 + bonusDmgAvg) * weaponAps * (1 + weaponApsPercent);
+                weaponDps = (((weaponMinDmg + weaponMinDmg + weaponDeltaDmg) / 2 * (1 + weaponPercentDamage)) + bonusDmgAvg) * weaponAps * (1 + weaponApsPercent);
                 correctedDps = weaponDps * (1 + atkSpdPercent + setAtkSpdPercent) * (1 + (ccPercent + setCcPercent) * (cdPercent + setCdPercent)) * (1 + (mainStats + setMainStats) / 100);
             }
             else if (weaponCount == 2) {
@@ -138,10 +138,11 @@ namespace D3Calculation
                 var weapon1AtkSpd = weaponApsFetcher.GetBonusDamage(new List<Item> { weapon1 }) * (1 + weaponApsPercentFetcher.GetBonusDamage(new List<Item> { weapon1 }));
                 var weapon2AtkSpd = weaponApsFetcher.GetBonusDamage(new List<Item> { weapon2 }) * (1 + weaponApsPercentFetcher.GetBonusDamage(new List<Item> { weapon2 }));
                 
-                var weaponAtkSpd = 2 * weapon1AtkSpd * weapon2AtkSpd / (weapon1AtkSpd + weapon2AtkSpd);
+                var weaponAtkSpd = 2 * weapon1AtkSpd * weapon2AtkSpd * 1 / (weapon1AtkSpd + weapon2AtkSpd);
                 //var weaponAtkSpd = (weapon1AtkSpd + weapon2AtkSpd)/2;
 
                 weaponDps = ((weaponMinDmg + weaponMinDmg + weaponDeltaDmg) / 4 + bonusDmgAvg) * weaponAtkSpd;
+                
                 correctedDps = weaponDps * (1 + atkSpdPercent + setAtkSpdPercent + 0.15) * (1 + (ccPercent + setCcPercent) * (cdPercent + setCdPercent)) * (1 + (mainStats + setMainStats) / 100);
             }
 

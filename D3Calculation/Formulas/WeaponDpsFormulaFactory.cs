@@ -6,17 +6,14 @@ namespace D3Calculation.Formulas
 {
     public class WeaponDpsFormulaFactory : AbstractFormulaFactory
     {
-        private readonly List<Item> _weapons;
         private readonly WeaponDmgFormulaFactory _weaponDmgFormula;
         private readonly WeaponApsFormulaFactory _weaponApsFactory;
 
-        public WeaponDpsFormulaFactory(List<Item> weapons, ElementalTermFactories factories, WeaponDmgFormulaFactory weaponDmgFormula, WeaponApsFormulaFactory weaponApsFactory)
+        public WeaponDpsFormulaFactory(ElementalTermFactories factories, WeaponDmgFormulaFactory weaponDmgFormula, WeaponApsFormulaFactory weaponApsFactory)
             : base(factories)
         {
-            if (weapons == null) throw new ArgumentNullException("weapons");
             if (weaponDmgFormula == null) throw new ArgumentNullException("weaponDmgFormula");
             if (weaponApsFactory == null) throw new ArgumentNullException("weaponApsFactory");
-            _weapons = weapons;
             _weaponDmgFormula = weaponDmgFormula;
             _weaponApsFactory = weaponApsFactory;
         }

@@ -7,6 +7,7 @@ namespace D3Calculation.Formulas
 {
     public class CriticalHitChanceFormulaFactory : AbstractFormulaFactory
     {
+        private const double CcPercentDefaultConst = 0.05;
         private readonly IList<Item> _itemList;
         private readonly CritPercentFetcher _critPercentFetcher;
 
@@ -21,7 +22,7 @@ namespace D3Calculation.Formulas
 
         public override ITerm CreateFormula()
         {
-            return Factories.BaseFactory.CreateAttributeTerm(_itemList, _critPercentFetcher);
+            return Factories.SumFactory.CreateFormulaTerm(Factories.BaseFactory.CreateConstantTerm(CcPercentDefaultConst),Factories.BaseFactory.CreateAttributeTerm(_itemList, _critPercentFetcher));
         }
     }
 }

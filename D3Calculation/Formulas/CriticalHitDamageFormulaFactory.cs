@@ -7,6 +7,7 @@ namespace D3Calculation.Formulas
 {
     public class CriticalHitDamageFormulaFactory : AbstractFormulaFactory
     {
+        private const double CdPercentDefaultConst = 0.5;
         private readonly IList<Item> _itemList;
         private readonly CritDamageFetcher _critDamageFetcher;
 
@@ -21,7 +22,7 @@ namespace D3Calculation.Formulas
 
         public override ITerm CreateFormula()
         {
-            return Factories.BaseFactory.CreateAttributeTerm(_itemList, _critDamageFetcher);
+            return Factories.SumFactory.CreateFormulaTerm(Factories.BaseFactory.CreateConstantTerm(CdPercentDefaultConst), Factories.BaseFactory.CreateAttributeTerm(_itemList, _critDamageFetcher));
         }
     }
 }

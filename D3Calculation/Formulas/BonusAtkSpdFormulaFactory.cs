@@ -22,7 +22,9 @@ namespace D3Calculation.Formulas
 
         public override ITerm CreateFormula()
         {
+            //corrected for the moment
             var dualWieldBonus = _itemList.Count(o => o.AttacksPerSecond != null) == 2 ? 0.15 : 0.0;
+            //var dualWieldBonus = 0.0;
 
             return
                 Factories.SumFactory.CreateFormulaTerm(Factories.BaseFactory.CreateAttributeTerm(_itemList,

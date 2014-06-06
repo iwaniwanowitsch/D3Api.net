@@ -25,7 +25,7 @@ namespace D3Calculation.Formulas
             return
                 terms.Length != 0
                     ? _productFactory.CreateFormulaTerm(_sumFactory.CreateFormulaTerm(terms),
-                        _divisionFactory.CreateFormulaTerm(_divisionFactory.CreateConstantTerm(terms.Length)))
+                        _divisionFactory.CreateFormulaTerm(_divisionFactory.CreateConstantTerm((double)terms.Length)))
                     : _sumFactory.CreateConstantTerm(0);
         }
     }

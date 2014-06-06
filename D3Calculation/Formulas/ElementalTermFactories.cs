@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace D3Calculation.Formulas
 {
+    // verstößt gegen Open-Close-Principle, sorgt aber für DRY code.
     public class ElementalTermFactories
     {
         private readonly BaseTermFactory _baseFactory;

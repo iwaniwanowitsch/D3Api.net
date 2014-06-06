@@ -77,14 +77,24 @@ namespace D3Calculation
                 var divisionFactory = new DivisionTermFactory();
                 var elementalFactory = new ElementalTermFactories(new BaseTermFactory(), sumFactory, productFactory, new SubstractionTermFactory(), divisionFactory, new PercentSumTermFactory(), new AverageTermFactory(sumFactory,productFactory,divisionFactory));
 
-                var formel = new WeaponAvgDmgFormulaFactory(elementalFactory, weaponList,new MinWeaponDamageFetcher(), new DeltaWeaponDamageFetcher());
-                Console.WriteLine(formel.CreateFormula().ToString());
+                var weaponAvgDmgFactory = new WeaponAvgDmgFormulaFactory(elementalFactory, weaponList,new MinWeaponDamageFetcher(), new DeltaWeaponDamageFetcher());
+                var weaponDmgFactory = new WeaponDmgFormulaFactory(elementalFactory,weaponList,new PercentWeaponDamageFetcher(), weaponAvgDmgFactory, new BonusAvgDmgFormulaFactory(elementalFactory,itemList,new MinDamageFetcher(), new DeltaDamageFetcher()));
+                var weaponDpsFactory = new WeaponDpsFormulaFactory(elementalFactory,weaponDmgFactory, new WeaponApsFormulaFactory(elementalFactory,weaponList,new ApsWeaponFetcher(), new ApsPercentWeaponFetcher()));
+
+                var damageFactory = new DamageFormulaFactory(elementalFactory, weaponDpsFactory, new CriticalHitDamageFormulaFactory(elementalFactory, itemList, new CritDamageFetcher()), new CriticalHitChanceFormulaFactory(elementalFactory, itemList, new CritPercentFetcher()), new BonusAtkSpdFormulaFactory(elementalFactory, itemList, new ApsPercentFetcher()), new MainAttributeFormulaFactory(elementalFactory, mainStatFetcher, itemList, myhero.Level));
+
+                Console.WriteLine(damageFactory.CreateFormula().Evaluate().ToString());
+                Console.WriteLine(weaponDpsFactory.CreateFormula().ToString());
+                Console.WriteLine(weaponDpsFactory.CreateFormula().Evaluate().ToString());
+                Console.WriteLine((new WeaponApsFormulaFactory(elementalFactory,weaponList,new ApsWeaponFetcher(), new ApsPercentWeaponFetcher())).CreateFormula().Evaluate());
+                Console.WriteLine(weaponDmgFactory.CreateFormula().Evaluate());
+                
                 Console.ReadLine();
 
                 var damageCalculator = new DamageCalculator(itemList,mainStatFetcher);
                 var ehpCalculator = new EhpCalculator(itemList,myhero.HeroClass);
 
-                var damageData = damageCalculator.GetHeroDamage(myhero.Level,myhero.Stats.Damage);
+                var damageData = damageCalculator.GetHeroDamage(myhero.Level);
                 var ehp = ehpCalculator.GetEhp(myhero.Level);
 
                 Console.WriteLine(myhero.Name);
