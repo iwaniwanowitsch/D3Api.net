@@ -1,37 +1,46 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using D3apiData.API.Objects.Hero;
-using D3apiData.API.Objects.Item;
-using D3Calculation.AttributeFetchers;
 
 namespace D3Calculation.Formulas
 {
-    public class DamageFormulaFactory : IFormulaFactory
+    public class DamageFormulaFactory : AbstractFormulaFactory
     {
-        private readonly List<Item> _itemList;
-        private readonly IAttributeFetcher _mainAttributeFetcher;
+        private readonly WeaponDpsFormulaFactory _weaponDpsFactory;
+        private readonly CriticalHitDamageFormulaFactory _criticalHitDamageFactory;
+        private readonly CriticalHitChanceFormulaFactory _criticalHitChanceFactory;
+        private readonly BonusAtkSpdFormulaFactory _bonusAtkSpdFactory;
+        private readonly MainAttributeFormulaFactory _mainAttributeFactory;
 
-        public DamageFormulaFactory(List<Item> itemList, IAttributeFetcher mainAttributeFetcher)
+        public DamageFormulaFactory(ElementalTermFactories factories,  WeaponDpsFormulaFactory weaponDpsFactory, CriticalHitDamageFormulaFactory criticalHitDamageFactory, CriticalHitChanceFormulaFactory criticalHitChanceFactory, BonusAtkSpdFormulaFactory bonusAtkSpdFactory, MainAttributeFormulaFactory mainAttributeFactory)
+            : base(factories)
         {
-            if (itemList == null) throw new ArgumentNullException("itemList");
-            if (mainAttributeFetcher == null) throw new ArgumentNullException("mainAttributeFetcher");
-            _itemList = itemList;
-            _mainAttributeFetcher = mainAttributeFetcher;
+            if (weaponDpsFactory == null) throw new ArgumentNullException("weaponDpsFactory");
+            if (criticalHitDamageFactory == null) throw new ArgumentNullException("criticalHitDamageFactory");
+            if (criticalHitChanceFactory == null) throw new ArgumentNullException("criticalHitChanceFactory");
+            if (bonusAtkSpdFactory == null) throw new ArgumentNullException("bonusAtkSpdFactory");
+            if (mainAttributeFactory == null) throw new ArgumentNullException("mainAttributeFactory");
+            _weaponDpsFactory = weaponDpsFactory;
+            _criticalHitDamageFactory = criticalHitDamageFactory;
+            _criticalHitChanceFactory = criticalHitChanceFactory;
+            _bonusAtkSpdFactory = bonusAtkSpdFactory;
+            _mainAttributeFactory = mainAttributeFactory;
         }
 
-        public ITerm CreateFormula()
+        public override ITerm CreateFormula()
         {
-            var weapons = _itemList.Where(o => o.AttacksPerSecond != null).ToList();
+            var weaponDpsFormula = _weaponDpsFactory.CreateFormula();
+            var criticalHitDamageFormula = _criticalHitDamageFactory.CreateFormula();
+            var criticalHitChanceFormula = _criticalHitChanceFactory.CreateFormula();
+            var bonusAtkSpdFormula = _bonusAtkSpdFactory.CreateFormula();
+            var mainAttributeFormula = _mainAttributeFactory.CreateFormula();
 
-            var weaponsDps = new WeaponDpsFormulaFactory(_itemList, weapons, new MinDamageFetcher(),
-                new DeltaDamageFetcher(), new MinWeaponDamageFetcher(), new DeltaWeaponDamageFetcher(),
-                new ApsWeaponFetcher(), new ApsPercentWeaponFetcher(), new PercentWeaponDamageFetcher());
-
-            return null;
+            return Factories.ProductFactory.CreateFormulaTerm(weaponDpsFormula,
+                Factories.PercentSumFactory.CreateFormulaTerm(bonusAtkSpdFormula),
+                Factories.PercentSumFactory.CreateFormulaTerm(
+                    Factories.ProductFactory.CreateFormulaTerm(criticalHitChanceFormula, criticalHitDamageFormula)),
+                Factories.PercentSumFactory.CreateFormulaTerm(
+                    Factories.ProductFactory.CreateFormulaTerm(mainAttributeFormula,
+                        Factories.BaseFactory.CreateConstantTerm(1.0/100))));
         }
     }
 }

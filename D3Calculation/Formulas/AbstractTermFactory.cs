@@ -6,14 +6,14 @@ namespace D3Calculation.Formulas
 {
     public abstract class AbstractTermFactory : ITermFactory
     {
-        public abstract ITerm CreateFormulaTerm(List<ITerm> terms);
+        public abstract ITerm CreateFormulaTerm(params ITerm[] terms);
 
         public virtual ITerm CreateConstantTerm(double constant)
         {
             return new ConstantTerm(constant);
         }
 
-        public virtual ITerm CreateAttributeTerm(List<Item> items, IAttributeFetcher fetcher)
+        public virtual ITerm CreateAttributeTerm(IList<Item> items, IAttributeFetcher fetcher)
         {
             return new AttributeTerm(items, fetcher);
         }

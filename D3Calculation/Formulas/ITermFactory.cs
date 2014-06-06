@@ -6,10 +6,10 @@ namespace D3Calculation.Formulas
 {
     public interface ITermFactory
     {
-        ITerm CreateFormulaTerm(List<ITerm> terms);
+        ITerm CreateFormulaTerm(params ITerm[] terms);
 
         ITerm CreateConstantTerm(double constant);
 
-        ITerm CreateAttributeTerm(List<Item> items, IAttributeFetcher fetcher);
+        ITerm CreateAttributeTerm(IList<Item> items, IAttributeFetcher fetcher);
     }
 }

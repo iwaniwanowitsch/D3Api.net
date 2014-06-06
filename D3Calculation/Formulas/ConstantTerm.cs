@@ -13,5 +13,10 @@
         {
             return _constant;
         }
+
+        public override string ToString()
+        {
+            return _constant.ToString("0.###");
+        }
     }
 }

@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Linq;
 using D3apiData;
 using D3apiData.API;
 using D3apiData.API.Objects.Hero;
 using D3Calculation.AttributeFetchers;
 using System.Collections.Generic;
+using D3Calculation.Formulas;
 using D3Calculation.ItemFetchers;
 
 namespace D3Calculation
@@ -22,8 +24,7 @@ namespace D3Calculation
                 Console.Write("Enter Battletag: ");
                 var battletag = Console.ReadLine();
 
-                var d3api = new D3ApiServiceExample();
-                d3api.Config.CollectMode = CollectMode.Online;
+                var d3api = new D3ApiServiceExample {Config = {CollectMode = CollectMode.Online}};
 
                 var myprofile = d3api.Data.GetProfileByBattletag(battletag);
                 if (myprofile.IsErrorObject())
@@ -57,6 +58,7 @@ namespace D3Calculation
                 // hero items list
                 var itemListFetcher = new HeroItemsFetcher(d3api.Data);
                 var itemList = itemListFetcher.GetItemsList(myhero);
+                var weaponList = itemList.Where(o => o.AttacksPerSecond != null).ToList();
 
                 var heroMainStatFetcherLookup = new Dictionary<HeroClass, IAttributeFetcher>
                 {
@@ -69,6 +71,15 @@ namespace D3Calculation
                 };
 
                 var mainStatFetcher = heroMainStatFetcherLookup[myhero.HeroClass];
+
+                var sumFactory = new SumTermFactory();
+                var productFactory = new ProductTermFactory();
+                var divisionFactory = new DivisionTermFactory();
+                var elementalFactory = new ElementalTermFactories(new BaseTermFactory(), sumFactory, productFactory, new SubstractionTermFactory(), divisionFactory, new PercentSumTermFactory(), new AverageTermFactory(sumFactory,productFactory,divisionFactory));
+
+                var formel = new WeaponAvgDmgFormulaFactory(elementalFactory, weaponList,new MinWeaponDamageFetcher(), new DeltaWeaponDamageFetcher());
+                Console.WriteLine(formel.CreateFormula().ToString());
+                Console.ReadLine();
 
                 var damageCalculator = new DamageCalculator(itemList,mainStatFetcher);
                 var ehpCalculator = new EhpCalculator(itemList,myhero.HeroClass);

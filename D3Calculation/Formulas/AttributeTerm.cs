@@ -8,10 +8,10 @@ namespace D3Calculation.Formulas
 {
     public class AttributeTerm : ITerm
     {
-        private List<Item> _items;
+        private IList<Item> _items;
         private readonly IAttributeFetcher _fetcher;
 
-        public AttributeTerm(List<Item> items, IAttributeFetcher fetcher)
+        public AttributeTerm(IList<Item> items, IAttributeFetcher fetcher)
         {
             if (items == null) throw new ArgumentNullException("items");
             if (fetcher == null) throw new ArgumentNullException("fetcher");
@@ -19,7 +19,7 @@ namespace D3Calculation.Formulas
             _fetcher = fetcher;
         }
 
-        public List<Item> Items
+        public IList<Item> Items
         {
             get { return _items; }
             set { if (value != null) _items = value; }
@@ -29,6 +29,11 @@ namespace D3Calculation.Formulas
         {
             return _fetcher.GetBonusDamage(Items) +
                    _fetcher.GetBonusDamage(SetAttributesFetcher.GetSetAttributes(Items));
+        }
+
+        public override string ToString()
+        {
+            return _fetcher.GetType().Name;
         }
     }
 }

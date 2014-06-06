@@ -20,17 +20,13 @@ namespace D3Calculation.Formulas
             _divisionFactory = divisionFactory;
         }
 
-        public override ITerm CreateFormulaTerm(List<ITerm> terms)
+        public override ITerm CreateFormulaTerm(params ITerm[] terms)
         {
             return
-                terms.Count != 0 ? _productFactory.CreateFormulaTerm(new List<ITerm>
-                {
-                    _sumFactory.CreateFormulaTerm(terms),
-                    _divisionFactory.CreateFormulaTerm(new List<ITerm>
-                    {
-                        _divisionFactory.CreateConstantTerm(terms.Count)
-                    })
-                }) : _sumFactory.CreateConstantTerm(0);
+                terms.Length != 0
+                    ? _productFactory.CreateFormulaTerm(_sumFactory.CreateFormulaTerm(terms),
+                        _divisionFactory.CreateFormulaTerm(_divisionFactory.CreateConstantTerm(terms.Length)))
+                    : _sumFactory.CreateConstantTerm(0);
         }
     }
 }
