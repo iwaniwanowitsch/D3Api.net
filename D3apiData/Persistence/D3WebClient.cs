@@ -1,4 +1,5 @@
-﻿using D3apiData.Persistence;
+﻿using D3apiData.Helper;
+using D3apiData.Persistence;
 using System;
 using System.IO;
 using System.Net;
@@ -27,7 +28,7 @@ namespace D3apiData.Persistence
         public void SaveIconSync(string url, string filepath)
         {
             // Construct HTTP request to get the logo
-            var httpRequest = (HttpWebRequest)WebRequest.Create(checkURL(url));
+            var httpRequest = (HttpWebRequest)WebRequest.Create(url.CheckUrl());
             httpRequest.Method = WebRequestMethods.Http.Get;
             // Get back the HTTP response for web server
             var httpResponse = (HttpWebResponse)httpRequest.GetResponse();
@@ -61,30 +62,15 @@ namespace D3apiData.Persistence
         }
 
         /// <summary>
-        /// checks url for validity (only formal)
-        /// </summary>
-        /// <param name="url"></param>
-        /// <returns></returns>
-        private Uri checkURL(string url) {
-            if (!url.StartsWith("http://") && !url.StartsWith("https://"))
-                url = "http://" + url;
-            Uri result;
-            if (Uri.TryCreate(url, UriKind.Absolute, out result) && result.Scheme == Uri.UriSchemeHttp)
-                return result;
-            else
-                throw new ArgumentException("not a valid url");
-        }
-
-        /// <summary>
         /// gets stream from url via httprequest
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
         public Stream Deserialize(string url)
         {
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create(checkURL(url));
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(url.CheckUrl());
             httpWebRequest.Credentials = CredentialCache.DefaultCredentials;
-            httpWebRequest.Proxy = new WebProxy("127.0.0.1:3128");
+            //httpWebRequest.Proxy = new WebProxy("127.0.0.1:3128");
             var httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
             if (httpWebResponse.StatusCode != HttpStatusCode.OK)
                 throw new HttpListenerException();
