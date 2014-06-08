@@ -10,16 +10,14 @@ namespace D3apiData.API.FilepathProviders
     {
         /// <summary />
         /// <param name="nextMember"></param>
-        public IconFilePathProvider(IFilePathProvider nextMember) : base(nextMember) { base.Path = "/icons/"; }
+        public IconFilePathProvider(IFilePathProvider nextMember,string pathRoot) : base(nextMember,pathRoot) { base.Path = "/icons/"; }
 
         /// <summary />
         /// <param name="url"></param>
-        /// <param name="builder"></param>
-        protected override void DoAppendFilePathBuilder(string url, StringBuilder builder)
+        protected override string DoBuildFilePath(string url)
         {
-            builder.Append(@"icons\");
             var split = url.Split(new[] { Path }, StringSplitOptions.None);
-            builder.Append(split[1].Replace("/", "\\"));
+            return @"icons\" + split[1].Replace("/", "\\");
         }
     }
 }

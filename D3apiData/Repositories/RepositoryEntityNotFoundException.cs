@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace D3apiData.Persistence
+namespace D3apiData.Repositories
 {
     public class RepositoryEntityNotFoundException : Exception
     {

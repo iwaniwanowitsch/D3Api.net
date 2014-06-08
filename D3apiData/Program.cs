@@ -1,4 +1,9 @@
 ﻿using System;
+using System.IO;
+using System.Net;
+using D3apiData.API.FilepathProviders;
+using D3apiData.API.UrlConstruction;
+using D3apiData.Repositories;
 
 namespace D3apiData
 {
@@ -6,7 +11,36 @@ namespace D3apiData
     {
         static void Main(string[] args)
         {
-            var api = new D3ApiServiceExample();
+            // composition root
+
+            var locale = Locales.en_GB;
+            var cachepath = @"cache\";
+
+            var profileUrlConstructor = new ProfileUrlConstructionProvider(locale);
+            var heroUrlConstructor = new HeroUrlConstructionProvider(locale);
+            var itemUrlConstructor = new ItemUrlConstructionProvider(locale);
+            var followerUrlConstructor = new FollowerUrlConstructionProvider(locale);
+            var artisanUrlConstructor = new ArtisanUrlConstructionProvider(locale);
+            var iconUrlConstructor = new IconUrlConstructionProvider(locale);
+
+            var defaultFilePathProvider = new DefaultFilePathProvider(); // end of chain
+            var iconFilePathProvider = new IconFilePathProvider(defaultFilePathProvider,cachepath);
+            var itemFilePathProvider = new ItemFilePathProvider(iconFilePathProvider, cachepath);
+            var profileFilePathProvider = new ProfileFilePathProvider(itemFilePathProvider, cachepath);
+            var heroFilePathProvider = new HeroFilePathProvider(profileFilePathProvider,cachepath); // begin of chain
+
+            var readRepo = new StreamWebRepository(null);
+            var writeRepo = new StreamFileFromUrlRepository(heroFilePathProvider);
+            var readRepoDecorated = new TryCacheRepositoryDecorator<Stream, string>(readRepo,writeRepo);
+
+            var profileRepository = new ProfileRepository(readRepoDecorated, profileUrlConstructor);
+            var heroRepository = new HeroRepository(readRepoDecorated, heroUrlConstructor);
+            var itemRepository = new ItemRepository(readRepoDecorated, itemUrlConstructor);
+            var followerRepository = new FollowerRepository(readRepoDecorated, followerUrlConstructor);
+            var artisanRepository = new ArtisanRepository(readRepoDecorated, artisanUrlConstructor);
+            var skillIconRepository = new SkillIconRepository(readRepoDecorated, iconUrlConstructor);
+            var itemIconRepository = new ItemIconRepository(readRepoDecorated, iconUrlConstructor);
+
             //Console.WriteLine(data.Config.Locale);
 
             /*ItemNamesCollector collector = new ItemNamesCollector(data.Webclient);
@@ -20,17 +54,16 @@ namespace D3apiData
 
             //var profile = api.Data.GetProfileByBattletag("iwaniwanow#2854");
             //api.Data.Battletag = "iwaniwanow#2854";
-            //var hero = api.Data.GetHeroById("41139248");
-            var icon = api.Data.GetItemIconById("unique_helm_014_x1_demonhunter_male");
+            var hero = heroRepository.GetByBattletagAndId("iwaniwanow#2854","41139248");
+            //var icon = api.Data.GetItemIconById("unique_helm_014_x1_demonhunter_male");
 
             //api.Config.CollectMode = CollectMode.TryCacheThenOnline;
 
             //api.Data.Battletag = "iwaniwanow#2854";
-            var item = api.Data.GetItemByTooltipParams("item/ClYIy-bypQwSBwgEFaLQXCIdyfq8oB1-dlWhHZsGAMsddEWniR3z1Ue0MIsCOI4CQABQElgEYJMCgAFGpQF0RaeJrQF-VrMutQHJW5KkuAGm0s_XAcABBxjEwualBFAIWAI");
-            Console.WriteLine(item.Name);
+            var item = itemRepository.GetByTooltipParams("item/ClYIy-bypQwSBwgEFaLQXCIdyfq8oB1-dlWhHZsGAMsddEWniR3z1Ue0MIsCOI4CQABQElgEYJMCgAFGpQF0RaeJrQF-VrMutQHJW5KkuAGm0s_XAcABBxjEwualBFAIWAI");
+            Console.WriteLine(hero.Name);
 
             Console.ReadLine();
-            api.SaveConfig();
         }
     }
 }

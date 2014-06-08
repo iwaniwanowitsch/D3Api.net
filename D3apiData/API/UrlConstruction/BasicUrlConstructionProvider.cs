@@ -7,6 +7,13 @@ namespace D3apiData.API.UrlConstruction
     /// </summary>
     public abstract class BasicUrlConstructionProvider
     {
+        public Locales Locale { get; set; }
+
+        protected BasicUrlConstructionProvider(Locales locale)
+        {
+            Locale = locale;
+        }
+
         /// <summary />
         protected readonly Dictionary<Locales, string> HostLookup = new Dictionary<Locales, string>
         {

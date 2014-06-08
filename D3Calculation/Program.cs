@@ -24,9 +24,9 @@ namespace D3Calculation
                 Console.Write("Enter Battletag: ");
                 var battletag = Console.ReadLine();
 
-                var d3api = new D3ApiServiceExample {Config = {CollectMode = CollectMode.Online}};
+                var d3api = new D3ApiService();
 
-                var myprofile = d3api.Data.GetProfileByBattletag(battletag);
+                var myprofile = d3api.ProfileRepository.GetByBattletag(battletag);
                 if (myprofile.IsErrorObject())
                 {
                     Console.WriteLine("Invalid battletag. Press key to try again");
@@ -53,10 +53,10 @@ namespace D3Calculation
                 }
                 Console.Clear();
 
-                var myhero = d3api.Data.GetHeroById(battletag, myprofile.Heroes[heroid].Id.ToString());
+                var myhero = d3api.HeroRepository.GetByBattletagAndId(battletag, myprofile.Heroes[heroid].Id.ToString());
 
                 // hero items list
-                var itemListFetcher = new HeroItemsFetcher(d3api.Data);
+                var itemListFetcher = new HeroItemsFetcher(d3api.ItemRepository);
                 var itemList = itemListFetcher.GetItemsList(myhero);
                 var weaponList = itemList.Where(o => o.AttacksPerSecond != null).ToList();
 

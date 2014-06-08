@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace D3apiData.Persistence
+namespace D3apiData.Repositories
 {
     public class TryCacheRepositoryDecorator<TEntity, TKey> : IReadonlyRepository<TEntity, TKey> where TEntity : class
     {
@@ -15,16 +15,16 @@ namespace D3apiData.Persistence
             _writeRepo = writeRepo;
         }
 
-        public TEntity Get(TKey key)
+        public TEntity Retrieve(TKey key)
         {
             TEntity data;
             try
             {
-                data = _writeRepo.Get(key);
+                data = _writeRepo.Retrieve(key);
             }
             catch (RepositoryEntityNotFoundException)
             {
-                data = _readRepo.Get(key);
+                data = _readRepo.Retrieve(key);
                 _writeRepo.Save(data,key);
             }
             return data;

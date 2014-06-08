@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace D3apiData.JSON
 {
-    class JsonUtility
+    public static class JsonUtility
     {
         public static T ObjectFromJsonStream<T>(Stream stream) where T : class
         {

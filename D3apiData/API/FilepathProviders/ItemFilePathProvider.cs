@@ -11,17 +11,14 @@ namespace D3apiData.API.FilepathProviders
     {
         /// <summary />
         /// <param name="nextMember"></param>
-        public ItemFilePathProvider(IFilePathProvider nextMember) : base(nextMember) { base.Path = "/item/"; }
+        public ItemFilePathProvider(IFilePathProvider nextMember, string pathRoot) : base(nextMember, pathRoot) { base.Path = "/item/"; }
 
         /// <summary />
         /// <param name="url"></param>
-        /// <param name="builder"></param>
-        protected override void DoAppendFilePathBuilder(string url, StringBuilder builder)
+        protected override string DoBuildFilePath(string url)
         {
             var split = url.Split(new[] { Path }, StringSplitOptions.None);
-            builder.Append(@"item\");
-            builder.Append(split[1].Length <= 32 ? split[1] : MD5Helper.GetMd5Hash(split[1]));
-            builder.Append(".json");
+            return @"item\" + (split[1].Length <= 32 ? split[1] : MD5Helper.GetMd5Hash(split[1])) + ".json";
         }
     }
 }

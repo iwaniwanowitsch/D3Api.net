@@ -1,4 +1,4 @@
-﻿using D3apiData.Persistence;
+﻿using D3apiData.Repositories;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +7,7 @@ using System.Linq;
 namespace D3apiData.WebClient
 {
     class ItemNamesCollector
-    {
+    {/*
         private readonly D3WebClient _client;
 
         /// <summary>
@@ -137,5 +137,5 @@ namespace D3apiData.WebClient
                 }
             }
         }
-    }
+    */}
 }

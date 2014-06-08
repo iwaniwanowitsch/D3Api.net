@@ -8,11 +8,12 @@ namespace D3apiData.API.UrlConstruction
     /// </summary>
     public class ArtisanUrlConstructionProvider : BasicUrlConstructionProvider, IUrlConstructionProvider
     {
+
         /// <summary />
         public Type ApiType { get; private set; }
 
         /// <summary />
-        public ArtisanUrlConstructionProvider()
+        public ArtisanUrlConstructionProvider(Locales locale) : base(locale)
         {
             ApiType = typeof (Artisan);
         }
@@ -21,9 +22,9 @@ namespace D3apiData.API.UrlConstruction
         /// <param name="id"></param>
         /// <param name="locale"></param>
         /// <returns></returns>
-        public string ConstructUrlFromId(ApiId id, Locales locale)
+        public string ConstructUrlFromId(ApiId id)
         {
-            return base.HostLookup[locale] + Apihost + Apipath + "data/artisan/" + Uri.EscapeUriString(id.Id);
+            return base.HostLookup[Locale] + Apihost + Apipath + "data/artisan/" + Uri.EscapeUriString(id.Id);
         }
     }
 }

@@ -10,11 +10,9 @@ namespace D3apiData.API.FilepathProviders
     {
         /// <summary />
         /// <param name="url"></param>
-        /// <param name="builder"></param>
-        public void AppendFilePathBuilder(string url, StringBuilder builder)
+        public string BuildFilePath(string url)
         {
-            builder.Append(MD5Helper.GetMd5Hash(url));
-            builder.Append(".json");
+            return MD5Helper.GetMd5Hash(url) + ".json";
         }
     }
 }

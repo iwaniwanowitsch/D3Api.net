@@ -3,10 +3,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace D3apiData.Persistence
+namespace D3apiData.Repositories
 {
     public interface IReadonlyRepository<TEntity, in TKey> where TEntity : class
     {
-        TEntity Get(TKey key);
+        TEntity Retrieve(TKey key);
     }
 }

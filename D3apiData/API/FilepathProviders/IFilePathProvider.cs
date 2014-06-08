@@ -12,7 +12,6 @@ namespace D3apiData.API.FilepathProviders
         /// appends unique filepath from url to stringbuilder
         /// </summary>
         /// <param name="url"></param>
-        /// <param name="builder"></param>
-        void AppendFilePathBuilder(string url, StringBuilder builder);
+        string BuildFilePath(string url);
     }
 }

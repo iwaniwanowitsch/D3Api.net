@@ -1,4 +1,4 @@
-﻿namespace D3apiData.Persistence
+﻿namespace D3apiData.Repositories
 {
     public interface IRepository<TEntity, in TKey> : IReadonlyRepository<TEntity, TKey> where TEntity : class
     {

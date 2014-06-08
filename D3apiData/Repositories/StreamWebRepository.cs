@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using D3apiData.Helper;
 
-namespace D3apiData.Persistence
+namespace D3apiData.Repositories
 {
     public class StreamWebRepository : IReadonlyRepository<Stream,string>
     {
@@ -15,15 +15,15 @@ namespace D3apiData.Persistence
 
         public StreamWebRepository(WebProxy proxy)
         {
-            if (proxy == null) throw new ArgumentNullException("proxy");
             _proxy = proxy;
         }
 
-        public Stream Get(string url)
+        public Stream Retrieve(string url)
         {
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(url.CheckUrl());
             httpWebRequest.Credentials = CredentialCache.DefaultCredentials;
-            httpWebRequest.Proxy = _proxy;
+            if(_proxy != null)
+                httpWebRequest.Proxy = _proxy;
             var httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
             if (httpWebResponse.StatusCode != HttpStatusCode.OK)
                 throw new HttpListenerException();

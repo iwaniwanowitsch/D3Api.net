@@ -4,17 +4,18 @@ using System.Linq;
 using D3apiData.API;
 using D3apiData.API.Objects.Hero;
 using D3apiData.API.Objects.Item;
+using D3apiData.Repositories;
 
 namespace D3Calculation.ItemFetchers
 {
     class HeroItemsFetcher
     {
-        private readonly D3Data _data;
+        private readonly ItemRepository _itemRepository;
 
-        public HeroItemsFetcher(D3Data data)
+        public HeroItemsFetcher(ItemRepository itemRepository)
         {
-            if (data == null) throw new ArgumentNullException("data");
-            _data = data;
+            if (itemRepository == null) throw new ArgumentNullException("itemRepository");
+            _itemRepository = itemRepository;
         }
 
         public List<Item> GetItemsList(Hero hero)
@@ -25,7 +26,7 @@ namespace D3Calculation.ItemFetchers
                 heroItemsProperties.Select(p => p.GetGetMethod().Invoke(items, new object[0]))
                     .Where(o => o != null)
                     .Cast<ItemSummary>()
-                    .Select(o => _data.GetItemByTooltipParams(o.TooltipParams))
+                    .Select(o => _itemRepository.GetByTooltipParams(o.TooltipParams))
                     .ToList();
         } 
     }

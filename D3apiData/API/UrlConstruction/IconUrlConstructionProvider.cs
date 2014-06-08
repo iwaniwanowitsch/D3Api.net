@@ -14,7 +14,7 @@ namespace D3apiData.API.UrlConstruction
         public Type ApiType { get; private set; }
 
         /// <summary />
-        public IconUrlConstructionProvider()
+        public IconUrlConstructionProvider(Locales locale) : base(locale)
         {
             ApiType = typeof (D3Icon);
         }
@@ -23,9 +23,9 @@ namespace D3apiData.API.UrlConstruction
         /// <param name="id"></param>
         /// <param name="locale"></param>
         /// <returns></returns>
-        public string ConstructUrlFromId(ApiId id, Locales locale)
+        public string ConstructUrlFromId(ApiId id)
         {
-            return base.HostLookup[locale] + Mediahost + "icons/" + Uri.EscapeUriString(id.Id) + Uri.EscapeUriString(id.Id2) + ".png";
+            return base.HostLookup[Locale] + Mediahost + "icons/" + Uri.EscapeUriString(id.Id) + Uri.EscapeUriString(id.Id2) + ".png";
         }
     }
 }

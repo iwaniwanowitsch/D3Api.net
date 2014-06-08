@@ -2,31 +2,19 @@
 using System.IO;
 using System.Xml.Serialization;
 
-namespace D3apiData.Persistence
+namespace D3apiData.Repositories
 {
-    /// <summary>
-    /// serializes to xml format
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public class SerializerXml<T> : ISerializer<T> where T : class
+    public class XmlFileRepository<T> : IRepository<T, string> where T : class
     {
-        /// <summary>
-        /// empty constructor
-        /// </summary>
-        public SerializerXml()
-        {
-
-        }
-
-        /// <inheritdoc/>
-        public T Deserialize(string filepath)
+        public T Retrieve(string filepath)
         {
             T serialized = null;
             try
             {
                 using (Stream stream = File.Open(filepath, FileMode.OpenOrCreate))
                 {
-                    if (stream.Length != 0) {
+                    if (stream.Length != 0)
+                    {
                         var ser = new XmlSerializer(typeof(T));
                         serialized = (T)ser.Deserialize(stream);
                     }
@@ -34,20 +22,19 @@ namespace D3apiData.Persistence
             }
             catch (InvalidOperationException e)
             {
-                throw e;
+                throw new RepositoryEntityNotFoundException();
             }
             return serialized;
         }
 
-        /// <inheritdoc/>
-        public void Serialize(T obj, string filepath)
+        public void Save(T entity, string filepath)
         {
             try
             {
                 using (Stream stream = File.Open(filepath, FileMode.Create))
                 {
                     var ser = new XmlSerializer(typeof(T));
-                    ser.Serialize(stream, obj);
+                    ser.Serialize(stream, entity);
                 }
             }
             catch (InvalidOperationException e)
