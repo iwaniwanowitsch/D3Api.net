@@ -8,13 +8,10 @@ namespace D3apiData.API.UrlConstruction
     /// </summary>
     public class FollowerUrlConstructionProvider : BasicUrlConstructionProvider, IUrlConstructionProvider
     {
-        /// <summary />
-        public Type ApiType { get; private set; }
 
         /// <summary />
         public FollowerUrlConstructionProvider(Locales locale) : base(locale)
         {
-            ApiType = typeof (Follower);
         }
 
         /// <summary />

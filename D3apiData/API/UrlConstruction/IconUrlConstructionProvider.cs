@@ -8,15 +8,9 @@ namespace D3apiData.API.UrlConstruction
     /// </summary>
     public class IconUrlConstructionProvider : BasicUrlConstructionProvider, IUrlConstructionProvider
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        public Type ApiType { get; private set; }
-
         /// <summary />
         public IconUrlConstructionProvider(Locales locale) : base(locale)
         {
-            ApiType = typeof (D3Icon);
         }
 
         /// <summary />

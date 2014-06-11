@@ -8,9 +8,10 @@ namespace D3apiData.Repositories
 {
     public class ProfileRepository : JsonObjectRepositoryDecorator<Profile>
     {
-        private readonly ProfileUrlConstructionProvider _urlConstructor;
+        private readonly IUrlConstructionProvider _urlConstructor;
 
-        public ProfileRepository(IReadonlyRepository<Stream, string> readRepo, ProfileUrlConstructionProvider urlConstructor) : base(readRepo)
+        public ProfileRepository(IReadonlyRepository<Stream, string> readRepo, IUrlConstructionProvider urlConstructor)
+            : base(readRepo)
         {
             if (urlConstructor == null) throw new ArgumentNullException("urlConstructor");
             _urlConstructor = urlConstructor;

@@ -8,9 +8,10 @@ namespace D3apiData.Repositories
 {
     public class SkillIconRepository : IconRepositoryDecorator
     {
-        private readonly IconUrlConstructionProvider _urlConstructor;
+        private readonly IUrlConstructionProvider _urlConstructor;
 
-        public SkillIconRepository(IReadonlyRepository<Stream, string> readRepo, IconUrlConstructionProvider urlConstructor) : base(readRepo)
+        public SkillIconRepository(IReadonlyRepository<Stream, string> readRepo, IUrlConstructionProvider urlConstructor)
+            : base(readRepo)
         {
             if (urlConstructor == null) throw new ArgumentNullException("urlConstructor");
             _urlConstructor = urlConstructor;

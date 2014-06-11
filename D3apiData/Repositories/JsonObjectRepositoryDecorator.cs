@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using D3apiData.API.Objects;
-using D3apiData.JSON;
+using D3apiData.Helper;
 
 namespace D3apiData.Repositories
 {

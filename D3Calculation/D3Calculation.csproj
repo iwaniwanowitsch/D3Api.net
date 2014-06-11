@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LightInject">
+      <HintPath>..\packages\LightInject.3.0.1.7\lib\net45\LightInject.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -84,6 +87,9 @@
     <Compile Include="EhpCalculator.cs" />
     <Compile Include="Formulas\AbstractFormulaFactory.cs" />
     <Compile Include="Formulas\AbstractTermFactory.cs" />
+    <Compile Include="Formulas\ArmorDamageReductionFormulaFactory.cs" />
+    <Compile Include="Formulas\ArmorFormulaFactory.cs" />
+    <Compile Include="Formulas\AttributeFormulaFactory.cs" />
     <Compile Include="Formulas\AttributeTerm.cs" />
     <Compile Include="Formulas\AverageTermFactory.cs" />
     <Compile Include="Formulas\BaseTermFactory.cs" />
@@ -94,16 +100,26 @@
     <Compile Include="Formulas\CriticalHitDamageFormulaFactory.cs" />
     <Compile Include="Formulas\DamageFormulaFactory.cs" />
     <Compile Include="Formulas\DivisionTermFactory.cs" />
+    <Compile Include="Formulas\DodgeDamageReductionFormulaFactory.cs" />
+    <Compile Include="Formulas\EhpFormulaFactory.cs" />
+    <Compile Include="Formulas\ElementalResistanceFormulaFactory.cs" />
     <Compile Include="Formulas\ElementalTermFactories.cs" />
     <Compile Include="Formulas\FormulaTerm.cs" />
     <Compile Include="Formulas\IFormulaFactory.cs" />
     <Compile Include="Formulas\ITerm.cs" />
     <Compile Include="Formulas\ITermFactory.cs" />
     <Compile Include="Formulas\MainAttributeFormulaFactory.cs" />
+    <Compile Include="Formulas\MaxLifeFormulaFactory.cs" />
+    <Compile Include="Formulas\OtherDamageReductionFormulaFactory.cs" />
     <Compile Include="Formulas\PercentSumTermFactory.cs" />
     <Compile Include="Formulas\ProductTermFactory.cs" />
+    <Compile Include="Formulas\ResistanceDamageReductionFormulaFactory.cs" />
+    <Compile Include="Formulas\ResistanceFormulaFactory.cs" />
+    <Compile Include="Formulas\SecondaryAttributeFormulaFactory.cs" />
     <Compile Include="Formulas\SubstractionTermFactory.cs" />
     <Compile Include="Formulas\SumTermFactory.cs" />
+    <Compile Include="Formulas\VitalityFormulaFactory.cs" />
+    <Compile Include="Formulas\VsElitesDamageFormulaFactory.cs" />
     <Compile Include="Formulas\WeaponApsFormulaFactory.cs" />
     <Compile Include="Formulas\WeaponAvgDmgFormulaFactory.cs" />
     <Compile Include="Formulas\WeaponDmgFormulaFactory.cs" />

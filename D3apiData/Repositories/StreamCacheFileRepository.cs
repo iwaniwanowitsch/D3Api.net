@@ -1,12 +1,20 @@
+using System;
 using System.IO;
 
 namespace D3apiData.Repositories
 {
-    public class StreamFileRepository : IRepository<Stream, string>
+    public class StreamCacheFileRepository : ICacheRepository<Stream, string>
     {
+        private readonly TimeSpan _cacheDuration;
+
+        public StreamCacheFileRepository(TimeSpan cacheDuration)
+        {
+            _cacheDuration = cacheDuration;
+        }
+
         public virtual Stream Retrieve(string filepath)
         {
-            if (File.Exists(filepath))
+            if (IsValid(filepath))
                 return File.OpenRead(filepath);
             else
                 throw new RepositoryEntityNotFoundException();
@@ -25,6 +33,21 @@ namespace D3apiData.Repositories
                 // Use write method to write to the file specified above
                 fileStream.Write(bytesInStream, 0, bytesInStream.Length);
             }
+        }
+
+        public virtual void Delete(string filepath)
+        {
+            if (File.Exists(filepath))
+                File.Delete(filepath);
+        }
+
+        public virtual bool IsValid(string filepath)
+        {
+            if (File.Exists(filepath) && (DateTime.Now - File.GetCreationTime(filepath)) < _cacheDuration)
+                return true;
+            if(File.Exists(filepath))
+                Delete(filepath);
+            return false;
         }
     }
 }

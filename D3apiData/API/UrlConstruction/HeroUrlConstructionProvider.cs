@@ -9,12 +9,8 @@ namespace D3apiData.API.UrlConstruction
     public class HeroUrlConstructionProvider : BasicUrlConstructionProvider, IUrlConstructionProvider
     {
         /// <summary />
-        public Type ApiType { get; private set; }
-
-        /// <summary />
         public HeroUrlConstructionProvider(Locales locale) : base(locale)
         {
-            ApiType = typeof (Hero);
         }
 
         /// <summary />

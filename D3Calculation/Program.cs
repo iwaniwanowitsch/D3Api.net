@@ -7,6 +7,7 @@ using D3Calculation.AttributeFetchers;
 using System.Collections.Generic;
 using D3Calculation.Formulas;
 using D3Calculation.ItemFetchers;
+using LightInject;
 
 namespace D3Calculation
 {
@@ -24,7 +25,7 @@ namespace D3Calculation
                 Console.Write("Enter Battletag: ");
                 var battletag = Console.ReadLine();
 
-                var d3api = new D3ApiService();
+                var d3api = new ApiAccessFacade(CollectMode.TryCacheThenOnline,Locales.en_GB);
 
                 var myprofile = d3api.ProfileRepository.GetByBattletag(battletag);
                 if (myprofile.IsErrorObject())
@@ -82,6 +83,9 @@ namespace D3Calculation
                 var weaponDpsFactory = new WeaponDpsFormulaFactory(elementalFactory,weaponDmgFactory, new WeaponApsFormulaFactory(elementalFactory,weaponList,new ApsWeaponFetcher(), new ApsPercentWeaponFetcher()));
 
                 var damageFactory = new DamageFormulaFactory(elementalFactory, weaponDpsFactory, new CriticalHitDamageFormulaFactory(elementalFactory, itemList, new CritDamageFetcher()), new CriticalHitChanceFormulaFactory(elementalFactory, itemList, new CritPercentFetcher()), new BonusAtkSpdFormulaFactory(elementalFactory, itemList, new ApsPercentFetcher()), new MainAttributeFormulaFactory(elementalFactory, mainStatFetcher, itemList, myhero.Level));
+
+                //var container = new ServiceContainer();
+                //var damageFactory = container.GetInstance<DamageFormulaFactory>();
 
                 Console.WriteLine(damageFactory.CreateFormula().Evaluate().ToString());
                 Console.WriteLine(weaponDpsFactory.CreateFormula().ToString());

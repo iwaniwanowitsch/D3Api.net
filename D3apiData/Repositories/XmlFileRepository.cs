@@ -42,5 +42,11 @@ namespace D3apiData.Repositories
                 throw e;
             }
         }
+
+        public void Delete(string filepath)
+        {
+            if(File.Exists(filepath))
+                File.Delete(filepath);
+        }
     }
 }

@@ -8,9 +8,9 @@ namespace D3apiData.Repositories
 {
     public class ArtisanRepository : JsonObjectRepositoryDecorator<Artisan>
     {
-        private readonly ArtisanUrlConstructionProvider _urlConstructor;
+        private readonly IUrlConstructionProvider _urlConstructor;
 
-        public ArtisanRepository(IReadonlyRepository<Stream, string> readRepo, ArtisanUrlConstructionProvider urlConstructor) : base(readRepo)
+        public ArtisanRepository(IReadonlyRepository<Stream, string> readRepo, IUrlConstructionProvider urlConstructor) : base(readRepo)
         {
             if (urlConstructor == null) throw new ArgumentNullException("urlConstructor");
             _urlConstructor = urlConstructor;

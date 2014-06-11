@@ -9,12 +9,8 @@ namespace D3apiData.API.UrlConstruction
     public class ProfileUrlConstructionProvider : BasicUrlConstructionProvider, IUrlConstructionProvider
     {
         /// <summary />
-        public Type ApiType { get; private set; }
-
-        /// <summary />
         public ProfileUrlConstructionProvider(Locales locale) : base(locale)
         {
-            ApiType = typeof (Profile);
         }
 
         /// <summary />

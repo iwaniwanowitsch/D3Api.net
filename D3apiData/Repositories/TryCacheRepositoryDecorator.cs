@@ -5,9 +5,9 @@ namespace D3apiData.Repositories
     public class TryCacheRepositoryDecorator<TEntity, TKey> : IReadonlyRepository<TEntity, TKey> where TEntity : class
     {
         private IReadonlyRepository<TEntity, TKey> _readRepo;
-        private IRepository<TEntity, TKey> _writeRepo;
+        private ICacheRepository<TEntity, TKey> _writeRepo;
 
-        public TryCacheRepositoryDecorator(IReadonlyRepository<TEntity, TKey> readRepo, IRepository<TEntity, TKey> writeRepo)
+        public TryCacheRepositoryDecorator(IReadonlyRepository<TEntity, TKey> readRepo, ICacheRepository<TEntity, TKey> writeRepo)
         {
             if (readRepo == null) throw new ArgumentNullException("readRepo");
             if (writeRepo == null) throw new ArgumentNullException("writeRepo");

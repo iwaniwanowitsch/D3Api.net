@@ -9,12 +9,8 @@ namespace D3apiData.API.UrlConstruction
     public class ItemUrlConstructionProvider : BasicUrlConstructionProvider, IUrlConstructionProvider
     {
         /// <summary />
-        public Type ApiType { get; private set; }
-
-        /// <summary />
         public ItemUrlConstructionProvider(Locales locale) : base(locale)
         {
-            ApiType = typeof (Item);
         }
 
         /// <summary />

@@ -9,9 +9,10 @@ namespace D3apiData.Repositories
 {
     public class ItemRepository : JsonObjectRepositoryDecorator<Item>
     {
-        private readonly ItemUrlConstructionProvider _urlConstructor;
+        private readonly IUrlConstructionProvider _urlConstructor;
 
-        public ItemRepository(IReadonlyRepository<Stream, string> readRepo, ItemUrlConstructionProvider urlConstructor) : base(readRepo)
+        public ItemRepository(IReadonlyRepository<Stream, string> readRepo, IUrlConstructionProvider urlConstructor)
+            : base(readRepo)
         {
             if (urlConstructor == null) throw new ArgumentNullException("urlConstructor");
             _urlConstructor = urlConstructor;

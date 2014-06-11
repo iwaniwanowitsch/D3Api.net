@@ -1,20 +1,20 @@
-﻿using D3apiData.Repositories;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using D3apiData.Repositories;
 
-namespace D3apiData.WebClient
+namespace D3apiData.WebInteraction
 {
     class ItemNamesCollector
-    {/*
-        private readonly D3WebClient _client;
+    {
+        private readonly StreamWebRepository _client;
 
         /// <summary>
         /// constructor for class, which collects item names from battle.net/en/item/
         /// </summary>
         /// <param name="client">webclient for requests</param>
-        public ItemNamesCollector(D3WebClient client)
+        public ItemNamesCollector(StreamWebRepository client)
         {
             if (client == null)
                 throw new ArgumentNullException("client");
@@ -106,17 +106,18 @@ namespace D3apiData.WebClient
         private void GrabAllLinks(string root, string path, IEnumerable<string> containings, ICollection<string> visited, ICollection<string> results)
         {
             string sitecontent;
-            using(var stream = _client.Deserialize(root + path))
+            using(var stream = _client.Retrieve(root + path))
                 using(var reader = new StreamReader(stream))
                     sitecontent = reader.ReadToEnd();
-            foreach (var containing in containings)
+            var enumerable = containings as IList<string> ?? containings.ToList();
+            foreach (var containing in enumerable)
             {
                 string[] split = sitecontent.Split(new string[] { containing }, StringSplitOptions.RemoveEmptyEntries);
                 foreach (string linkstring in split)
                 {
-                    if (linkstring.IndexOf("\" rel=\"np\"") > 0 && linkstring.IndexOf("\" rel=\"np\"") < 200)
+                    if (linkstring.IndexOf("\" rel=\"np\"", System.StringComparison.Ordinal) > 0 && linkstring.IndexOf("\" rel=\"np\"", System.StringComparison.Ordinal) < 200)
                     {
-                        string result = linkstring.Remove(linkstring.IndexOf("\" rel=\"np\""));
+                        string result = linkstring.Remove(linkstring.IndexOf("\" rel=\"np\"", System.StringComparison.Ordinal));
                         if (!visited.Contains(containing + result) && !result.EndsWith("/"))
                         {
                             results.Add(result);
@@ -126,16 +127,16 @@ namespace D3apiData.WebClient
                 }
             }
             if (path.Contains("#"))
-                path = path.Remove(path.IndexOf("#"));
+                path = path.Remove(path.IndexOf("#", System.StringComparison.Ordinal));
             var sites = sitecontent.Split(new string[] { "#page=" }, StringSplitOptions.RemoveEmptyEntries).Count() - 1;
             for (int i = 2; i < sites / 2; i++)
             {
                 if (!visited.Contains(path + "#page=" + i))
                 {
                     visited.Add(path + "#page=" + i);
-                    GrabAllLinks(root, path + "#page=" + i, containings, visited, results);
+                    GrabAllLinks(root, path + "#page=" + i, enumerable, visited, results);
                 }
             }
         }
-    */}
+    }
 }

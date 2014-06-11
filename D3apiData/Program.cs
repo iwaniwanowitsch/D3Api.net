@@ -30,7 +30,7 @@ namespace D3apiData
             var heroFilePathProvider = new HeroFilePathProvider(profileFilePathProvider,cachepath); // begin of chain
 
             var readRepo = new StreamWebRepository(null);
-            var writeRepo = new StreamFileFromUrlRepository(heroFilePathProvider);
+            var writeRepo = new StreamCacheFileFromUrlRepository(new TimeSpan(0, 0, 15, 0), heroFilePathProvider);
             var readRepoDecorated = new TryCacheRepositoryDecorator<Stream, string>(readRepo,writeRepo);
 
             var profileRepository = new ProfileRepository(readRepoDecorated, profileUrlConstructor);

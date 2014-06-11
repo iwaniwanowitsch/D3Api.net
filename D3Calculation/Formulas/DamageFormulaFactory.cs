@@ -11,7 +11,7 @@ namespace D3Calculation.Formulas
         private readonly BonusAtkSpdFormulaFactory _bonusAtkSpdFactory;
         private readonly MainAttributeFormulaFactory _mainAttributeFactory;
 
-        public DamageFormulaFactory(ElementalTermFactories factories,  WeaponDpsFormulaFactory weaponDpsFactory, CriticalHitDamageFormulaFactory criticalHitDamageFactory, CriticalHitChanceFormulaFactory criticalHitChanceFactory, BonusAtkSpdFormulaFactory bonusAtkSpdFactory, MainAttributeFormulaFactory mainAttributeFactory)
+        public DamageFormulaFactory(ElementalTermFactories factories, WeaponDpsFormulaFactory weaponDpsFactory, CriticalHitDamageFormulaFactory criticalHitDamageFactory, CriticalHitChanceFormulaFactory criticalHitChanceFactory, BonusAtkSpdFormulaFactory bonusAtkSpdFactory, MainAttributeFormulaFactory mainAttributeFactory)
             : base(factories)
         {
             if (weaponDpsFactory == null) throw new ArgumentNullException("weaponDpsFactory");

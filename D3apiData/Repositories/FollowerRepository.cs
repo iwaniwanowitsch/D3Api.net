@@ -8,9 +8,10 @@ namespace D3apiData.Repositories
 {
     public class FollowerRepository : JsonObjectRepositoryDecorator<Follower>
     {
-        private readonly FollowerUrlConstructionProvider _urlConstructor;
+        private readonly IUrlConstructionProvider _urlConstructor;
 
-        public FollowerRepository(IReadonlyRepository<Stream, string> readRepo, FollowerUrlConstructionProvider urlConstructor) : base(readRepo)
+        public FollowerRepository(IReadonlyRepository<Stream, string> readRepo, IUrlConstructionProvider urlConstructor)
+            : base(readRepo)
         {
             if (urlConstructor == null) throw new ArgumentNullException("urlConstructor");
             _urlConstructor = urlConstructor;

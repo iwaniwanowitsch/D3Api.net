@@ -8,11 +8,6 @@ namespace D3apiData.API.UrlConstruction
     public interface IUrlConstructionProvider
     {
         Locales Locale { get; set; }
-
-        /// <summary>
-        /// type to check against
-        /// </summary>
-        Type ApiType { get; }
         
         /// <summary>
         /// construction of url from id and locale

@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Newtonsoft.Json;
 
-namespace D3apiData.JSON
+namespace D3apiData.Helper
 {
     public static class JsonUtility
     {
