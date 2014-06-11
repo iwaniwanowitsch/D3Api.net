@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 using D3ApiDotNet.Core.Objects.Artisan;
 using D3ApiDotNet.Core.Objects.Follower;
 using D3ApiDotNet.Core.Objects.Hero;
@@ -17,7 +12,6 @@ using D3ApiDotNet.DataAccess.API.UrlConstruction.Factories;
 using D3ApiDotNet.DataAccess.Repositories;
 using D3ApiDotNet.DataAccess.Repositories.Factories;
 using System.Net;
-using D3ApiDotNet.DataAccess;
 
 namespace D3ApiDotNet.DataAccess
 {

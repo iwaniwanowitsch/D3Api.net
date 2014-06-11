@@ -7,6 +7,7 @@ using D3ApiDotNet.Core.Objects.Item;
 
 namespace D3ApiDotNet.Core.Calculation
 {
+    [Obsolete("use formula factories")]
     public class EhpCalculator
     {
         private const double VitalityBaseConst = 7;

@@ -6,6 +6,7 @@ using D3ApiDotNet.Core.Objects.Item;
 
 namespace D3ApiDotNet.Core.Calculation
 {
+    [Obsolete("use formula factories")]
     class DamageCalculator
     {
         private const double AtkSpdPercentDefaultConst = 0;

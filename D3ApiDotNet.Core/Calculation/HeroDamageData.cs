@@ -1,5 +1,8 @@
-﻿namespace D3ApiDotNet.Core.Calculation
+﻿using System;
+
+namespace D3ApiDotNet.Core.Calculation
 {
+    [Obsolete("use formula factories")]
     class HeroDamageData
     {
         private double _profileDps;
