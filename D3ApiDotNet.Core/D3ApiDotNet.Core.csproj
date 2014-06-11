@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{367579F4-0FC5-40C1-86BD-CC162861B327}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>D3ApiDotNet.Core</RootNamespace>
+    <AssemblyName>D3ApiDotNet.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="LightInject">
+      <HintPath>..\packages\LightInject.3.0.1.7\lib\net45\LightInject.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Calculation\AttributeFetchers\ApsFetcher.cs" />
+    <Compile Include="Calculation\AttributeFetchers\ApsPercentFetcher.cs" />
+    <Compile Include="Calculation\AttributeFetchers\ApsPercentWeaponFetcher.cs" />
+    <Compile Include="Calculation\AttributeFetchers\ApsWeaponFetcher.cs" />
+    <Compile Include="Calculation\AttributeFetchers\ArcaneBonusDamageFetcher.cs" />
+    <Compile Include="Calculation\AttributeFetchers\ArcaneResistFetcher.cs" />
+    <Compile Include="Calculation\AttributeFetchers\ArmorFetcher.cs" />
+    <Compile Include="Calculation\AttributeFetchers\BasicAttributeAdditiveFetcher.cs" />
+    <Compile Include="Calculation\AttributeFetchers\BasicAttributeFetcher.cs" />
+    <Compile Include="Calculation\AttributeFetchers\ColdBonusDamageFetcher.cs" />
+    <Compile Include="Calculation\AttributeFetchers\ColdResistFetcher.cs" />
+    <Compile Include="Calculation\AttributeFetchers\CooldownReductionFetcher.cs" />
+    <Compile Include="Calculation\AttributeFetchers\CritDamageFetcher.cs" />
+    <Compile Include="Calculation\AttributeFetchers\CritPercentFetcher.cs" />
+    <Compile Include="Calculation\AttributeFetchers\DeltaDamageFetcher.cs" />
+    <Compile Include="Calculation\AttributeFetchers\DeltaWeaponDamageFetcher.cs" />
+    <Compile Include="Calculation\AttributeFetchers\DexterityFetcher.cs" />
+    <Compile Include="Calculation\AttributeFetchers\ElitesBonusDamageFetcher.cs" />
+    <Compile Include="Calculation\AttributeFetchers\ElitesDamageReductionFetcher.cs" />
+    <Compile Include="Calculation\AttributeFetchers\FireBonusDamageFetcher.cs" />
+    <Compile Include="Calculation\AttributeFetchers\FireResistFetcher.cs" />
+    <Compile Include="Calculation\AttributeFetchers\HolyBonusDamageFetcher.cs" />
+    <Compile Include="Calculation\AttributeFetchers\HpPercentFetcher.cs" />
+    <Compile Include="Calculation\AttributeFetchers\IAttributeFetcher.cs" />
+    <Compile Include="Calculation\AttributeFetchers\IntelligenceFetcher.cs" />
+    <Compile Include="Calculation\AttributeFetchers\LightningBonusDamageFetcher.cs" />
+    <Compile Include="Calculation\AttributeFetchers\LightningResistFetcher.cs" />
+    <Compile Include="Calculation\AttributeFetchers\MeleeDamageReductionFetcher.cs" />
+    <Compile Include="Calculation\AttributeFetchers\MinDamageFetcher.cs" />
+    <Compile Include="Calculation\AttributeFetchers\MinWeaponDamageFetcher.cs" />
+    <Compile Include="Calculation\AttributeFetchers\PercentWeaponDamageFetcher.cs" />
+    <Compile Include="Calculation\AttributeFetchers\PhysicalBonusDamageFetcher.cs" />
+    <Compile Include="Calculation\AttributeFetchers\PhysicalResistFetcher.cs" />
+    <Compile Include="Calculation\AttributeFetchers\PoisonBonusDamageFetcher.cs" />
+    <Compile Include="Calculation\AttributeFetchers\PoisonResistFetcher.cs" />
+    <Compile Include="Calculation\AttributeFetchers\RangedDamageReductionFetcher.cs" />
+    <Compile Include="Calculation\AttributeFetchers\ResourceCostReductionFetcher.cs" />
+    <Compile Include="Calculation\AttributeFetchers\StrengthFetcher.cs" />
+    <Compile Include="Calculation\AttributeFetchers\VitalityFetcher.cs" />
+    <Compile Include="Calculation\DamageCalculator.cs" />
+    <Compile Include="Calculation\EhpCalculator.cs" />
+    <Compile Include="Calculation\Formulas\AbstractFormulaFactory.cs" />
+    <Compile Include="Calculation\Formulas\AbstractTermFactory.cs" />
+    <Compile Include="Calculation\Formulas\ArmorDamageReductionFormulaFactory.cs" />
+    <Compile Include="Calculation\Formulas\ArmorFormulaFactory.cs" />
+    <Compile Include="Calculation\Formulas\AttributeFormulaFactory.cs" />
+    <Compile Include="Calculation\Formulas\AttributeTerm.cs" />
+    <Compile Include="Calculation\Formulas\AverageTermFactory.cs" />
+    <Compile Include="Calculation\Formulas\BaseTermFactory.cs" />
+    <Compile Include="Calculation\Formulas\BonusAtkSpdFormulaFactory.cs" />
+    <Compile Include="Calculation\Formulas\BonusAvgDmgFormulaFactory.cs" />
+    <Compile Include="Calculation\Formulas\ConstantTerm.cs" />
+    <Compile Include="Calculation\Formulas\CriticalHitChanceFormulaFactory.cs" />
+    <Compile Include="Calculation\Formulas\CriticalHitDamageFormulaFactory.cs" />
+    <Compile Include="Calculation\Formulas\DamageFormulaFactory.cs" />
+    <Compile Include="Calculation\Formulas\DivisionTermFactory.cs" />
+    <Compile Include="Calculation\Formulas\DodgeDamageReductionFormulaFactory.cs" />
+    <Compile Include="Calculation\Formulas\EhpFormulaFactory.cs" />
+    <Compile Include="Calculation\Formulas\ElementalResistanceFormulaFactory.cs" />
+    <Compile Include="Calculation\Formulas\ElementalTermFactories.cs" />
+    <Compile Include="Calculation\Formulas\FormulaTerm.cs" />
+    <Compile Include="Calculation\Formulas\IFormulaFactory.cs" />
+    <Compile Include="Calculation\Formulas\ITerm.cs" />
+    <Compile Include="Calculation\Formulas\ITermFactory.cs" />
+    <Compile Include="Calculation\Formulas\MainAttributeFormulaFactory.cs" />
+    <Compile Include="Calculation\Formulas\MaxLifeFormulaFactory.cs" />
+    <Compile Include="Calculation\Formulas\MaxTermFactory.cs" />
+    <Compile Include="Calculation\Formulas\OtherDamageReductionFormulaFactory.cs" />
+    <Compile Include="Calculation\Formulas\PercentSumTermFactory.cs" />
+    <Compile Include="Calculation\Formulas\ProductTermFactory.cs" />
+    <Compile Include="Calculation\Formulas\ResistanceDamageReductionFormulaFactory.cs" />
+    <Compile Include="Calculation\Formulas\ResistanceFormulaFactory.cs" />
+    <Compile Include="Calculation\Formulas\SecondaryAttributeFormulaFactory.cs" />
+    <Compile Include="Calculation\Formulas\SubstractionTermFactory.cs" />
+    <Compile Include="Calculation\Formulas\SumTermFactory.cs" />
+    <Compile Include="Calculation\Formulas\VitalityFormulaFactory.cs" />
+    <Compile Include="Calculation\Formulas\VsElitesDamageFormulaFactory.cs" />
+    <Compile Include="Calculation\Formulas\WeaponApsFormulaFactory.cs" />
+    <Compile Include="Calculation\Formulas\WeaponAvgDmgFormulaFactory.cs" />
+    <Compile Include="Calculation\Formulas\WeaponDmgFormulaFactory.cs" />
+    <Compile Include="Calculation\Formulas\WeaponDpsFormulaFactory.cs" />
+    <Compile Include="Calculation\HeroDamageData.cs" />
+    <Compile Include="EnumerableExtension.cs" />
+    <Compile Include="ItemValueRangeExtension.cs" />
+    <Compile Include="Objects\Artisan\Artisan.cs" />
+    <Compile Include="Objects\Artisan\ArtisanLevel.cs" />
+    <Compile Include="Objects\Artisan\ArtisanTier.cs" />
+    <Compile Include="Objects\Artisan\ArtisanTraining.cs" />
+    <Compile Include="Objects\Artisan\Reagent.cs" />
+    <Compile Include="Objects\Artisan\Recipe.cs" />
+    <Compile Include="Objects\ErrorObject.cs" />
+    <Compile Include="Objects\Follower\Follower.cs" />
+    <Compile Include="Objects\Follower\FollowerItems.cs" />
+    <Compile Include="Objects\Follower\Followers.cs" />
+    <Compile Include="Objects\Follower\FollowerStats.cs" />
+    <Compile Include="Objects\Hero\ActProgress.cs" />
+    <Compile Include="Objects\Hero\Hero.cs" />
+    <Compile Include="Objects\Hero\HeroClass.cs" />
+    <Compile Include="Objects\Hero\HeroItems.cs" />
+    <Compile Include="Objects\Hero\HeroKills.cs" />
+    <Compile Include="Objects\Hero\HeroProgress.cs" />
+    <Compile Include="Objects\Hero\HeroStats.cs" />
+    <Compile Include="Objects\Hero\HeroSummary.cs" />
+    <Compile Include="Objects\Hero\Quest.cs" />
+    <Compile Include="Objects\IBaseObject.cs" />
+    <Compile Include="Objects\Images\D3Icon.cs" />
+    <Compile Include="Objects\Item\Affix.cs" />
+    <Compile Include="Objects\Item\Item.cs" />
+    <Compile Include="Objects\Item\ItemAttributes.cs" />
+    <Compile Include="Objects\Item\ItemSalvageComponent.cs" />
+    <Compile Include="Objects\Item\ItemSummary.cs" />
+    <Compile Include="Objects\Item\ItemTextAttribute.cs" />
+    <Compile Include="Objects\Item\ItemTextAttributes.cs" />
+    <Compile Include="Objects\Item\ItemType.cs" />
+    <Compile Include="Objects\Item\ItemValueRange.cs" />
+    <Compile Include="Objects\Item\RandomAffix.cs" />
+    <Compile Include="Objects\Item\Set.cs" />
+    <Compile Include="Objects\Item\SetRank.cs" />
+    <Compile Include="Objects\Item\SocketedGems.cs" />
+    <Compile Include="Objects\Item\SocketEffect.cs" />
+    <Compile Include="Objects\Profile\Profile.cs" />
+    <Compile Include="Objects\Profile\ProfileArtisan.cs" />
+    <Compile Include="Objects\Profile\ProfileKills.cs" />
+    <Compile Include="Objects\Profile\ProfileProgress.cs" />
+    <Compile Include="Objects\Profile\ProfileTimeplayed.cs" />
+    <Compile Include="Objects\Skill\ActiveSkill.cs" />
+    <Compile Include="Objects\Skill\FollowerSkill.cs" />
+    <Compile Include="Objects\Skill\HeroSkills.cs" />
+    <Compile Include="Objects\Skill\PassiveSkill.cs" />
+    <Compile Include="Objects\Skill\Rune.cs" />
+    <Compile Include="Objects\Skill\Skill.cs" />
+    <Compile Include="Objects\TestObject.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Calculation\Hilfsrechnung\Toughness-Berechnung_V1_0.xlsx" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Calculation\Hilfsrechnung\links.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
