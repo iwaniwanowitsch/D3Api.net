@@ -17,6 +17,7 @@ using D3apiData.API.Objects.Profile;
 using D3apiData.API.UrlConstruction.Factories;
 using D3apiData.Repositories;
 using D3apiData.Repositories.Factories;
+using System.Net;
 
 namespace D3apiData
 {
@@ -26,18 +27,21 @@ namespace D3apiData
         private readonly IFilePathProvider _filepathprovider;
         private readonly IRepositoryFactory _repositoryFactory;
         private CollectMode _collectMode;
+        private readonly WebProxy _proxy;
 
         private IReadonlyRepository<Stream, string> _readRepo; 
 
-        public ApiAccessFacade(CollectMode mode, Locales locale)
+        public ApiAccessFacade(CollectMode mode, Locales locale, WebProxy proxy)
         {
+            _proxy = proxy;
+
             var filepathproviderFactory = new FilePathProviderChainFactory();
             IUrlConstructionProviderFactory urlcontructionproviderFactory = new UrlConstructionProviderFactory();
             _repositoryFactory = new RepositoryFactory();
             _collectMode = mode;
             _filepathprovider = filepathproviderFactory.CreateFilePathProvider("");
             _readRepo = _repositoryFactory.CreateReadRepository(_filepathprovider,
-                mode);
+                mode, _proxy);
 
             ProfileRepository = new ProfileRepository(_readRepo,urlcontructionproviderFactory.CreateUrlConstructionProvider(locale,typeof(Profile)));
             HeroRepository = new HeroRepository(_readRepo, urlcontructionproviderFactory.CreateUrlConstructionProvider(locale, typeof(Hero)));
@@ -54,8 +58,8 @@ namespace D3apiData
             set
             {
                 if (value != _collectMode) { 
-                    _collectMode = value; 
-                    _readRepo = _repositoryFactory.CreateReadRepository(_filepathprovider, _collectMode);
+                    _collectMode = value;
+                    _readRepo = _repositoryFactory.CreateReadRepository(_filepathprovider, _collectMode, _proxy);
                 }
             }
         }

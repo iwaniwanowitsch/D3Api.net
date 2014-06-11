@@ -17,10 +17,11 @@ namespace D3Calculation.Formulas
         private readonly DivisionTermFactory _divisionFactory;
         private readonly PercentSumTermFactory _percentSumFactory;
         private readonly AverageTermFactory _averageFactory;
+        private readonly MaxTermFactory _maxFactory;
 
         public ElementalTermFactories(BaseTermFactory baseFactory, SumTermFactory sumFactory,
             ProductTermFactory productFactory, SubstractionTermFactory substractionFactory,
-            DivisionTermFactory divisionFactory, PercentSumTermFactory percentSumFactory, AverageTermFactory averageFactory)
+            DivisionTermFactory divisionFactory, PercentSumTermFactory percentSumFactory, AverageTermFactory averageFactory, MaxTermFactory maxFactory)
         {
             if (baseFactory == null) throw new ArgumentNullException("baseFactory");
             if (sumFactory == null) throw new ArgumentNullException("sumFactory");
@@ -29,6 +30,7 @@ namespace D3Calculation.Formulas
             if (divisionFactory == null) throw new ArgumentNullException("divisionFactory");
             if (percentSumFactory == null) throw new ArgumentNullException("percentSumFactory");
             if (averageFactory == null) throw new ArgumentNullException("averageFactory");
+            if (maxFactory == null) throw new ArgumentNullException("maxFactory");
             _baseFactory = baseFactory;
             _sumFactory = sumFactory;
             _productFactory = productFactory;
@@ -36,6 +38,7 @@ namespace D3Calculation.Formulas
             _divisionFactory = divisionFactory;
             _percentSumFactory = percentSumFactory;
             _averageFactory = averageFactory;
+            _maxFactory = maxFactory;
         }
 
         public BaseTermFactory BaseFactory
@@ -71,6 +74,11 @@ namespace D3Calculation.Formulas
         public AverageTermFactory AverageFactory
         {
             get { return _averageFactory; }
+        }
+
+        public MaxTermFactory MaxFactory
+        {
+            get { return _maxFactory; }
         }
     }
 }

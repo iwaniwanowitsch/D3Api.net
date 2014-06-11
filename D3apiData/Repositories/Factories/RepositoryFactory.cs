@@ -3,18 +3,19 @@ using System.IO;
 using D3apiData.API;
 using D3apiData.API.FilepathProviders;
 using D3apiData.API.FilepathProviders.Factories;
+using System.Net;
 
 namespace D3apiData.Repositories.Factories
 {
     public class RepositoryFactory : IRepositoryFactory
     {
 
-        public IReadonlyRepository<Stream, string> CreateReadRepository(IFilePathProvider filepathprovider, CollectMode mode)
+        public IReadonlyRepository<Stream, string> CreateReadRepository(IFilePathProvider filepathprovider, CollectMode mode, WebProxy proxy)
         {
             if (filepathprovider == null) throw new ArgumentNullException("filepathprovider");
             IReadonlyRepository<Stream, string> readRepo = null;
             ICacheRepository<Stream, string> cacheRepo = new StreamCacheFileFromUrlRepository(new TimeSpan(0, 0, 15, 0), filepathprovider);
-            IReadonlyRepository<Stream, string> webRepo = new StreamWebRepository(null);
+            IReadonlyRepository<Stream, string> webRepo = new StreamWebRepository(proxy);
             switch (mode)
             {
                 case CollectMode.Offline:

@@ -110,6 +110,7 @@
     <Compile Include="Formulas\ITermFactory.cs" />
     <Compile Include="Formulas\MainAttributeFormulaFactory.cs" />
     <Compile Include="Formulas\MaxLifeFormulaFactory.cs" />
+    <Compile Include="Formulas\MaxTermFactory.cs" />
     <Compile Include="Formulas\OtherDamageReductionFormulaFactory.cs" />
     <Compile Include="Formulas\PercentSumTermFactory.cs" />
     <Compile Include="Formulas\ProductTermFactory.cs" />
