@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{42AEDB63-1943-4FF2-97DF-E206A90A3952}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>D3ApiDotNet.DataAccess</RootNamespace>
+    <AssemblyName>D3ApiDotNet.DataAccess</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\D3ApiDotNet.DataAccess.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="LightInject">
+      <HintPath>..\packages\LightInject.3.0.1.7\lib\net45\LightInject.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApiAccessFacade.cs" />
+    <Compile Include="API\ApiEnumerates.cs" />
+    <Compile Include="API\ApiId.cs" />
+    <Compile Include="API\FilepathProviders\Factories\FilePathProviderChainFactory.cs" />
+    <Compile Include="API\FilepathProviders\Factories\IFilePathProviderFactory.cs" />
+    <Compile Include="API\UrlConstruction\Factories\UrlConstructionProviderFactory.cs" />
+    <Compile Include="API\UrlConstruction\IconUrlConstructionProvider.cs" />
+    <Compile Include="API\UrlConstruction\ArtisanUrlConstructionProvider.cs" />
+    <Compile Include="API\UrlConstruction\FollowerUrlConstructionProvider.cs" />
+    <Compile Include="API\UrlConstruction\ItemUrlConstructionProvider.cs" />
+    <Compile Include="API\UrlConstruction\HeroUrlConstructionProvider.cs" />
+    <Compile Include="API\UrlConstruction\Factories\IUrlConstructionProviderFactory.cs" />
+    <Compile Include="API\UrlConstruction\ProfileUrlConstructionProvider.cs" />
+    <Compile Include="API\UrlConstruction\BasicUrlConstructionProvider.cs" />
+    <Compile Include="API\FilepathProviders\BasicFilePathProviderChainMember.cs" />
+    <Compile Include="API\CollectMode.cs" />
+    <Compile Include="API\FilepathProviders\DefaultFilePathProvider.cs" />
+    <Compile Include="API\FilepathProviders\IFilePathProvider.cs" />
+    <Compile Include="API\FilepathProviders\IconFilePathProvider.cs" />
+    <Compile Include="API\FilepathProviders\ItemFilePathProvider.cs" />
+    <Compile Include="API\FilepathProviders\HeroFilePathProvider.cs" />
+    <Compile Include="API\UrlConstruction\IUrlConstructionProvider.cs" />
+    <Compile Include="API\FilepathProviders\ProfileFilePathProvider.cs" />
+    <Compile Include="Helper\MD5Helper.cs" />
+    <Compile Include="Helper\UrlHelper.cs" />
+    <Compile Include="IApiAccessFacade.cs" />
+    <Compile Include="Helper\JsonUtility.cs" />
+    <Compile Include="ItemFetchers\HeroItemsFetcher.cs" />
+    <Compile Include="Locales.cs" />
+    <Compile Include="Repositories\ArtisanRepository.cs" />
+    <Compile Include="Repositories\CacheRepositoryDecorator.cs" />
+    <Compile Include="Repositories\Factories\RepositoryFactory.cs" />
+    <Compile Include="Repositories\FollowerRepository.cs" />
+    <Compile Include="Repositories\HeroRepository.cs" />
+    <Compile Include="Repositories\ICacheRepository.cs" />
+    <Compile Include="Repositories\IconRepositoryDecorator.cs" />
+    <Compile Include="Repositories\IReadonlyRepository.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\Factories\IRepositoryFactory.cs" />
+    <Compile Include="Repositories\ItemIconRepository.cs" />
+    <Compile Include="Repositories\ItemRepository.cs" />
+    <Compile Include="Repositories\JsonObjectRepositoryDecorator.cs" />
+    <Compile Include="Repositories\ProfileRepository.cs" />
+    <Compile Include="Repositories\SkillIconRepository.cs" />
+    <Compile Include="Repositories\StreamCacheFileFromUrlRepository.cs" />
+    <Compile Include="Repositories\StreamCacheFileRepository.cs" />
+    <Compile Include="Repositories\StreamWebRepository.cs" />
+    <Compile Include="Repositories\RepositoryEntityNotFoundException.cs" />
+    <Compile Include="Repositories\TryCacheRepositoryDecorator.cs" />
+    <Compile Include="Repositories\XmlFileRepository.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="PropertiesExample.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebInteraction\ItemNamesCollector.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\D3ApiDotNet.Core\D3ApiDotNet.Core.csproj">
+      <Project>{367579f4-0fc5-40c1-86bd-cc162861b327}</Project>
+      <Name>D3ApiDotNet.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
