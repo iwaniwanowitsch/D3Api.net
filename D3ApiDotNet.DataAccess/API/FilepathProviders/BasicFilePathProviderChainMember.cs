@@ -35,15 +35,15 @@ namespace D3ApiDotNet.DataAccess.API.FilepathProviders
                 return _nextMember.BuildFilePath(url);
             }
             var filepath = _pathRoot;
-            try
-            {
-                var uri = new Uri(url);
-                filepath += uri.Host;
-            }
-            catch (UriFormatException)
-            {
-                // couldnt convert url to uri. no host.
-            }
+            //try
+            //{
+            //    var uri = new Uri(url);
+            //    filepath += uri.Host + @"\";
+            //}
+            //catch (UriFormatException)
+            //{
+            //    // couldnt convert url to uri. no host.
+            //}
             return filepath + DoBuildFilePath(url);
         }
 
