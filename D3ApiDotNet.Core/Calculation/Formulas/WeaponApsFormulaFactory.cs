@@ -32,25 +32,34 @@ namespace D3ApiDotNet.Core.Calculation.Formulas
                 return Factories.ProductFactory.CreateFormulaTerm(weaponAps,
                 Factories.PercentSumFactory.CreateFormulaTerm(Factories.BaseFactory.CreateAttributeTerm(_weaponList, _apsPercentWeaponFetcher)));
             }
-            else
+            else if (weaponCount == 2)
             {
-                var weapon1List = new List<Item> { _weaponList[0]};
-                var weapon2List = new List<Item> { _weaponList[1]};
-                var weapon1ApsFactory = Factories.ProductFactory.CreateFormulaTerm(Factories.BaseFactory.CreateAttributeTerm(weapon1List, _apsWeaponFetcher), Factories.PercentSumFactory.CreateFormulaTerm(Factories.BaseFactory.CreateAttributeTerm(weapon1List, _apsPercentWeaponFetcher)));
-                var weapon2ApsFactory = Factories.ProductFactory.CreateFormulaTerm(Factories.BaseFactory.CreateAttributeTerm(weapon2List, _apsWeaponFetcher), Factories.PercentSumFactory.CreateFormulaTerm(Factories.BaseFactory.CreateAttributeTerm(weapon2List, _apsPercentWeaponFetcher)));
+                var weapon1List = new List<Item> {_weaponList[0]};
+                var weapon2List = new List<Item> {_weaponList[1]};
+                var weapon1ApsFactory =
+                    Factories.ProductFactory.CreateFormulaTerm(
+                        Factories.BaseFactory.CreateAttributeTerm(weapon1List, _apsWeaponFetcher),
+                        Factories.PercentSumFactory.CreateFormulaTerm(
+                            Factories.BaseFactory.CreateAttributeTerm(weapon1List, _apsPercentWeaponFetcher)));
+                var weapon2ApsFactory =
+                    Factories.ProductFactory.CreateFormulaTerm(
+                        Factories.BaseFactory.CreateAttributeTerm(weapon2List, _apsWeaponFetcher),
+                        Factories.PercentSumFactory.CreateFormulaTerm(
+                            Factories.BaseFactory.CreateAttributeTerm(weapon2List, _apsPercentWeaponFetcher)));
 
                 weaponAps = Factories.ProductFactory.CreateFormulaTerm(
                     Factories.BaseFactory.CreateConstantTerm(2.0),
                     weapon1ApsFactory,
                     weapon2ApsFactory,
                     Factories.DivisionFactory.CreateFormulaTerm(
-                    Factories.SumFactory.CreateFormulaTerm(
-                        weapon1ApsFactory,
-                        weapon2ApsFactory
-                        )
-                    ));
+                        Factories.SumFactory.CreateFormulaTerm(
+                            weapon1ApsFactory,
+                            weapon2ApsFactory
+                            )
+                        ));
                 return weaponAps;
             }
+            return new ConstantTerm(0);
         }
     }
 }

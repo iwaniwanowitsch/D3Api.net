@@ -90,7 +90,9 @@
     <Compile Include="Calculation\AttributeFetchers\StrengthFetcher.cs" />
     <Compile Include="Calculation\AttributeFetchers\VitalityFetcher.cs" />
     <Compile Include="Calculation\DamageCalculator.cs" />
+    <Compile Include="Calculation\DamageTermComposite.cs" />
     <Compile Include="Calculation\EhpCalculator.cs" />
+    <Compile Include="Calculation\EhpTermComposite.cs" />
     <Compile Include="Calculation\Formulas\AbstractFormulaFactory.cs" />
     <Compile Include="Calculation\Formulas\AbstractTermFactory.cs" />
     <Compile Include="Calculation\Formulas\ArmorDamageReductionFormulaFactory.cs" />
@@ -102,12 +104,14 @@
     <Compile Include="Calculation\Formulas\BonusAtkSpdFormulaFactory.cs" />
     <Compile Include="Calculation\Formulas\BonusAvgDmgFormulaFactory.cs" />
     <Compile Include="Calculation\Formulas\ConstantTerm.cs" />
+    <Compile Include="Calculation\Formulas\CooldownReductionFormulaFactory.cs" />
     <Compile Include="Calculation\Formulas\CriticalHitChanceFormulaFactory.cs" />
     <Compile Include="Calculation\Formulas\CriticalHitDamageFormulaFactory.cs" />
     <Compile Include="Calculation\Formulas\DamageFormulaFactory.cs" />
     <Compile Include="Calculation\Formulas\DivisionTermFactory.cs" />
     <Compile Include="Calculation\Formulas\DodgeDamageReductionFormulaFactory.cs" />
     <Compile Include="Calculation\Formulas\EhpFormulaFactory.cs" />
+    <Compile Include="Calculation\Formulas\ElementalDamageFormulaFactory.cs" />
     <Compile Include="Calculation\Formulas\ElementalResistanceFormulaFactory.cs" />
     <Compile Include="Calculation\Formulas\ElementalTermFactories.cs" />
     <Compile Include="Calculation\Formulas\FormulaTerm.cs" />
@@ -122,7 +126,9 @@
     <Compile Include="Calculation\Formulas\ProductTermFactory.cs" />
     <Compile Include="Calculation\Formulas\ResistanceDamageReductionFormulaFactory.cs" />
     <Compile Include="Calculation\Formulas\ResistanceFormulaFactory.cs" />
+    <Compile Include="Calculation\Formulas\ResourceCostReductionFormulaFactory.cs" />
     <Compile Include="Calculation\Formulas\SecondaryAttributeFormulaFactory.cs" />
+    <Compile Include="Calculation\Formulas\SingleElementalDamageFormulaFactory.cs" />
     <Compile Include="Calculation\Formulas\SubstractionTermFactory.cs" />
     <Compile Include="Calculation\Formulas\SumTermFactory.cs" />
     <Compile Include="Calculation\Formulas\VitalityFormulaFactory.cs" />

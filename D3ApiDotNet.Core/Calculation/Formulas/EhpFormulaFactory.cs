@@ -33,10 +33,12 @@ namespace D3ApiDotNet.Core.Calculation.Formulas
             return Factories.ProductFactory.CreateFormulaTerm(
                 _maxLifeFormulaFactory.CreateFormula(),
                 Factories.DivisionFactory.CreateFormulaTerm(
-                    _armorDamageReductionFormulaFactory.CreateFormula(),
-                    _resistanceDamageReductionFormulaFactory.CreateFormula(),
-                    _dodgeDamageReductionFormulaFactory.CreateFormula(),
-                    _otherDamageReductionFormulaFactory.CreateFormula()
+                    Factories.ProductFactory.CreateFormulaTerm(
+                        _armorDamageReductionFormulaFactory.CreateFormula(),
+                        _resistanceDamageReductionFormulaFactory.CreateFormula(),
+                        _dodgeDamageReductionFormulaFactory.CreateFormula(),
+                        _otherDamageReductionFormulaFactory.CreateFormula()
+                        )
                     )
                 );
         }

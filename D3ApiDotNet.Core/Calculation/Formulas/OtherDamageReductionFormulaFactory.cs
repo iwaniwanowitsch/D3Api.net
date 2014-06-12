@@ -27,10 +27,13 @@ namespace D3ApiDotNet.Core.Calculation.Formulas
         public override ITerm CreateFormula()
         {
             return
-                Factories.AverageFactory.CreateFormulaTerm(
-                    Factories.BaseFactory.CreateAttributeTerm(_itemList, _meleeDamageReductionFetcher),
-                    Factories.BaseFactory.CreateAttributeTerm(_itemList, _rangedDamageReductionFetcher),
-                    Factories.BaseFactory.CreateAttributeTerm(_itemList, _elitesDamageReductionFetcher));
+                Factories.SumFactory.CreateFormulaTerm(Factories.BaseFactory.CreateConstantTerm(1.0),
+                    Factories.SubstractionFactory.CreateFormulaTerm(
+                        Factories.AverageFactory.CreateFormulaTerm(
+                            Factories.BaseFactory.CreateAttributeTerm(_itemList, _meleeDamageReductionFetcher),
+                            Factories.BaseFactory.CreateAttributeTerm(_itemList, _rangedDamageReductionFetcher),
+                            Factories.BaseFactory.CreateAttributeTerm(_itemList, _elitesDamageReductionFetcher))
+                        ));
         }
     }
 }
