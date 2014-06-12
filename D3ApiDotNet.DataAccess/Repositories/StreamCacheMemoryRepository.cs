@@ -7,12 +7,18 @@ namespace D3ApiDotNet.DataAccess.Repositories
 {
     public class StreamCacheMemoryRepository : ICacheRepository<Stream,string>
     {
-        private readonly TimeSpan _cacheDuration;
+        private TimeSpan _cacheDuration;
         private Dictionary<string,StreamDateTimeData> _cacheData = new Dictionary<string, StreamDateTimeData>(); 
 
         public StreamCacheMemoryRepository(TimeSpan cacheDuration)
         {
-            _cacheDuration = cacheDuration;
+            Duration = cacheDuration;
+        }
+
+        public TimeSpan Duration
+        {
+            get { return _cacheDuration; }
+            set { _cacheDuration = value; }
         }
 
         public Stream Retrieve(string key)
@@ -34,7 +40,7 @@ namespace D3ApiDotNet.DataAccess.Repositories
 
         public bool IsValid(string key)
         {
-            if (_cacheData.ContainsKey(key) && (DateTime.Now - _cacheData[key].Time) < _cacheDuration)
+            if (_cacheData.ContainsKey(key) && (DateTime.Now - _cacheData[key].Time) < Duration)
                 return true;
             if(_cacheData.ContainsKey(key))
                 Delete(key);

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using D3ApiDotNet.Core.Objects.Artisan;
 using D3ApiDotNet.Core.Objects.Follower;
 using D3ApiDotNet.Core.Objects.Hero;
@@ -21,21 +22,22 @@ namespace D3ApiDotNet.DataAccess
         private readonly IFilePathProvider _filepathprovider;
         private readonly IRepositoryFactory _repositoryFactory;
         private CollectMode _collectMode;
-        private readonly WebProxy _proxy;
 
-        private IReadonlyRepository<Stream, string> _readRepo; 
+        private IReadonlyRepository<Stream, string> _readRepo;
+        private readonly StreamWebRepository _webRepo;
+        private readonly StreamCacheMemoryRepository _cacheRepo;
 
         public ApiAccessFacade(CollectMode mode, Locales locale, WebProxy proxy)
         {
-            _proxy = proxy;
 
             var filepathproviderFactory = new FilePathProviderChainFactory();
             IUrlConstructionProviderFactory urlcontructionproviderFactory = new UrlConstructionProviderFactory();
             _repositoryFactory = new RepositoryFactory();
             _collectMode = mode;
             _filepathprovider = filepathproviderFactory.CreateFilePathProvider("");
-            _readRepo = _repositoryFactory.CreateReadRepository(_filepathprovider,
-                mode, _proxy);
+            _webRepo = new StreamWebRepository(proxy);
+            _cacheRepo = new StreamCacheMemoryRepository(new TimeSpan(0, 0, 15, 0));
+            _readRepo = _repositoryFactory.CreateReadRepository(_filepathprovider, mode, _webRepo, _cacheRepo);
 
             ProfileRepository = new ProfileRepository(_readRepo,urlcontructionproviderFactory.CreateUrlConstructionProvider(locale,typeof(Profile)));
             HeroRepository = new HeroRepository(_readRepo, urlcontructionproviderFactory.CreateUrlConstructionProvider(locale, typeof(Hero)));
@@ -53,7 +55,7 @@ namespace D3ApiDotNet.DataAccess
             {
                 if (value != _collectMode) { 
                     _collectMode = value;
-                    _readRepo = _repositoryFactory.CreateReadRepository(_filepathprovider, _collectMode, _proxy);
+                    _readRepo = _repositoryFactory.CreateReadRepository(_filepathprovider, _collectMode, _webRepo, _cacheRepo);
                 }
             }
         }

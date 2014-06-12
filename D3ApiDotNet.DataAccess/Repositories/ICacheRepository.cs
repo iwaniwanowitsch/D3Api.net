@@ -8,6 +8,7 @@ namespace D3ApiDotNet.DataAccess.Repositories
 {
     public interface ICacheRepository<TEntity, in TKey> : IRepository<TEntity,TKey> where TEntity : class
     {
+        TimeSpan Duration { get; set; }
         bool IsValid(TKey key);
     }
 }

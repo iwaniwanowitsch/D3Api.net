@@ -6,11 +6,17 @@ namespace D3ApiDotNet.DataAccess.Repositories
 {
     public class StreamCacheFileRepository : ICacheRepository<Stream, string>
     {
-        private readonly TimeSpan _cacheDuration;
+        private TimeSpan _cacheDuration;
 
         public StreamCacheFileRepository(TimeSpan cacheDuration)
         {
-            _cacheDuration = cacheDuration;
+            Duration = cacheDuration;
+        }
+
+        public TimeSpan Duration
+        {
+            get { return _cacheDuration; }
+            set { _cacheDuration = value; }
         }
 
         public virtual Stream Retrieve(string filepath)
@@ -44,7 +50,7 @@ namespace D3ApiDotNet.DataAccess.Repositories
 
         public virtual bool IsValid(string filepath)
         {
-            if (File.Exists(filepath) && (DateTime.Now - File.GetCreationTime(filepath)) < _cacheDuration)
+            if (File.Exists(filepath) && (DateTime.Now - File.GetCreationTime(filepath)) < Duration)
                 return true;
             if(File.Exists(filepath))
                 Delete(filepath);

@@ -9,6 +9,7 @@ namespace D3ApiDotNet.DataAccess.Repositories.Factories
 {
     public interface IRepositoryFactory
     {
-        IReadonlyRepository<Stream, string> CreateReadRepository(IFilePathProvider filepathprovider, CollectMode mode, WebProxy proxy);
+        IReadonlyRepository<Stream, string> CreateReadRepository(IFilePathProvider filepathprovider,
+            CollectMode mode, IReadonlyRepository<Stream, string> webRepo, ICacheRepository<Stream, string> cacheRepo);
     }
 }

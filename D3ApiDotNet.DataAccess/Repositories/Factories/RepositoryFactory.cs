@@ -10,12 +10,10 @@ namespace D3ApiDotNet.DataAccess.Repositories.Factories
     public class RepositoryFactory : IRepositoryFactory
     {
 
-        public IReadonlyRepository<Stream, string> CreateReadRepository(IFilePathProvider filepathprovider, CollectMode mode, WebProxy proxy)
+        public IReadonlyRepository<Stream, string> CreateReadRepository(IFilePathProvider filepathprovider, CollectMode mode, IReadonlyRepository<Stream, string> webRepo, ICacheRepository<Stream, string> cacheRepo)
         {
             if (filepathprovider == null) throw new ArgumentNullException("filepathprovider");
             IReadonlyRepository<Stream, string> readRepo = null;
-            ICacheRepository<Stream, string> cacheRepo = new StreamCacheMemoryRepository(new TimeSpan(0, 0, 15, 0));
-            IReadonlyRepository<Stream, string> webRepo = new StreamWebRepository(proxy);
             switch (mode)
             {
                 case CollectMode.Offline:
