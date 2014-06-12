@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{42AEDB63-1943-4FF2-97DF-E206A90A3952}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>D3ApiDotNet.DataAccess</RootNamespace>
     <AssemblyName>D3ApiDotNet.DataAccess</AssemblyName>
