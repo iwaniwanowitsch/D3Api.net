@@ -16,8 +16,9 @@ namespace D3ApiDotNet.DataAccess.API.FilepathProviders
         /// <param name="url"></param>
         protected override string DoBuildFilePath(string url)
         {
-            var split = url.Split(new[] { Path }, StringSplitOptions.None);
-            return @"hero\" + split[1].Replace("/", "\\") + ".json";
+            var split1 = url.Split(new[] { "/profile/" }, StringSplitOptions.None);
+            var split2 = url.Split(new[] { Path }, StringSplitOptions.None);
+            return @"profile\" + split1[1].Replace("/", "\\") + ".json";
         }
     }
 }
