@@ -170,6 +170,7 @@
     <Compile Include="Objects\Item\SetRank.cs" />
     <Compile Include="Objects\Item\SocketedGems.cs" />
     <Compile Include="Objects\Item\SocketEffect.cs" />
+    <Compile Include="Objects\ObjectCloner.cs" />
     <Compile Include="Objects\Profile\Profile.cs" />
     <Compile Include="Objects\Profile\ProfileArtisan.cs" />
     <Compile Include="Objects\Profile\ProfileKills.cs" />

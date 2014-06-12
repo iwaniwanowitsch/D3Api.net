@@ -6,7 +6,7 @@ namespace D3ApiDotNet.Core.Objects
     /// D3ApiServiceExample: basic error class, all api object will inherit
     /// </summary>
     [DataContract]
-    public class ErrorObject : IBaseObject
+    public abstract class ErrorObject : IBaseObject
     {
         /// <summary>
         /// Error code
