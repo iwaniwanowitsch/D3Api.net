@@ -14,7 +14,7 @@ namespace D3ApiDotNet.DataAccess.Repositories.Factories
         {
             if (filepathprovider == null) throw new ArgumentNullException("filepathprovider");
             IReadonlyRepository<Stream, string> readRepo = null;
-            ICacheRepository<Stream, string> cacheRepo = new StreamCacheFileFromUrlRepository(new TimeSpan(0, 0, 15, 0), filepathprovider);
+            ICacheRepository<Stream, string> cacheRepo = new StreamCacheMemoryRepository(new TimeSpan(0, 0, 15, 0));
             IReadonlyRepository<Stream, string> webRepo = new StreamWebRepository(proxy);
             switch (mode)
             {

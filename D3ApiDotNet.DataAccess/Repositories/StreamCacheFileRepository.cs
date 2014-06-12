@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using D3ApiDotNet.DataAccess.Repositories;
 
 namespace D3ApiDotNet.DataAccess.Repositories
 {

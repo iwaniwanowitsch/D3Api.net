@@ -92,6 +92,7 @@
     <Compile Include="API\UrlConstruction\IUrlConstructionProvider.cs" />
     <Compile Include="API\FilepathProviders\ProfileFilePathProvider.cs" />
     <Compile Include="Helper\MD5Helper.cs" />
+    <Compile Include="Helper\StreamHelper.cs" />
     <Compile Include="Helper\UrlHelper.cs" />
     <Compile Include="IApiAccessFacade.cs" />
     <Compile Include="Helper\JsonUtility.cs" />
@@ -114,6 +115,8 @@
     <Compile Include="Repositories\SkillIconRepository.cs" />
     <Compile Include="Repositories\StreamCacheFileFromUrlRepository.cs" />
     <Compile Include="Repositories\StreamCacheFileRepository.cs" />
+    <Compile Include="Repositories\StreamCacheMemoryRepository.cs" />
+    <Compile Include="Repositories\StreamDateTimeData.cs" />
     <Compile Include="Repositories\StreamWebRepository.cs" />
     <Compile Include="Repositories\RepositoryEntityNotFoundException.cs" />
     <Compile Include="Repositories\TryCacheRepositoryDecorator.cs" />

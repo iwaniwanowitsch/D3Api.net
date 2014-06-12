@@ -16,6 +16,8 @@ namespace D3ApiDotNet.TextConsoleApplication
         {
             //ConfigureContainer;
             //var damageCalculator = container.Resolve<IDamageCalculator>();
+            var d3Api = new ApiAccessFacade(CollectMode.TryCacheThenOnline, Locales.en_GB, null /*new System.Net.WebProxy("127.0.0.1:3128")*/);
+            var itemListFetcher = new HeroItemsFetcher(d3Api.ItemRepository);
             do
             {
                 Console.Clear();
@@ -24,9 +26,7 @@ namespace D3ApiDotNet.TextConsoleApplication
                 Console.Write("Enter Battletag: ");
                 var battletag = Console.ReadLine();
 
-                var d3api = new ApiAccessFacade(CollectMode.TryCacheThenOnline, Locales.en_GB, null/*new System.Net.WebProxy("127.0.0.1:3128")*/);
-
-                var myprofile = d3api.ProfileRepository.GetByBattletag(battletag);
+                var myprofile = d3Api.ProfileRepository.GetByBattletag(battletag);
                 if (myprofile.IsErrorObject())
                 {
                     Console.WriteLine("Invalid battletag. Press key to try again");
@@ -53,10 +53,9 @@ namespace D3ApiDotNet.TextConsoleApplication
                 }
                 Console.Clear();
 
-                var myhero = d3api.HeroRepository.GetByBattletagAndId(battletag, myprofile.Heroes[heroid].Id.ToString());
+                var myhero = d3Api.HeroRepository.GetByBattletagAndId(battletag, myprofile.Heroes[heroid].Id.ToString());
 
                 // hero items list
-                var itemListFetcher = new HeroItemsFetcher(d3api.ItemRepository);
                 var itemList = itemListFetcher.GetItemsList(myhero);
                 //var weaponList = itemList.Where(o => o.AttacksPerSecond != null).ToList();
 
