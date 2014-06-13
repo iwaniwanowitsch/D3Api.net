@@ -36,7 +36,7 @@ namespace D3ApiDotNet.TextConsoleApplication
         {
             //ConfigureContainer;
             //var damageCalculator = container.Resolve<IDamageCalculator>();
-            var d3Api = new ApiAccessFacade(CollectMode.TryCacheThenOnline, Locales.en_GB, new System.Net.WebProxy("127.0.0.1:3128"));
+            var d3Api = new ApiAccessFacade(CollectMode.TryCacheThenOnline, Locales.en_GB, null/*new System.Net.WebProxy("127.0.0.1:3128")*/);
             var itemListFetcher = new HeroItemsFetcher(d3Api.ItemRepository);
             
             var listDataContainer = new ItemListDataContainer(GetItems);
