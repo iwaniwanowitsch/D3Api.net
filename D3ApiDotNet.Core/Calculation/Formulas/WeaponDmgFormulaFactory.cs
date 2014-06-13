@@ -5,21 +5,18 @@ using D3ApiDotNet.Core.Objects.Item;
 
 namespace D3ApiDotNet.Core.Calculation.Formulas
 {
-    public class WeaponDmgFormulaFactory : AbstractFormulaFactory
+    public class WeaponDmgFormulaFactory : AbstractItemsFormulaFactory
     {
-        private readonly IList<Item> _weaponList;
         private readonly PercentWeaponDamageFetcher _percentWeaponDamageFetcher;
         private readonly WeaponAvgDmgFormulaFactory _weaponAvgDmgFactory;
         private readonly BonusAvgDmgFormulaFactory _bonusAvgDmgFactory;
 
-        public WeaponDmgFormulaFactory(ElementalTermFactories factories, IList<Item> weaponList, PercentWeaponDamageFetcher percentWeaponDamageFetcher, WeaponAvgDmgFormulaFactory weaponAvgDmgFactory, BonusAvgDmgFormulaFactory bonusAvgDmgFactory)
-            : base(factories)
+        public WeaponDmgFormulaFactory(ElementalTermFactories factories, IItemListDataContainer itemListData, PercentWeaponDamageFetcher percentWeaponDamageFetcher, WeaponAvgDmgFormulaFactory weaponAvgDmgFactory, BonusAvgDmgFormulaFactory bonusAvgDmgFactory)
+            : base(factories, itemListData)
         {
-            if (weaponList == null) throw new ArgumentNullException("weaponList");
             if (percentWeaponDamageFetcher == null) throw new ArgumentNullException("percentWeaponDamageFetcher");
             if (weaponAvgDmgFactory == null) throw new ArgumentNullException("weaponAvgDmgFactory");
             if (bonusAvgDmgFactory == null) throw new ArgumentNullException("bonusAvgDmgFactory");
-            _weaponList = weaponList;
             _percentWeaponDamageFetcher = percentWeaponDamageFetcher;
             _weaponAvgDmgFactory = weaponAvgDmgFactory;
             _bonusAvgDmgFactory = bonusAvgDmgFactory;
@@ -33,7 +30,7 @@ namespace D3ApiDotNet.Core.Calculation.Formulas
                 Factories.SumFactory.CreateFormulaTerm(
                     Factories.ProductFactory.CreateFormulaTerm(
                         Factories.PercentSumFactory.CreateFormulaTerm(
-                            Factories.BaseFactory.CreateAttributeTerm(_weaponList, _percentWeaponDamageFetcher)),
+                            Factories.BaseFactory.CreateAttributeTerm(ItemListData, _percentWeaponDamageFetcher)),
                         weaponAvgDmgFormula),
                     bonusAvgDmgFormula);
         }

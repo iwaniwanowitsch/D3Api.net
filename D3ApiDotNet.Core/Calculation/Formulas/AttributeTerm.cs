@@ -7,27 +7,21 @@ namespace D3ApiDotNet.Core.Calculation.Formulas
 {
     public class AttributeTerm : ITerm
     {
-        private IList<Item> _items;
-        private readonly IAttributeFetcher _fetcher;
+        protected readonly IAttributeFetcher _fetcher;
+        protected IItemListDataContainer _itemListData;
 
-        public AttributeTerm(EventHandler<IList<Item>> itemsChangedHandler, IAttributeFetcher fetcher)
+        public AttributeTerm(IItemListDataContainer itemListData, IAttributeFetcher fetcher)
         {
-            if (itemsChangedHandler == null) throw new ArgumentNullException("itemListChangedEvent");
+            if (itemListData == null) throw new ArgumentNullException("itemListChangedEvent");
             if (fetcher == null) throw new ArgumentNullException("fetcher");
-            itemsChangedHandler += UpdateItems;
             _fetcher = fetcher;
+            _itemListData = itemListData;
         }
 
-        public void UpdateItems(object o, IList<Item> items)
+        public virtual double Evaluate()
         {
-            if (items == null) throw new ArgumentNullException("items");
-            _items = items;
-        }
-
-        public double Evaluate()
-        {
-            return _fetcher.GetBonusDamage(_items) +
-                   _fetcher.GetBonusDamage(_items.GetSetAttributes());
+            return _fetcher.GetBonusDamage(_itemListData.GetItemList()) +
+                   _fetcher.GetBonusDamage(_itemListData.GetItemList().GetSetAttributes());
         }
 
         public override string ToString()

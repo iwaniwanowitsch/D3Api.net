@@ -97,6 +97,7 @@
     <Compile Include="Calculation\EhpCalculator.cs" />
     <Compile Include="Calculation\EhpTermComposite.cs" />
     <Compile Include="Calculation\Formulas\AbstractFormulaFactory.cs" />
+    <Compile Include="Calculation\Formulas\AbstractItemsFormulaFactory.cs" />
     <Compile Include="Calculation\Formulas\AbstractTermFactory.cs" />
     <Compile Include="Calculation\Formulas\ArmorDamageReductionFormulaFactory.cs" />
     <Compile Include="Calculation\Formulas\ArmorFormulaFactory.cs" />
@@ -119,6 +120,8 @@
     <Compile Include="Calculation\Formulas\ElementalTermFactories.cs" />
     <Compile Include="Calculation\Formulas\FormulaTerm.cs" />
     <Compile Include="Calculation\Formulas\IFormulaFactory.cs" />
+    <Compile Include="Calculation\Formulas\IItemListDataContainer.cs" />
+    <Compile Include="Calculation\Formulas\ItemListDataContainer.cs" />
     <Compile Include="Calculation\Formulas\ITerm.cs" />
     <Compile Include="Calculation\Formulas\ITermFactory.cs" />
     <Compile Include="Calculation\Formulas\MainAttributeFormulaFactory.cs" />

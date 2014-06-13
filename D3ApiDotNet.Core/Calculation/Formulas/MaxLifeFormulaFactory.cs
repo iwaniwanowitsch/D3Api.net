@@ -5,20 +5,17 @@ using D3ApiDotNet.Core.Objects.Item;
 
 namespace D3ApiDotNet.Core.Calculation.Formulas
 {
-    public class MaxLifeFormulaFactory : AbstractFormulaFactory
+    public class MaxLifeFormulaFactory : AbstractItemsFormulaFactory
     {
-        private readonly IList<Item> _itemList;
         private readonly HpPercentFetcher _hpPercentFetcher;
         private readonly VitalityFormulaFactory _vitalityFormula;
         private readonly double _heroLvl;
 
-        public MaxLifeFormulaFactory(ElementalTermFactories factories, IList<Item> itemList, HpPercentFetcher hpPercentFetcher, VitalityFormulaFactory vitalityFormula, double heroLvl)
-            : base(factories)
+        public MaxLifeFormulaFactory(ElementalTermFactories factories, IItemListDataContainer itemListData, HpPercentFetcher hpPercentFetcher, VitalityFormulaFactory vitalityFormula, double heroLvl)
+            : base(factories, itemListData)
         {
-            if (itemList == null) throw new ArgumentNullException("itemList");
             if (hpPercentFetcher == null) throw new ArgumentNullException("hpPercentFetcher");
             if (vitalityFormula == null) throw new ArgumentNullException("vitalityFormula");
-            _itemList = itemList;
             _hpPercentFetcher = hpPercentFetcher;
             _vitalityFormula = vitalityFormula;
             _heroLvl = heroLvl;
@@ -37,7 +34,7 @@ namespace D3ApiDotNet.Core.Calculation.Formulas
                 factor = 80;
             maxlife = Factories.SumFactory.CreateFormulaTerm(maxlife, Factories.ProductFactory.CreateFormulaTerm(Factories.BaseFactory.CreateConstantTerm(factor), _vitalityFormula.CreateFormula()));
             return Factories.ProductFactory.CreateFormulaTerm(maxlife,
-                Factories.PercentSumFactory.CreateFormulaTerm(Factories.BaseFactory.CreateAttributeTerm(_itemList, _hpPercentFetcher)));
+                Factories.PercentSumFactory.CreateFormulaTerm(Factories.BaseFactory.CreateAttributeTerm(ItemListData, _hpPercentFetcher)));
         }
     }
 }

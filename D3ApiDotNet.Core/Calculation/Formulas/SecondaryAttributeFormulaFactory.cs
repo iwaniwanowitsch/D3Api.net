@@ -6,8 +6,8 @@ namespace D3ApiDotNet.Core.Calculation.Formulas
 {
     public class SecondaryAttributeFormulaFactory : AttributeFormulaFactory
     {
-        public SecondaryAttributeFormulaFactory(ElementalTermFactories factories, IAttributeFetcher mainAttributeFetcher, IList<Item> itemList, double heroLvl)
-            : base(factories, mainAttributeFetcher, itemList, heroLvl, 1.0)
+        public SecondaryAttributeFormulaFactory(ElementalTermFactories factories, IAttributeFetcher mainAttributeFetcher, IItemListDataContainer itemListData, double heroLvl)
+            : base(factories, mainAttributeFetcher, itemListData, heroLvl, 1.0)
         {
         }
     }

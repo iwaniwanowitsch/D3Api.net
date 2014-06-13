@@ -7,17 +7,39 @@ using D3ApiDotNet.Core.Objects.Hero;
 using D3ApiDotNet.DataAccess;
 using D3ApiDotNet.DataAccess.API;
 using D3ApiDotNet.DataAccess.ItemFetchers;
+using D3ApiDotNet.Core.Calculation.Formulas;
+using D3ApiDotNet.Core.Objects.Item;
 
 namespace D3ApiDotNet.TextConsoleApplication
 {
     class Program
     {
+
         static void Main(string[] args)
+        {
+            var dosome = new DoSomethingClassCausImHip();
+            dosome.DoSomething();
+        }
+    }
+
+    public class DoSomethingClassCausImHip
+    {
+
+        private List<Item> _itemList = new List<Item>();
+
+        private IList<Item> GetItems()
+        {
+            return _itemList;
+        }
+
+        public void DoSomething()
         {
             //ConfigureContainer;
             //var damageCalculator = container.Resolve<IDamageCalculator>();
-            var d3Api = new ApiAccessFacade(CollectMode.TryCacheThenOnline, Locales.en_GB, null /*new System.Net.WebProxy("127.0.0.1:3128")*/);
+            var d3Api = new ApiAccessFacade(CollectMode.TryCacheThenOnline, Locales.en_GB, new System.Net.WebProxy("127.0.0.1:3128"));
             var itemListFetcher = new HeroItemsFetcher(d3Api.ItemRepository);
+            
+            var listDataContainer = new ItemListDataContainer(GetItems);
             do
             {
                 Console.Clear();
@@ -56,8 +78,8 @@ namespace D3ApiDotNet.TextConsoleApplication
                 var myhero = d3Api.HeroRepository.GetByBattletagAndId(battletag, myprofile.Heroes[heroid].Id.ToString());
 
                 // hero items list
-                var itemList = itemListFetcher.GetItemsList(myhero);
-                //var weaponList = itemList.Where(o => o.AttacksPerSecond != null).ToList();
+                _itemList = itemListFetcher.GetItemsList(myhero);
+                //var weaponList = _itemList.Where(o => o.AttacksPerSecond != null).ToList();
 
                 var heroMainStatFetcherLookup = new Dictionary<HeroClass, IAttributeFetcher>
                 {
@@ -71,8 +93,8 @@ namespace D3ApiDotNet.TextConsoleApplication
 
                 var mainStatFetcher = heroMainStatFetcherLookup[myhero.HeroClass];
 
-                var damageCalculationComposite = new DamageTermComposite(myhero.Level, mainStatFetcher, itemList);
-                var ehpCalculationComposite = new EhpTermComposite(myhero.Level, itemList, myhero.HeroClass);
+                var damageCalculationComposite = new DamageTermComposite(myhero.Level, mainStatFetcher, listDataContainer);
+                var ehpCalculationComposite = new EhpTermComposite(myhero.Level, listDataContainer, myhero.HeroClass);
 
                 Console.WriteLine(myhero.Name);
                 Console.WriteLine("Profile Damage: {0:0.##}", myhero.Stats.Damage);

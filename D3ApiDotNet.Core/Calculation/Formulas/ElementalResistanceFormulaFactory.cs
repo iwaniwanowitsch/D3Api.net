@@ -5,18 +5,16 @@ using D3ApiDotNet.Core.Objects.Item;
 
 namespace D3ApiDotNet.Core.Calculation.Formulas
 {
-    public class ElementalResistanceFormulaFactory<T> : AbstractFormulaFactory where T : IAttributeFetcher
+    public class ElementalResistanceFormulaFactory<T> : AbstractItemsFormulaFactory where T : IAttributeFetcher
     {
-        private readonly IList<Item> _itemList;
         private readonly T _elementalResistanceFetcher;
         private readonly AttributeFormulaFactory _intelligenceFormulaFactory;
 
-        public ElementalResistanceFormulaFactory(ElementalTermFactories factories, IList<Item> itemList, T elementalResistanceFetcher, AttributeFormulaFactory intelligenceFormulaFactory) : base(factories)
+        public ElementalResistanceFormulaFactory(ElementalTermFactories factories, IItemListDataContainer itemListData, T elementalResistanceFetcher, AttributeFormulaFactory intelligenceFormulaFactory)
+            : base(factories, itemListData)
         {
-            if (itemList == null) throw new ArgumentNullException("itemList");
             if (elementalResistanceFetcher == null) throw new ArgumentNullException("elementalResistanceFetcher");
             if (intelligenceFormulaFactory == null) throw new ArgumentNullException("intelligenceFormulaFactory");
-            _itemList = itemList;
             _elementalResistanceFetcher = elementalResistanceFetcher;
             _intelligenceFormulaFactory = intelligenceFormulaFactory;
         }
@@ -25,7 +23,7 @@ namespace D3ApiDotNet.Core.Calculation.Formulas
         {
             return
                 Factories.SumFactory.CreateFormulaTerm(
-                    Factories.BaseFactory.CreateAttributeTerm(_itemList, _elementalResistanceFetcher),
+                    Factories.BaseFactory.CreateAttributeTerm(ItemListData, _elementalResistanceFetcher),
                     Factories.ProductFactory.CreateFormulaTerm(_intelligenceFormulaFactory.CreateFormula(),
                         Factories.BaseFactory.CreateConstantTerm(1.0/10)));
         }

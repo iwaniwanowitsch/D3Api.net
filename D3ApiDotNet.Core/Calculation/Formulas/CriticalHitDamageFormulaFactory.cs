@@ -5,24 +5,21 @@ using D3ApiDotNet.Core.Objects.Item;
 
 namespace D3ApiDotNet.Core.Calculation.Formulas
 {
-    public class CriticalHitDamageFormulaFactory : AbstractFormulaFactory
+    public class CriticalHitDamageFormulaFactory : AbstractItemsFormulaFactory
     {
         private const double CdPercentDefaultConst = 0.5;
-        private readonly IList<Item> _itemList;
         private readonly CritDamageFetcher _critDamageFetcher;
 
-        public CriticalHitDamageFormulaFactory(ElementalTermFactories factories, IList<Item> itemList, CritDamageFetcher critDamageFetcher)
-            : base(factories)
+        public CriticalHitDamageFormulaFactory(ElementalTermFactories factories, IItemListDataContainer itemListData, CritDamageFetcher critDamageFetcher)
+            : base(factories, itemListData)
         {
-            if (itemList == null) throw new ArgumentNullException("itemList");
             if (critDamageFetcher == null) throw new ArgumentNullException("critDamageFetcher");
-            _itemList = itemList;
             _critDamageFetcher = critDamageFetcher;
         }
 
         public override ITerm CreateFormula()
         {
-            return Factories.SumFactory.CreateFormulaTerm(Factories.BaseFactory.CreateConstantTerm(CdPercentDefaultConst), Factories.BaseFactory.CreateAttributeTerm(_itemList, _critDamageFetcher));
+            return Factories.SumFactory.CreateFormulaTerm(Factories.BaseFactory.CreateConstantTerm(CdPercentDefaultConst), Factories.BaseFactory.CreateAttributeTerm(ItemListData, _critDamageFetcher));
         }
     }
 }

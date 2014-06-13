@@ -10,7 +10,7 @@ namespace D3ApiDotNet.Core.Calculation
     public class EhpTermComposite : ITerm
     {
         private readonly int? _heroLvl;
-        private readonly IList<Item> _itemList;
+        private readonly IItemListDataContainer _itemListData;
         private readonly OtherDamageReductionFormulaFactory _otherDamageReductionFactory;
         private readonly AttributeFormulaFactory _dexterityFactory;
         private readonly DodgeDamageReductionFormulaFactory _dodgeDamageReductionFactory;
@@ -24,56 +24,56 @@ namespace D3ApiDotNet.Core.Calculation
         private readonly MaxLifeFormulaFactory _maxLifeFactory;
         private readonly EhpFormulaFactory _ehpFactory;
 
-        public EhpTermComposite(int? heroLvl, IList<Item> itemList, HeroClass heroClass)
+        public EhpTermComposite(int? heroLvl, IItemListDataContainer itemListData, HeroClass heroClass)
         {
             if (heroLvl == null) throw new ArgumentNullException("heroLvl");
-            if (itemList == null) throw new ArgumentNullException("itemList");
+            if (itemListData == null) throw new ArgumentNullException("itemListData");
             _heroLvl = heroLvl;
-            _itemList = itemList;
+            _itemListData = itemListData;
 
             var sumFactory = new SumTermFactory();
             var productFactory = new ProductTermFactory();
             var divisionFactory = new DivisionTermFactory();
             var elementalTermsFactory = new ElementalTermFactories(new BaseTermFactory(), sumFactory, productFactory, new SubstractionTermFactory(), divisionFactory, new PercentSumTermFactory(), new AverageTermFactory(sumFactory, productFactory, divisionFactory), new MaxTermFactory());
 
-            _otherDamageReductionFactory = new OtherDamageReductionFormulaFactory(elementalTermsFactory, _itemList,
+            _otherDamageReductionFactory = new OtherDamageReductionFormulaFactory(elementalTermsFactory, _itemListData,
                 new MeleeDamageReductionFetcher(), new RangedDamageReductionFetcher(),
                 new ElitesDamageReductionFetcher());
 
-            _dexterityFactory = new AttributeFormulaFactory(elementalTermsFactory, new DexterityFetcher(), _itemList,
+            _dexterityFactory = new AttributeFormulaFactory(elementalTermsFactory, new DexterityFetcher(), _itemListData,
                 _heroLvl.Value, heroClass == HeroClass.Monk || heroClass == HeroClass.Demonhunter ? 3.0 : 1.0);
             _dodgeDamageReductionFactory = new DodgeDamageReductionFormulaFactory(elementalTermsFactory,
                 _dexterityFactory, _heroLvl.Value);
 
             _intelligenceFactory = new AttributeFormulaFactory(elementalTermsFactory, new IntelligenceFetcher(),
-                _itemList, _heroLvl.Value,
+                _itemListData, _heroLvl.Value,
                 heroClass == HeroClass.Wizard || heroClass == HeroClass.Witchdoctor ? 3.0 : 1.0);
             _resistanceFactory = new ResistanceFormulaFactory(elementalTermsFactory,
-                new ElementalResistanceFormulaFactory<PhysicalResistFetcher>(elementalTermsFactory, _itemList,
+                new ElementalResistanceFormulaFactory<PhysicalResistFetcher>(elementalTermsFactory, _itemListData,
                     new PhysicalResistFetcher(), _intelligenceFactory),
-                new ElementalResistanceFormulaFactory<ColdResistFetcher>(elementalTermsFactory, _itemList,
+                new ElementalResistanceFormulaFactory<ColdResistFetcher>(elementalTermsFactory, _itemListData,
                     new ColdResistFetcher(), _intelligenceFactory),
-                new ElementalResistanceFormulaFactory<FireResistFetcher>(elementalTermsFactory, _itemList,
+                new ElementalResistanceFormulaFactory<FireResistFetcher>(elementalTermsFactory, _itemListData,
                     new FireResistFetcher(), _intelligenceFactory),
-                new ElementalResistanceFormulaFactory<LightningResistFetcher>(elementalTermsFactory, _itemList,
+                new ElementalResistanceFormulaFactory<LightningResistFetcher>(elementalTermsFactory, _itemListData,
                     new LightningResistFetcher(), _intelligenceFactory),
-                new ElementalResistanceFormulaFactory<PoisonResistFetcher>(elementalTermsFactory, _itemList,
+                new ElementalResistanceFormulaFactory<PoisonResistFetcher>(elementalTermsFactory, _itemListData,
                     new PoisonResistFetcher(), _intelligenceFactory),
-                new ElementalResistanceFormulaFactory<ArcaneResistFetcher>(elementalTermsFactory, _itemList,
+                new ElementalResistanceFormulaFactory<ArcaneResistFetcher>(elementalTermsFactory, _itemListData,
                     new ArcaneResistFetcher(), _intelligenceFactory));
             _resistanceDamageReductionFactory = new ResistanceDamageReductionFormulaFactory(elementalTermsFactory,
                 _resistanceFactory, _heroLvl.Value);
 
-            _strengthFactory = new AttributeFormulaFactory(elementalTermsFactory, new StrengthFetcher(), _itemList,
+            _strengthFactory = new AttributeFormulaFactory(elementalTermsFactory, new StrengthFetcher(), _itemListData,
                 _heroLvl.Value, heroClass == HeroClass.Barbarian || heroClass == HeroClass.Crusader ? 3.0 : 1.0);
-            _armorFactory = new ArmorFormulaFactory(elementalTermsFactory, _itemList, _strengthFactory,
+            _armorFactory = new ArmorFormulaFactory(elementalTermsFactory, _itemListData, _strengthFactory,
                 new ArmorFetcher());
             _armorDamageReductionFactory = new ArmorDamageReductionFormulaFactory(elementalTermsFactory, _armorFactory,
                 _heroLvl.Value);
 
-            _vitalityFactory = new VitalityFormulaFactory(elementalTermsFactory, new VitalityFetcher(), _itemList,
+            _vitalityFactory = new VitalityFormulaFactory(elementalTermsFactory, new VitalityFetcher(), _itemListData,
                 _heroLvl.Value);
-            _maxLifeFactory = new MaxLifeFormulaFactory(elementalTermsFactory, _itemList, new HpPercentFetcher(),
+            _maxLifeFactory = new MaxLifeFormulaFactory(elementalTermsFactory, _itemListData, new HpPercentFetcher(),
                 _vitalityFactory, _heroLvl.Value);
             _ehpFactory = new EhpFormulaFactory(elementalTermsFactory, _maxLifeFactory, _armorDamageReductionFactory, _resistanceDamageReductionFactory, _dodgeDamageReductionFactory, _otherDamageReductionFactory);
         }

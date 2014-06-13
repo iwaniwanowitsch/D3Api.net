@@ -11,6 +11,6 @@ namespace D3ApiDotNet.Core.Calculation.Formulas
 
         ITerm CreateConstantTerm(double constant);
 
-        ITerm CreateAttributeTerm(EventHandler<IList<Item>> itemsChangedHandler, IAttributeFetcher fetcher);
+        ITerm CreateAttributeTerm(IItemListDataContainer itemListData, IAttributeFetcher fetcher);
     }
 }

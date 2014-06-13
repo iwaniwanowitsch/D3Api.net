@@ -6,8 +6,8 @@ namespace D3ApiDotNet.Core.Calculation.Formulas
 {
     public class VitalityFormulaFactory : AttributeFormulaFactory
     {
-        public VitalityFormulaFactory(ElementalTermFactories factories, IAttributeFetcher vitalityFetcher, IList<Item> itemList, double heroLvl)
-            : base(factories, vitalityFetcher, itemList, heroLvl, 2.0)
+        public VitalityFormulaFactory(ElementalTermFactories factories, IAttributeFetcher vitalityFetcher, IItemListDataContainer itemListData, double heroLvl)
+            : base(factories, vitalityFetcher, itemListData, heroLvl, 2.0)
         {
         }
     }

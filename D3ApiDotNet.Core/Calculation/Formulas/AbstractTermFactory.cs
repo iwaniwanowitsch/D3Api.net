@@ -14,9 +14,9 @@ namespace D3ApiDotNet.Core.Calculation.Formulas
             return new ConstantTerm(constant);
         }
 
-        public virtual ITerm CreateAttributeTerm(EventHandler<IList<Item>> itemsChangedHandler, IAttributeFetcher fetcher)
+        public virtual ITerm CreateAttributeTerm(IItemListDataContainer itemListData, IAttributeFetcher fetcher)
         {
-            return new AttributeTerm(itemsChangedHandler, fetcher);
+            return new AttributeTerm(itemListData, fetcher);
         }
     }
 }

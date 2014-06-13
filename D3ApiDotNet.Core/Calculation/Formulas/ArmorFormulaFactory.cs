@@ -5,26 +5,23 @@ using D3ApiDotNet.Core.Objects.Item;
 
 namespace D3ApiDotNet.Core.Calculation.Formulas
 {
-    public class ArmorFormulaFactory : AbstractFormulaFactory
+    public class ArmorFormulaFactory : AbstractItemsFormulaFactory
     {
         private readonly AttributeFormulaFactory _strengthFormulaFactory;
         private readonly ArmorFetcher _armorFetcher;
-        private readonly IList<Item> _itemList;
 
-        public ArmorFormulaFactory(ElementalTermFactories factories, IList<Item> itemList, AttributeFormulaFactory strengthFormulaFactory, ArmorFetcher armorFetcher)
-            : base(factories)
+        public ArmorFormulaFactory(ElementalTermFactories factories, IItemListDataContainer itemListData, AttributeFormulaFactory strengthFormulaFactory, ArmorFetcher armorFetcher)
+            : base(factories, itemListData)
         {
             if (strengthFormulaFactory == null) throw new ArgumentNullException("strengthFormulaFactory");
             if (armorFetcher == null) throw new ArgumentNullException("armorFetcher");
-            if (itemList == null) throw new ArgumentNullException("itemList");
             _strengthFormulaFactory = strengthFormulaFactory;
             _armorFetcher = armorFetcher;
-            _itemList = itemList;
         }
 
         public override ITerm CreateFormula()
         {
-            return Factories.SumFactory.CreateFormulaTerm(Factories.BaseFactory.CreateAttributeTerm(_itemList, _armorFetcher),
+            return Factories.SumFactory.CreateFormulaTerm(Factories.BaseFactory.CreateAttributeTerm(ItemListData, _armorFetcher),
                 _strengthFormulaFactory.CreateFormula());
         }
     }

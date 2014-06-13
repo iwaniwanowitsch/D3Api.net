@@ -9,8 +9,8 @@ namespace D3ApiDotNet.Core.Calculation.Formulas
     {
         private readonly ElitesBonusDamageFetcher _elitesBonusDamageFetcher;
 
-        public VsElitesDamageFormulaFactory(ElementalTermFactories factories, EventHandler<IList<Item>> itemsChangedHandler, ElitesBonusDamageFetcher elitesBonusDamageFetcher)
-            : base(factories, itemsChangedHandler)
+        public VsElitesDamageFormulaFactory(ElementalTermFactories factories, IItemListDataContainer itemListData, ElitesBonusDamageFetcher elitesBonusDamageFetcher)
+            : base(factories, itemListData)
         {
             if (elitesBonusDamageFetcher == null) throw new ArgumentNullException("elitesBonusDamageFetcher");
             _elitesBonusDamageFetcher = elitesBonusDamageFetcher;
@@ -18,7 +18,7 @@ namespace D3ApiDotNet.Core.Calculation.Formulas
 
         public override ITerm CreateFormula()
         {
-            return Factories.BaseFactory.CreateAttributeTerm(ItemsChangedHandler, _elitesBonusDamageFetcher);
+            return Factories.BaseFactory.CreateAttributeTerm(ItemListData, _elitesBonusDamageFetcher);
         }
     }
 }
