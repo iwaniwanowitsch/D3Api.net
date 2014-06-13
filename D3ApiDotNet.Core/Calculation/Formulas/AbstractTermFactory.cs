@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using D3ApiDotNet.Core.Calculation.AttributeFetchers;
 using D3ApiDotNet.Core.Objects.Item;
@@ -13,9 +14,9 @@ namespace D3ApiDotNet.Core.Calculation.Formulas
             return new ConstantTerm(constant);
         }
 
-        public virtual ITerm CreateAttributeTerm(IList<Item> items, IAttributeFetcher fetcher)
+        public virtual ITerm CreateAttributeTerm(EventHandler<IList<Item>> itemsChangedHandler, IAttributeFetcher fetcher)
         {
-            return new AttributeTerm(items, fetcher);
+            return new AttributeTerm(itemsChangedHandler, fetcher);
         }
     }
 }

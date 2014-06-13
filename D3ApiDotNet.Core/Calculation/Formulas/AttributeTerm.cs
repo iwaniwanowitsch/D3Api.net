@@ -7,15 +7,21 @@ namespace D3ApiDotNet.Core.Calculation.Formulas
 {
     public class AttributeTerm : ITerm
     {
-        private readonly IList<Item> _items;
+        private IList<Item> _items;
         private readonly IAttributeFetcher _fetcher;
 
-        public AttributeTerm(IList<Item> items, IAttributeFetcher fetcher)
+        public AttributeTerm(EventHandler<IList<Item>> itemsChangedHandler, IAttributeFetcher fetcher)
+        {
+            if (itemsChangedHandler == null) throw new ArgumentNullException("itemListChangedEvent");
+            if (fetcher == null) throw new ArgumentNullException("fetcher");
+            itemsChangedHandler += UpdateItems;
+            _fetcher = fetcher;
+        }
+
+        public void UpdateItems(object o, IList<Item> items)
         {
             if (items == null) throw new ArgumentNullException("items");
-            if (fetcher == null) throw new ArgumentNullException("fetcher");
             _items = items;
-            _fetcher = fetcher;
         }
 
         public double Evaluate()

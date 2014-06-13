@@ -5,22 +5,20 @@ using D3ApiDotNet.Core.Objects.Item;
 
 namespace D3ApiDotNet.Core.Calculation.Formulas
 {
-    public class VsElitesDamageFormulaFactory : AbstractFormulaFactory
+    public class VsElitesDamageFormulaFactory : AbstractItemsFormulaFactory
     {
-        private readonly IList<Item> _itemList;
         private readonly ElitesBonusDamageFetcher _elitesBonusDamageFetcher;
 
-        public VsElitesDamageFormulaFactory(ElementalTermFactories factories, IList<Item> itemList, ElitesBonusDamageFetcher elitesBonusDamageFetcher) : base(factories)
+        public VsElitesDamageFormulaFactory(ElementalTermFactories factories, EventHandler<IList<Item>> itemsChangedHandler, ElitesBonusDamageFetcher elitesBonusDamageFetcher)
+            : base(factories, itemsChangedHandler)
         {
-            if (itemList == null) throw new ArgumentNullException("itemList");
             if (elitesBonusDamageFetcher == null) throw new ArgumentNullException("elitesBonusDamageFetcher");
-            _itemList = itemList;
             _elitesBonusDamageFetcher = elitesBonusDamageFetcher;
         }
 
         public override ITerm CreateFormula()
         {
-            return Factories.BaseFactory.CreateAttributeTerm(_itemList, _elitesBonusDamageFetcher);
+            return Factories.BaseFactory.CreateAttributeTerm(ItemsChangedHandler, _elitesBonusDamageFetcher);
         }
     }
 }
