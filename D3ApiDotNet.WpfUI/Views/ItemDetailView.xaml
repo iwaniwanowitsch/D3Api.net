@@ -42,7 +42,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.ColumnSpan="2" Text="Plan: Herausragender Großdurchstecher" Style="{StaticResource ItemHeaderStyle}" />
+        <TextBlock Grid.ColumnSpan="2" Text="Herausragender Großdurchstecher" Style="{StaticResource ItemHeaderStyle}" />
 
         <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="5">
             <Grid.ColumnDefinitions>
@@ -54,8 +54,8 @@
             <TextBlock Grid.Column="1" Text="Benötigte Stufe: 60" Foreground="Silver" FlowDirection="RightToLeft"/>
         </Grid>
 
-        <StackPanel Grid.Column="0" Grid.Row="2" Background="#33FFD700" VerticalAlignment="Top" Margin="5">
-            <Border BorderThickness="3" BorderBrush="Gold" CornerRadius="5" Padding="5">
+        <StackPanel Grid.Column="0" Grid.Row="2" VerticalAlignment="Top" Margin="5">
+            <Border Style="{StaticResource WhiteItemBorderStyle}">
                 <Image Source="http://media.blizzard.com/d3/icons/items/large/unique_dagger_003_x1_demonhunter_male.png"/>
             </Border>
         </StackPanel>
