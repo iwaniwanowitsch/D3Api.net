@@ -4,17 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:views="clr-namespace:D3ApiDotNet.WpfUI.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="233" d:DesignWidth="134">
-    <Grid>
-        <StackPanel Background="#33FFD700" VerticalAlignment="Top">
-            <Border BorderThickness="3" BorderBrush="Gold" CornerRadius="5" Padding="5">
-                <Image Source="http://media.blizzard.com/d3/icons/items/large/unique_dagger_003_x1_demonhunter_male.png">
-                    <Image.ToolTip>
-                        <views:ItemDetailView x:Name="DetailView" />
-                    </Image.ToolTip>
-                </Image>
-            </Border>
-        </StackPanel>
-    </Grid>
+             HorizontalAlignment="Center" VerticalAlignment="Center"
+             mc:Ignorable="d">
+    <Border Name="ItemBorder" Style="{StaticResource YellowItemBorderStyle}" VerticalAlignment="Center" HorizontalAlignment="Center"
+            ToolTipService.ShowDuration="3600000" ToolTipService.BetweenShowDelay="0">
+        <Image Name="ItemImage" Source="http://media.blizzard.com/d3/icons/items/large/pants_001_demonhunter_male.png" Stretch="None"/>
+        <Border.ToolTip>
+            <ToolTip>
+                <views:ItemDetailView x:Name="DetailView" />
+            </ToolTip>
+        </Border.ToolTip>
+    </Border>
 </UserControl>

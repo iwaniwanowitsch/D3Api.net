@@ -8,50 +8,47 @@
              d:DesignHeight="734" d:DesignWidth="300">
     <UserControl.Resources>
         <Style x:Key="ItemStyle" TargetType="views:ItemView">
-            <Setter Property="Margin" Value="10"/>
-            <Setter Property="Width" Value="74"/>
-        </Style>
-
-        <Style x:Key="BigItemStyle" TargetType="views:ItemView" BasedOn="{StaticResource ItemStyle}">
-            <Setter Property="Height" Value="138"/>
-        </Style>
-        
-        <Style x:Key="SmallItemStyle" TargetType="views:ItemView" BasedOn="{StaticResource ItemStyle}">
-            <Setter Property="Height" Value="74"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Width" Value="Auto"/>
+            <Setter Property="Height" Value="Auto"/>
         </Style>
     </UserControl.Resources>
-    
+
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <views:ItemView Grid.Row="0" Grid.Column="0" Style="{StaticResource BigItemStyle}" x:Name="ShoulderItemView" />
-        <views:ItemView Grid.Row="0" Grid.Column="1" Style="{StaticResource BigItemStyle}" x:Name="HeadItemView"/>
-        <views:ItemView Grid.Row="0" Grid.Column="2" Style="{StaticResource SmallItemStyle}" x:Name="AmuletItemView"/>
-        
-        <views:ItemView Grid.Row="1" Grid.Column="0" Style="{StaticResource BigItemStyle}" x:Name="HandItemView"/>
-        <views:ItemView Grid.Row="1" Grid.Column="1" Style="{StaticResource BigItemStyle}" x:Name="ChestItemView"/>
-        <views:ItemView Grid.Row="1" Grid.Column="2" Style="{StaticResource BigItemStyle}" x:Name="BracerItemView"/>
+        <views:ItemView Grid.Row="1" Grid.Column="1" Style="{StaticResource ItemStyle}" x:Name="ShoulderItemView" />
+        <views:ItemView Grid.Row="1" Grid.Column="2" Style="{StaticResource ItemStyle}" x:Name="HeadItemView"/>
+        <views:ItemView Grid.Row="1" Grid.Column="3" Style="{StaticResource ItemStyle}" x:Name="AmuletItemView"/>
 
-        <views:ItemView Grid.Row="2" Grid.Column="0" Style="{StaticResource SmallItemStyle}" x:Name="LeftRingItemView"/>
-        <views:ItemView Grid.Row="2" Grid.Column="1" Style="{StaticResource SmallItemStyle}" x:Name="WaistItemView"/>
-        <views:ItemView Grid.Row="2" Grid.Column="2" Style="{StaticResource SmallItemStyle}" x:Name="RightRingItemView"/>
+        <views:ItemView Grid.Row="2" Grid.Column="1" Style="{StaticResource ItemStyle}" x:Name="HandItemView"/>
+        <views:ItemView Grid.Row="2" Grid.Column="2" Style="{StaticResource ItemStyle}" x:Name="ChestItemView"/>
+        <views:ItemView Grid.Row="2" Grid.Column="3" Style="{StaticResource ItemStyle}" x:Name="BracerItemView"/>
 
-        <views:ItemView Grid.Row="3" Grid.Column="0" Style="{StaticResource BigItemStyle}" x:Name="MainHandItemView" Grid.RowSpan="2"/>
-        <views:ItemView Grid.Row="3" Grid.Column="1" Style="{StaticResource BigItemStyle}" x:Name="PantsItemView"/>
-        <views:ItemView Grid.Row="3" Grid.Column="2" Style="{StaticResource BigItemStyle}" x:Name="OffHandItemView" Grid.RowSpan="2"/>
+        <views:ItemView Grid.Row="3" Grid.Column="1" Style="{StaticResource ItemStyle}" x:Name="LeftRingItemView"/>
+        <views:ItemView Grid.Row="3" Grid.Column="2" Style="{StaticResource ItemStyle}" x:Name="WaistItemView"/>
+        <views:ItemView Grid.Row="3" Grid.Column="3" Style="{StaticResource ItemStyle}" x:Name="RightRingItemView"/>
 
-        <views:ItemView Grid.Row="4" Grid.Column="1" Style="{StaticResource BigItemStyle}" x:Name="BootsItemView"/>
+        <views:ItemView Grid.Row="4" Grid.Column="1" Style="{StaticResource ItemStyle}" x:Name="MainHandItemView" Grid.RowSpan="2"/>
+        <views:ItemView Grid.Row="4" Grid.Column="2" Style="{StaticResource ItemStyle}" x:Name="PantsItemView"/>
+        <views:ItemView Grid.Row="4" Grid.Column="3" Style="{StaticResource ItemStyle}" x:Name="OffHandItemView" Grid.RowSpan="2"/>
+
+        <views:ItemView Grid.Row="5" Grid.Column="2" Style="{StaticResource ItemStyle}" x:Name="BootsItemView"/>
 
     </Grid>
 </UserControl>

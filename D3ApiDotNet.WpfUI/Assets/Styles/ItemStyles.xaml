@@ -1,0 +1,118 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Base Item -->
+    <Style x:Key="BaseItemBorderStyle" TargetType="Border">
+        <Setter Property="BorderThickness" Value="3"/>
+        <Setter Property="CornerRadius" Value="5"/>
+        <Setter Property="Padding" Value="5"/>
+    </Style>
+    
+    <!-- No Item -->
+    <Style x:Key="NoItemBorderStyle" TargetType="Border" BasedOn="{StaticResource BaseItemBorderStyle}">
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <DrawingBrush Viewport="0,0,8,8" ViewportUnits="Absolute" TileMode="Tile">
+                    <DrawingBrush.Drawing>
+                        <DrawingGroup>
+                            <GeometryDrawing Brush="Gray">
+                                <GeometryDrawing.Geometry>
+                                    <GeometryGroup>
+                                        <RectangleGeometry Rect="0,0,50,50" />
+                                        <RectangleGeometry Rect="50,50,50,50" />
+                                    </GeometryGroup>
+                                </GeometryDrawing.Geometry>
+                            </GeometryDrawing>
+                        </DrawingGroup>
+                    </DrawingBrush.Drawing>
+                </DrawingBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!-- Damaged Item -->
+    <Style x:Key="GrayItemBorderStyle" TargetType="Border" BasedOn="{StaticResource BaseItemBorderStyle}">
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource ItemBackgroundColorGray}"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource ItemBackgroundColorGray}" Opacity=".3"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!-- Default Item -->
+    <Style x:Key="WhiteItemBorderStyle" TargetType="Border" BasedOn="{StaticResource BaseItemBorderStyle}">
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource ItemBackgroundColorWhite}"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource ItemBackgroundColorWhite}" Opacity=".3"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!-- Blue Item -->
+    <Style x:Key="BlueItemBorderStyle" TargetType="Border" BasedOn="{StaticResource BaseItemBorderStyle}">
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource ItemBackgroundColorBlue}"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource ItemBackgroundColorBlue}" Opacity=".3"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Golden Item -->
+    <Style x:Key="YellowItemBorderStyle" TargetType="Border" BasedOn="{StaticResource BaseItemBorderStyle}">
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource ItemBackgroundColorYellow}"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource ItemBackgroundColorYellow}" Opacity=".3"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Legendary Item -->
+    <Style x:Key="OrangeItemBorderStyle" TargetType="Border" BasedOn="{StaticResource BaseItemBorderStyle}">
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource ItemBackgroundColorOrange}"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource ItemBackgroundColorOrange}" Opacity=".3"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Set Item -->
+    <Style x:Key="GreenItemBorderStyle" TargetType="Border" BasedOn="{StaticResource BaseItemBorderStyle}">
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource ItemBackgroundColorGreen}"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource ItemBackgroundColorGreen}" Opacity=".3"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>
