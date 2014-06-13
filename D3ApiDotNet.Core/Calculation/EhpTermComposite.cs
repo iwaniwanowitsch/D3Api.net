@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using D3ApiDotNet.Core.Calculation.AttributeFetchers;
 using D3ApiDotNet.Core.Calculation.Formulas;
+using D3ApiDotNet.Core.Calculation.Formulas.FormulaFactories;
+using D3ApiDotNet.Core.Calculation.Formulas.TermFactories;
 using D3ApiDotNet.Core.Objects.Hero;
 using D3ApiDotNet.Core.Objects.Item;
 

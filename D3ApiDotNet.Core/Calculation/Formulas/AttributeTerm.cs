@@ -12,7 +12,7 @@ namespace D3ApiDotNet.Core.Calculation.Formulas
 
         public AttributeTerm(IItemListDataContainer itemListData, IAttributeFetcher fetcher)
         {
-            if (itemListData == null) throw new ArgumentNullException("itemListChangedEvent");
+            if (itemListData == null) throw new ArgumentNullException("itemListData");
             if (fetcher == null) throw new ArgumentNullException("fetcher");
             _fetcher = fetcher;
             _itemListData = itemListData;

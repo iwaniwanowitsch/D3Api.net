@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using D3ApiDotNet.Core.Calculation.Formulas.TermFactories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using D3ApiDotNet.Core.Calculation.Formulas;
 

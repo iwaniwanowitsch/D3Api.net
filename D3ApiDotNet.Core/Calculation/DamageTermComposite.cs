@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using D3ApiDotNet.Core.Calculation.AttributeFetchers;
 using D3ApiDotNet.Core.Calculation.Formulas;
+using D3ApiDotNet.Core.Calculation.Formulas.FormulaFactories;
+using D3ApiDotNet.Core.Calculation.Formulas.TermFactories;
 using D3ApiDotNet.Core.Objects.Item;
 
 namespace D3ApiDotNet.Core.Calculation
