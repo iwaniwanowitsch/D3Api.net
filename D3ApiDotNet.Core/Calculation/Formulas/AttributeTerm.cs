@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using D3ApiDotNet.Core.Calculation.AttributeFetchers;
-using D3ApiDotNet.Core.Objects.Item;
 
 namespace D3ApiDotNet.Core.Calculation.Formulas
 {
