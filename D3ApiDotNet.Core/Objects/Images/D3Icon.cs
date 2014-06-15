@@ -15,6 +15,11 @@ namespace D3ApiDotNet.Core.Objects.Images
         /// <summary />
         public Image Icon { get; set; }
 
+        public D3Icon()
+        {
+            
+        }
+
         /// <summary>
         /// constructor
         /// </summary>

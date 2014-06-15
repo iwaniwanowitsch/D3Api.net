@@ -14,6 +14,7 @@ using Newtonsoft.Json.Linq;
 
 namespace D3ApiDotNet.Core.Objects.Item
 {
+
     /// <summary>
     /// D3ApiServiceExample: ItemAttributes, all attributes!
     /// </summary>

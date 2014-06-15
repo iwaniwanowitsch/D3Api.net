@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Drawing" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -50,8 +51,18 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="SampleDataTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\D3ApiDotNet.Core\D3ApiDotNet.Core.csproj">
+      <Project>{367579F4-0FC5-40C1-86BD-CC162861B327}</Project>
+      <Name>D3ApiDotNet.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\D3ApiDotNet.WpfUI\D3ApiDotNet.WpfUI.csproj">
+      <Project>{4bf0d1e4-d535-4751-8f52-a9883bf14e44}</Project>
+      <Name>D3ApiDotNet.WpfUI</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

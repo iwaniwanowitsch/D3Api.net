@@ -10,6 +10,12 @@
 
                 <!-- Styles -->
                 <ResourceDictionary Source="Assets/Styles/ItemStyles.xaml"/>
+                
+                <!-- Data Templates -->
+                <ResourceDictionary Source="DataTemplates.xaml" />
+                
+                <!-- Converters -->
+                <ResourceDictionary Source="Converters.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

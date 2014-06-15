@@ -3,15 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:views="clr-namespace:D3ApiDotNet.WpfUI.Views"
+             xmlns:sampleData="clr-namespace:D3ApiDotNet.WpfUI.SampleData"
              HorizontalAlignment="Center" VerticalAlignment="Center"
              mc:Ignorable="d">
-    <Border Name="ItemBorder" Style="{StaticResource YellowItemBorderStyle}" VerticalAlignment="Center" HorizontalAlignment="Center"
-            ToolTipService.ShowDuration="3600000" ToolTipService.BetweenShowDelay="0">
-        <Image Name="ItemImage" Source="http://media.blizzard.com/d3/icons/items/large/pants_001_demonhunter_male.png" Stretch="None"/>
+    <d:UserControl.DataContext>
+        <sampleData:ItemViewModelSampleData />
+    </d:UserControl.DataContext>
+
+    <Border Name="ItemBorder" Style="{Binding Path=ItemDetailViewModel.Item.DisplayColor, Converter={StaticResource ItemBorderColorConverter}}" ToolTipService.ShowDuration="3600000" ToolTipService.BetweenShowDelay="0">
+        <Image Source="{Binding Path=ItemDetailViewModel.Icon.Icon, Converter={StaticResource ImageConverter}}" />
         <Border.ToolTip>
-            <ToolTip>
-                <views:ItemDetailView x:Name="DetailView" />
+            <ToolTip IsEnabled="{Binding Path=HasTooltipEnabled}">
+                <ContentControl Content="{Binding Path=ItemDetailViewModel}" ContentTemplate="{DynamicResource ItemDetailViewModelTemplate}" />
             </ToolTip>
         </Border.ToolTip>
     </Border>

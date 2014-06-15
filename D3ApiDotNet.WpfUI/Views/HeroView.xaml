@@ -3,18 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:views="clr-namespace:D3ApiDotNet.WpfUI.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="734" d:DesignWidth="300">
+             xmlns:sampleData="clr-namespace:D3ApiDotNet.WpfUI.SampleData"
+             d:HorizontalAlignment="Center" d:VerticalAlignment="Center"
+             mc:Ignorable="d">
+    <d:UserControl.DataContext>
+        <sampleData:HeroViewModelSampleData />
+    </d:UserControl.DataContext>
     <UserControl.Resources>
-        <Style x:Key="ItemStyle" TargetType="views:ItemView">
+        <Style x:Key="ItemStyle" TargetType="ContentControl">
             <Setter Property="Margin" Value="5"/>
             <Setter Property="Width" Value="Auto"/>
             <Setter Property="Height" Value="Auto"/>
         </Style>
     </UserControl.Resources>
 
-    <Grid>
+    <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
@@ -22,33 +25,32 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <views:ItemView Grid.Row="1" Grid.Column="1" Style="{StaticResource ItemStyle}" x:Name="ShoulderItemView" />
-        <views:ItemView Grid.Row="1" Grid.Column="2" Style="{StaticResource ItemStyle}" x:Name="HeadItemView"/>
-        <views:ItemView Grid.Row="1" Grid.Column="3" Style="{StaticResource ItemStyle}" x:Name="AmuletItemView"/>
+        <ContentControl Grid.Row="1" Grid.Column="1" Style="{StaticResource ItemStyle}" Content="{Binding Path=ShouldersItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}"/>
+        <ContentControl Grid.Row="1" Grid.Column="2" Style="{StaticResource ItemStyle}" Content="{Binding Path=HeadItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}"/>
+        <ContentControl Grid.Row="1" Grid.Column="3" Style="{StaticResource ItemStyle}" Content="{Binding Path=AmuletItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}"/>
 
-        <views:ItemView Grid.Row="2" Grid.Column="1" Style="{StaticResource ItemStyle}" x:Name="HandItemView"/>
-        <views:ItemView Grid.Row="2" Grid.Column="2" Style="{StaticResource ItemStyle}" x:Name="ChestItemView"/>
-        <views:ItemView Grid.Row="2" Grid.Column="3" Style="{StaticResource ItemStyle}" x:Name="BracerItemView"/>
+        <ContentControl Grid.Row="2" Grid.Column="1" Style="{StaticResource ItemStyle}" Content="{Binding Path=HandItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}"/>
+        <ContentControl Grid.Row="2" Grid.Column="2" Style="{StaticResource ItemStyle}" Content="{Binding Path=ChestItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}"/>
+        <ContentControl Grid.Row="2" Grid.Column="3" Style="{StaticResource ItemStyle}" Content="{Binding Path=BracersItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}"/>
 
-        <views:ItemView Grid.Row="3" Grid.Column="1" Style="{StaticResource ItemStyle}" x:Name="LeftRingItemView"/>
-        <views:ItemView Grid.Row="3" Grid.Column="2" Style="{StaticResource ItemStyle}" x:Name="WaistItemView"/>
-        <views:ItemView Grid.Row="3" Grid.Column="3" Style="{StaticResource ItemStyle}" x:Name="RightRingItemView"/>
+        <ContentControl Grid.Row="3" Grid.Column="1" Style="{StaticResource ItemStyle}" Content="{Binding Path=LeftRingItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}"/>
+        <ContentControl Grid.Row="3" Grid.Column="2" Style="{StaticResource ItemStyle}" Content="{Binding Path=WaistItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}"/>
+        <ContentControl Grid.Row="3" Grid.Column="3" Style="{StaticResource ItemStyle}" Content="{Binding Path=RightRingItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}"/>
 
-        <views:ItemView Grid.Row="4" Grid.Column="1" Style="{StaticResource ItemStyle}" x:Name="MainHandItemView" Grid.RowSpan="2"/>
-        <views:ItemView Grid.Row="4" Grid.Column="2" Style="{StaticResource ItemStyle}" x:Name="PantsItemView"/>
-        <views:ItemView Grid.Row="4" Grid.Column="3" Style="{StaticResource ItemStyle}" x:Name="OffHandItemView" Grid.RowSpan="2"/>
+        <ContentControl Grid.Row="4" Grid.Column="1" Style="{StaticResource ItemStyle}" Content="{Binding Path=MainHandItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}" Grid.RowSpan="2"/>
+        <ContentControl Grid.Row="4" Grid.Column="2" Style="{StaticResource ItemStyle}" Content="{Binding Path=PantsItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}"/>
+        <ContentControl Grid.Row="4" Grid.Column="3" Style="{StaticResource ItemStyle}" Content="{Binding Path=OffHandItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}" Grid.RowSpan="2"/>
 
-        <views:ItemView Grid.Row="5" Grid.Column="2" Style="{StaticResource ItemStyle}" x:Name="BootsItemView"/>
+        <ContentControl Grid.Row="5" Grid.Column="2" Style="{StaticResource ItemStyle}" Content="{Binding Path=BootsItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}"/>
 
     </Grid>
 </UserControl>

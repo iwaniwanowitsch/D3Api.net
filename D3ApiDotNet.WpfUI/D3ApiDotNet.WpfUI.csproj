@@ -36,6 +36,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -53,6 +54,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\ImageBitmapSourceConverter.cs" />
+    <Compile Include="Converters\ItemBorderColorConverter.cs" />
+    <Compile Include="Converters\ItemColorConverter.cs" />
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="SampleData\HeroViewModelSampleData.cs" />
+    <Compile Include="SampleData\ItemDetailViewModelSampleData.cs" />
+    <Compile Include="SampleData\ItemViewModelSampleData.cs" />
+    <Compile Include="SampleData\MainWindowViewModelSampleData.cs" />
+    <Compile Include="ViewModels\BaseItemDetailViewModel.cs" />
+    <Compile Include="ViewModels\HeroViewModel.cs" />
+    <Compile Include="ViewModels\IHeroViewModel.cs" />
+    <Compile Include="ViewModels\IItemDetailViewModel.cs" />
+    <Compile Include="ViewModels\IItemViewModel.cs" />
+    <Compile Include="ViewModels\IMainWindowViewModel.cs" />
+    <Compile Include="ViewModels\ItemDetailViewModel.cs" />
+    <Compile Include="ViewModels\ItemViewModel.cs" />
     <Compile Include="Views\HeroView.xaml.cs">
       <DependentUpon>HeroView.xaml</DependentUpon>
     </Compile>
@@ -69,6 +86,14 @@
     <Page Include="Assets\Values\Colors.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Converters.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -134,9 +159,17 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\Fonts\" />
-    <Folder Include="Assets\Images\" />
     <Folder Include="Models\" />
-    <Folder Include="ViewModels\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\Images\unique_spiritstone_004_x1_demonhunter_male.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\Images\unique_spiritstone_004_x1_demonhunter_male_small.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
