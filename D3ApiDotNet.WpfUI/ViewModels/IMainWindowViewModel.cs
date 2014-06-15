@@ -1,7 +1,10 @@
-﻿namespace D3ApiDotNet.WpfUI.ViewModels
+﻿using System.Collections.ObjectModel;
+using D3ApiDotNet.WpfUI.Commands;
+
+namespace D3ApiDotNet.WpfUI.ViewModels
 {
-    public interface IMainWindowViewModel
+    public interface IMainWindowViewModel : IAddContentViewModelCommand
     {
-        IHeroViewModel HeroViewModel { get; set; }
+        ObservableCollection<IContentViewModel> ContentViewModels { get; set; }
     }
 }

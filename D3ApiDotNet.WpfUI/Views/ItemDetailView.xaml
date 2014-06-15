@@ -58,7 +58,9 @@
         </Grid>
 
         <StackPanel Grid.Column="0" Grid.Row="2" VerticalAlignment="Top" Margin="5">
-            <ContentControl Content="{Binding Path=ItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}" />
+            <Border Name="ItemBorder" Style="{Binding Path=Item.DisplayColor, Converter={StaticResource ItemBorderColorConverter}}" ToolTipService.ShowDuration="3600000" ToolTipService.BetweenShowDelay="0">
+                <Image Source="{Binding Path=Icon.Icon, Converter={StaticResource ImageConverter}}" />
+            </Border>
         </StackPanel>
 
         <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Vertical">

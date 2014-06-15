@@ -9,7 +9,7 @@ namespace D3ApiDotNet.WpfUI.ViewModels
 {
     public class HeroViewModel : IHeroViewModel
     {
-        public HeroViewModel(IItemViewModel headItemViewModel, IItemViewModel shouldersItemViewModel, IItemViewModel amuletItemViewModel, IItemViewModel chestItemViewModel, IItemViewModel bracersItemViewModel, Hero actualHero, IItemViewModel bootsItemViewModel, IItemViewModel offHandItemViewModel, IItemViewModel rightRingItemViewModel, IItemViewModel waistItemViewModel, IItemViewModel leftRingItemViewModel, IItemViewModel mainHandItemViewModel, IItemViewModel pantsItemViewModel)
+        public HeroViewModel(IItemViewModel headItemViewModel, IItemViewModel shouldersItemViewModel, IItemViewModel amuletItemViewModel, IItemViewModel chestItemViewModel, IItemViewModel bracersItemViewModel, IItemViewModel handItemViewModel, IItemViewModel bootsItemViewModel, IItemViewModel offHandItemViewModel, IItemViewModel rightRingItemViewModel, IItemViewModel waistItemViewModel, IItemViewModel leftRingItemViewModel, IItemViewModel mainHandItemViewModel, IItemViewModel pantsItemViewModel, Hero actualHero)
         {
             HeadItemViewModel = headItemViewModel;
             ShouldersItemViewModel = shouldersItemViewModel;
@@ -23,6 +23,7 @@ namespace D3ApiDotNet.WpfUI.ViewModels
             LeftRingItemViewModel = leftRingItemViewModel;
             MainHandItemViewModel = mainHandItemViewModel;
             PantsItemViewModel = pantsItemViewModel;
+            HandItemViewModel = handItemViewModel;
             ActualHero = actualHero;
         }
 
@@ -45,5 +46,15 @@ namespace D3ApiDotNet.WpfUI.ViewModels
         }
 
         public Hero ActualHero { get; set; }
+
+        public string Name
+        {
+            get
+            {
+                if (ActualHero != null)
+                    return "HeroView: " + ActualHero.Name;
+                return "HeroView";
+            }
+        }
     }
 }

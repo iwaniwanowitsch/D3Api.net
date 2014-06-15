@@ -5,4 +5,5 @@
     <l:ImageBitmapSourceConverter x:Key="ImageConverter" />
     <l:ItemBorderColorConverter x:Key="ItemBorderColorConverter" />
     <l:ItemColorConverter x:Key="ItemColorConverter" />
+    <l:ObjectNullToBoolConverter x:Key="ObjectNullToBoolConverter" />
 </ResourceDictionary>

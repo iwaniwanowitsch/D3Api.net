@@ -7,15 +7,12 @@ namespace D3ApiDotNet.WpfUI.ViewModels
 {
     public class ItemDetailViewModel : BaseItemDetailViewModel
     {
-        public ItemDetailViewModel([NotNull] Item item, [NotNull] D3Icon icon, [NotNull] IItemViewModel itemViewModel)
+        public ItemDetailViewModel([NotNull] Item item, [NotNull] D3Icon icon)
         {
             if (item == null) throw new ArgumentNullException("item");
             if (icon == null) throw new ArgumentNullException("icon");
-            if (itemViewModel == null) throw new ArgumentNullException("itemViewModel");
-            itemViewModel.HasTooltipEnabled = false;
             Item = item;
             Icon = icon;
-            ItemViewModel = itemViewModel;
         }
     }
 }

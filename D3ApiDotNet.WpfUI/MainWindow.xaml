@@ -1,12 +1,27 @@
 ﻿<Window x:Class="D3ApiDotNet.WpfUI.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:sampleData="clr-namespace:D3ApiDotNet.WpfUI.SampleData"
-        Title="MainWindow" Height="800" Width="600" WindowStartupLocation="CenterScreen">
-    <Window.DataContext>
+        xmlns:vm="clr-namespace:D3ApiDotNet.WpfUI.ViewModels"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" WindowStartupLocation="CenterScreen">
+    <d:Window.DataContext>
         <sampleData:MainWindowViewModelSampleData />
-    </Window.DataContext>
+    </d:Window.DataContext>
+    <Window.Resources>
+
+    <DataTemplate x:Key="TabControlItemHeaderTemplate" DataType="vm:IContentViewModel">
+        <TextBlock Text="{Binding Path=Name, FallbackValue=ContentView}"/>
+    </DataTemplate>
+
+    </Window.Resources>
     <Grid>
-        <ContentControl Content="{Binding HeroViewModel}" ContentTemplate="{DynamicResource HeroViewModelTemplate}" />
+        <TabControl ItemsSource="{Binding ContentViewModels}" ContentTemplate="{DynamicResource LoadDataViewModelTemplate}" ItemTemplate="{StaticResource TabControlItemHeaderTemplate}">
+            <!-- <TabItem Header="{Binding Path=HeroViewModel.ActualHero.Name, FallbackValue=HeroView}">
+                <ContentControl Content="{Binding HeroViewModel}" ContentTemplate="{DynamicResource HeroViewModelTemplate}" />
+            </TabItem> -->
+        </TabControl>
     </Grid>
 </Window>

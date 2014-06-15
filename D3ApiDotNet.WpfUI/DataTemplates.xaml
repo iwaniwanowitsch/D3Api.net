@@ -14,4 +14,8 @@
         <views:HeroView />
     </DataTemplate>
 
+    <DataTemplate x:Key="LoadDataViewModelTemplate">
+        <views:LoadDataView />
+    </DataTemplate>
+
 </ResourceDictionary>

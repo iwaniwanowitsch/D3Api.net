@@ -1,4 +1,6 @@
-﻿using D3ApiDotNet.WpfUI.ViewModels;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using D3ApiDotNet.WpfUI.ViewModels;
 
 namespace D3ApiDotNet.WpfUI.SampleData
 {
@@ -6,8 +8,12 @@ namespace D3ApiDotNet.WpfUI.SampleData
     {
         public MainWindowViewModelSampleData()
         {
-            HeroViewModel = new HeroViewModelSampleData();
+            ContentViewModels = new ObservableCollection<IContentViewModel> { new HeroViewModelSampleData(), new HeroViewModelSampleData() };
         }
-        public IHeroViewModel HeroViewModel { get; set; }
+        public ObservableCollection<IContentViewModel> ContentViewModels { get; set; }
+        public void AddContentViewModel(IContentViewModel contentViewModel)
+        {
+            ContentViewModels.Add(contentViewModel);
+        }
     }
 }

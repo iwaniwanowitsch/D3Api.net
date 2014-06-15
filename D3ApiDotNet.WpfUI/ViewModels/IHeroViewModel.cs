@@ -9,7 +9,7 @@ using D3ApiDotNet.Core.Objects.Item;
 
 namespace D3ApiDotNet.WpfUI.ViewModels
 {
-    public interface IHeroViewModel
+    public interface IHeroViewModel : IContentViewModel
     {
         //ObservableCollection<IItemViewModel> ItemViewList { get; set; }
 

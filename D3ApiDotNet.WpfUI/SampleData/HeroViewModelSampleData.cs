@@ -41,5 +41,10 @@ namespace D3ApiDotNet.WpfUI.SampleData
         }
 
         public Hero ActualHero { get; set; }
+
+        public string Name
+        {
+            get { return "HeroView"; }
+        }
     }
 }

@@ -54,9 +54,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\AddContentViewModelCommand.cs" />
+    <Compile Include="Commands\IAddContentViewModelCommand.cs" />
+    <Compile Include="Commands\ILoadProfileCommand.cs" />
+    <Compile Include="Commands\LoadHeroCommand.cs" />
+    <Compile Include="Commands\LoadProfileCommand.cs" />
     <Compile Include="Converters\ImageBitmapSourceConverter.cs" />
     <Compile Include="Converters\ItemBorderColorConverter.cs" />
     <Compile Include="Converters\ItemColorConverter.cs" />
+    <Compile Include="Converters\ObjectNullToBoolConverter.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="SampleData\HeroViewModelSampleData.cs" />
     <Compile Include="SampleData\ItemDetailViewModelSampleData.cs" />
@@ -64,12 +70,16 @@
     <Compile Include="SampleData\MainWindowViewModelSampleData.cs" />
     <Compile Include="ViewModels\BaseItemDetailViewModel.cs" />
     <Compile Include="ViewModels\HeroViewModel.cs" />
+    <Compile Include="ViewModels\IContentViewModel.cs" />
     <Compile Include="ViewModels\IHeroViewModel.cs" />
     <Compile Include="ViewModels\IItemDetailViewModel.cs" />
     <Compile Include="ViewModels\IItemViewModel.cs" />
+    <Compile Include="ViewModels\ILoadDataViewModel.cs" />
     <Compile Include="ViewModels\IMainWindowViewModel.cs" />
     <Compile Include="ViewModels\ItemDetailViewModel.cs" />
     <Compile Include="ViewModels\ItemViewModel.cs" />
+    <Compile Include="ViewModels\LoadDataViewModel.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\HeroView.xaml.cs">
       <DependentUpon>HeroView.xaml</DependentUpon>
     </Compile>
@@ -78,6 +88,9 @@
     </Compile>
     <Compile Include="Views\ItemView.xaml.cs">
       <DependentUpon>ItemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoadDataView.xaml.cs">
+      <DependentUpon>LoadDataView.xaml</DependentUpon>
     </Compile>
     <Page Include="Assets\Styles\ItemStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -118,6 +131,10 @@
     <Page Include="Views\ItemView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\LoadDataView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

@@ -9,7 +9,6 @@ namespace D3ApiDotNet.WpfUI.ViewModels
     {
         public virtual Item Item { get; set; }
         public virtual D3Icon Icon { get; protected set; }
-        public virtual IItemViewModel ItemViewModel { get; protected set; }
         public virtual IList<string> Attributes
         {
             get
