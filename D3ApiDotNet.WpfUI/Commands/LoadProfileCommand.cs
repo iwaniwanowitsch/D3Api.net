@@ -29,10 +29,14 @@ namespace D3ApiDotNet.WpfUI.Commands
         {
             var battletag = _loadDataViewModel.Battletag;
             var profile = await Task.Factory.StartNew(() => _api.ProfileRepository.GetByBattletag(battletag));
+            _loadDataViewModel.Heroes.Clear();
+            if (profile.IsErrorObject())
+                return;
             foreach (var hero in profile.Heroes)
             {
                 var herodata = await Task.Factory.StartNew(() => _api.HeroRepository.GetByBattletagAndId(battletag, hero.Id.ToString()));
                 _loadDataViewModel.Heroes.Add(herodata);
+                _loadDataViewModel.LoadHeroCommand.OnCanExecuteChanged();
             }
         }
 

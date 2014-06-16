@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using D3ApiDotNet.WpfUI.Annotations;
 
 namespace D3ApiDotNet.WpfUI.ViewModels
@@ -16,6 +17,7 @@ namespace D3ApiDotNet.WpfUI.ViewModels
 
         public void AddContentViewModel(IContentViewModel contentViewModel)
         {
+            if (ContentViewModels.All(o => contentViewModel.Name != o.Name))
             ContentViewModels.Add(contentViewModel);
         }
 

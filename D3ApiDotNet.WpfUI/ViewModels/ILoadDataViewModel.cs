@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
 using D3ApiDotNet.Core.Objects.Hero;
 using D3ApiDotNet.WpfUI.Commands;
 
