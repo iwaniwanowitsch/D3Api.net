@@ -14,7 +14,7 @@ namespace D3ApiDotNet.WpfUI.Converters
     {
         private readonly Dictionary<string, Color?> _lookupDictionary = new Dictionary<string, Color?>
         {
-            {"grey" , Application.Current.Resources["ItemBackgroundColorGrey"] as Color? },
+            {"gray" , Application.Current.Resources["ItemBackgroundColorGray"] as Color? },
             {"white", Application.Current.Resources["ItemBackgroundColorWhite"] as Color? },
             {"blue", Application.Current.Resources["ItemBackgroundColorBlue"] as Color? },
             {"yellow", Application.Current.Resources["ItemBackgroundColorYellow"] as Color? },
