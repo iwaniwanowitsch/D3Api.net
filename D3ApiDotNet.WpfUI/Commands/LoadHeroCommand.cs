@@ -24,21 +24,20 @@ namespace D3ApiDotNet.WpfUI.Commands
             _api = api;
             _loadDataViewModel = loadDataViewModel;
             _addContentViewModelCommand = addContentViewModelCommand;
+            
         }
 
         public bool CanExecute(object parameter)
         {
             if (_loadDataViewModel.Heroes == null)
                 return false;
-            return _loadDataViewModel.Heroes.FirstOrDefault(
-                    o => o.Id.ToString(CultureInfo.InvariantCulture) == _loadDataViewModel.HeroId) != null;
+            return _loadDataViewModel.Heroes.Count > _loadDataViewModel.HeroId;
         }
 
         public async void Execute(object parameter)
         {
             var hero =
-                _loadDataViewModel.Heroes.FirstOrDefault(
-                    o => o.Id.ToString(CultureInfo.InvariantCulture) == _loadDataViewModel.HeroId);
+                _loadDataViewModel.Heroes[_loadDataViewModel.HeroId];
             if (hero == null)
                 return;
             var items = hero.Items;
@@ -72,6 +71,13 @@ namespace D3ApiDotNet.WpfUI.Commands
                     new ItemViewModel(true, new ItemDetailViewModel(mainHand, _api.ItemIconRepository.GetByIdAndSize(mainHand.Icon))),
                     new ItemViewModel(true, new ItemDetailViewModel(pants, _api.ItemIconRepository.GetByIdAndSize(pants.Icon))),
                     hero));
+        }
+
+        public void OnCanExecuteChanged()
+        {
+            var handler = CanExecuteChanged;
+            if (handler != null)
+                handler(this, EventArgs.Empty);
         }
 
         public event EventHandler CanExecuteChanged;

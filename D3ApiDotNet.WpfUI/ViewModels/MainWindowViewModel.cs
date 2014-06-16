@@ -6,6 +6,8 @@ namespace D3ApiDotNet.WpfUI.ViewModels
 {
     public class MainWindowViewModel : IMainWindowViewModel
     {
+        private ObservableCollection<IContentViewModel> _contentViewModels;
+
         public MainWindowViewModel([NotNull] ObservableCollection<IContentViewModel> contentViewModels)
         {
             if (contentViewModels == null) throw new ArgumentNullException("contentViewModels");
@@ -17,6 +19,14 @@ namespace D3ApiDotNet.WpfUI.ViewModels
             ContentViewModels.Add(contentViewModel);
         }
 
-        public ObservableCollection<IContentViewModel> ContentViewModels { get; set; }
+        public ObservableCollection<IContentViewModel> ContentViewModels
+        {
+            get { return _contentViewModels; }
+            set
+            {
+                if (value == null) return;
+                _contentViewModels = value; 
+            }
+        }
     }
 }

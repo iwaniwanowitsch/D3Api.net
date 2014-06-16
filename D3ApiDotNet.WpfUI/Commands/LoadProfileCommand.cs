@@ -30,10 +30,17 @@ namespace D3ApiDotNet.WpfUI.Commands
             var battletag = _loadDataViewModel.Battletag;
             var profile = await Task.Factory.StartNew(() => _api.ProfileRepository.GetByBattletag(battletag));
             foreach (var hero in profile.Heroes)
-                await
-                    Task.Factory.StartNew(() =>
-                        _loadDataViewModel.Heroes.Add(_api.HeroRepository.GetByBattletagAndId(battletag,
-                            hero.Id.ToString(CultureInfo.InvariantCulture))));
+            {
+                var herodata = await Task.Factory.StartNew(() => _api.HeroRepository.GetByBattletagAndId(battletag, hero.Id.ToString()));
+                _loadDataViewModel.Heroes.Add(herodata);
+            }
+        }
+
+        public void OnCanExecuteChanged()
+        {
+            var handler = CanExecuteChanged;
+            if (handler != null)
+                handler(this, EventArgs.Empty);
         }
 
         public event EventHandler CanExecuteChanged;

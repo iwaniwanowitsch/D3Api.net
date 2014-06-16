@@ -63,6 +63,9 @@
     <Compile Include="Converters\ItemBorderColorConverter.cs" />
     <Compile Include="Converters\ItemColorConverter.cs" />
     <Compile Include="Converters\ObjectNullToBoolConverter.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="SampleData\HeroViewModelSampleData.cs" />
     <Compile Include="SampleData\ItemDetailViewModelSampleData.cs" />
@@ -108,18 +111,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\HeroView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

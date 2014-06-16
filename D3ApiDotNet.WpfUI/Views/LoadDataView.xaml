@@ -17,9 +17,9 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Row="0" Grid.Column="0" Text="Enter Battletag: " />
-        <TextBox Grid.Row="0" Grid.Column="1" x:Name="BattletagTextBox" Text="{Binding Path=Battletag}"/>
+        <TextBox Grid.Row="0" Grid.Column="1" x:Name="BattletagTextBox" Text="{Binding Path=Battletag, UpdateSourceTrigger=PropertyChanged}"/>
         <Button Grid.Row="1" Grid.Column="1" x:Name="BattletagButton" Command="{Binding Path=LoadProfileCommand}" Content="Load Profile" />
-        <ComboBox Grid.Row="2" Grid.Column="0" x:Name="HeroComboBox" ItemsSource="{Binding Path=Heroes}" IsEnabled="{Binding Path=Heroes, Converter={StaticResource ObjectNullToBoolConverter}}"/>
+        <ComboBox Grid.Row="2" Grid.Column="0" x:Name="HeroComboBox" ItemsSource="{Binding Path=Heroes}" SelectedIndex="{Binding Path=HeroId, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding Path=Heroes, Converter={StaticResource ObjectNullToBoolConverter}}"/>
         <Button Grid.Row="3" Grid.Column="1" x:Name="HeroButton" Command="{Binding Path=LoadHeroCommand}" Content="Load Hero" IsEnabled="{Binding Path=Heroes, Converter={StaticResource ObjectNullToBoolConverter}}" />
     </Grid>
 </UserControl>
