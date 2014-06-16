@@ -13,7 +13,7 @@ namespace D3ApiDotNet.WpfUI.Converters
     {
         private readonly Dictionary<string, Style> _lookupDictionary = new Dictionary<string, Style>
         {
-            {"grey" , Application.Current.FindResource("GrayItemBorderStyle") as Style},
+            {"gray" , Application.Current.FindResource("GrayItemBorderStyle") as Style},
             {"white", Application.Current.FindResource("WhiteItemBorderStyle") as Style},
             {"blue", Application.Current.FindResource("BlueItemBorderStyle") as Style},
             {"yellow", Application.Current.FindResource("YellowItemBorderStyle") as Style},
