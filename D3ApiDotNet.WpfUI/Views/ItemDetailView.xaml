@@ -4,34 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:sampleData="clr-namespace:D3ApiDotNet.WpfUI.SampleData"
-             mc:Ignorable="d" 
-             d:DesignHeight="544" d:DesignWidth="364">
+             mc:Ignorable="d" MaxWidth="400"
+             d:DesignHeight="304" d:DesignWidth="200">
     <d:UserControl.DataContext>
         <sampleData:ItemDetailViewModelSampleData />
     </d:UserControl.DataContext>
 
     <UserControl.Resources>
-        <Style x:Key="ItemHeaderStyle" TargetType="TextBlock">
-            <Setter Property="Padding" Value="10"/>
-            <Setter Property="Foreground" Value="Gold"/>
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Background" Value="#333"/>
-            <Setter Property="TextWrapping" Value="Wrap"/>
-        </Style>
-        
-        <DataTemplate x:Key="ItemAttributesTemplate">
-            <StackPanel Orientation="Horizontal" Margin="0,2">
-                <TextBlock Text="{Binding FallbackValue=ItemAttribute}" Foreground="CornflowerBlue" TextWrapping="Wrap"/>
-            </StackPanel>
-        </DataTemplate>
-        
-        <DataTemplate x:Key="GemsTemplate">
-            <StackPanel Orientation="Horizontal" Margin="0,2">
-                <Ellipse Width="16" Height="16" Margin="5" Fill="red" />
-                <TextBlock Text="{Binding FallbackValue=GemAttribute}" Foreground="White" TextWrapping="Wrap"/>
-            </StackPanel>
-        </DataTemplate>
+        <ResourceDictionary Source="pack://application:,,,/Assets/Styles/Templates/ItemAttributesTemplates.xaml"/>
     </UserControl.Resources>
 
     <Grid Background="Black">
@@ -45,7 +25,9 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.ColumnSpan="2" Text="{Binding Path=Item.Name}" Style="{StaticResource ItemHeaderStyle}" />
+        <TextBlock Grid.ColumnSpan="2" Text="{Binding Path=Item.Name}"
+                   Padding="10" Foreground="{Binding Path=Item.DisplayColor, Converter={StaticResource ItemColorConverter}}"
+                   FontSize="16" FontWeight="Bold" Background="#333" TextWrapping="Wrap"/>
 
         <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="5">
             <Grid.ColumnDefinitions>
@@ -58,22 +40,25 @@
         </Grid>
 
         <StackPanel Grid.Column="0" Grid.Row="2" VerticalAlignment="Top" Margin="5">
-            <Border Name="ItemBorder" Style="{Binding Path=Item.DisplayColor, Converter={StaticResource ItemBorderColorConverter}}" ToolTipService.ShowDuration="3600000" ToolTipService.BetweenShowDelay="0">
+            <Border Name="ItemBorder" Style="{Binding Path=Item.DisplayColor, Converter={StaticResource ItemBorderColorConverter}}">
                 <Image Source="{Binding Path=Icon.Icon, Converter={StaticResource ImageConverter}}" />
             </Border>
         </StackPanel>
 
-        <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Vertical">
-            <ListBox x:Name="ItemAttributesListBox" Background="{x:Null}" BorderBrush="{x:Null}" 
+        <Border Grid.Column="1" Grid.Row="2" Padding="10">
+            <StackPanel Orientation="Vertical">
+                <ListBox x:Name="ItemAttributesListBox" Background="{x:Null}" BorderBrush="{x:Null}" 
                     ItemTemplate="{DynamicResource ItemAttributesTemplate}" 
-                    HorizontalContentAlignment="Stretch" 
+                    HorizontalContentAlignment="Stretch"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                     ItemsSource="{Binding Path=Attributes}"/>
-            <ListBox x:Name="GemsListBox" Background="{x:Null}" BorderBrush="{x:Null}" 
+                <ListBox x:Name="GemsListBox" Background="{x:Null}" BorderBrush="{x:Null}" 
                     ItemTemplate="{DynamicResource GemsTemplate}" 
                     HorizontalContentAlignment="Stretch" 
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                     ItemsSource="{Binding Path=Gems}"/>
-            
-        </StackPanel>
-        
+
+            </StackPanel>
+        </Border>
     </Grid>
 </UserControl>

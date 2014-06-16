@@ -1,0 +1,32 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <!-- Displays one attribute row of an item -->
+    <DataTemplate x:Key="ItemAttributesTemplate">
+        <Grid Margin="0,2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle Grid.Column="0" Width="4" Height="4" Margin="0,6,3,0" Fill="Gray" VerticalAlignment="Top">
+                <Rectangle.LayoutTransform>
+                    <RotateTransform Angle="-45"/>
+                </Rectangle.LayoutTransform>
+            </Rectangle>
+            <TextBlock Grid.Column="1" Text="{Binding FallbackValue=ItemAttribute}" FontSize="12" Foreground="CornflowerBlue" TextWrapping="Wrap" VerticalAlignment="Center"/>
+        </Grid>
+    </DataTemplate>
+
+    <!-- Displays one gem row of an item -->
+    <DataTemplate x:Key="GemsTemplate">
+        <Grid Margin="0,2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!-- TODO: Color of gem: -->
+            <Ellipse Grid.Column="0" Width="16" Height="16" Margin="5" Fill="red" VerticalAlignment="Center" />
+            <TextBlock Grid.Column="1" Text="{Binding FallbackValue=GemAttribute}" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Center"/>
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>

@@ -17,7 +17,8 @@
         </Style>
     </UserControl.Resources>
 
-    <Grid Margin="20">
+    <ScrollViewer Margin="20" VerticalScrollBarVisibility="Auto">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
@@ -25,13 +26,14 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <ContentControl Grid.Row="1" Grid.Column="1" Style="{StaticResource ItemStyle}" Content="{Binding Path=ShouldersItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}"/>
@@ -52,5 +54,6 @@
 
         <ContentControl Grid.Row="5" Grid.Column="2" Style="{StaticResource ItemStyle}" Content="{Binding Path=BootsItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}"/>
 
-    </Grid>
+        </Grid>
+    </ScrollViewer>
 </UserControl>

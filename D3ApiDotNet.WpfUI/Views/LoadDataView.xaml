@@ -4,27 +4,64 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="331" d:DesignWidth="658">
     <UserControl.Resources>
         <DataTemplate x:Key="ComboBoxItemTemplate">
             <ComboBoxItem Content="{Binding Path=Name}" />
         </DataTemplate>
+
+        <Style x:Key="TitleStyle" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontFamily" Value="Segoe UI Light"/>
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+        <Style x:Key="ButtonStyle" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="5,0"/>
+        </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="0" Text="Enter Battletag: " />
-        <TextBox Grid.Row="0" Grid.Column="1" x:Name="BattletagTextBox" Text="{Binding Path=Battletag, UpdateSourceTrigger=PropertyChanged}"/>
-        <Button Grid.Row="1" Grid.Column="1" x:Name="BattletagButton" Command="{Binding Path=LoadProfileCommand, IsAsync=True}" Content="Load Profile" />
-        <ComboBox Grid.Row="2" Grid.Column="0" x:Name="HeroComboBox" ItemTemplate="{StaticResource ComboBoxItemTemplate}" ItemsSource="{Binding Path=Heroes, UpdateSourceTrigger=PropertyChanged}" SelectedIndex="{Binding Path=HeroId, UpdateSourceTrigger=PropertyChanged}" />
-        <Button Grid.Row="3" Grid.Column="1" x:Name="HeroButton" Command="{Binding Path=LoadHeroCommand, IsAsync=True}" Content="Load Hero" IsEnabled="{Binding Path=Heroes, Converter={StaticResource ObjectNullToBoolConverter}, UpdateSourceTrigger=PropertyChanged}" />
+        <Image Source="/D3ApiDotNet.WpfUI;component/logo.ico" Stretch="None" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
+        
+        <Grid Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Width="400">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
+                       Text="Enter Battletag: " Style="{StaticResource TitleStyle}"/>
+            <TextBox Grid.Row="1" Grid.Column="0" x:Name="BattletagTextBox" 
+                     Text="{Binding Path=Battletag, UpdateSourceTrigger=PropertyChanged}" 
+                     Margin="5" FontSize="14"/>
+            <Button Grid.Row="1" Grid.Column="1" x:Name="BattletagButton" 
+                    Command="{Binding Path=LoadProfileCommand, IsAsync=True}" 
+                    Content="Load Profile"
+                    Style="{StaticResource ButtonStyle}" />
+
+            <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
+                       Text="Select Hero:" Style="{StaticResource TitleStyle}"/>
+            <ComboBox Grid.Row="4" Grid.Column="0" x:Name="HeroComboBox" 
+                      ItemTemplate="{StaticResource ComboBoxItemTemplate}" 
+                      ItemsSource="{Binding Path=Heroes, UpdateSourceTrigger=PropertyChanged}" 
+                      SelectedIndex="{Binding Path=HeroId, UpdateSourceTrigger=PropertyChanged}" 
+                      Margin="5" FontSize="14" />
+            <Button Grid.Row="4" Grid.Column="1" x:Name="HeroButton" 
+                    Command="{Binding Path=LoadHeroCommand, IsAsync=True}" 
+                    Content="Load Hero" IsEnabled="{Binding Path=Heroes, 
+                    Converter={StaticResource ObjectNullToBoolConverter}, UpdateSourceTrigger=PropertyChanged}"
+                    Style="{StaticResource ButtonStyle}"/>
+        </Grid>
     </Grid>
 </UserControl>

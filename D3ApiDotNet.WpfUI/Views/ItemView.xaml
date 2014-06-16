@@ -13,7 +13,7 @@
     <Border Name="ItemBorder" Style="{Binding Path=ItemDetailViewModel.Item.DisplayColor, Converter={StaticResource ItemBorderColorConverter}}" ToolTipService.ShowDuration="3600000" ToolTipService.BetweenShowDelay="0">
         <Image Source="{Binding Path=ItemDetailViewModel.Icon.Icon, Converter={StaticResource ImageConverter}}" />
         <Border.ToolTip>
-            <ToolTip IsEnabled="{Binding Path=HasTooltipEnabled}">
+            <ToolTip IsEnabled="{Binding Path=HasTooltipEnabled}" Padding="0">
                 <ContentControl Content="{Binding Path=ItemDetailViewModel}" ContentTemplate="{DynamicResource ItemDetailViewModelTemplate}" />
             </ToolTip>
         </Border.ToolTip>

@@ -6,7 +6,7 @@
         xmlns:sampleData="clr-namespace:D3ApiDotNet.WpfUI.SampleData"
         xmlns:vm="clr-namespace:D3ApiDotNet.WpfUI.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="800" WindowStartupLocation="CenterScreen" Icon="logo.ico">
     <d:Window.DataContext>
         <sampleData:MainWindowViewModelSampleData />
     </d:Window.DataContext>
@@ -18,7 +18,10 @@
 
     </Window.Resources>
     <Grid>
-        <TabControl ItemsSource="{Binding ContentViewModels}" ContentTemplateSelector="{StaticResource ContentViewModelTemplateSelector}" ItemTemplate="{StaticResource TabControlItemHeaderTemplate}">
+        <TabControl SelectedIndex="0" 
+                    ItemsSource="{Binding ContentViewModels}" 
+                    ContentTemplateSelector="{StaticResource ContentViewModelTemplateSelector}" 
+                    ItemTemplate="{StaticResource TabControlItemHeaderTemplate}">
             <!-- <TabItem Header="{Binding Path=HeroViewModel.ActualHero.Name, FallbackValue=HeroView}">
                 <ContentControl Content="{Binding HeroViewModel}" ContentTemplate="{DynamicResource HeroViewModelTemplate}" />
             </TabItem> -->
