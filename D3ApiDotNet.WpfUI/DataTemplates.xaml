@@ -17,5 +17,6 @@
     <DataTemplate x:Key="LoadDataViewModelTemplate">
         <views:LoadDataView />
     </DataTemplate>
+    
 
 </ResourceDictionary>

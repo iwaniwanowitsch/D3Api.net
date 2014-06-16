@@ -15,6 +15,9 @@
                 
                 <!-- Converters -->
                 <ResourceDictionary Source="Converters.xaml" />
+                
+                <!-- Template Selectors -->
+                <ResourceDictionary Source="TemplateSelectors.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

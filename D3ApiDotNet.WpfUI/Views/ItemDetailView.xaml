@@ -28,7 +28,7 @@
         
         <DataTemplate x:Key="GemsTemplate">
             <StackPanel Orientation="Horizontal" Margin="0,2">
-                <Ellipse Width="16" Height="16" Margin="5" Fill="Red" />
+                <Ellipse Width="16" Height="16" Margin="5" Fill="red" />
                 <TextBlock Text="{Binding FallbackValue=GemAttribute}" Foreground="White" TextWrapping="Wrap"/>
             </StackPanel>
         </DataTemplate>

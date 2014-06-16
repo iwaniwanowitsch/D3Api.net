@@ -18,7 +18,7 @@
 
     </Window.Resources>
     <Grid>
-        <TabControl ItemsSource="{Binding ContentViewModels}" ContentTemplate="{DynamicResource LoadDataViewModelTemplate}" ItemTemplate="{StaticResource TabControlItemHeaderTemplate}">
+        <TabControl ItemsSource="{Binding ContentViewModels}" ContentTemplateSelector="{StaticResource ContentViewModelTemplateSelector}" ItemTemplate="{StaticResource TabControlItemHeaderTemplate}">
             <!-- <TabItem Header="{Binding Path=HeroViewModel.ActualHero.Name, FallbackValue=HeroView}">
                 <ContentControl Content="{Binding HeroViewModel}" ContentTemplate="{DynamicResource HeroViewModelTemplate}" />
             </TabItem> -->

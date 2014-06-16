@@ -71,6 +71,7 @@
     <Compile Include="SampleData\ItemDetailViewModelSampleData.cs" />
     <Compile Include="SampleData\ItemViewModelSampleData.cs" />
     <Compile Include="SampleData\MainWindowViewModelSampleData.cs" />
+    <Compile Include="TemplateSelectors\ContentViewModelTemplateSelector.cs" />
     <Compile Include="ViewModels\BaseItemDetailViewModel.cs" />
     <Compile Include="ViewModels\HeroViewModel.cs" />
     <Compile Include="ViewModels\IContentViewModel.cs" />
@@ -118,6 +119,10 @@
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TemplateSelectors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\HeroView.xaml">
       <Generator>MSBuild:Compile</Generator>

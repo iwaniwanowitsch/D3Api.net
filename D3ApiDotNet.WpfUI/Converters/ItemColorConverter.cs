@@ -25,11 +25,24 @@ namespace D3ApiDotNet.WpfUI.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var color = value as string;
-            if (value != null)
+            if (targetType == typeof(Color))
             {
-                return new SolidColorBrush(_lookupDictionary[color].Value);
+                if (color != null)
+                {
+                    return new SolidColorBrush(_lookupDictionary[color].Value);
+                }
+                return new SolidColorBrush(_lookupDictionary["white"].Value);
             }
-            return new SolidColorBrush(_lookupDictionary["white"].Value);
+            else if (targetType == typeof(Brush))
+            {
+                BrushConverter bc = new BrushConverter();
+                if (color != null)
+                {
+                    return new SolidColorBrush(_lookupDictionary[color].Value);
+                }
+                return new SolidColorBrush(_lookupDictionary["white"].Value);
+            }
+            return null;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
