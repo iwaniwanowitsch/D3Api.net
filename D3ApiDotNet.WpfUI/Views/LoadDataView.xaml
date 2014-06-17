@@ -9,10 +9,27 @@
     <d:UserControl.DataContext>
         <sampleData:LoadDataViewModelSampleData />
     </d:UserControl.DataContext>
-    
+
     <UserControl.Resources>
         <DataTemplate x:Key="ComboBoxItemTemplate">
-            <ComboBoxItem Content="{Binding Path=Name}" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" Source="pack://application:,,,/Assets/Images/HeroClasses/BarbarianClassLogo32.png" Height="32" Width="32" Margin="0,0,5,0"/>
+                <TextBlock Grid.Column="1" Text="{Binding Path=Name}" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                <TextBlock Grid.Column="2" Text="Hardcore" Foreground="Gold" Margin="3,0" VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="3" Text="Dead" Foreground="Red" Margin="3,0" VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="4" Text="70" Margin="3,0" VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="5" Text="(203)" Foreground="LightSkyBlue" VerticalAlignment="Center" Margin="3,0"/>
+                <!--<ComboBoxItem Content="{Binding Path=Name}"/>-->
+            </Grid>
+
         </DataTemplate>
 
         <Style x:Key="TitleStyle" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
@@ -25,15 +42,15 @@
             <Setter Property="Padding" Value="5,0"/>
         </Style>
     </UserControl.Resources>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Image Source="/D3ApiDotNet.WpfUI;component/logo.ico" Stretch="None" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
-        
-        <Grid Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Width="400">
+
+        <Grid Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Width="500">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -55,14 +72,21 @@
                     Command="{Binding Path=LoadProfileCommand, IsAsync=True}" 
                     Content="Load Profile"
                     Style="{StaticResource ButtonStyle}" />
-            
+
             <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
                        Text="Select Hero:" Style="{StaticResource TitleStyle}"/>
             <ComboBox Grid.Row="4" Grid.Column="0" x:Name="HeroComboBox" 
                       ItemTemplate="{StaticResource ComboBoxItemTemplate}" 
                       ItemsSource="{Binding Path=Heroes, UpdateSourceTrigger=PropertyChanged}" 
                       SelectedIndex="{Binding Path=HeroId, UpdateSourceTrigger=PropertyChanged}" 
-                      Margin="5" FontSize="14" />
+                      HorizontalContentAlignment="Stretch"
+                      Margin="5" FontSize="14">
+                <ComboBox.ItemContainerStyle>
+                    <Style TargetType="{x:Type ComboBoxItem}">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ComboBox.ItemContainerStyle>
+            </ComboBox>
             <Button Grid.Row="4" Grid.Column="1" x:Name="HeroButton" 
                     Command="{Binding Path=LoadHeroCommand, IsAsync=True}" 
                     Content="Load Hero" IsEnabled="{Binding Path=Heroes, 
