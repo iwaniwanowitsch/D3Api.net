@@ -10,25 +10,54 @@
         <sampleData:HeroViewModelSampleData />
     </d:UserControl.DataContext>
     <UserControl.Resources>
-        <Style x:Key="ItemStyle" TargetType="ContentControl">
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="Width" Value="Auto"/>
-            <Setter Property="Height" Value="Auto"/>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Assets/Styles/HeroAttributesStyle.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Assets/Styles/HeroViewStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </UserControl.Resources>
+
     <StackPanel Orientation="Horizontal">
-        <StackPanel>
-            <WrapPanel>
-                <TextBlock Text="{Binding Path=ActualHero.Name, FallbackValue=''}" Margin="0 0 30 0"/>
-                <TextBlock Text="{Binding Path=ActualHero.HeroClass, FallbackValue=''}" />
-            </WrapPanel>
-            <TextBlock Text="{Binding StringFormat='Last updated: {0}', Path=ActualHero.LastUpdated, FallbackValue=''}" />
-            <TextBlock Text="{Binding StringFormat='Level: {0}', Path=ActualHero.Level, FallbackValue=''}" />
-            <TextBlock Text="{Binding StringFormat='Paragon: {0}', Path=ActualHero.ParagonLevel, FallbackValue=''}" />
-            <TextBlock Text="{Binding StringFormat='Profile Dps: {0:n}', Path=ActualHero.Stats.Damage, FallbackValue=''}" />
-            <TextBlock Text="{Binding StringFormat='Elites killed: {0:n}', Path=ActualHero.Kills.Elites, FallbackValue=''}" />
-        </StackPanel>
-    <ScrollViewer Margin="20" VerticalScrollBarVisibility="Auto">
+        <!-- TODO: Move attributes to seperate user control (e.g. HeroAtrributesView), because of code length -->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" MinWidth="200">
+                <TextBlock Text="{Binding Path=ActualHero.Name, FallbackValue=''}" FontFamily="Segoe UI Light" FontSize="20" TextWrapping="Wrap"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{Binding StringFormat='Level: {0}', Path=ActualHero.Level, FallbackValue=''}" FontSize="14" />
+                    <TextBlock Grid.Column="1" Text="{Binding StringFormat=' ({0})', Path=ActualHero.ParagonLevel, FallbackValue=''}" FontSize="14" Foreground="LightSkyBlue" />
+                    <TextBlock Grid.Column="2" Text="{Binding Path=ActualHero.HeroClass, FallbackValue=''}" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                </Grid>
+                <Grid Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Profile Dps:" Style="{StaticResource AttributeNameStyle}"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding StringFormat={}{0:n}, Path=ActualHero.Stats.Damage, FallbackValue=''}" Style="{StaticResource NumberValueStyle}" />
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Elites killed:" Style="{StaticResource AttributeNameStyle}" />
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding StringFormat={}{0:n}, Path=ActualHero.Kills.Elites, FallbackValue=''}" Style="{StaticResource NumberValueStyle}" />
+                </Grid>
+            </StackPanel>
+            <TextBlock Grid.Row="1" Text="{Binding StringFormat='Last updated: {0:G}', Path=ActualHero.LastUpdated, FallbackValue=''}" 
+                       Foreground="Gray" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" TextWrapping="Wrap"/>
+        </Grid>
+        
+        <ScrollViewer Margin="20" VerticalScrollBarVisibility="Auto">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
