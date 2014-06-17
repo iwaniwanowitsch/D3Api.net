@@ -36,6 +36,8 @@ namespace D3ApiDotNet.WpfUI.Commands
 
         public async void Execute(object parameter)
         {
+            if (LoadDataViewModel.HeroId < 0 || LoadDataViewModel.HeroId >= LoadDataViewModel.Heroes.Count) 
+                return;
             var hero =
                 LoadDataViewModel.Heroes[LoadDataViewModel.HeroId];
             if (hero == null)
