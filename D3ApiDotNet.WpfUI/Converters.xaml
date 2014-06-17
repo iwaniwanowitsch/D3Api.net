@@ -8,4 +8,5 @@
     <l:ObjectNullToBoolConverter x:Key="ObjectNullToBoolConverter" />
     <l:AffixTypeColorConverter x:Key="AffixTypeColorConverter" />
     <l:BoolToHardcoreConverter x:Key="BoolToHardcoreConverter" />
+    <l:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
 </ResourceDictionary>

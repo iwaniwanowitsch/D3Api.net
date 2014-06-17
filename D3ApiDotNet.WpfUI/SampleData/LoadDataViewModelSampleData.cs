@@ -23,6 +23,7 @@ namespace D3ApiDotNet.WpfUI.SampleData
         }
 
         public string Name { get; private set; }
+        public bool IsLoading { get; set; }
 
         public ICommand Delete
         {

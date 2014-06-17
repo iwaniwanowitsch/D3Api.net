@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using D3ApiDotNet.WpfUI.Annotations;
 using D3ApiDotNet.WpfUI.Commands;
@@ -15,14 +11,16 @@ namespace D3ApiDotNet.WpfUI.ViewModels.Interfaces
         private readonly bool _isDeletable;
         private ICommand _deleteCommand;
 
-        protected BaseContentViewModel([NotNull] IManageContentViewModelActions manageContentViewModelActions, bool isDeletable)
+        protected BaseContentViewModel([NotNull] IManageContentViewModelActions manageContentViewModelActions, bool isDeletable, bool isLoading)
         {
             if (manageContentViewModelActions == null) throw new ArgumentNullException("manageContentViewModelActions");
             _manageContentViewModelActions = manageContentViewModelActions;
             _isDeletable = isDeletable;
+            IsLoading = isLoading;
         }
 
         public abstract string Name { get; }
+        public virtual bool IsLoading { get; set; }
 
         public virtual ICommand Delete
         {

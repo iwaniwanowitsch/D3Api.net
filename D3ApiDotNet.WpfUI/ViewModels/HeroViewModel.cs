@@ -9,8 +9,15 @@ namespace D3ApiDotNet.WpfUI.ViewModels
     public class HeroViewModel : BaseContentViewModel, IHeroViewModel
     {
 
-        public HeroViewModel(IItemViewModel headItemViewModel, IItemViewModel shouldersItemViewModel, IItemViewModel amuletItemViewModel, IItemViewModel chestItemViewModel, IItemViewModel bracersItemViewModel, IItemViewModel handItemViewModel, IItemViewModel bootsItemViewModel, IItemViewModel offHandItemViewModel, IItemViewModel rightRingItemViewModel, IItemViewModel waistItemViewModel, IItemViewModel leftRingItemViewModel, IItemViewModel mainHandItemViewModel, IItemViewModel pantsItemViewModel, Hero actualHero, [NotNull] IManageContentViewModelActions manageContentViewModelActions)
-            : base(manageContentViewModelActions, true)
+        public HeroViewModel(Hero actualHero, [NotNull] IManageContentViewModelActions manageContentViewModelActions,
+            bool isLoading)
+            : base(manageContentViewModelActions, true, isLoading)
+        {
+            ActualHero = actualHero;
+        }
+
+        public HeroViewModel(IItemViewModel headItemViewModel, IItemViewModel shouldersItemViewModel, IItemViewModel amuletItemViewModel, IItemViewModel chestItemViewModel, IItemViewModel bracersItemViewModel, IItemViewModel handItemViewModel, IItemViewModel bootsItemViewModel, IItemViewModel offHandItemViewModel, IItemViewModel rightRingItemViewModel, IItemViewModel waistItemViewModel, IItemViewModel leftRingItemViewModel, IItemViewModel mainHandItemViewModel, IItemViewModel pantsItemViewModel, Hero actualHero, [NotNull] IManageContentViewModelActions manageContentViewModelActions, bool isLoading)
+            : base(manageContentViewModelActions, true, isLoading)
         {
             HeadItemViewModel = headItemViewModel;
             ShouldersItemViewModel = shouldersItemViewModel;

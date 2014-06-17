@@ -17,7 +17,7 @@ namespace D3ApiDotNet.WpfUI.ViewModels
 
         public AllItemListViewModel([NotNull] ApiAccessFacade api, [NotNull] ItemNamesCollector itemNamesCollector,
             [NotNull] ObservableCollection<Item> itemList, [NotNull] IManageContentViewModelActions manageContentViewModelActions)
-            : base(manageContentViewModelActions, false)
+            : base(manageContentViewModelActions, false, true)
         {
             if (api == null) throw new ArgumentNullException("api");
             if (itemNamesCollector == null) throw new ArgumentNullException("itemNamesCollector");
@@ -49,6 +49,7 @@ namespace D3ApiDotNet.WpfUI.ViewModels
                 if (item != null && !AllItemList.Contains(item))
                     AllItemList.Add(item);
             }
+            IsLoading = false;
         }
 
         public override string Name

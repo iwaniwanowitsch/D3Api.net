@@ -42,6 +42,11 @@ namespace D3ApiDotNet.WpfUI.Commands
                 LoadDataViewModel.Heroes[LoadDataViewModel.HeroId];
             if (hero == null)
                 return;
+
+            var heroViewModel = new HeroViewModel(hero, _manageContentViewModelActions, true);
+            _manageContentViewModelActions.AddContentViewModel(heroViewModel);
+
+
             var items = hero.Items;
             var head = items.Head != null ? await Task.Factory.StartNew(() => _api.ItemRepository.GetByTooltipParams(items.Head.TooltipParams)) : null;
             var shoulders = items.Shoulders != null ? await Task.Factory.StartNew(() => _api.ItemRepository.GetByTooltipParams(items.Shoulders.TooltipParams)) : null;
@@ -73,22 +78,20 @@ namespace D3ApiDotNet.WpfUI.Commands
             var mainHandicon = mainHand != null ? await Task.Factory.StartNew(() => _api.ItemIconRepository.GetByIdAndSize(mainHand.Icon, iconsize)) : null;
             var pantsicon = pants != null ? await Task.Factory.StartNew(() => _api.ItemIconRepository.GetByIdAndSize(pants.Icon, iconsize)) : null;
 
-            _manageContentViewModelActions.AddContentViewModel(
-                new HeroViewModel(
-                    new ItemViewModel(true, new ItemDetailViewModel(head, headicon)),
-                    new ItemViewModel(true, new ItemDetailViewModel(shoulders, shouldersicon)),
-                    new ItemViewModel(true, new ItemDetailViewModel(amulet, amuleticon)),
-                    new ItemViewModel(true, new ItemDetailViewModel(chest, chesticon)),
-                    new ItemViewModel(true, new ItemDetailViewModel(bracers, bracersicon)),
-                    new ItemViewModel(true, new ItemDetailViewModel(hands, handsicon)),
-                    new ItemViewModel(true, new ItemDetailViewModel(boots, bootsicon)),
-                    new ItemViewModel(true, new ItemDetailViewModel(offHand, offHandicon)),
-                    new ItemViewModel(true, new ItemDetailViewModel(rightRing, rightRingicon)),
-                    new ItemViewModel(true, new ItemDetailViewModel(waist, waisticon)),
-                    new ItemViewModel(true, new ItemDetailViewModel(leftRing, leftRingicon)),
-                    new ItemViewModel(true, new ItemDetailViewModel(mainHand, mainHandicon)),
-                    new ItemViewModel(true, new ItemDetailViewModel(pants, pantsicon)),
-                    hero, _manageContentViewModelActions));
+            heroViewModel.HeadItemViewModel = new ItemViewModel(true, new ItemDetailViewModel(head, headicon));
+            heroViewModel.ShouldersItemViewModel = new ItemViewModel(true, new ItemDetailViewModel(shoulders, shouldersicon));
+            heroViewModel.AmuletItemViewModel = new ItemViewModel(true, new ItemDetailViewModel(amulet, amuleticon));
+            heroViewModel.ChestItemViewModel = new ItemViewModel(true, new ItemDetailViewModel(chest, chesticon));
+            heroViewModel.BracersItemViewModel = new ItemViewModel(true, new ItemDetailViewModel(bracers, bracersicon));
+            heroViewModel.HandItemViewModel = new ItemViewModel(true, new ItemDetailViewModel(hands, handsicon));
+            heroViewModel.BootsItemViewModel = new ItemViewModel(true, new ItemDetailViewModel(boots, bootsicon));
+            heroViewModel.OffHandItemViewModel = new ItemViewModel(true, new ItemDetailViewModel(offHand, offHandicon));
+            heroViewModel.RightRingItemViewModel = new ItemViewModel(true, new ItemDetailViewModel(rightRing, rightRingicon));
+            heroViewModel.WaistItemViewModel = new ItemViewModel(true, new ItemDetailViewModel(waist, waisticon));
+            heroViewModel.LeftRingItemViewModel = new ItemViewModel(true, new ItemDetailViewModel(leftRing, leftRingicon));
+            heroViewModel.MainHandItemViewModel = new ItemViewModel(true, new ItemDetailViewModel(mainHand, mainHandicon));
+            heroViewModel.PantsItemViewModel = new ItemViewModel(true, new ItemDetailViewModel(pants, pantsicon));
+            heroViewModel.IsLoading = false;
         }
 
         public void OnCanExecuteChanged()

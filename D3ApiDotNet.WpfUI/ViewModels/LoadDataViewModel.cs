@@ -19,7 +19,7 @@ namespace D3ApiDotNet.WpfUI.ViewModels
         public LoadDataViewModel([NotNull] ApiAccessFacade api, [NotNull] LoadProfileCommand loadProfileCommand,
             [NotNull] LoadHeroCommand loadHeroCommand, [NotNull] ObservableCollection<Hero> heroes,
             [NotNull] IManageContentViewModelActions manageContentViewModelActions)
-            : base(manageContentViewModelActions, false)
+            : base(manageContentViewModelActions, false, false)
         {
             if (api == null) throw new ArgumentNullException("api");
             if (loadProfileCommand == null) throw new ArgumentNullException("loadProfileCommand");

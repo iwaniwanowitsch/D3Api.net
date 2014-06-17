@@ -7,6 +7,8 @@ namespace D3ApiDotNet.WpfUI.ViewModels.Interfaces
     {
         string Name { get; }
 
+        bool IsLoading { get; set; }
+
         ICommand Delete { get; }
     }
 }

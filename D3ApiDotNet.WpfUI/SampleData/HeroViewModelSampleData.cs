@@ -24,6 +24,7 @@ namespace D3ApiDotNet.WpfUI.SampleData
             OffHandItemViewModel = new ItemViewModelSampleData();
             BootsItemViewModel = new ItemViewModelSampleData();
             ActualHero = new Hero{Level = 70, ParagonLevel = 243, HeroClass = HeroClass.Monk, Name = "geiler Hero"};
+            IsLoading = true;
         }
         public IItemViewModel HeadItemViewModel { get; set; }
         public IItemViewModel ShouldersItemViewModel { get; set; }
@@ -49,6 +50,8 @@ namespace D3ApiDotNet.WpfUI.SampleData
         {
             get { return "HeroView"; }
         }
+
+        public bool IsLoading { get; set; }
 
         public ICommand Delete
         {
