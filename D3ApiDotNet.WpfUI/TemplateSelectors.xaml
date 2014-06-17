@@ -3,7 +3,7 @@
                     xmlns:ts="clr-namespace:D3ApiDotNet.WpfUI.TemplateSelectors">
 
 
-    <ts:ContentViewModelTemplateSelector x:Key="ContentViewModelTemplateSelector" LoadDataViewModelTemplate="{StaticResource LoadDataViewModelTemplate}" HeroViewModelTemplate="{StaticResource HeroViewModelTemplate}" />
+    <ts:ContentViewModelTemplateSelector x:Key="ContentViewModelTemplateSelector" LoadDataViewModelTemplate="{StaticResource LoadDataViewModelTemplate}" HeroViewModelTemplate="{StaticResource HeroViewModelTemplate}" AllItemListViewModelTemplate="{StaticResource AllItemListViewModelTemplate}" />
 
     
 </ResourceDictionary>

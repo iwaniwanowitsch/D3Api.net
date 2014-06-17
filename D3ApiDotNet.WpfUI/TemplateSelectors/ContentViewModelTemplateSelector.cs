@@ -1,10 +1,4 @@
-﻿using D3ApiDotNet.WpfUI.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using D3ApiDotNet.WpfUI.ViewModels.Interfaces;
 
@@ -14,6 +8,7 @@ namespace D3ApiDotNet.WpfUI.TemplateSelectors
     {
         public DataTemplate LoadDataViewModelTemplate { get; set; }
         public DataTemplate HeroViewModelTemplate { get; set; }
+        public DataTemplate AllItemListViewModelTemplate { get; set; }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
@@ -26,6 +21,11 @@ namespace D3ApiDotNet.WpfUI.TemplateSelectors
 
             if (heroViewModel != null)
                 return HeroViewModelTemplate;
+
+            var allItemsViewModel = item as IAllItemListViewModel;
+
+            if (allItemsViewModel != null)
+                return AllItemListViewModelTemplate;
 
             return null;
         }

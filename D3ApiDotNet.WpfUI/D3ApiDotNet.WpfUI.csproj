@@ -85,9 +85,11 @@
     <Compile Include="SampleData\LoadDataViewModelSampleData.cs" />
     <Compile Include="SampleData\MainWindowViewModelSampleData.cs" />
     <Compile Include="TemplateSelectors\ContentViewModelTemplateSelector.cs" />
+    <Compile Include="ViewModels\AllItemListViewModel.cs" />
     <Compile Include="ViewModels\BaseItemDetailViewModel.cs" />
     <Compile Include="ViewModels\HeroViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\BaseContentViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\IAllItemListViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IContentViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IHeroViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IItemDetailViewModel.cs" />
@@ -98,6 +100,9 @@
     <Compile Include="ViewModels\ItemViewModel.cs" />
     <Compile Include="ViewModels\LoadDataViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="Views\AllItemsView.xaml.cs">
+      <DependentUpon>AllItemsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\HeroView.xaml.cs">
       <DependentUpon>HeroView.xaml</DependentUpon>
     </Compile>
@@ -147,6 +152,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="TemplateSelectors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AllItemsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

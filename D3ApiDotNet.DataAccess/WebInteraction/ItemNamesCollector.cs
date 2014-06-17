@@ -6,7 +6,7 @@ using D3ApiDotNet.DataAccess.Repositories;
 
 namespace D3ApiDotNet.DataAccess.WebInteraction
 {
-    class ItemNamesCollector
+    public class ItemNamesCollector
     {
         private readonly StreamWebRepository _client;
 

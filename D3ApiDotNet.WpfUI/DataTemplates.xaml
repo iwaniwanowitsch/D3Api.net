@@ -18,5 +18,8 @@
         <views:LoadDataView />
     </DataTemplate>
     
+    <DataTemplate x:Key="AllItemListViewModelTemplate">
+        <views:AllItemsView />
+    </DataTemplate>
 
 </ResourceDictionary>

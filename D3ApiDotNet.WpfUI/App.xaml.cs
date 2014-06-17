@@ -7,8 +7,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using D3ApiDotNet.Core.Objects.Hero;
+using D3ApiDotNet.Core.Objects.Item;
 using D3ApiDotNet.DataAccess;
 using D3ApiDotNet.DataAccess.API;
+using D3ApiDotNet.DataAccess.Repositories;
+using D3ApiDotNet.DataAccess.WebInteraction;
 using D3ApiDotNet.WpfUI.Commands;
 using D3ApiDotNet.WpfUI.ViewModels;
 using System.Net;
@@ -27,7 +30,12 @@ namespace D3ApiDotNet.WpfUI
 
             var mainWindowViewModel = new MainWindowViewModel(new ObservableCollection<IContentViewModel>());
 
-            var api = new ApiAccessFacade(CollectMode.TryCacheThenOnline, Locales.en_GB, null /*new WebProxy("127.0.0.1:3128")*/, new TimeSpan(0, 1, 0, 0));
+            var collectMode = CollectMode.TryCacheThenOnline;
+            var locale = Locales.en_GB;
+
+            var api = new ApiAccessFacade(collectMode, locale, null /*new WebProxy("127.0.0.1:3128")*/, new TimeSpan(0, 1, 0, 0));
+            var longapi = new ApiAccessFacade(collectMode, locale, null /*new WebProxy("127.0.0.1:3128")*/, TimeSpan.MaxValue);
+            var itemCollector = new ItemNamesCollector(new StreamWebRepository(null));
 
             var manageContentViewModelCommand =
                 new ManageContentViewModelActions(mainWindowViewModel.AddContentViewModel,
@@ -39,10 +47,14 @@ namespace D3ApiDotNet.WpfUI
 
             var loadDataViewModel = new LoadDataViewModel(api, loadProfileCommand, loadHeroCommand, heroes, manageContentViewModelCommand);
 
+            var allItemListViewModel = new AllItemListViewModel(longapi, itemCollector, new ObservableCollection<Item>(),
+                manageContentViewModelCommand);
+
             loadProfileCommand.LoadDataViewModel = loadDataViewModel;
             loadHeroCommand.LoadDataViewModel = loadDataViewModel;
 
             mainWindowViewModel.AddContentViewModel(loadDataViewModel);
+            mainWindowViewModel.AddContentViewModel(allItemListViewModel);
 
             var mainWindow = new MainWindow { DataContext = mainWindowViewModel };
 
