@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using D3ApiDotNet.DataAccess;
+using D3ApiDotNet.DataAccess.API;
 using D3ApiDotNet.WpfUI.Annotations;
 using D3ApiDotNet.WpfUI.ViewModels;
+using D3ApiDotNet.WpfUI.ViewModels.Interfaces;
 
 namespace D3ApiDotNet.WpfUI.Commands
 {
@@ -57,19 +59,19 @@ namespace D3ApiDotNet.WpfUI.Commands
 
             _addContentViewModelCommand.AddContentViewModel(
                 new HeroViewModel(
-                    head != null ? new ItemViewModel(true, new ItemDetailViewModel(head,_api.ItemIconRepository.GetByIdAndSize(head.Icon))) : null,
-                    shoulders != null ? new ItemViewModel(true, new ItemDetailViewModel(shoulders,_api.ItemIconRepository.GetByIdAndSize(shoulders.Icon))) : null,
-                    amulet != null ? new ItemViewModel(true, new ItemDetailViewModel(amulet, _api.ItemIconRepository.GetByIdAndSize(amulet.Icon))) : null,
-                    chest != null ? new ItemViewModel(true, new ItemDetailViewModel(chest, _api.ItemIconRepository.GetByIdAndSize(chest.Icon))) : null,
-                    bracers != null ? new ItemViewModel(true, new ItemDetailViewModel(bracers, _api.ItemIconRepository.GetByIdAndSize(bracers.Icon))) : null,
-                    hands != null ? new ItemViewModel(true, new ItemDetailViewModel(hands, _api.ItemIconRepository.GetByIdAndSize(hands.Icon))) : null,
-                    boots != null ? new ItemViewModel(true, new ItemDetailViewModel(boots, _api.ItemIconRepository.GetByIdAndSize(boots.Icon))) : null,
-                    offHand != null ? new ItemViewModel(true, new ItemDetailViewModel(offHand, _api.ItemIconRepository.GetByIdAndSize(offHand.Icon))) : null,
-                    rightRing != null ? new ItemViewModel(true, new ItemDetailViewModel(rightRing, _api.ItemIconRepository.GetByIdAndSize(rightRing.Icon))) : null,
-                    waist != null ? new ItemViewModel(true, new ItemDetailViewModel(waist, _api.ItemIconRepository.GetByIdAndSize(waist.Icon))) : null,
-                    leftRing != null ? new ItemViewModel(true, new ItemDetailViewModel(leftRing, _api.ItemIconRepository.GetByIdAndSize(leftRing.Icon))) : null,
-                    mainHand != null ? new ItemViewModel(true, new ItemDetailViewModel(mainHand, _api.ItemIconRepository.GetByIdAndSize(mainHand.Icon))) : null,
-                    pants != null ? new ItemViewModel(true, new ItemDetailViewModel(pants, _api.ItemIconRepository.GetByIdAndSize(pants.Icon))) : null,
+                    head != null ? new ItemViewModel(true, new ItemDetailViewModel(head,_api.ItemIconRepository.GetByIdAndSize(head.Icon,ItemIconSizes.Small))) : null,
+                    shoulders != null ? new ItemViewModel(true, new ItemDetailViewModel(shoulders, _api.ItemIconRepository.GetByIdAndSize(shoulders.Icon, ItemIconSizes.Small))) : null,
+                    amulet != null ? new ItemViewModel(true, new ItemDetailViewModel(amulet, _api.ItemIconRepository.GetByIdAndSize(amulet.Icon, ItemIconSizes.Small))) : null,
+                    chest != null ? new ItemViewModel(true, new ItemDetailViewModel(chest, _api.ItemIconRepository.GetByIdAndSize(chest.Icon, ItemIconSizes.Small))) : null,
+                    bracers != null ? new ItemViewModel(true, new ItemDetailViewModel(bracers, _api.ItemIconRepository.GetByIdAndSize(bracers.Icon, ItemIconSizes.Small))) : null,
+                    hands != null ? new ItemViewModel(true, new ItemDetailViewModel(hands, _api.ItemIconRepository.GetByIdAndSize(hands.Icon, ItemIconSizes.Small))) : null,
+                    boots != null ? new ItemViewModel(true, new ItemDetailViewModel(boots, _api.ItemIconRepository.GetByIdAndSize(boots.Icon, ItemIconSizes.Small))) : null,
+                    offHand != null ? new ItemViewModel(true, new ItemDetailViewModel(offHand, _api.ItemIconRepository.GetByIdAndSize(offHand.Icon, ItemIconSizes.Small))) : null,
+                    rightRing != null ? new ItemViewModel(true, new ItemDetailViewModel(rightRing, _api.ItemIconRepository.GetByIdAndSize(rightRing.Icon, ItemIconSizes.Small))) : null,
+                    waist != null ? new ItemViewModel(true, new ItemDetailViewModel(waist, _api.ItemIconRepository.GetByIdAndSize(waist.Icon, ItemIconSizes.Small))) : null,
+                    leftRing != null ? new ItemViewModel(true, new ItemDetailViewModel(leftRing, _api.ItemIconRepository.GetByIdAndSize(leftRing.Icon, ItemIconSizes.Small))) : null,
+                    mainHand != null ? new ItemViewModel(true, new ItemDetailViewModel(mainHand, _api.ItemIconRepository.GetByIdAndSize(mainHand.Icon, ItemIconSizes.Small))) : null,
+                    pants != null ? new ItemViewModel(true, new ItemDetailViewModel(pants, _api.ItemIconRepository.GetByIdAndSize(pants.Icon, ItemIconSizes.Small))) : null,
                     hero));
         }
 

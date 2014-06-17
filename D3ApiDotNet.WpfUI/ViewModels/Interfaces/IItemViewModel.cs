@@ -1,8 +1,4 @@
-﻿using System.ComponentModel;
-using D3ApiDotNet.Core.Objects.Images;
-using D3ApiDotNet.Core.Objects.Item;
-
-namespace D3ApiDotNet.WpfUI.ViewModels
+﻿namespace D3ApiDotNet.WpfUI.ViewModels.Interfaces
 {
     public interface IItemViewModel
     {

@@ -5,6 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:sampleData="clr-namespace:D3ApiDotNet.WpfUI.SampleData"
         xmlns:vm="clr-namespace:D3ApiDotNet.WpfUI.ViewModels"
+        xmlns:interfaces="clr-namespace:D3ApiDotNet.WpfUI.ViewModels.Interfaces"
         mc:Ignorable="d"
         Title="MainWindow" Height="800" WindowStartupLocation="CenterScreen" Icon="logo.ico">
     <d:Window.DataContext>
@@ -12,7 +13,7 @@
     </d:Window.DataContext>
     <Window.Resources>
 
-    <DataTemplate x:Key="TabControlItemHeaderTemplate" DataType="vm:IContentViewModel">
+    <DataTemplate x:Key="TabControlItemHeaderTemplate" DataType="interfaces:IContentViewModel">
         <TextBlock Text="{Binding Path=Name, FallbackValue=ContentView}"/>
     </DataTemplate>
 

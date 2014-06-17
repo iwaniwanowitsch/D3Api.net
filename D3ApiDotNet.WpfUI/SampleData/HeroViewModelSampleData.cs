@@ -1,5 +1,6 @@
 ﻿using D3ApiDotNet.Core.Objects.Hero;
 using D3ApiDotNet.WpfUI.ViewModels;
+using D3ApiDotNet.WpfUI.ViewModels.Interfaces;
 
 namespace D3ApiDotNet.WpfUI.SampleData
 {
@@ -20,7 +21,7 @@ namespace D3ApiDotNet.WpfUI.SampleData
             PantsItemViewModel = new ItemViewModelSampleData();
             OffHandItemViewModel = new ItemViewModelSampleData();
             BootsItemViewModel = new ItemViewModelSampleData();
-            ActualHero = null;
+            ActualHero = new Hero{Level = 70, ParagonLevel = 243, HeroClass = HeroClass.Monk, Name = "geiler Hero"};
         }
         public IItemViewModel HeadItemViewModel { get; set; }
         public IItemViewModel ShouldersItemViewModel { get; set; }

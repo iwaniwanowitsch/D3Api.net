@@ -2,6 +2,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using D3ApiDotNet.WpfUI.Annotations;
+using D3ApiDotNet.WpfUI.ViewModels.Interfaces;
 
 namespace D3ApiDotNet.WpfUI.ViewModels
 {

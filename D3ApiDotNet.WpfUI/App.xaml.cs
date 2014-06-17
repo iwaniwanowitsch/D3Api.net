@@ -10,6 +10,7 @@ using D3ApiDotNet.DataAccess;
 using D3ApiDotNet.DataAccess.API;
 using D3ApiDotNet.WpfUI.ViewModels;
 using System.Net;
+using D3ApiDotNet.WpfUI.ViewModels.Interfaces;
 
 namespace D3ApiDotNet.WpfUI
 {
@@ -24,7 +25,7 @@ namespace D3ApiDotNet.WpfUI
 
             var mainWindowViewModel = new MainWindowViewModel(new ObservableCollection<IContentViewModel>());
 
-            var api = new ApiAccessFacade(CollectMode.TryCacheThenOnline, Locales.en_GB, null/*new WebProxy("127.0.0.1:3128")*/);
+            var api = new ApiAccessFacade(CollectMode.TryCacheThenOnline, Locales.en_GB, null/*new WebProxy("127.0.0.1:3128")*/, new TimeSpan(0, 1, 0, 0));
 
             var loadDataViewModel = new LoadDataViewModel(mainWindowViewModel, api);
 

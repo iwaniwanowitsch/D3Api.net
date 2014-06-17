@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using D3ApiDotNet.WpfUI.Commands;
 
-namespace D3ApiDotNet.WpfUI.ViewModels
+namespace D3ApiDotNet.WpfUI.ViewModels.Interfaces
 {
     public interface IMainWindowViewModel : IAddContentViewModelCommand
     {

@@ -1,6 +1,7 @@
 ﻿using System;
 using D3ApiDotNet.WpfUI.Annotations;
 using D3ApiDotNet.WpfUI.ViewModels;
+using D3ApiDotNet.WpfUI.ViewModels.Interfaces;
 
 namespace D3ApiDotNet.WpfUI.Commands
 {

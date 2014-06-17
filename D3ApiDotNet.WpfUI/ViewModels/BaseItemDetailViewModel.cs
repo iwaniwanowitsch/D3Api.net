@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using D3ApiDotNet.Core.Objects.Images;
 using D3ApiDotNet.Core.Objects.Item;
+using D3ApiDotNet.WpfUI.ViewModels.Interfaces;
 
 namespace D3ApiDotNet.WpfUI.ViewModels
 {
@@ -9,14 +10,22 @@ namespace D3ApiDotNet.WpfUI.ViewModels
     {
         public virtual Item Item { get; set; }
         public virtual D3Icon Icon { get; protected set; }
-        public virtual IList<string> Attributes
+        public virtual IList<string> PrimaryAttributes
         {
             get
             {
                 var primary = Item.Attributes.Primary ?? new ItemTextAttribute[0];
+                return primary.Select(o => o.Text).ToList();
+            }
+        }
+
+        public virtual IList<string> SecondaryAttributes
+        {
+            get
+            {
                 var secondary = Item.Attributes.Secondary ?? new ItemTextAttribute[0];
                 var passive = Item.Attributes.Passive ?? new ItemTextAttribute[0];
-                return primary.Concat(secondary).Concat(passive).Select(o => o.Text).ToList();
+                return secondary.Concat(passive).Select(o => o.Text).ToList();
             }
         }
 

@@ -2,9 +2,14 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:sampleData="clr-namespace:D3ApiDotNet.WpfUI.SampleData"
              mc:Ignorable="d" 
              d:DesignHeight="331" d:DesignWidth="658">
+    <d:UserControl.DataContext>
+        <sampleData:LoadDataViewModelSampleData />
+    </d:UserControl.DataContext>
+    
     <UserControl.Resources>
         <DataTemplate x:Key="ComboBoxItemTemplate">
             <ComboBoxItem Content="{Binding Path=Name}" />
@@ -20,6 +25,7 @@
             <Setter Property="Padding" Value="5,0"/>
         </Style>
     </UserControl.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -49,7 +55,7 @@
                     Command="{Binding Path=LoadProfileCommand, IsAsync=True}" 
                     Content="Load Profile"
                     Style="{StaticResource ButtonStyle}" />
-
+            
             <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
                        Text="Select Hero:" Style="{StaticResource TitleStyle}"/>
             <ComboBox Grid.Row="4" Grid.Column="0" x:Name="HeroComboBox" 

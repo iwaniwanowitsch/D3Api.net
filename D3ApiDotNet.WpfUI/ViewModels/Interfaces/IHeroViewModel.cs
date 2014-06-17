@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using D3ApiDotNet.Core.Objects.Hero;
-using D3ApiDotNet.Core.Objects.Item;
+﻿using D3ApiDotNet.Core.Objects.Hero;
 
-namespace D3ApiDotNet.WpfUI.ViewModels
+namespace D3ApiDotNet.WpfUI.ViewModels.Interfaces
 {
     public interface IHeroViewModel : IContentViewModel
     {

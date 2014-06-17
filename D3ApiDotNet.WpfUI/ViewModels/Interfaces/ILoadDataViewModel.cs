@@ -2,7 +2,7 @@
 using D3ApiDotNet.Core.Objects.Hero;
 using D3ApiDotNet.WpfUI.Commands;
 
-namespace D3ApiDotNet.WpfUI.ViewModels
+namespace D3ApiDotNet.WpfUI.ViewModels.Interfaces
 {
     public interface ILoadDataViewModel : IContentViewModel
     {

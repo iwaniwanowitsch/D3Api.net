@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using D3ApiDotNet.DataAccess;
 using D3ApiDotNet.WpfUI.Annotations;
 using D3ApiDotNet.WpfUI.ViewModels;
+using D3ApiDotNet.WpfUI.ViewModels.Interfaces;
 
 namespace D3ApiDotNet.WpfUI.Commands
 {

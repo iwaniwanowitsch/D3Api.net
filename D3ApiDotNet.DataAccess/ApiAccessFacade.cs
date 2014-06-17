@@ -27,7 +27,7 @@ namespace D3ApiDotNet.DataAccess
         private readonly IReadonlyRepository<Stream,string> _webRepo;
         private readonly ICacheRepository<Stream,string> _cacheRepo;
 
-        public ApiAccessFacade(CollectMode mode, Locales locale, WebProxy proxy)
+        public ApiAccessFacade(CollectMode mode, Locales locale, WebProxy proxy, TimeSpan cacheTime)
         {
 
             var filepathproviderFactory = new FilePathProviderChainFactory();
@@ -36,7 +36,7 @@ namespace D3ApiDotNet.DataAccess
             _collectMode = mode;
             _filepathprovider = filepathproviderFactory.CreateFilePathProvider("");
             _webRepo = new StreamWebRepository(proxy);
-            _cacheRepo = new StreamCacheFileFromUrlRepository(new TimeSpan(0, 0, 15, 0), _filepathprovider);
+            _cacheRepo = new StreamCacheFileFromUrlRepository(cacheTime, _filepathprovider);
             _readRepo = _repositoryFactory.CreateReadRepository(_filepathprovider, _collectMode, _webRepo, _cacheRepo);
 
             ProfileRepository = new ProfileRepository(_readRepo,urlcontructionproviderFactory.CreateUrlConstructionProvider(locale,typeof(Profile)));

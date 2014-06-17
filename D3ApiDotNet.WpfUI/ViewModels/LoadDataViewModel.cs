@@ -6,6 +6,7 @@ using D3ApiDotNet.Core.Objects.Hero;
 using D3ApiDotNet.DataAccess;
 using D3ApiDotNet.WpfUI.Annotations;
 using D3ApiDotNet.WpfUI.Commands;
+using D3ApiDotNet.WpfUI.ViewModels.Interfaces;
 
 namespace D3ApiDotNet.WpfUI.ViewModels
 {

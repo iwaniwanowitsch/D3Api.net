@@ -50,7 +50,7 @@ namespace D3ApiDotNet.DataAccess.Repositories
 
         public virtual bool IsValid(string filepath)
         {
-            if (File.Exists(filepath) && (DateTime.Now - File.GetCreationTime(filepath)) < Duration)
+            if (File.Exists(filepath) && (DateTime.Now - new FileInfo(filepath).LastWriteTime) < Duration)
                 return true;
             if(File.Exists(filepath))
                 Delete(filepath);

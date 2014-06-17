@@ -78,6 +78,6 @@ namespace D3ApiDotNet.Core.Objects.Hero
         /// not actual in api, but easier to handle
         /// </summary>
         [IgnoreDataMember]
-        public DateTime LastUpdated;
+        public DateTime LastUpdated { get; set; }
     }
 }

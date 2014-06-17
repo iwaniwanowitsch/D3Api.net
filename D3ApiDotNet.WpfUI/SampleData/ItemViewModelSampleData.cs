@@ -4,6 +4,7 @@ using D3ApiDotNet.Core.Objects.Item;
 using D3ApiDotNet.DataAccess.Repositories;
 using D3ApiDotNet.WpfUI.ViewModels;
 using System.Drawing;
+using D3ApiDotNet.WpfUI.ViewModels.Interfaces;
 using D3ApiDotNet.WpfUI.Views;
 
 namespace D3ApiDotNet.WpfUI.SampleData

@@ -36,7 +36,7 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Column="0" Text="{Binding Path=Item.TypeName}" Foreground="{Binding Path=Item.DisplayColor, Converter={StaticResource ItemColorConverter}}"/>
-            <TextBlock Grid.Column="1" Text="{Binding Path=Item.RequiredLevel, StringFormat=Level: {0}}" Foreground="Silver" FlowDirection="RightToLeft"/>
+            <TextBlock Grid.Column="1" Text="{Binding Path=Item.RequiredLevel, StringFormat='Required Level: {0}'}" Foreground="Silver" FlowDirection="RightToLeft"/>
         </Grid>
 
         <StackPanel Grid.Column="0" Grid.Row="2" VerticalAlignment="Top" Margin="5">
@@ -47,11 +47,17 @@
 
         <Border Grid.Column="1" Grid.Row="2" Padding="10">
             <StackPanel Orientation="Vertical">
-                <ListBox x:Name="ItemAttributesListBox" Background="{x:Null}" BorderBrush="{x:Null}" 
+                <ListBox x:Name="ItemPrimaryAttributesListBox" Background="{x:Null}" BorderBrush="{x:Null}" 
                     ItemTemplate="{DynamicResource ItemAttributesTemplate}" 
                     HorizontalContentAlignment="Stretch"
                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                    ItemsSource="{Binding Path=Attributes}"/>
+                    ItemsSource="{Binding Path=PrimaryAttributes}"/>
+                <Separator/>
+                <ListBox x:Name="ItemSecondaryAttributesListBox" Background="{x:Null}" BorderBrush="{x:Null}" 
+                    ItemTemplate="{DynamicResource ItemAttributesTemplate}" 
+                    HorizontalContentAlignment="Stretch"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    ItemsSource="{Binding Path=SecondaryAttributes}"/>
                 <ListBox x:Name="GemsListBox" Background="{x:Null}" BorderBrush="{x:Null}" 
                     ItemTemplate="{DynamicResource GemsTemplate}" 
                     HorizontalContentAlignment="Stretch" 
