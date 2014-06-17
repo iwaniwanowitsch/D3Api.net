@@ -14,6 +14,7 @@ namespace D3ApiDotNet.WpfUI.ViewModels
         {
             get
             {
+                if (Item == null) return null;
                 var primary = Item.Attributes.Primary ?? new ItemTextAttribute[0];
                 return primary.ToList();
             }
@@ -23,6 +24,7 @@ namespace D3ApiDotNet.WpfUI.ViewModels
         {
             get
             {
+                if (Item == null) return null;
                 var secondary = Item.Attributes.Secondary ?? new ItemTextAttribute[0];
                 var passive = Item.Attributes.Passive ?? new ItemTextAttribute[0];
                 return secondary.Concat(passive).ToList();
@@ -33,6 +35,7 @@ namespace D3ApiDotNet.WpfUI.ViewModels
         {
             get
             {
+                if (Item == null) return null;
                 var gems = Item.Gems ?? new SocketedGems[0];
                 var primary = gems.SelectMany(o => o.Attributes.Primary ?? new ItemTextAttribute[0]);
                 var secondary = gems.SelectMany(o => o.Attributes.Secondary ?? new ItemTextAttribute[0]);

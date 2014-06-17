@@ -7,10 +7,10 @@ namespace D3ApiDotNet.WpfUI.ViewModels
 {
     public class ItemDetailViewModel : BaseItemDetailViewModel
     {
-        public ItemDetailViewModel([NotNull] Item item, [NotNull] D3Icon icon)
+        public ItemDetailViewModel(Item item, D3Icon icon)
         {
-            if (item == null) throw new ArgumentNullException("item");
-            if (icon == null) throw new ArgumentNullException("icon");
+            //if (item == null) throw new ArgumentNullException("item");
+            //if (icon == null) throw new ArgumentNullException("icon");
             Item = item;
             Icon = icon;
         }
