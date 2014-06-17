@@ -7,4 +7,5 @@
     <l:ItemColorConverter x:Key="ItemColorConverter" />
     <l:ObjectNullToBoolConverter x:Key="ObjectNullToBoolConverter" />
     <l:AffixTypeColorConverter x:Key="AffixTypeColorConverter" />
+    <l:BoolToHardcoreConverter x:Key="BoolToHardcoreConverter" />
 </ResourceDictionary>

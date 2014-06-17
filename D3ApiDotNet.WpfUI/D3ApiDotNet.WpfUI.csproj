@@ -70,6 +70,7 @@
     <Compile Include="Commands\LoadProfileCommand.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Converters\AffixTypeColorConverter.cs" />
+    <Compile Include="Converters\BoolToHardcoreConverter.cs" />
     <Compile Include="Converters\ImageBitmapSourceConverter.cs" />
     <Compile Include="Converters\ItemBorderColorConverter.cs" />
     <Compile Include="Converters\ItemColorConverter.cs" />
