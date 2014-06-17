@@ -14,7 +14,7 @@ namespace D3ApiDotNet.WpfUI.Converters
             if (hardcore != null) {
                 if (targetType == typeof(Brush))
                 {
-                    var color = hardcore.Value ? Colors.Red : Colors.Yellow;
+                    var color = hardcore.Value ? Colors.Red : Colors.Silver;
                     return new SolidColorBrush(color);
                 }
                 return hardcore.Value ? "Hardcore" : "Softcore";

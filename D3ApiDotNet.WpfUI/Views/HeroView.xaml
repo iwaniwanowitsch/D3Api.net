@@ -12,8 +12,8 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/Assets/Styles/HeroAttributesStyle.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/Assets/Styles/HeroViewStyles.xaml"/>
+                <ResourceDictionary Source="../Assets/Styles/HeroAttributesStyle.xaml"/>
+                <ResourceDictionary Source="../Assets/Styles/HeroViewStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
