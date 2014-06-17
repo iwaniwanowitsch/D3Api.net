@@ -10,20 +10,24 @@ using D3ApiDotNet.WpfUI.ViewModels.Interfaces;
 
 namespace D3ApiDotNet.WpfUI.ViewModels
 {
-    public class LoadDataViewModel : ILoadDataViewModel
+    public class LoadDataViewModel : BaseContentViewModel, ILoadDataViewModel
     {
         private string _battletag;
         private ObservableCollection<Hero> _heroes;
         private int _heroId;
 
-        public LoadDataViewModel([NotNull] IAddContentViewModelCommand addContentViewModelCommand,
-            [NotNull] ApiAccessFacade api)
+        public LoadDataViewModel([NotNull] ApiAccessFacade api, [NotNull] LoadProfileCommand loadProfileCommand,
+            [NotNull] LoadHeroCommand loadHeroCommand, [NotNull] ObservableCollection<Hero> heroes,
+            [NotNull] IManageContentViewModelActions manageContentViewModelActions)
+            : base(manageContentViewModelActions, false)
         {
-            if (addContentViewModelCommand == null) throw new ArgumentNullException("addContentViewModelCommand");
             if (api == null) throw new ArgumentNullException("api");
-            LoadProfileCommand = new LoadProfileCommand(api,this);
-            LoadHeroCommand = new LoadHeroCommand(api,this,addContentViewModelCommand);
-            Heroes = new ObservableCollection<Hero>();
+            if (loadProfileCommand == null) throw new ArgumentNullException("loadProfileCommand");
+            if (loadHeroCommand == null) throw new ArgumentNullException("loadHeroCommand");
+            if (heroes == null) throw new ArgumentNullException("heroes");
+            LoadProfileCommand = loadProfileCommand;
+            LoadHeroCommand = loadHeroCommand;
+            _heroes = heroes;
         }
 
         public ObservableCollection<Hero> Heroes
@@ -61,7 +65,7 @@ namespace D3ApiDotNet.WpfUI.ViewModels
         public LoadHeroCommand LoadHeroCommand { get; private set; }
         public ILoadProfileCommand LoadProfileCommand { get; private set; }
 
-        public string Name
+        public override string Name
         {
             get { return "Load Profile data"; }
         }

@@ -22,6 +22,11 @@ namespace D3ApiDotNet.WpfUI.ViewModels
             ContentViewModels.Add(contentViewModel);
         }
 
+        public void RemoveContentViewModel(IContentViewModel contentViewModel)
+        {
+            ContentViewModels.Remove(contentViewModel);
+        }
+
         public ObservableCollection<IContentViewModel> ContentViewModels
         {
             get { return _contentViewModels; }

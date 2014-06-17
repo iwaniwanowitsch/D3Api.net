@@ -35,7 +35,6 @@ namespace D3ApiDotNet.WpfUI.Converters
             }
             else if (targetType == typeof(Brush))
             {
-                BrushConverter bc = new BrushConverter();
                 if (color != null)
                 {
                     return new SolidColorBrush(_lookupDictionary[color].Value);

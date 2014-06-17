@@ -14,32 +14,30 @@ namespace D3ApiDotNet.WpfUI.Commands
     public class LoadHeroCommand : ICommand
     {
         private readonly ApiAccessFacade _api;
-        private readonly ILoadDataViewModel _loadDataViewModel;
-        private readonly IAddContentViewModelCommand _addContentViewModelCommand;
+        private readonly IManageContentViewModelActions _manageContentViewModelActions;
 
-        public LoadHeroCommand([NotNull] ApiAccessFacade api, [NotNull] ILoadDataViewModel loadDataViewModel,
-            [NotNull] IAddContentViewModelCommand addContentViewModelCommand)
+        public LoadHeroCommand([NotNull] ApiAccessFacade api, [NotNull] IManageContentViewModelActions manageContentViewModelActions)
         {
             if (api == null) throw new ArgumentNullException("api");
-            if (loadDataViewModel == null) throw new ArgumentNullException("loadDataViewModel");
-            if (addContentViewModelCommand == null) throw new ArgumentNullException("addContentViewModelCommand");
+            if (manageContentViewModelActions == null) throw new ArgumentNullException("manageContentViewModelActions");
             _api = api;
-            _loadDataViewModel = loadDataViewModel;
-            _addContentViewModelCommand = addContentViewModelCommand;
+            _manageContentViewModelActions = manageContentViewModelActions;
             
         }
 
+        public ILoadDataViewModel LoadDataViewModel { get; set; }
+
         public bool CanExecute(object parameter)
         {
-            if (_loadDataViewModel.Heroes == null)
+            if (LoadDataViewModel.Heroes == null)
                 return false;
-            return _loadDataViewModel.Heroes.Count > _loadDataViewModel.HeroId;
+            return LoadDataViewModel.Heroes.Count > LoadDataViewModel.HeroId;
         }
 
         public async void Execute(object parameter)
         {
             var hero =
-                _loadDataViewModel.Heroes[_loadDataViewModel.HeroId];
+                LoadDataViewModel.Heroes[LoadDataViewModel.HeroId];
             if (hero == null)
                 return;
             var items = hero.Items;
@@ -57,7 +55,7 @@ namespace D3ApiDotNet.WpfUI.Commands
             var offHand = items.OffHand != null ? await Task.Factory.StartNew(() => _api.ItemRepository.GetByTooltipParams(items.OffHand.TooltipParams)) : null;
             var boots = items.Feet != null ? await Task.Factory.StartNew(() => _api.ItemRepository.GetByTooltipParams(items.Feet.TooltipParams)) : null;
 
-            _addContentViewModelCommand.AddContentViewModel(
+            _manageContentViewModelActions.AddContentViewModel(
                 new HeroViewModel(
                     head != null ? new ItemViewModel(true, new ItemDetailViewModel(head,_api.ItemIconRepository.GetByIdAndSize(head.Icon,ItemIconSizes.Small))) : null,
                     shoulders != null ? new ItemViewModel(true, new ItemDetailViewModel(shoulders, _api.ItemIconRepository.GetByIdAndSize(shoulders.Icon, ItemIconSizes.Small))) : null,
@@ -72,7 +70,7 @@ namespace D3ApiDotNet.WpfUI.Commands
                     leftRing != null ? new ItemViewModel(true, new ItemDetailViewModel(leftRing, _api.ItemIconRepository.GetByIdAndSize(leftRing.Icon, ItemIconSizes.Small))) : null,
                     mainHand != null ? new ItemViewModel(true, new ItemDetailViewModel(mainHand, _api.ItemIconRepository.GetByIdAndSize(mainHand.Icon, ItemIconSizes.Small))) : null,
                     pants != null ? new ItemViewModel(true, new ItemDetailViewModel(pants, _api.ItemIconRepository.GetByIdAndSize(pants.Icon, ItemIconSizes.Small))) : null,
-                    hero));
+                    hero, _manageContentViewModelActions));
         }
 
         public void OnCanExecuteChanged()

@@ -8,12 +8,12 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Rectangle Grid.Column="0" Width="4" Height="4" Margin="0,6,3,0" Fill="Gray" VerticalAlignment="Top">
+            <Rectangle Grid.Column="0" Width="6" Height="6" Margin="0,6,3,0" Fill="{Binding Path=AffixType, Converter={StaticResource AffixTypeColorConverter}, FallbackValue=gray}" VerticalAlignment="Top">
                 <Rectangle.LayoutTransform>
                     <RotateTransform Angle="-45"/>
                 </Rectangle.LayoutTransform>
             </Rectangle>
-            <TextBlock Grid.Column="1" Text="{Binding FallbackValue=ItemAttribute}" FontSize="12" Foreground="CornflowerBlue" TextWrapping="Wrap" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="1" Text="{Binding Path=Text, FallbackValue=ItemAttribute}" FontSize="12" Foreground="CornflowerBlue" TextWrapping="Wrap" VerticalAlignment="Center"/>
         </Grid>
     </DataTemplate>
 
@@ -25,8 +25,8 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <!-- TODO: Color of gem: -->
-            <Ellipse Grid.Column="0" Width="16" Height="16" Margin="5" Fill="red" VerticalAlignment="Center" />
-            <TextBlock Grid.Column="1" Text="{Binding FallbackValue=GemAttribute}" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Center"/>
+            <Ellipse Grid.Column="0" Width="16" Height="16" Margin="5" Fill="gray" VerticalAlignment="Center" />
+            <TextBlock Grid.Column="1" Text="{Binding Path=Text, FallbackValue=GemAttribute}" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Center"/>
         </Grid>
     </DataTemplate>
 </ResourceDictionary>

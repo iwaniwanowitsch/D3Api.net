@@ -16,5 +16,9 @@ namespace D3ApiDotNet.WpfUI.SampleData
         {
             ContentViewModels.Add(contentViewModel);
         }
+
+        public void RemoveContentViewModel(IContentViewModel contentViewModel)
+        {
+        }
     }
 }

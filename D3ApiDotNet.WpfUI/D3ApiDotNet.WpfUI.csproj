@@ -63,11 +63,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Commands\AddContentViewModelCommand.cs" />
-    <Compile Include="Commands\IAddContentViewModelCommand.cs" />
+    <Compile Include="Commands\ManageContentViewModelActions.cs" />
+    <Compile Include="Commands\IManageContentViewModelActions.cs" />
     <Compile Include="Commands\ILoadProfileCommand.cs" />
     <Compile Include="Commands\LoadHeroCommand.cs" />
     <Compile Include="Commands\LoadProfileCommand.cs" />
+    <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Converters\AffixTypeColorConverter.cs" />
     <Compile Include="Converters\ImageBitmapSourceConverter.cs" />
     <Compile Include="Converters\ItemBorderColorConverter.cs" />
     <Compile Include="Converters\ItemColorConverter.cs" />
@@ -84,6 +86,7 @@
     <Compile Include="TemplateSelectors\ContentViewModelTemplateSelector.cs" />
     <Compile Include="ViewModels\BaseItemDetailViewModel.cs" />
     <Compile Include="ViewModels\HeroViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\BaseContentViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IContentViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IHeroViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IItemDetailViewModel.cs" />

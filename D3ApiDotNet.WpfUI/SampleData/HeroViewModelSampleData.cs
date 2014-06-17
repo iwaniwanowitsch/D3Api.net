@@ -1,4 +1,6 @@
-﻿using D3ApiDotNet.Core.Objects.Hero;
+﻿using System;
+using System.Windows.Input;
+using D3ApiDotNet.Core.Objects.Hero;
 using D3ApiDotNet.WpfUI.ViewModels;
 using D3ApiDotNet.WpfUI.ViewModels.Interfaces;
 
@@ -46,6 +48,11 @@ namespace D3ApiDotNet.WpfUI.SampleData
         public string Name
         {
             get { return "HeroView"; }
+        }
+
+        public ICommand Delete
+        {
+            get { return null; }
         }
     }
 }

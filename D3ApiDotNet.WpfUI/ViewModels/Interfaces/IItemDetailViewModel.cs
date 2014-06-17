@@ -8,8 +8,8 @@ namespace D3ApiDotNet.WpfUI.ViewModels.Interfaces
     {
         Item Item { get; set; }
         D3Icon Icon { get; }
-        IList<string> PrimaryAttributes { get; }
-        IList<string> SecondaryAttributes { get; }
-        IList<string> Gems { get; }
+        IList<ItemTextAttribute> PrimaryAttributes { get; }
+        IList<ItemTextAttribute> SecondaryAttributes { get; }
+        IList<ItemTextAttribute> Gems { get; }
     }
 }

@@ -1,16 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using D3ApiDotNet.Core.Objects.Hero;
+using D3ApiDotNet.WpfUI.Annotations;
+using D3ApiDotNet.WpfUI.Commands;
 using D3ApiDotNet.WpfUI.ViewModels.Interfaces;
 
 namespace D3ApiDotNet.WpfUI.ViewModels
 {
-    public class HeroViewModel : IHeroViewModel
+    public class HeroViewModel : BaseContentViewModel, IHeroViewModel
     {
-        public HeroViewModel(IItemViewModel headItemViewModel, IItemViewModel shouldersItemViewModel, IItemViewModel amuletItemViewModel, IItemViewModel chestItemViewModel, IItemViewModel bracersItemViewModel, IItemViewModel handItemViewModel, IItemViewModel bootsItemViewModel, IItemViewModel offHandItemViewModel, IItemViewModel rightRingItemViewModel, IItemViewModel waistItemViewModel, IItemViewModel leftRingItemViewModel, IItemViewModel mainHandItemViewModel, IItemViewModel pantsItemViewModel, Hero actualHero)
+
+        public HeroViewModel(IItemViewModel headItemViewModel, IItemViewModel shouldersItemViewModel, IItemViewModel amuletItemViewModel, IItemViewModel chestItemViewModel, IItemViewModel bracersItemViewModel, IItemViewModel handItemViewModel, IItemViewModel bootsItemViewModel, IItemViewModel offHandItemViewModel, IItemViewModel rightRingItemViewModel, IItemViewModel waistItemViewModel, IItemViewModel leftRingItemViewModel, IItemViewModel mainHandItemViewModel, IItemViewModel pantsItemViewModel, Hero actualHero, [NotNull] IManageContentViewModelActions manageContentViewModelActions)
+            : base(manageContentViewModelActions, true)
         {
             HeadItemViewModel = headItemViewModel;
             ShouldersItemViewModel = shouldersItemViewModel;
@@ -48,7 +48,7 @@ namespace D3ApiDotNet.WpfUI.ViewModels
 
         public Hero ActualHero { get; set; }
 
-        public string Name
+        public override string Name
         {
             get
             {

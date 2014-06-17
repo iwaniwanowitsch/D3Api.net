@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Input;
 using D3ApiDotNet.Core.Objects.Hero;
 using D3ApiDotNet.DataAccess;
 using D3ApiDotNet.DataAccess.API;
@@ -19,12 +16,19 @@ namespace D3ApiDotNet.WpfUI.SampleData
         {
             Name = "Load Profile data mock";
             var api = new ApiAccessFacade(CollectMode.Offline, Locales.en_GB, null, new TimeSpan(0,1,0,0));
-            LoadHeroCommand = new LoadHeroCommand(api, this, new AddContentViewModelCommand(
-                (o) => { ; }));
-            LoadProfileCommand = new LoadProfileCommand(api, this);
+            LoadProfileCommand = new LoadProfileCommand(api) {LoadDataViewModel = this};
+
+            LoadHeroCommand = new LoadHeroCommand(api, new ManageContentViewModelActions(
+                (o) => { ; }, (o) => { ; })) { LoadDataViewModel = this };
         }
 
         public string Name { get; private set; }
+
+        public ICommand Delete
+        {
+            get { return null; }
+        }
+
         public ObservableCollection<Hero> Heroes { get; set; }
         public string Battletag { get; set; }
         public int HeroId { get; set; }

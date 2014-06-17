@@ -6,4 +6,5 @@
     <l:ItemBorderColorConverter x:Key="ItemBorderColorConverter" />
     <l:ItemColorConverter x:Key="ItemColorConverter" />
     <l:ObjectNullToBoolConverter x:Key="ObjectNullToBoolConverter" />
+    <l:AffixTypeColorConverter x:Key="AffixTypeColorConverter" />
 </ResourceDictionary>

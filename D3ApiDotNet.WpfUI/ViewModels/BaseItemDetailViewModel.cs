@@ -10,26 +10,26 @@ namespace D3ApiDotNet.WpfUI.ViewModels
     {
         public virtual Item Item { get; set; }
         public virtual D3Icon Icon { get; protected set; }
-        public virtual IList<string> PrimaryAttributes
+        public virtual IList<ItemTextAttribute> PrimaryAttributes
         {
             get
             {
                 var primary = Item.Attributes.Primary ?? new ItemTextAttribute[0];
-                return primary.Select(o => o.Text).ToList();
+                return primary.ToList();
             }
         }
 
-        public virtual IList<string> SecondaryAttributes
+        public virtual IList<ItemTextAttribute> SecondaryAttributes
         {
             get
             {
                 var secondary = Item.Attributes.Secondary ?? new ItemTextAttribute[0];
                 var passive = Item.Attributes.Passive ?? new ItemTextAttribute[0];
-                return secondary.Concat(passive).Select(o => o.Text).ToList();
+                return secondary.Concat(passive).ToList();
             }
         }
 
-        public virtual IList<string> Gems
+        public virtual IList<ItemTextAttribute> Gems
         {
             get
             {
@@ -37,7 +37,7 @@ namespace D3ApiDotNet.WpfUI.ViewModels
                 var primary = gems.SelectMany(o => o.Attributes.Primary ?? new ItemTextAttribute[0]);
                 var secondary = gems.SelectMany(o => o.Attributes.Secondary ?? new ItemTextAttribute[0]);
                 var passive = gems.SelectMany(o => o.Attributes.Passive ?? new ItemTextAttribute[0]);
-                return primary.Concat(secondary).Concat(passive).Select(o => o.Text).ToList();
+                return primary.Concat(secondary).Concat(passive).ToList();
             }
         } 
     }

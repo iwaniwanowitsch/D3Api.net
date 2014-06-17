@@ -11,33 +11,32 @@ namespace D3ApiDotNet.WpfUI.Commands
     public class LoadProfileCommand : ILoadProfileCommand
     {
         private readonly ApiAccessFacade _api;
-        private readonly ILoadDataViewModel _loadDataViewModel;
 
-        public LoadProfileCommand([NotNull] ApiAccessFacade api, [NotNull] ILoadDataViewModel loadDataViewModel)
+        public LoadProfileCommand([NotNull] ApiAccessFacade api)
         {
             if (api == null) throw new ArgumentNullException("api");
-            if (loadDataViewModel == null) throw new ArgumentNullException("loadDataViewModel");
             _api = api;
-            _loadDataViewModel = loadDataViewModel;
         }
+
+        public ILoadDataViewModel LoadDataViewModel { get; set; }
 
         public bool CanExecute(object parameter)
         {
-            return _loadDataViewModel.Battletag != null;
+            return LoadDataViewModel.Battletag != null;
         }
 
         public async void Execute(object parameter)
         {
-            var battletag = _loadDataViewModel.Battletag;
+            var battletag = LoadDataViewModel.Battletag;
             var profile = await Task.Factory.StartNew(() => _api.ProfileRepository.GetByBattletag(battletag));
-            _loadDataViewModel.Heroes.Clear();
+            LoadDataViewModel.Heroes.Clear();
             if (profile.IsErrorObject())
                 return;
             foreach (var hero in profile.Heroes)
             {
                 var herodata = await Task.Factory.StartNew(() => _api.HeroRepository.GetByBattletagAndId(battletag, hero.Id.ToString()));
-                _loadDataViewModel.Heroes.Add(herodata);
-                _loadDataViewModel.LoadHeroCommand.OnCanExecuteChanged();
+                LoadDataViewModel.Heroes.Add(herodata);
+                LoadDataViewModel.LoadHeroCommand.OnCanExecuteChanged();
             }
         }
 

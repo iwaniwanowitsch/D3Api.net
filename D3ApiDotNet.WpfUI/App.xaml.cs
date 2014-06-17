@@ -6,8 +6,10 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using D3ApiDotNet.Core.Objects.Hero;
 using D3ApiDotNet.DataAccess;
 using D3ApiDotNet.DataAccess.API;
+using D3ApiDotNet.WpfUI.Commands;
 using D3ApiDotNet.WpfUI.ViewModels;
 using System.Net;
 using D3ApiDotNet.WpfUI.ViewModels.Interfaces;
@@ -27,7 +29,18 @@ namespace D3ApiDotNet.WpfUI
 
             var api = new ApiAccessFacade(CollectMode.TryCacheThenOnline, Locales.en_GB, null/*new WebProxy("127.0.0.1:3128")*/, new TimeSpan(0, 1, 0, 0));
 
-            var loadDataViewModel = new LoadDataViewModel(mainWindowViewModel, api);
+            var manageContentViewModelCommand =
+                new ManageContentViewModelActions(mainWindowViewModel.AddContentViewModel,
+                    mainWindowViewModel.RemoveContentViewModel);
+            var loadProfileCommand = new LoadProfileCommand(api);
+            var loadHeroCommand = new LoadHeroCommand(api, manageContentViewModelCommand);
+
+            var heroes = new ObservableCollection<Hero>();
+
+            var loadDataViewModel = new LoadDataViewModel(api, loadProfileCommand, loadHeroCommand, heroes, manageContentViewModelCommand);
+
+            loadProfileCommand.LoadDataViewModel = loadDataViewModel;
+            loadHeroCommand.LoadDataViewModel = loadDataViewModel;
 
             mainWindowViewModel.AddContentViewModel(loadDataViewModel);
 
