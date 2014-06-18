@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:t="clr-namespace:D3ApiDotNet.WpfUI.Assets.Styles.Templates"
              xmlns:sampleData="clr-namespace:D3ApiDotNet.WpfUI.SampleData"
              mc:Ignorable="d" MaxWidth="400"
              d:DesignHeight="304" d:DesignWidth="200">
@@ -11,7 +12,7 @@
     </d:UserControl.DataContext>
 
     <UserControl.Resources>
-        <ResourceDictionary Source="pack://application:,,,/Assets/Styles/Templates/ItemAttributesTemplates.xaml"/>
+        <t:ItemAttributesTemplates />
     </UserControl.Resources>
 
     <Grid Background="Black">
