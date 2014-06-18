@@ -48,9 +48,9 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="Profile Dps:" Style="{StaticResource AttributeNameStyle}"/>
-                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding StringFormat={}{0:n}, Path=ActualHero.Stats.Damage, FallbackValue=''}" Style="{StaticResource NumberValueStyle}" />
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=ActualHero.Stats.Damage, StringFormat='{}{0:n}', FallbackValue=''}" Style="{StaticResource NumberValueStyle}" />
                     <TextBlock Grid.Row="2" Grid.Column="0" Text="Elites killed:" Style="{StaticResource AttributeNameStyle}" />
-                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding StringFormat={}{0:n}, Path=ActualHero.Kills.Elites, FallbackValue=''}" Style="{StaticResource NumberValueStyle}" />
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=ActualHero.Kills.Elites, StringFormat='{}{0:0,0}', FallbackValue=''}" Style="{StaticResource NumberValueStyle}" />
                 </Grid>
             </StackPanel>
             <TextBlock Grid.Row="1" Text="{Binding StringFormat='Last updated: {0:G}', Path=ActualHero.LastUpdated, FallbackValue=''}" 

@@ -26,6 +26,7 @@ namespace D3ApiDotNet.WpfUI
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            // Comp root
             base.OnStartup(e);
 
             var mainWindowViewModel = new MainWindowViewModel(new ObservableCollection<IContentViewModel>());

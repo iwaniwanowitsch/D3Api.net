@@ -23,7 +23,7 @@ namespace D3ApiDotNet.WpfUI.SampleData
             PantsItemViewModel = new ItemViewModelSampleData();
             OffHandItemViewModel = new ItemViewModelSampleData();
             BootsItemViewModel = new ItemViewModelSampleData();
-            ActualHero = new Hero{Level = 70, ParagonLevel = 243, HeroClass = HeroClass.Monk, Name = "geiler Hero"};
+            ActualHero = new Hero { Level = 70, ParagonLevel = 243, HeroClass = HeroClass.Monk, Name = "geiler Hero", Kills = new HeroKills { Elites = 100 } };
             IsLoading = true;
         }
         public IItemViewModel HeadItemViewModel { get; set; }

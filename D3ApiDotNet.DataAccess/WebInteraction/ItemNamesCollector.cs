@@ -8,13 +8,13 @@ namespace D3ApiDotNet.DataAccess.WebInteraction
 {
     public class ItemNamesCollector
     {
-        private readonly StreamWebRepository _client;
+        private readonly IReadonlyRepository<Stream, string> _client;
 
         /// <summary>
         /// constructor for class, which collects item names from battle.net/en/item/
         /// </summary>
         /// <param name="client">webclient for requests</param>
-        public ItemNamesCollector(StreamWebRepository client)
+        public ItemNamesCollector(IReadonlyRepository<Stream,string> client)
         {
             if (client == null)
                 throw new ArgumentNullException("client");
