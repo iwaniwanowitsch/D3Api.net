@@ -26,6 +26,9 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" MinWidth="200">
             <TextBlock Text="{Binding Path=HeroViewModel.ActualHero.Name, FallbackValue=''}" FontFamily="Segoe UI Light" FontSize="20" TextWrapping="Wrap"/>
+            
+            <!-- TODO: ich finde es nicht gut, hier ein grid zu verwenden. mir würde ein vertikales stackpanel besser gefallen. ist flexibler beim erweitern -->
+            
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>

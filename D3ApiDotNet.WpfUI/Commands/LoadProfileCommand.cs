@@ -38,6 +38,7 @@ namespace D3ApiDotNet.WpfUI.Commands
                 LoadDataViewModel.Heroes.Add(herodata);
                 LoadDataViewModel.LoadHeroCommand.OnCanExecuteChanged();
             }
+            LoadDataViewModel.HeroId = 0;
         }
 
         public void OnCanExecuteChanged()

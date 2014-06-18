@@ -52,6 +52,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <!-- outsourcen -->
         <Image Source="/D3ApiDotNet.WpfUI;component/logo.ico" Stretch="None" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
 
         <Grid Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Width="500">

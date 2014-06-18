@@ -74,50 +74,62 @@ namespace D3ApiDotNet.WpfUI.Commands
             heroViewModel.SkeletonHeroViewModel = skeletonHeroViewModel;
             heroViewModel.StatsViewModel = statsHeroViewModel;
 
-            var items = hero.Items;
-            var head = items.Head != null ? await Task.Factory.StartNew(() => _api.ItemRepository.GetByTooltipParams(items.Head.TooltipParams)) : null;
-            var shoulders = items.Shoulders != null ? await Task.Factory.StartNew(() => _api.ItemRepository.GetByTooltipParams(items.Shoulders.TooltipParams)) : null;
-            var amulet = items.Neck != null ? await Task.Factory.StartNew(() => _api.ItemRepository.GetByTooltipParams(items.Neck.TooltipParams)) : null;
-            var hands = items.Hands != null ? await Task.Factory.StartNew(() => _api.ItemRepository.GetByTooltipParams(items.Hands.TooltipParams)) : null;
-            var chest = items.Torso != null ? await Task.Factory.StartNew(() => _api.ItemRepository.GetByTooltipParams(items.Torso.TooltipParams)) : null;
-            var bracers = items.Bracers != null ? await Task.Factory.StartNew(() => _api.ItemRepository.GetByTooltipParams(items.Bracers.TooltipParams)) : null;
-            var leftRing = items.LeftFinger != null ? await Task.Factory.StartNew(() => _api.ItemRepository.GetByTooltipParams(items.LeftFinger.TooltipParams)) : null;
-            var waist = items.Waist != null ? await Task.Factory.StartNew(() => _api.ItemRepository.GetByTooltipParams(items.Waist.TooltipParams)) : null;
-            var rightRing = items.RightFinger != null ? await Task.Factory.StartNew(() => _api.ItemRepository.GetByTooltipParams(items.RightFinger.TooltipParams)) : null;
-            var mainHand = items.MainHand != null ? await Task.Factory.StartNew(() => _api.ItemRepository.GetByTooltipParams(items.MainHand.TooltipParams)) : null;
-            var pants = items.Legs != null ? await Task.Factory.StartNew(() => _api.ItemRepository.GetByTooltipParams(items.Legs.TooltipParams)) : null;
-            var offHand = items.OffHand != null ? await Task.Factory.StartNew(() => _api.ItemRepository.GetByTooltipParams(items.OffHand.TooltipParams)) : null;
-            var boots = items.Feet != null ? await Task.Factory.StartNew(() => _api.ItemRepository.GetByTooltipParams(items.Feet.TooltipParams)) : null;
-
             var iconsize = ItemIconSizes.Small;
 
-            var headicon = head != null ? await Task.Factory.StartNew(() => _api.ItemIconRepository.GetByIdAndSize(head.Icon,iconsize)) : null;
-            var shouldersicon = shoulders != null ? await Task.Factory.StartNew(() => _api.ItemIconRepository.GetByIdAndSize(shoulders.Icon, iconsize)) : null;
-            var amuleticon = amulet != null ? await Task.Factory.StartNew(() => _api.ItemIconRepository.GetByIdAndSize(amulet.Icon, iconsize)) : null;
-            var chesticon = chest != null ? await Task.Factory.StartNew(() => _api.ItemIconRepository.GetByIdAndSize(chest.Icon, iconsize)) : null;
-            var bracersicon = bracers != null ? await Task.Factory.StartNew(() => _api.ItemIconRepository.GetByIdAndSize(bracers.Icon, iconsize)) : null;
-            var handsicon = hands != null ? await Task.Factory.StartNew(() => _api.ItemIconRepository.GetByIdAndSize(hands.Icon, iconsize)) : null;
-            var bootsicon = boots != null ? await Task.Factory.StartNew(() => _api.ItemIconRepository.GetByIdAndSize(boots.Icon, iconsize)) : null;
-            var offHandicon = offHand != null ? await Task.Factory.StartNew(() => _api.ItemIconRepository.GetByIdAndSize(offHand.Icon, iconsize)) : null;
-            var rightRingicon = rightRing != null ? await Task.Factory.StartNew(() => _api.ItemIconRepository.GetByIdAndSize(rightRing.Icon, iconsize)) : null;
-            var waisticon = waist != null ? await Task.Factory.StartNew(() => _api.ItemIconRepository.GetByIdAndSize(waist.Icon, iconsize)) : null;
-            var leftRingicon = leftRing != null ? await Task.Factory.StartNew(() => _api.ItemIconRepository.GetByIdAndSize(leftRing.Icon, iconsize)) : null;
-            var mainHandicon = mainHand != null ? await Task.Factory.StartNew(() => _api.ItemIconRepository.GetByIdAndSize(mainHand.Icon, iconsize)) : null;
-            var pantsicon = pants != null ? await Task.Factory.StartNew(() => _api.ItemIconRepository.GetByIdAndSize(pants.Icon, iconsize)) : null;
-
+            var items = hero.Items;
+            
+            var head = items.Head != null ? await Task.Factory.StartNew(() => _api.ItemRepository.GetByTooltipParams(items.Head.TooltipParams)) : null;
+            var headicon = head != null ? await Task.Factory.StartNew(() => _api.ItemIconRepository.GetByIdAndSize(head.Icon, iconsize)) : null;
             heroViewModel.HeadItemViewModel = new ItemViewModel(true, new ItemDetailViewModel(head, headicon));
+
+            var shoulders = items.Shoulders != null ? await Task.Factory.StartNew(() => _api.ItemRepository.GetByTooltipParams(items.Shoulders.TooltipParams)) : null;
+            var shouldersicon = shoulders != null ? await Task.Factory.StartNew(() => _api.ItemIconRepository.GetByIdAndSize(shoulders.Icon, iconsize)) : null;
             heroViewModel.ShouldersItemViewModel = new ItemViewModel(true, new ItemDetailViewModel(shoulders, shouldersicon));
+
+            var amulet = items.Neck != null ? await Task.Factory.StartNew(() => _api.ItemRepository.GetByTooltipParams(items.Neck.TooltipParams)) : null;
+            var amuleticon = amulet != null ? await Task.Factory.StartNew(() => _api.ItemIconRepository.GetByIdAndSize(amulet.Icon, iconsize)) : null;
             heroViewModel.AmuletItemViewModel = new ItemViewModel(true, new ItemDetailViewModel(amulet, amuleticon));
-            heroViewModel.ChestItemViewModel = new ItemViewModel(true, new ItemDetailViewModel(chest, chesticon));
-            heroViewModel.BracersItemViewModel = new ItemViewModel(true, new ItemDetailViewModel(bracers, bracersicon));
+
+            var hands = items.Hands != null ? await Task.Factory.StartNew(() => _api.ItemRepository.GetByTooltipParams(items.Hands.TooltipParams)) : null;
+            var handsicon = hands != null ? await Task.Factory.StartNew(() => _api.ItemIconRepository.GetByIdAndSize(hands.Icon, iconsize)) : null;
             heroViewModel.HandItemViewModel = new ItemViewModel(true, new ItemDetailViewModel(hands, handsicon));
-            heroViewModel.BootsItemViewModel = new ItemViewModel(true, new ItemDetailViewModel(boots, bootsicon));
-            heroViewModel.OffHandItemViewModel = new ItemViewModel(true, new ItemDetailViewModel(offHand, offHandicon));
-            heroViewModel.RightRingItemViewModel = new ItemViewModel(true, new ItemDetailViewModel(rightRing, rightRingicon));
-            heroViewModel.WaistItemViewModel = new ItemViewModel(true, new ItemDetailViewModel(waist, waisticon));
+
+            var chest = items.Torso != null ? await Task.Factory.StartNew(() => _api.ItemRepository.GetByTooltipParams(items.Torso.TooltipParams)) : null;
+            var chesticon = chest != null ? await Task.Factory.StartNew(() => _api.ItemIconRepository.GetByIdAndSize(chest.Icon, iconsize)) : null;
+            heroViewModel.ChestItemViewModel = new ItemViewModel(true, new ItemDetailViewModel(chest, chesticon));
+
+            var bracers = items.Bracers != null ? await Task.Factory.StartNew(() => _api.ItemRepository.GetByTooltipParams(items.Bracers.TooltipParams)) : null;
+            var bracersicon = bracers != null ? await Task.Factory.StartNew(() => _api.ItemIconRepository.GetByIdAndSize(bracers.Icon, iconsize)) : null;
+            heroViewModel.BracersItemViewModel = new ItemViewModel(true, new ItemDetailViewModel(bracers, bracersicon));
+
+            var leftRing = items.LeftFinger != null ? await Task.Factory.StartNew(() => _api.ItemRepository.GetByTooltipParams(items.LeftFinger.TooltipParams)) : null;
+            var leftRingicon = leftRing != null ? await Task.Factory.StartNew(() => _api.ItemIconRepository.GetByIdAndSize(leftRing.Icon, iconsize)) : null;
             heroViewModel.LeftRingItemViewModel = new ItemViewModel(true, new ItemDetailViewModel(leftRing, leftRingicon));
+
+            var waist = items.Waist != null ? await Task.Factory.StartNew(() => _api.ItemRepository.GetByTooltipParams(items.Waist.TooltipParams)) : null;
+            var waisticon = waist != null ? await Task.Factory.StartNew(() => _api.ItemIconRepository.GetByIdAndSize(waist.Icon, iconsize)) : null;
+            heroViewModel.WaistItemViewModel = new ItemViewModel(true, new ItemDetailViewModel(waist, waisticon));
+
+            var rightRing = items.RightFinger != null ? await Task.Factory.StartNew(() => _api.ItemRepository.GetByTooltipParams(items.RightFinger.TooltipParams)) : null;
+            var rightRingicon = rightRing != null ? await Task.Factory.StartNew(() => _api.ItemIconRepository.GetByIdAndSize(rightRing.Icon, iconsize)) : null;
+            heroViewModel.RightRingItemViewModel = new ItemViewModel(true, new ItemDetailViewModel(rightRing, rightRingicon));
+
+            var mainHand = items.MainHand != null ? await Task.Factory.StartNew(() => _api.ItemRepository.GetByTooltipParams(items.MainHand.TooltipParams)) : null;
+            var mainHandicon = mainHand != null ? await Task.Factory.StartNew(() => _api.ItemIconRepository.GetByIdAndSize(mainHand.Icon, iconsize)) : null;
             heroViewModel.MainHandItemViewModel = new ItemViewModel(true, new ItemDetailViewModel(mainHand, mainHandicon));
+
+            var pants = items.Legs != null ? await Task.Factory.StartNew(() => _api.ItemRepository.GetByTooltipParams(items.Legs.TooltipParams)) : null;
+            var pantsicon = pants != null ? await Task.Factory.StartNew(() => _api.ItemIconRepository.GetByIdAndSize(pants.Icon, iconsize)) : null;
             heroViewModel.PantsItemViewModel = new ItemViewModel(true, new ItemDetailViewModel(pants, pantsicon));
+
+            var offHand = items.OffHand != null ? await Task.Factory.StartNew(() => _api.ItemRepository.GetByTooltipParams(items.OffHand.TooltipParams)) : null;
+            var offHandicon = offHand != null ? await Task.Factory.StartNew(() => _api.ItemIconRepository.GetByIdAndSize(offHand.Icon, iconsize)) : null;
+            heroViewModel.OffHandItemViewModel = new ItemViewModel(true, new ItemDetailViewModel(offHand, offHandicon));
+
+            var boots = items.Feet != null ? await Task.Factory.StartNew(() => _api.ItemRepository.GetByTooltipParams(items.Feet.TooltipParams)) : null;
+            var bootsicon = boots != null ? await Task.Factory.StartNew(() => _api.ItemIconRepository.GetByIdAndSize(boots.Icon, iconsize)) : null;
+            heroViewModel.BootsItemViewModel = new ItemViewModel(true, new ItemDetailViewModel(boots, bootsicon));
+            
             heroViewModel.IsLoading = false;
         }
 

@@ -11,8 +11,8 @@ namespace D3ApiDotNet.WpfUI.Tests
         public void TestIfImageIsLoadedCorrectlyInItemDetailViewModelSampleData()
         {
             // Arrange
-            var sampleData = new ItemDetailNotifyPropertyChangedSampleData();
-
+            var sampleData = new ItemDetailViewModelSampleData();
+            
             // Assert
             Assert.IsNotNull(sampleData.Icon.Icon);
         }

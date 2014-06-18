@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using D3ApiDotNet.Core.NotifyPropertyChanged;
 using D3ApiDotNet.Core.Objects.Hero;
 using D3ApiDotNet.DataAccess;
 using D3ApiDotNet.WpfUI.Annotations;
@@ -27,7 +28,7 @@ namespace D3ApiDotNet.WpfUI.ViewModels
             if (heroes == null) throw new ArgumentNullException("heroes");
             LoadProfileCommand = loadProfileCommand;
             LoadHeroCommand = loadHeroCommand;
-            _heroes = heroes;
+            Heroes = heroes;
         }
 
         public ObservableCollection<Hero> Heroes
@@ -35,8 +36,7 @@ namespace D3ApiDotNet.WpfUI.ViewModels
             get { return _heroes; }
             set
             {
-                if (value == null) return;
-                _heroes = value;
+                this.SetValueIfChanged(ref _heroes, value);
                 LoadHeroCommand.OnCanExecuteChanged();
             }
         }
@@ -46,8 +46,7 @@ namespace D3ApiDotNet.WpfUI.ViewModels
             get { return _battletag; }
             set
             {
-                if (value == null) return;
-                _battletag = value;
+                this.SetValueIfChanged(ref _battletag, value);
                 LoadProfileCommand.OnCanExecuteChanged();
             }
         }
@@ -57,7 +56,7 @@ namespace D3ApiDotNet.WpfUI.ViewModels
             get { return _heroId; }
             set
             {
-                _heroId = value;
+                this.SetValueIfChanged(ref _heroId, value);
                 LoadHeroCommand.OnCanExecuteChanged();
             }
         }

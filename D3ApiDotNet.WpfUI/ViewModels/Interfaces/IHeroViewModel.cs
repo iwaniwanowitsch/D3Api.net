@@ -6,7 +6,7 @@ namespace D3ApiDotNet.WpfUI.ViewModels.Interfaces
 {
     public interface IHeroViewModel : IContentViewModel
     {
-        ObservableCollection<Item> ItemList { get; set; }
+        ObservableCollection<Item> ItemList { get; }
         ISkeletonHeroViewModel SkeletonHeroViewModel { get; set; }
         IStatsHeroViewModel StatsViewModel { get; set; }
 
