@@ -10,4 +10,5 @@
     <l:BoolToHardcoreConverter x:Key="BoolToHardcoreConverter" />
     <l:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     <l:ObjectNullToVisibilityConverter x:Key="ObjectNullToVisibilityConverter" />
+    <l:TermEvaluateConverter x:Key="TermEvaluateConverter" />
 </ResourceDictionary>

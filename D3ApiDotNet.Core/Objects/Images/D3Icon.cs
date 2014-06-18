@@ -13,14 +13,8 @@ namespace D3ApiDotNet.Core.Objects.Images
     /// </summary>
     public class D3Icon : BaseNotifyPropertyChanged
     {
-        private Image _icon;
-
         /// <summary />
-        public Image Icon
-        {
-            get { return _icon; }
-            set { this.SetValueIfChanged(ref _icon, value); }
-        }
+        public Image Icon { get; set; }
 
         public D3Icon()
         {

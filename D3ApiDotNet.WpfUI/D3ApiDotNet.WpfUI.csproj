@@ -80,6 +80,7 @@
     <Compile Include="Converters\ItemColorConverter.cs" />
     <Compile Include="Converters\ObjectNullToBoolConverter.cs" />
     <Compile Include="Converters\ObjectNullToVisibilityConverter.cs" />
+    <Compile Include="Converters\TermEvaluateConverter.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>

@@ -12,6 +12,8 @@ namespace D3ApiDotNet.WpfUI.ViewModels
     public class StatsHeroViewModel : BaseNotifyPropertyChanged, IStatsHeroViewModel
     {
         private IHeroViewModel _heroViewModel;
+        private DamageTermComposite _damageTerms;
+        private EhpTermComposite _ehpTerms;
 
         public StatsHeroViewModel(DamageTermComposite damageTerms, EhpTermComposite ehpTerms, IHeroViewModel heroViewModel)
         {
@@ -32,8 +34,16 @@ namespace D3ApiDotNet.WpfUI.ViewModels
             }
         }
 
-        public DamageTermComposite DamageTerms { get; set; }
+        public DamageTermComposite DamageTerms
+        {
+            get { return _damageTerms; }
+            set { this.SetValueIfChanged(ref _damageTerms, value); }
+        }
 
-        public EhpTermComposite EhpTerms { get; set; }
+        public EhpTermComposite EhpTerms
+        {
+            get { return _ehpTerms; }
+            set { this.SetValueIfChanged(ref _ehpTerms, value); }
+        }
     }
 }

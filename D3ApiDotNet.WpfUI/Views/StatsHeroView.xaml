@@ -48,11 +48,16 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="Profile Dps:" Style="{StaticResource AttributeNameStyle}"/>
                 <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding StringFormat='{}{0:n}', Path=HeroViewModel.ActualHero.Stats.Damage, FallbackValue=''}" Style="{StaticResource NumberValueStyle}" />
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="Elites killed:" Style="{StaticResource AttributeNameStyle}" />
                 <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding StringFormat='{}{0:0,0}', Path=HeroViewModel.ActualHero.Kills.Elites, FallbackValue=''}" Style="{StaticResource NumberValueStyle}" />
+                
+                <!-- neu eingefügt: berechnete Werte -->
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Calculated Damage:" Style="{StaticResource AttributeNameStyle}" />
+                <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding StringFormat='{}{0:n}', Path=DamageTerms, Converter={StaticResource TermEvaluateConverter}, FallbackValue=''}" Style="{StaticResource NumberValueStyle}" />
             </Grid>
         </StackPanel>
         <TextBlock Grid.Row="1" Text="{Binding StringFormat='Last updated: {0:G}', Path=HeroViewModel.ActualHero.LastUpdated, FallbackValue=''}" 
