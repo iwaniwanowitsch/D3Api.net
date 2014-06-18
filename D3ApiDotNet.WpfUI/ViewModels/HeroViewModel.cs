@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using D3ApiDotNet.Core.NotifyPropertyChanged;
 using D3ApiDotNet.Core.Objects.Hero;
+using D3ApiDotNet.Core.Objects.Item;
 using D3ApiDotNet.WpfUI.Annotations;
 using D3ApiDotNet.WpfUI.Commands;
 using D3ApiDotNet.WpfUI.ViewModels.Interfaces;
@@ -17,6 +20,7 @@ namespace D3ApiDotNet.WpfUI.ViewModels
             : base(manageContentViewModelActions, true, isLoading)
         {
             ActualHero = actualHero;
+            ItemList = new ObservableCollection<Item>();
         }
 
         public HeroViewModel(IItemViewModel headItemViewModel, IItemViewModel shouldersItemViewModel, IItemViewModel amuletItemViewModel, IItemViewModel chestItemViewModel, IItemViewModel bracersItemViewModel, IItemViewModel handItemViewModel, IItemViewModel bootsItemViewModel, IItemViewModel offHandItemViewModel, IItemViewModel rightRingItemViewModel, IItemViewModel waistItemViewModel, IItemViewModel leftRingItemViewModel, IItemViewModel mainHandItemViewModel, IItemViewModel pantsItemViewModel, Hero actualHero, [NotNull] IManageContentViewModelActions manageContentViewModelActions, bool isLoading)
@@ -36,6 +40,7 @@ namespace D3ApiDotNet.WpfUI.ViewModels
             PantsItemViewModel = pantsItemViewModel;
             HandItemViewModel = handItemViewModel;
             ActualHero = actualHero;
+            ItemList = new ObservableCollection<Item>();
         }
 
         public IItemViewModel HeadItemViewModel { get; set; }
@@ -67,6 +72,8 @@ namespace D3ApiDotNet.WpfUI.ViewModels
                 return "HeroView";
             }
         }
+
+        public ObservableCollection<Item> ItemList { get; set; }
 
         public ISkeletonHeroViewModel SkeletonHeroViewModel
         {

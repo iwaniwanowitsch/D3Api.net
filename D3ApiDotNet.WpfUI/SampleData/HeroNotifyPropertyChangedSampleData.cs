@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
+using D3ApiDotNet.Core.NotifyPropertyChanged;
 using D3ApiDotNet.Core.Objects.Hero;
 using D3ApiDotNet.WpfUI.ViewModels;
 using D3ApiDotNet.WpfUI.ViewModels.Interfaces;
@@ -11,8 +13,10 @@ using System.Collections.Generic;
 
 namespace D3ApiDotNet.WpfUI.SampleData
 {
-    public class HeroViewModelSampleData : IHeroViewModel
+    public class HeroViewModelSampleData : BaseNotifyPropertyChanged, IHeroViewModel
     {
+        private Hero _actualHero;
+
         public HeroViewModelSampleData()
         {
             HeadItemViewModel = new ItemViewModelSampleData();
@@ -30,8 +34,12 @@ namespace D3ApiDotNet.WpfUI.SampleData
             BootsItemViewModel = new ItemViewModelSampleData();
             ActualHero = new Hero { Level = 70, ParagonLevel = 243, HeroClass = HeroClass.Monk, Name = "geiler Hero", Kills = new HeroKills { Elites = 100 } };
             IsLoading = true;
+            //SkeletonHeroViewModel = new SkeletonHeroViewModelSampleData();
+            //StatsViewModel = new StatsHeroViewModelSampleData();
             SkeletonHeroViewModel = new SkeletonHeroViewModel(this);
-            StatsViewModel = new StatsHeroViewModel(new DamageTermComposite(ActualHero.Level, new DexterityFetcher(), new ItemListDataContainer(() => new List<Item>{HeadItemViewModel.ItemDetailViewModel.Item})), new EhpTermComposite(ActualHero.Level, new ItemListDataContainer(() => new List<Item>()), ActualHero.HeroClass), this);
+            var itemListDataContainer = new ItemListDataContainer(() => new List<Item>());
+            StatsViewModel = new StatsHeroViewModel(new DamageTermComposite(ActualHero.Level, new DexterityFetcher(), itemListDataContainer), new EhpTermComposite(ActualHero.Level, itemListDataContainer, ActualHero.HeroClass), this);
+            ItemList = new ObservableCollection<Item>();
         }
         public IItemViewModel HeadItemViewModel { get; set; }
         public IItemViewModel ShouldersItemViewModel { get; set; }
@@ -51,7 +59,11 @@ namespace D3ApiDotNet.WpfUI.SampleData
             return false;
         }
 
-        public Hero ActualHero { get; set; }
+        public Hero ActualHero
+        {
+            get { return _actualHero; }
+            set { this.SetValueIfChanged(ref _actualHero,value); }
+        }
 
         public string Name
         {
@@ -65,6 +77,7 @@ namespace D3ApiDotNet.WpfUI.SampleData
             get { return null; }
         }
 
+        public ObservableCollection<Item> ItemList { get; set; }
         public ISkeletonHeroViewModel SkeletonHeroViewModel { get; set; }
 
         public IStatsHeroViewModel StatsViewModel { get; set; }

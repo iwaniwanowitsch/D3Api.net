@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="D3ApiDotNet.WpfUI.Views.SkeletonHeroView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:sampleData="clr-namespace:D3ApiDotNet.WpfUI.SampleData"
+             mc:Ignorable="d" 
+             d:HorizontalAlignment="Center" d:VerticalAlignment="Center">
+    <d:UserControl.DataContext>
+        <sampleData:SkeletonHeroViewModelSampleData />
+    </d:UserControl.DataContext>
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Assets/Styles/HeroViewStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <ScrollViewer Margin="20" VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <ContentControl Grid.Row="0" Grid.Column="0" Style="{StaticResource ItemStyle}" Content="{Binding Path=HeroViewModel.ShouldersItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}"/>
+            <ContentControl Grid.Row="0" Grid.Column="1" Style="{StaticResource ItemStyle}" Content="{Binding Path=HeroViewModel.HeadItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}"/>
+            <ContentControl Grid.Row="0" Grid.Column="2" Style="{StaticResource ItemStyle}" Content="{Binding Path=HeroViewModel.AmuletItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}"/>
+
+            <ContentControl Grid.Row="1" Grid.Column="0" Style="{StaticResource ItemStyle}" Content="{Binding Path=HeroViewModel.HandItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}"/>
+            <ContentControl Grid.Row="1" Grid.Column="1" Style="{StaticResource ItemStyle}" Content="{Binding Path=HeroViewModel.ChestItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}"/>
+            <ContentControl Grid.Row="1" Grid.Column="2" Style="{StaticResource ItemStyle}" Content="{Binding Path=HeroViewModel.BracersItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}"/>
+
+            <ContentControl Grid.Row="2" Grid.Column="0" Style="{StaticResource ItemStyle}" Content="{Binding Path=HeroViewModel.LeftRingItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}"/>
+            <ContentControl Grid.Row="2" Grid.Column="1" Style="{StaticResource ItemStyle}" Content="{Binding Path=HeroViewModel.WaistItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}"/>
+            <ContentControl Grid.Row="2" Grid.Column="2" Style="{StaticResource ItemStyle}" Content="{Binding Path=HeroViewModel.RightRingItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}"/>
+
+            <ContentControl Grid.Row="3" Grid.Column="0" Style="{StaticResource ItemStyle}" Content="{Binding Path=HeroViewModel.MainHandItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}" Grid.RowSpan="2"/>
+            <ContentControl Grid.Row="3" Grid.Column="1" Style="{StaticResource ItemStyle}" Content="{Binding Path=HeroViewModel.PantsItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}"/>
+            <ContentControl Grid.Row="3" Grid.Column="2" Style="{StaticResource ItemStyle}" Content="{Binding Path=HeroViewModel.OffHandItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}" Grid.RowSpan="2"/>
+
+            <ContentControl Grid.Row="4" Grid.Column="1" Style="{StaticResource ItemStyle}" Content="{Binding Path=HeroViewModel.BootsItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}"/>
+
+        </Grid>
+    </ScrollViewer>
+</UserControl>

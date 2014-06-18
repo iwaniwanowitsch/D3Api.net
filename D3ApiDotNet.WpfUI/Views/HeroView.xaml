@@ -11,7 +11,7 @@
     </d:UserControl.DataContext>
 
     <StackPanel Orientation="Horizontal">
-        <ContentControl Content="{Binding Path=StatsHeroViewModel}" ContentTemplate="{DynamicResource StatsHeroViewModelTemplate}" />
-        <ContentControl Content="{Binding Path=SkelotonHeroViewModel}" ContentTemplate="{DynamicResource SkelotonHeroViewModelTemplate}" />
+        <ContentControl Content="{Binding Path=StatsViewModel}" ContentTemplate="{DynamicResource StatsHeroViewModelTemplate}" />
+        <ContentControl Content="{Binding Path=SkeletonHeroViewModel}" ContentTemplate="{DynamicResource SkelotonHeroViewModelTemplate}" />
     </StackPanel>
 </UserControl>

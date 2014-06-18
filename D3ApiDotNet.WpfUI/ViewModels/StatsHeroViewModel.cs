@@ -1,4 +1,5 @@
 ﻿using D3ApiDotNet.Core.Calculation;
+using D3ApiDotNet.Core.NotifyPropertyChanged;
 using D3ApiDotNet.WpfUI.ViewModels.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace D3ApiDotNet.WpfUI.ViewModels
 {
-    public class StatsHeroViewModel : BaseViewModel, IStatsHeroViewModel
+    public class StatsHeroViewModel : BaseNotifyPropertyChanged, IStatsHeroViewModel
     {
         private IHeroViewModel _heroViewModel;
 

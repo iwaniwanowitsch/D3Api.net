@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
+using D3ApiDotNet.Core.NotifyPropertyChanged;
 using D3ApiDotNet.Core.Objects.Images;
 using D3ApiDotNet.Core.Objects.Item;
 using D3ApiDotNet.WpfUI.ViewModels.Interfaces;
 
 namespace D3ApiDotNet.WpfUI.ViewModels
 {
-    public abstract class BaseItemDetailViewModel : BaseViewModel, IItemDetailViewModel
+    public abstract class BaseItemDetailViewModel : BaseNotifyPropertyChanged, IItemDetailViewModel
     {
         private Item _item;
         private D3Icon _icon;

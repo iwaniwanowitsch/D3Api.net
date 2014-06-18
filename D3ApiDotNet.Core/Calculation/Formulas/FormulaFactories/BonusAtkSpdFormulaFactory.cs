@@ -20,7 +20,7 @@ namespace D3ApiDotNet.Core.Calculation.Formulas.FormulaFactories
         public override ITerm CreateFormula()
         {
             //corrected for the moment
-            var dualWieldBonus = ItemList.Count(o => o.AttacksPerSecond != null) == 2 ? 0.15 : 0.0;
+            var dualWieldBonus = WeaponList.Count == 2 ? 0.15 : 0.0;
             //var dualWieldBonus = 0.0;
 
             return

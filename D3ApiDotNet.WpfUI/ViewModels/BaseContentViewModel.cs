@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
+using D3ApiDotNet.Core.NotifyPropertyChanged;
 using D3ApiDotNet.WpfUI.Annotations;
 using D3ApiDotNet.WpfUI.Commands;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using D3ApiDotNet.WpfUI.ViewModels.Interfaces;
 namespace D3ApiDotNet.WpfUI.ViewModels
 {
 
-    public abstract class BaseContentViewModel : BaseViewModel, IContentViewModel
+    public abstract class BaseContentViewModel : BaseNotifyPropertyChanged, IContentViewModel
     {
         private readonly IManageContentViewModelActions _manageContentViewModelActions;
         private readonly bool _isDeletable;

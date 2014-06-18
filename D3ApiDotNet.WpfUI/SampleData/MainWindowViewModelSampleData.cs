@@ -5,7 +5,7 @@ using D3ApiDotNet.WpfUI.ViewModels.Interfaces;
 
 namespace D3ApiDotNet.WpfUI.SampleData
 {
-    class MainWindowViewModelSampleData : IMainWindowViewModel
+    public class MainWindowViewModelSampleData : IMainWindowViewModel
     {
         public MainWindowViewModelSampleData()
         {

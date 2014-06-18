@@ -8,7 +8,7 @@
              mc:Ignorable="d" MaxWidth="400"
              d:DesignHeight="304" d:DesignWidth="200">
     <d:UserControl.DataContext>
-        <sampleData:ItemDetailViewModelSampleData />
+        <sampleData:ItemDetailNotifyPropertyChangedSampleData />
     </d:UserControl.DataContext>
 
     <UserControl.Resources>

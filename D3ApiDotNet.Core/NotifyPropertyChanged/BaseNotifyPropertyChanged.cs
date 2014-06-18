@@ -1,15 +1,9 @@
-﻿using D3ApiDotNet.WpfUI.ViewModels.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace D3ApiDotNet.WpfUI.ViewModels
+namespace D3ApiDotNet.Core.NotifyPropertyChanged
 {
-    public abstract class BaseViewModel : INotifyPropertyChanged, IRaisePropertyChanged
+    public abstract class BaseNotifyPropertyChanged : INotifyPropertyChanged, IRaisePropertyChanged
     {
         protected void RaisePropertyChanged([CallerMemberName]string propertyName = null)
         {

@@ -146,6 +146,9 @@
     <Compile Include="Calculation\HeroDamageData.cs" />
     <Compile Include="EnumerableExtension.cs" />
     <Compile Include="ItemValueRangeExtension.cs" />
+    <Compile Include="NotifyPropertyChanged\BaseNotifyPropertyChanged.cs" />
+    <Compile Include="NotifyPropertyChanged\IRaisedPropertyChanged.cs" />
+    <Compile Include="NotifyPropertyChanged\RaisedPropertyChangedExtension.cs" />
     <Compile Include="Objects\Artisan\Artisan.cs" />
     <Compile Include="Objects\Artisan\ArtisanLevel.cs" />
     <Compile Include="Objects\Artisan\ArtisanTier.cs" />

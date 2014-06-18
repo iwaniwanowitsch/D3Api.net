@@ -1,12 +1,7 @@
-﻿using D3ApiDotNet.WpfUI.ViewModels.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace D3ApiDotNet.WpfUI.ViewModels
+namespace D3ApiDotNet.Core.NotifyPropertyChanged
 {
     public static class RaisePropertyChangedExtensions
     {

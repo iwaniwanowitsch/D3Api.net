@@ -1,12 +1,13 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using D3ApiDotNet.Core.NotifyPropertyChanged;
 using D3ApiDotNet.WpfUI.Annotations;
 using D3ApiDotNet.WpfUI.ViewModels.Interfaces;
 
 namespace D3ApiDotNet.WpfUI.ViewModels
 {
-    public class MainWindowViewModel : BaseViewModel, IMainWindowViewModel
+    public class MainWindowViewModel : BaseNotifyPropertyChanged, IMainWindowViewModel
     {
         private ObservableCollection<IContentViewModel> _contentViewModels;
 

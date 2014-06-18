@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using D3ApiDotNet.Core.NotifyPropertyChanged;
 using D3ApiDotNet.Core.Objects.Images;
 using D3ApiDotNet.Core.Objects.Item;
 using D3ApiDotNet.DataAccess.Repositories;
@@ -9,8 +10,10 @@ using D3ApiDotNet.WpfUI.ViewModels.Interfaces;
 
 namespace D3ApiDotNet.WpfUI.ViewModels
 {
-    public class ItemViewModel : BaseViewModel, IItemViewModel
+    public class ItemViewModel : BaseNotifyPropertyChanged, IItemViewModel
     {
+        private IItemDetailViewModel _itemDetailViewModel;
+
         public ItemViewModel(bool hasTooltipEnabled, [NotNull] IItemDetailViewModel itemDetailViewModel)
         {
             if (itemDetailViewModel == null) throw new ArgumentNullException("itemDetailViewModel");
@@ -19,6 +22,11 @@ namespace D3ApiDotNet.WpfUI.ViewModels
         }
 
         public bool HasTooltipEnabled { get; set; }
-        public IItemDetailViewModel ItemDetailViewModel { get; private set; }
+
+        public IItemDetailViewModel ItemDetailViewModel
+        {
+            get { return _itemDetailViewModel; }
+            private set { this.SetValueIfChanged(ref _itemDetailViewModel,value); }
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using D3ApiDotNet.WpfUI.ViewModels.Interfaces;
+﻿using D3ApiDotNet.Core.NotifyPropertyChanged;
+using D3ApiDotNet.WpfUI.ViewModels.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace D3ApiDotNet.WpfUI.ViewModels
 {
-    public class SkeletonHeroViewModel : BaseViewModel, ISkeletonHeroViewModel
+    public class SkeletonHeroViewModel : BaseNotifyPropertyChanged, ISkeletonHeroViewModel
     {
         private IHeroViewModel _heroViewModel;
 

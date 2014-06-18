@@ -1,8 +1,14 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using D3ApiDotNet.Core.Calculation;
+using D3ApiDotNet.Core.Calculation.AttributeFetchers;
+using D3ApiDotNet.Core.Calculation.Formulas;
+using D3ApiDotNet.Core.Objects.Hero;
+using D3ApiDotNet.Core.Objects.Item;
 using D3ApiDotNet.DataAccess;
 using D3ApiDotNet.DataAccess.API;
 using D3ApiDotNet.WpfUI.Annotations;
@@ -45,7 +51,28 @@ namespace D3ApiDotNet.WpfUI.Commands
 
             var heroViewModel = new HeroViewModel(hero, _manageContentViewModelActions, true);
             _manageContentViewModelActions.AddContentViewModel(heroViewModel);
+            var skeletonHeroViewModel = new SkeletonHeroViewModel(heroViewModel);
+            
+            var heroMainStatFetcherLookup = new Dictionary<HeroClass, IAttributeFetcher>
+                {
+                    {HeroClass.Barbarian, new StrengthFetcher()},
+                    {HeroClass.Crusader, new StrengthFetcher()},
+                    {HeroClass.Demonhunter, new DexterityFetcher()},
+                    {HeroClass.Monk, new DexterityFetcher()},
+                    {HeroClass.Witchdoctor, new IntelligenceFetcher()},
+                    {HeroClass.Wizard, new IntelligenceFetcher()}
+                };
 
+            var mainStatFetcher = heroMainStatFetcherLookup[hero.HeroClass];
+
+            var itemListContainer = new ItemListDataContainer(() => heroViewModel.ItemList);
+
+            var statsHeroViewModel =
+                new StatsHeroViewModel(new DamageTermComposite(hero.Level, mainStatFetcher, itemListContainer),
+                    new EhpTermComposite(hero.Level, itemListContainer, hero.HeroClass), heroViewModel);
+
+            heroViewModel.SkeletonHeroViewModel = skeletonHeroViewModel;
+            heroViewModel.StatsViewModel = statsHeroViewModel;
 
             var items = hero.Items;
             var head = items.Head != null ? await Task.Factory.StartNew(() => _api.ItemRepository.GetByTooltipParams(items.Head.TooltipParams)) : null;

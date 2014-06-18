@@ -1,10 +1,12 @@
-﻿using D3ApiDotNet.Core.Objects.Hero;
+﻿using System.Collections.ObjectModel;
+using D3ApiDotNet.Core.Objects.Hero;
+using D3ApiDotNet.Core.Objects.Item;
 
 namespace D3ApiDotNet.WpfUI.ViewModels.Interfaces
 {
     public interface IHeroViewModel : IContentViewModel
     {
-        //ObservableCollection<IItemViewModel> ItemViewList { get; set; }
+        ObservableCollection<Item> ItemList { get; set; }
         ISkeletonHeroViewModel SkeletonHeroViewModel { get; set; }
         IStatsHeroViewModel StatsViewModel { get; set; }
 
