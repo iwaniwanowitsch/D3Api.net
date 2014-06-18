@@ -9,4 +9,5 @@
     <l:AffixTypeColorConverter x:Key="AffixTypeColorConverter" />
     <l:BoolToHardcoreConverter x:Key="BoolToHardcoreConverter" />
     <l:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    <l:ObjectNullToVisibilityConverter x:Key="ObjectNullToVisibilityConverter" />
 </ResourceDictionary>

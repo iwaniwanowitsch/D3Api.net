@@ -9,88 +9,9 @@
     <d:UserControl.DataContext>
         <sampleData:HeroViewModelSampleData />
     </d:UserControl.DataContext>
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../Assets/Styles/HeroAttributesStyle.xaml"/>
-                <ResourceDictionary Source="../Assets/Styles/HeroViewStyles.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </UserControl.Resources>
 
     <StackPanel Orientation="Horizontal">
-        <!-- TODO: Move attributes to seperate user control (e.g. HeroAtrributesView), because of code length -->
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" MinWidth="200">
-                <TextBlock Text="{Binding Path=ActualHero.Name, FallbackValue=''}" FontFamily="Segoe UI Light" FontSize="20" TextWrapping="Wrap"/>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Text="{Binding StringFormat='Level: {0}', Path=ActualHero.Level, FallbackValue=''}" FontSize="14" />
-                    <TextBlock Grid.Column="1" Text="{Binding StringFormat=' ({0})', Path=ActualHero.ParagonLevel, FallbackValue=''}" FontSize="14" Foreground="LightSkyBlue" />
-                    <TextBlock Grid.Column="2" Text="{Binding Path=ActualHero.HeroClass, FallbackValue=''}" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                </Grid>
-                <Grid Margin="0,10,0,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Profile Dps:" Style="{StaticResource AttributeNameStyle}"/>
-                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=ActualHero.Stats.Damage, StringFormat='{}{0:n}', FallbackValue=''}" Style="{StaticResource NumberValueStyle}" />
-                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Elites killed:" Style="{StaticResource AttributeNameStyle}" />
-                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=ActualHero.Kills.Elites, StringFormat='{}{0:0,0}', FallbackValue=''}" Style="{StaticResource NumberValueStyle}" />
-                </Grid>
-            </StackPanel>
-            <TextBlock Grid.Row="1" Text="{Binding StringFormat='Last updated: {0:G}', Path=ActualHero.LastUpdated, FallbackValue=''}" 
-                       Foreground="Gray" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" TextWrapping="Wrap"/>
-        </Grid>
-        
-        <ScrollViewer Margin="20" VerticalScrollBarVisibility="Auto">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-
-                <ContentControl Grid.Row="0" Grid.Column="0" Style="{StaticResource ItemStyle}" Content="{Binding Path=ShouldersItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}"/>
-                <ContentControl Grid.Row="0" Grid.Column="1" Style="{StaticResource ItemStyle}" Content="{Binding Path=HeadItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}"/>
-                <ContentControl Grid.Row="0" Grid.Column="2" Style="{StaticResource ItemStyle}" Content="{Binding Path=AmuletItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}"/>
-
-                <ContentControl Grid.Row="1" Grid.Column="0" Style="{StaticResource ItemStyle}" Content="{Binding Path=HandItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}"/>
-                <ContentControl Grid.Row="1" Grid.Column="1" Style="{StaticResource ItemStyle}" Content="{Binding Path=ChestItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}"/>
-                <ContentControl Grid.Row="1" Grid.Column="2" Style="{StaticResource ItemStyle}" Content="{Binding Path=BracersItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}"/>
-
-                <ContentControl Grid.Row="2" Grid.Column="0" Style="{StaticResource ItemStyle}" Content="{Binding Path=LeftRingItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}"/>
-                <ContentControl Grid.Row="2" Grid.Column="1" Style="{StaticResource ItemStyle}" Content="{Binding Path=WaistItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}"/>
-                <ContentControl Grid.Row="2" Grid.Column="2" Style="{StaticResource ItemStyle}" Content="{Binding Path=RightRingItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}"/>
-
-                <ContentControl Grid.Row="3" Grid.Column="0" Style="{StaticResource ItemStyle}" Content="{Binding Path=MainHandItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}" Grid.RowSpan="2"/>
-                <ContentControl Grid.Row="3" Grid.Column="1" Style="{StaticResource ItemStyle}" Content="{Binding Path=PantsItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}"/>
-                <ContentControl Grid.Row="3" Grid.Column="2" Style="{StaticResource ItemStyle}" Content="{Binding Path=OffHandItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}" Grid.RowSpan="2"/>
-
-                <ContentControl Grid.Row="4" Grid.Column="1" Style="{StaticResource ItemStyle}" Content="{Binding Path=BootsItemViewModel}" ContentTemplate="{DynamicResource ItemViewModelTemplate}"/>
-
-            </Grid>
-        </ScrollViewer>
+        <ContentControl Content="{Binding Path=StatsHeroViewModel}" ContentTemplate="{DynamicResource StatsHeroViewModelTemplate}" />
+        <ContentControl Content="{Binding Path=SkelotonHeroViewModel}" ContentTemplate="{DynamicResource SkelotonHeroViewModelTemplate}" />
     </StackPanel>
 </UserControl>

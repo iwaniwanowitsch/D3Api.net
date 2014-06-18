@@ -9,6 +9,9 @@ namespace D3ApiDotNet.WpfUI.ViewModels
     public class HeroViewModel : BaseContentViewModel, IHeroViewModel
     {
 
+        ISkeletonHeroViewModel _skeletonHeroViewModel;
+        IStatsHeroViewModel _statsHeroViewModel;
+
         public HeroViewModel(Hero actualHero, [NotNull] IManageContentViewModelActions manageContentViewModelActions,
             bool isLoading)
             : base(manageContentViewModelActions, true, isLoading)
@@ -62,6 +65,30 @@ namespace D3ApiDotNet.WpfUI.ViewModels
                 if (ActualHero != null)
                     return "HeroView: " + ActualHero.Name;
                 return "HeroView";
+            }
+        }
+
+        public ISkeletonHeroViewModel SkeletonHeroViewModel
+        {
+            get
+            {
+                return _skeletonHeroViewModel;
+            }
+            set
+            {
+                this.SetValueIfChanged(ref _skeletonHeroViewModel, value);
+            }
+        }
+
+        public IStatsHeroViewModel StatsViewModel
+        {
+            get
+            {
+                return _statsHeroViewModel;
+            }
+            set
+            {
+                this.SetValueIfChanged(ref _statsHeroViewModel, value);
             }
         }
     }

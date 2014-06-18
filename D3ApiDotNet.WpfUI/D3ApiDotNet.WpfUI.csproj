@@ -79,6 +79,7 @@
     <Compile Include="Converters\ItemBorderColorConverter.cs" />
     <Compile Include="Converters\ItemColorConverter.cs" />
     <Compile Include="Converters\ObjectNullToBoolConverter.cs" />
+    <Compile Include="Converters\ObjectNullToVisibilityConverter.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -88,11 +89,13 @@
     <Compile Include="SampleData\ItemViewModelSampleData.cs" />
     <Compile Include="SampleData\LoadDataViewModelSampleData.cs" />
     <Compile Include="SampleData\MainWindowViewModelSampleData.cs" />
+    <Compile Include="SampleData\SkeletonHeroViewModelSampleData.cs" />
     <Compile Include="TemplateSelectors\ContentViewModelTemplateSelector.cs" />
     <Compile Include="ViewModels\AllItemListViewModel.cs" />
     <Compile Include="ViewModels\BaseItemDetailViewModel.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\HeroViewModel.cs" />
-    <Compile Include="ViewModels\Interfaces\BaseContentViewModel.cs" />
+    <Compile Include="ViewModels\BaseContentViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IAllItemListViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IContentViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IHeroViewModel.cs" />
@@ -100,10 +103,16 @@
     <Compile Include="ViewModels\Interfaces\IItemViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\ILoadDataViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IMainWindowViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\IRaisedPropertyChanged.cs" />
+    <Compile Include="ViewModels\Interfaces\ISkeletonHeroViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\IStatsHeroViewModel.cs" />
+    <Compile Include="ViewModels\SkeletonHeroViewModel.cs" />
+    <Compile Include="ViewModels\RaisedPropertyChangedExtension.cs" />
     <Compile Include="ViewModels\ItemDetailViewModel.cs" />
     <Compile Include="ViewModels\ItemViewModel.cs" />
     <Compile Include="ViewModels\LoadDataViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\StatsHeroViewModel.cs" />
     <Compile Include="Views\AllItemsView.xaml.cs">
       <DependentUpon>AllItemsView.xaml</DependentUpon>
     </Compile>
@@ -118,6 +127,12 @@
     </Compile>
     <Compile Include="Views\LoadDataView.xaml.cs">
       <DependentUpon>LoadDataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SkeletonHeroView.xaml.cs">
+      <DependentUpon>SkeletonHeroView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StatsHeroView.xaml.cs">
+      <DependentUpon>StatsHeroView.xaml</DependentUpon>
     </Compile>
     <Page Include="Assets\Styles\HeroAttributesStyle.xaml">
       <SubType>Designer</SubType>
@@ -179,6 +194,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\SkeletonHeroView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StatsHeroView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -221,16 +244,6 @@
   <ItemGroup>
     <Folder Include="Assets\Fonts\" />
     <Folder Include="Models\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Assets\Images\unique_spiritstone_004_x1_demonhunter_male.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Assets\Images\unique_spiritstone_004_x1_demonhunter_male_small.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="logo.ico" />

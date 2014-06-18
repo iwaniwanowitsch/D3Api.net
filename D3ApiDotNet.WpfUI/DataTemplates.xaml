@@ -22,4 +22,12 @@
         <views:AllItemsView />
     </DataTemplate>
 
+    <DataTemplate x:Key="StatsHeroViewModelTemplate">
+        <views:StatsHeroView />
+    </DataTemplate>
+
+    <DataTemplate x:Key="SkelotonHeroViewModelTemplate">
+        <views:SkeletonHeroView />
+    </DataTemplate>
+
 </ResourceDictionary>

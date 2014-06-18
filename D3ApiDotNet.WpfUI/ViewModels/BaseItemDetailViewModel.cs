@@ -6,10 +6,35 @@ using D3ApiDotNet.WpfUI.ViewModels.Interfaces;
 
 namespace D3ApiDotNet.WpfUI.ViewModels
 {
-    public abstract class BaseItemDetailViewModel : IItemDetailViewModel
+    public abstract class BaseItemDetailViewModel : BaseViewModel, IItemDetailViewModel
     {
-        public virtual Item Item { get; set; }
-        public virtual D3Icon Icon { get; protected set; }
+        private Item _item;
+        private D3Icon _icon;
+
+        public virtual Item Item
+        {
+            get
+            {
+                return _item;
+            }
+            set
+            {
+                this.SetValueIfChanged(ref _item, value);
+            }
+        }
+
+        public virtual D3Icon Icon
+        {
+            get
+            {
+                return _icon;
+            }
+            protected set
+            {
+                this.SetValueIfChanged(ref _icon, value);
+            }
+        }
+
         public virtual IList<ItemTextAttribute> PrimaryAttributes
         {
             get

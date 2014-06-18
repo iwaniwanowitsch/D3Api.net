@@ -6,7 +6,7 @@ using D3ApiDotNet.WpfUI.ViewModels.Interfaces;
 
 namespace D3ApiDotNet.WpfUI.ViewModels
 {
-    public class MainWindowViewModel : IMainWindowViewModel
+    public class MainWindowViewModel : BaseViewModel, IMainWindowViewModel
     {
         private ObservableCollection<IContentViewModel> _contentViewModels;
 

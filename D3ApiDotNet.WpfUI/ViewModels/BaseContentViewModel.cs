@@ -5,34 +5,12 @@ using D3ApiDotNet.WpfUI.Commands;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using D3ApiDotNet.WpfUI.ViewModels.Interfaces;
 
-namespace D3ApiDotNet.WpfUI.ViewModels.Interfaces
+namespace D3ApiDotNet.WpfUI.ViewModels
 {
-    public interface IRaisePropertyChanged
-    {
-        void RaisePropertyChanged(string propertyName);
-    }
 
-    public static class RaisePropertyChangedExtensions
-    {
-
-        public static void SetValueIfChanged<T>(this IRaisePropertyChanged target, ref T field, T value, [CallerMemberName]string propertyName = null)
-        {
-            SetValueIfChanged(target, ref field, value, EqualityComparer<T>.Default, propertyName);
-        }
-
-        public static void SetValueIfChanged<T>(this IRaisePropertyChanged target, ref T field, T value, IEqualityComparer<T> equalityComparer, [CallerMemberName]string propertyName = null)
-        {
-            if (equalityComparer.GetHashCode(field) == equalityComparer.GetHashCode(value) &&
-                equalityComparer.Equals(field, value))
-                return;
-
-            field = value;
-            target.RaisePropertyChanged(propertyName);
-        }
-    }
-
-    public abstract class BaseContentViewModel : IContentViewModel, INotifyPropertyChanged, IRaisePropertyChanged
+    public abstract class BaseContentViewModel : BaseViewModel, IContentViewModel
     {
         private readonly IManageContentViewModelActions _manageContentViewModelActions;
         private readonly bool _isDeletable;
@@ -67,15 +45,6 @@ namespace D3ApiDotNet.WpfUI.ViewModels.Interfaces
                 }
                 return _deleteCommand;
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        
-        void IRaisePropertyChanged.RaisePropertyChanged([CallerMemberName]string propertyName = null)
-        {
-            var handler = PropertyChanged;
-            if (handler != null)
-                handler(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

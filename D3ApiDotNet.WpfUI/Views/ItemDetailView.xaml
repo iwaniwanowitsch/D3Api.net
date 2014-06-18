@@ -53,7 +53,7 @@
                     HorizontalContentAlignment="Stretch"
                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                     ItemsSource="{Binding Path=PrimaryAttributes}"/>
-                <Separator/>
+                <Separator Visibility="{Binding Path=SecondaryAttributes,Converter={StaticResource ObjectNullToVisibilityConverter}}"/>
                 <ListBox x:Name="ItemSecondaryAttributesListBox" Background="{x:Null}" BorderBrush="{x:Null}" 
                     ItemTemplate="{DynamicResource ItemAttributesTemplate}" 
                     HorizontalContentAlignment="Stretch"

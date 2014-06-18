@@ -9,7 +9,7 @@ using D3ApiDotNet.WpfUI.ViewModels.Interfaces;
 
 namespace D3ApiDotNet.WpfUI.ViewModels
 {
-    public class ItemViewModel : IItemViewModel
+    public class ItemViewModel : BaseViewModel, IItemViewModel
     {
         public ItemViewModel(bool hasTooltipEnabled, [NotNull] IItemDetailViewModel itemDetailViewModel)
         {
@@ -20,22 +20,5 @@ namespace D3ApiDotNet.WpfUI.ViewModels
 
         public bool HasTooltipEnabled { get; set; }
         public IItemDetailViewModel ItemDetailViewModel { get; private set; }
-    }
-
-    public abstract class BaseViewModel : INotifyPropertyChanged, IRaisePropertyChanged
-    {
-        protected void RaisePropertyChanged([CallerMemberName]string propertyName = null)
-        {
-            var handler = PropertyChanged;
-            if (handler != null)
-                handler(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        void IRaisePropertyChanged.RaisePropertyChanged(string propertyName)
-        {
-            RaisePropertyChanged(propertyName);
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

@@ -33,9 +33,10 @@ namespace D3ApiDotNet.WpfUI
 
             var collectMode = CollectMode.TryCacheThenOnline;
             var locale = Locales.en_GB;
+            WebProxy proxy = null/*new WebProxy("127.0.0.1:3128")*/;
 
-            var api = new ApiAccessFacade(collectMode, locale, null /*new WebProxy("127.0.0.1:3128")*/, new TimeSpan(0, 1, 0, 0));
-            var longapi = new ApiAccessFacade(collectMode, locale, null /*new WebProxy("127.0.0.1:3128")*/, TimeSpan.MaxValue);
+            var api = new ApiAccessFacade(collectMode, locale, proxy, new TimeSpan(0, 1, 0, 0));
+            var longapi = new ApiAccessFacade(collectMode, locale, proxy, TimeSpan.MaxValue);
             var itemCollector = new ItemNamesCollector(new StreamWebRepository(null));
 
             var manageContentViewModelCommand =
