@@ -7,7 +7,6 @@
             <ResourceDictionary.MergedDictionaries>
                 <!-- Values -->
                 <ResourceDictionary Source="Assets/Values/ColorsDarkTheme.xaml"/>
-                <ResourceDictionary Source="Assets/Values/Images.xaml"/>
 
                 <!-- Window/Control Styles -->
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
