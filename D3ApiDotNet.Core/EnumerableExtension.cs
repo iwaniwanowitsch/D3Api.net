@@ -14,8 +14,8 @@ namespace D3ApiDotNet.Core
 
         public static IEnumerable<ItemAttributes> GetSetAttributes(this IEnumerable<Item> items)
         {
-            var setItems = items.Where(o => o.Set != null);
-            var royal = items.Count(o => o.AttributesRaw.AttributeSetItemDiscount != null) > 0;
+            var setItems = items.Where(o => o != null && o.Set != null);
+            var royal = items.Where(o => o != null).Count(o => o.AttributesRaw.AttributeSetItemDiscount != null) > 0;
             var checkedSetItems = new Dictionary<Item, int>();
             foreach (var setItem in setItems)
             {

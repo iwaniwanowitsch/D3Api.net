@@ -13,7 +13,14 @@ namespace D3ApiDotNet.Core.Calculation.AttributeFetchers
                 attributes.damageWeaponDelta_Holy +
                 attributes.damageWeaponDelta_Lightning +
                 attributes.damageWeaponDelta_Physical +
-                attributes.damageWeaponDelta_Poison;
+                attributes.damageWeaponDelta_Poison + 
+                attributes.damageWeaponBonusDeltaX1_Arcane + 
+                attributes.damageWeaponBonusDeltaX1_Cold + 
+                attributes.damageWeaponBonusDeltaX1_Fire + 
+                attributes.damageWeaponBonusDeltaX1_Holy + 
+                attributes.damageWeaponBonusDeltaX1_Lightning + 
+                attributes.damageWeaponBonusDeltaX1_Physical + 
+                attributes.damageWeaponBonusDeltaX1_Poison;
         }
     }
 }

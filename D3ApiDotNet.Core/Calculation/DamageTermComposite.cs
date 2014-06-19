@@ -46,8 +46,8 @@ namespace D3ApiDotNet.Core.Calculation
             var divisionFactory = new DivisionTermFactory();
             var elementalTermsFactory = new ElementalTermFactories(new BaseTermFactory(), sumFactory, productFactory, new SubstractionTermFactory(), divisionFactory, new PercentSumTermFactory(), new AverageTermFactory(sumFactory, productFactory, divisionFactory), new MaxTermFactory());
 
-            _weaponAvgDmgFactory = new WeaponAvgDmgFormulaFactory(elementalTermsFactory, itemListData, new MinWeaponDamageFetcher(), new DeltaWeaponDamageFetcher());
-            _weaponDmgFactory = new WeaponDmgFormulaFactory(elementalTermsFactory, itemListData, new PercentWeaponDamageFetcher(), _weaponAvgDmgFactory, new BonusAvgDmgFormulaFactory(elementalTermsFactory, itemListData, new MinDamageFetcher(), new DeltaDamageFetcher()));
+            _weaponAvgDmgFactory = new WeaponAvgDmgFormulaFactory(elementalTermsFactory, itemListData, new MinWeaponDamageFetcher(), new DeltaWeaponDamageFetcher(), new PercentWeaponDamageFetcher());
+            _weaponDmgFactory = new WeaponDmgFormulaFactory(elementalTermsFactory, itemListData, _weaponAvgDmgFactory, new BonusAvgDmgFormulaFactory(elementalTermsFactory, itemListData, new MinDamageFetcher(), new DeltaDamageFetcher()));
             _weaponApsFactory = new WeaponApsFormulaFactory(elementalTermsFactory, itemListData, new ApsWeaponFetcher(), new ApsPercentWeaponFetcher());
             _weaponDpsFactory = new WeaponDpsFormulaFactory(elementalTermsFactory, _weaponDmgFactory, _weaponApsFactory);
 

@@ -49,6 +49,10 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="Profile Dps:" Style="{StaticResource AttributeNameStyle}"/>
                 <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding StringFormat='{}{0:n}', Path=HeroViewModel.ActualHero.Stats.Damage, FallbackValue=''}" Style="{StaticResource NumberValueStyle}" />
@@ -57,7 +61,15 @@
                 
                 <!-- neu eingefügt: berechnete Werte -->
                 <TextBlock Grid.Row="3" Grid.Column="0" Text="Calculated Damage:" Style="{StaticResource AttributeNameStyle}" />
-                <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding StringFormat='{}{0:n}', Path=DamageTerms, Converter={StaticResource TermEvaluateConverter}, FallbackValue=''}" Style="{StaticResource NumberValueStyle}" />
+                <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding StringFormat='{}{0:n}', Path=DamageTerms.DamageTerm, Converter={StaticResource TermEvaluateConverter}, FallbackValue='', UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NumberValueStyle}" />
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="Weapon Dmg:" Style="{StaticResource AttributeNameStyle}" />
+                <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding StringFormat='{}{0:n}', Path=DamageTerms.WeaponDmgTerm, Converter={StaticResource TermEvaluateConverter}, FallbackValue='', UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NumberValueStyle}" />
+                <TextBlock Grid.Row="5" Grid.Column="0" Text="Weapon Aps:" Style="{StaticResource AttributeNameStyle}" />
+                <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding StringFormat='{}{0:n}', Path=DamageTerms.WeaponApsTerm, Converter={StaticResource TermEvaluateConverter}, FallbackValue='', UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NumberValueStyle}" />
+                <TextBlock Grid.Row="6" Grid.Column="0" Text="Weapon Dps:" Style="{StaticResource AttributeNameStyle}" />
+                <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding StringFormat='{}{0:n}', Path=DamageTerms.WeaponDpsTerm, Converter={StaticResource TermEvaluateConverter}, FallbackValue='', UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NumberValueStyle}" />
+                <TextBlock Grid.Row="7" Grid.Column="0" Text="Ehp:" Style="{StaticResource AttributeNameStyle}" />
+                <TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding StringFormat='{}{0:n}', Path=EhpTerms.EhpTerm, Converter={StaticResource TermEvaluateConverter}, FallbackValue='', UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NumberValueStyle}" />
             </Grid>
         </StackPanel>
         <TextBlock Grid.Row="1" Text="{Binding StringFormat='Last updated: {0:G}', Path=HeroViewModel.ActualHero.LastUpdated, FallbackValue=''}" 

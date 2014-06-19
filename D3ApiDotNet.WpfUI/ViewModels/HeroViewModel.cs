@@ -56,79 +56,131 @@ namespace D3ApiDotNet.WpfUI.ViewModels
         public IItemViewModel HeadItemViewModel
         {
             get { return _headItemViewModel; }
-            set { this.SetValueIfChanged(ref _headItemViewModel, value); }
+            set
+            {
+                this.SetValueIfChanged(ref _headItemViewModel, value);
+                StatsViewModel.Update();
+            }
         }
 
         public IItemViewModel ShouldersItemViewModel
         {
             get { return _shouldersItemViewModel; }
-            set { this.SetValueIfChanged(ref _shouldersItemViewModel, value); }
+            set
+            {
+                this.SetValueIfChanged(ref _shouldersItemViewModel, value);
+                StatsViewModel.Update();
+            }
         }
 
         public IItemViewModel AmuletItemViewModel
         {
             get { return _amuletItemViewModel; }
-            set { this.SetValueIfChanged(ref _amuletItemViewModel, value); }
+            set
+            {
+                this.SetValueIfChanged(ref _amuletItemViewModel, value);
+                StatsViewModel.Update();
+            }
         }
 
         public IItemViewModel ChestItemViewModel
         {
             get { return _chestItemViewModel; }
-            set { this.SetValueIfChanged(ref _chestItemViewModel, value); }
+            set
+            {
+                this.SetValueIfChanged(ref _chestItemViewModel, value);
+                StatsViewModel.Update();
+            }
         }
 
         public IItemViewModel HandItemViewModel
         {
             get { return _handItemViewModel; }
-            set { this.SetValueIfChanged(ref _handItemViewModel, value); }
+            set
+            {
+                this.SetValueIfChanged(ref _handItemViewModel, value);
+                StatsViewModel.Update();
+            }
         }
 
         public IItemViewModel BracersItemViewModel
         {
             get { return _bracersItemViewModel; }
-            set { this.SetValueIfChanged(ref _bracersItemViewModel, value); }
+            set
+            {
+                this.SetValueIfChanged(ref _bracersItemViewModel, value);
+                StatsViewModel.Update();
+            }
         }
 
         public IItemViewModel LeftRingItemViewModel
         {
             get { return _leftRingItemViewModel; }
-            set { this.SetValueIfChanged(ref _leftRingItemViewModel, value); }
+            set
+            {
+                this.SetValueIfChanged(ref _leftRingItemViewModel, value);
+                StatsViewModel.Update();
+            }
         }
 
         public IItemViewModel WaistItemViewModel
         {
             get { return _waistItemViewModel; }
-            set { this.SetValueIfChanged(ref _waistItemViewModel, value); }
+            set
+            {
+                this.SetValueIfChanged(ref _waistItemViewModel, value);
+                StatsViewModel.Update();
+            }
         }
 
         public IItemViewModel RightRingItemViewModel
         {
             get { return _rightRingItemViewModel; }
-            set { this.SetValueIfChanged(ref _rightRingItemViewModel, value); }
+            set
+            {
+                this.SetValueIfChanged(ref _rightRingItemViewModel, value);
+                StatsViewModel.Update();
+            }
         }
 
         public IItemViewModel MainHandItemViewModel
         {
             get { return _mainHandItemViewModel; }
-            set { this.SetValueIfChanged(ref _mainHandItemViewModel, value); }
+            set
+            {
+                this.SetValueIfChanged(ref _mainHandItemViewModel, value);
+                StatsViewModel.Update();
+            }
         }
 
         public IItemViewModel PantsItemViewModel
         {
             get { return _pantsItemViewModel; }
-            set { this.SetValueIfChanged(ref _pantsItemViewModel, value); }
+            set
+            {
+                this.SetValueIfChanged(ref _pantsItemViewModel, value);
+                StatsViewModel.Update();
+            }
         }
 
         public IItemViewModel OffHandItemViewModel
         {
             get { return _offHandItemViewModel; }
-            set { this.SetValueIfChanged(ref _offHandItemViewModel, value); }
+            set
+            {
+                this.SetValueIfChanged(ref _offHandItemViewModel, value);
+                StatsViewModel.Update();
+            }
         }
 
         public IItemViewModel BootsItemViewModel
         {
             get { return _bootsItemViewModel; }
-            set { this.SetValueIfChanged(ref _bootsItemViewModel, value); }
+            set
+            {
+                this.SetValueIfChanged(ref _bootsItemViewModel, value); 
+                StatsViewModel.Update();
+            }
         }
 
         public bool IsActualHero()

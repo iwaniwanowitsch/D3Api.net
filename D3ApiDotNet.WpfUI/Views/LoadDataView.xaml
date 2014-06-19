@@ -24,7 +24,8 @@
                 <!-- TODO: where to find those images? 
                 <Image Grid.Column="0" Source="pack://application:,,,/Assets/Images/HeroClasses/BarbarianClassLogo32.png" Height="32" Width="32" Margin="0,0,5,0"/>
                 -->
-                <TextBlock Grid.Column="1" Text="{Binding Path=Name}" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                <TextBlock Grid.Column="0" Text="{Binding Path=Name}" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                <TextBlock Grid.Column="1" Text="{Binding Path=HeroClass, StringFormat='({0})'}"  Margin="10 0 0 0"/>
                 <TextBlock Grid.Column="2" Text="{Binding Path=Hardcore, Converter={StaticResource BoolToHardcoreConverter}}" Foreground="{Binding Path=Hardcore, Converter={StaticResource BoolToHardcoreConverter}}" Margin="3,0" VerticalAlignment="Center"/>
                 <!-- Dead Heroes will not show up in this list
                 <TextBlock Grid.Column="3" Text="Dead" Foreground="Red" Margin="3,0" VerticalAlignment="Center"/>
