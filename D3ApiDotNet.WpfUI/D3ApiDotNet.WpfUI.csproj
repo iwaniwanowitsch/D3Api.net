@@ -72,8 +72,18 @@
     <Compile Include="Assets\Styles\ItemStyles.xaml.cs">
       <DependentUpon>ItemStyles.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Assets\Styles\LoadDataViewStyle.xaml.cs">
+      <DependentUpon>LoadDataViewStyle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Styles\Templates\HeroComboBoxItemTemplate.xaml.cs">
+      <DependentUpon>HeroComboboxItemTemplate.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Assets\Styles\Templates\ItemAttributesTemplates.xaml.cs">
       <DependentUpon>ItemAttributesTemplates.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Styles\Templates\TabControlItemHeaderTemplate.xaml.cs">
+      <DependentUpon>TabControlItemHeaderTemplate.xaml</DependentUpon>
+      <Generator>MSBuild:Compile</Generator>
     </Compile>
     <Compile Include="Commands\ManageContentViewModelActions.cs" />
     <Compile Include="Commands\IManageContentViewModelActions.cs" />
@@ -85,6 +95,7 @@
     <Compile Include="Converters\BoolToHardcoreConverter.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\HeroClassColorConverter.cs" />
+    <Compile Include="Converters\HeroClassIconConverter.cs" />
     <Compile Include="Converters\ImageBitmapSourceConverter.cs" />
     <Compile Include="Converters\ItemBorderColorConverter.cs" />
     <Compile Include="Converters\ItemColorConverter.cs" />
@@ -155,13 +166,29 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Assets\Styles\LoadDataViewStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Assets\Styles\Templates\HeroComboboxItemTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Assets\Styles\Templates\ItemAttributesTemplates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Assets\Values\Colors.xaml">
+    <Page Include="Assets\Styles\Templates\TabControlItemHeaderTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Assets\Values\ColorsDarkTheme.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Assets\Values\Images.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Converters.xaml">
       <SubType>Designer</SubType>
@@ -261,6 +288,9 @@
     <Resource Include="Assets\Images\HeroClasses\BarbarianClassLogo32.png" />
     <Resource Include="Assets\Images\HeroClasses\WitchDoctorClassLogo32.png" />
     <Resource Include="Assets\Images\HeroClasses\WizardClassLogo32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\Application\logo32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

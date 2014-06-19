@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:templates="clr-namespace:D3ApiDotNet.WpfUI.Assets.Styles.Templates"
+             xmlns:styles="clr-namespace:D3ApiDotNet.WpfUI.Assets.Styles"
              xmlns:sampleData="clr-namespace:D3ApiDotNet.WpfUI.SampleData"
              mc:Ignorable="d" 
              d:DesignHeight="331" d:DesignWidth="658">
@@ -11,40 +13,12 @@
     </d:UserControl.DataContext>
 
     <UserControl.Resources>
-        <DataTemplate x:Key="ComboBoxItemTemplate">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <!-- TODO: where to find those images? 
-                <Image Grid.Column="0" Source="pack://application:,,,/Assets/Images/HeroClasses/BarbarianClassLogo32.png" Height="32" Width="32" Margin="0,0,5,0"/>
-                -->
-                <TextBlock Grid.Column="1" Text="{Binding Path=Name}" VerticalAlignment="Center" TextWrapping="Wrap"/>
-                <TextBlock Grid.Column="2" Text="{Binding Path=Hardcore, Converter={StaticResource BoolToHardcoreConverter}}" Foreground="{Binding Path=Hardcore, Converter={StaticResource BoolToHardcoreConverter}}" Margin="3,0" VerticalAlignment="Center"/>
-                <!-- Dead Heroes will not show up in this list
-                <TextBlock Grid.Column="3" Text="Dead" Foreground="Red" Margin="3,0" VerticalAlignment="Center"/>
-                -->
-                <TextBlock Grid.Column="4" Text="{Binding Path=Level}" Margin="3,0" VerticalAlignment="Center"/>
-                <TextBlock Grid.Column="5" Text="{Binding Path=ParagonLevel, StringFormat='({0})'}" Foreground="LightSkyBlue" VerticalAlignment="Center" Margin="3,0"/>
-                <!--<ComboBoxItem Content="{Binding Path=Name}"/>-->
-            </Grid>
-
-        </DataTemplate>
-
-        <Style x:Key="TitleStyle" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="FontFamily" Value="Segoe UI Light"/>
-            <Setter Property="FontSize" Value="20"/>
-        </Style>
-        <Style x:Key="ButtonStyle" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="Padding" Value="5,0"/>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <templates:HeroComboBoxItemTemplate/>
+                <styles:LoadDataViewStyle/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </UserControl.Resources>
 
     <Grid>
@@ -69,19 +43,19 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
-                       Text="Enter Battletag: " Style="{StaticResource TitleStyle}"/>
+                       Text="Enter Battletag: " Style="{DynamicResource TitleStyle}"/>
             <TextBox Grid.Row="1" Grid.Column="0" x:Name="BattletagTextBox" 
                      Text="{Binding Path=Battletag, UpdateSourceTrigger=PropertyChanged}" 
                      Margin="5" FontSize="14"/>
             <Button Grid.Row="1" Grid.Column="1" x:Name="BattletagButton" 
                     Command="{Binding Path=LoadProfileCommand, IsAsync=True}" 
                     Content="Load Profile"
-                    Style="{StaticResource ButtonStyle}" />
+                    Style="{DynamicResource ButtonStyle}" />
 
             <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
-                       Text="Select Hero:" Style="{StaticResource TitleStyle}"/>
+                       Text="Select Hero:" Style="{DynamicResource TitleStyle}"/>
             <ComboBox Grid.Row="4" Grid.Column="0" x:Name="HeroComboBox" 
-                      ItemTemplate="{StaticResource ComboBoxItemTemplate}" 
+                      ItemTemplate="{DynamicResource HeroComboBoxItemTemplate}" 
                       ItemsSource="{Binding Path=Heroes, UpdateSourceTrigger=PropertyChanged}" 
                       SelectedIndex="{Binding Path=HeroId, UpdateSourceTrigger=PropertyChanged}" 
                       HorizontalContentAlignment="Stretch"
@@ -96,7 +70,7 @@
                     Command="{Binding Path=LoadHeroCommand, IsAsync=True}" 
                     Content="Load Hero" IsEnabled="{Binding Path=Heroes, 
                     Converter={StaticResource ObjectNullToBoolConverter}, UpdateSourceTrigger=PropertyChanged}"
-                    Style="{StaticResource ButtonStyle}"/>
+                    Style="{DynamicResource ButtonStyle}"/>
         </Grid>
     </Grid>
 </UserControl>
