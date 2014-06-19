@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
@@ -14,9 +11,9 @@ namespace D3ApiDotNet.WpfUI.Converters
     {
         private readonly Dictionary<string, Color?> _lookupDictionary = new Dictionary<string, Color?>
         {
-            {"default" , Application.Current.Resources["ItemBackgroundColorGray"] as Color? },
-            {"utility", Application.Current.Resources["ItemBackgroundColorOrange"] as Color? },
-            {"enchant", Application.Current.Resources["ItemBackgroundColorBlue"] as Color? }
+            {"default" , Application.Current.Resources["ItemAffixNumerationDefault"] as Color? },
+            {"utility", Application.Current.Resources["ItemAffixNumerationUtility"] as Color? },
+            {"enchant", Application.Current.Resources["ItemAffixNumerationEnchant"] as Color? }
         };
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

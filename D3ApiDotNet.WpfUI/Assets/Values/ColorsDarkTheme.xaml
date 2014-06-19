@@ -1,6 +1,5 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-
     <!-- Item Colors -->
     <Color x:Key="ItemBackgroundColorGray">DimGray</Color>
     <Color x:Key="ItemBackgroundColorWhite">LightGray</Color>
@@ -9,6 +8,10 @@
     <Color x:Key="ItemBackgroundColorOrange">#ff6c00</Color>
     <Color x:Key="ItemBackgroundColorGreen">LimeGreen</Color>
 
+    <!-- Item Affix Numeration Colos -->
+    <Color x:Key="ItemAffixNumerationDefault">DimGray</Color>
+    <Color x:Key="ItemAffixNumerationUtility">#ff6c00</Color>
+    <Color x:Key="ItemAffixNumerationEnchant">CornflowerBlue</Color>
     
     <!-- Hero Colors -->
     <Color x:Key="HeroClassColorBarbarian">IndianRed</Color>
