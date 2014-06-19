@@ -21,5 +21,10 @@ namespace D3ApiDotNet.WpfUI.SampleData
         public IHeroViewModel HeroViewModel { get; set; }
         public DamageTermComposite DamageTerms { get; set; }
         public EhpTermComposite EhpTerms { get; set; }
+
+        public void Update()
+        {
+            
+        }
     }
 }

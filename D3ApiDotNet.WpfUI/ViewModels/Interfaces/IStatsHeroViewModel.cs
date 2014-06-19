@@ -14,5 +14,7 @@ namespace D3ApiDotNet.WpfUI.ViewModels.Interfaces
         DamageTermComposite DamageTerms { get; set; }
 
         EhpTermComposite EhpTerms { get; set; }
+
+        void Update();
     }
 }

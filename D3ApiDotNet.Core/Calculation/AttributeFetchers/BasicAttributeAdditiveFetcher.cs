@@ -18,7 +18,7 @@ namespace D3ApiDotNet.Core.Calculation.AttributeFetchers
 
         public override double GetBonusDamage(IEnumerable<Item> items)
         {
-            return GetBonusDamage(items.Select(o => o.AttributesRaw)) + GetBonusDamage(items.SelectMany(o => o.Gems.Select(a => a.AttributesRaw)));
+            return GetBonusDamage(items.Where(o => o != null).Select(o => o.AttributesRaw)) + GetBonusDamage(items.Where(o => o != null).SelectMany(o => o.Gems.Where(p => p != null).Select(a => a.AttributesRaw)));
         }
     }
 }

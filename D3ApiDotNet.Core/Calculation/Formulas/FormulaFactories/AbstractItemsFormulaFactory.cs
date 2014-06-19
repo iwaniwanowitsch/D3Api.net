@@ -19,7 +19,7 @@ namespace D3ApiDotNet.Core.Calculation.Formulas.FormulaFactories
         protected IList<Item> WeaponList {
             get
             {
-                return ItemList.Where<Item>(o => o.AttacksPerSecond != null).ToList<Item>();
+                return ItemList.Where<Item>(o => o != null && o.AttacksPerSecond != null).ToList<Item>();
             }
         }
 

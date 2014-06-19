@@ -45,5 +45,11 @@ namespace D3ApiDotNet.WpfUI.ViewModels
             get { return _ehpTerms; }
             set { this.SetValueIfChanged(ref _ehpTerms, value); }
         }
+
+        public void Update()
+        {
+            RaisePropertyChanged("DamageTerms");
+            RaisePropertyChanged("EhpTerms");
+        }
     }
 }
