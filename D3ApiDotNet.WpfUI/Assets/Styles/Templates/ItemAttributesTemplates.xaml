@@ -9,7 +9,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Rectangle Grid.Column="0" Width="6" Height="6" Margin="0,6,3,0" Fill="{Binding Path=AffixType, Converter={StaticResource AffixTypeColorConverter}, FallbackValue=gray}" VerticalAlignment="Top">
+            <Rectangle Grid.Column="0" Width="6" Height="6" Margin="0,4,3,0" Fill="{Binding Path=AffixType, Converter={StaticResource AffixTypeColorConverter}, FallbackValue=gray}" VerticalAlignment="Top">
                 <Rectangle.LayoutTransform>
                     <RotateTransform Angle="-45"/>
                 </Rectangle.LayoutTransform>

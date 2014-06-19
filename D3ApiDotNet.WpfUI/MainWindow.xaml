@@ -4,8 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:sampleData="clr-namespace:D3ApiDotNet.WpfUI.SampleData"
-        xmlns:interfaces="clr-namespace:D3ApiDotNet.WpfUI.ViewModels.Interfaces"
-        xmlns:metro="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:templates="clr-namespace:D3ApiDotNet.WpfUI.Assets.Styles.Templates"
         mc:Ignorable="d"
         Title="MainWindow" Height="800" WindowStartupLocation="CenterScreen" Icon="logo.ico">
     <d:Window.DataContext>
@@ -13,22 +12,14 @@
     </d:Window.DataContext>
     
     <Window.Resources>
-
-        <DataTemplate x:Key="TabControlItemHeaderTemplate" DataType="interfaces:IContentViewModel">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding Path=Name, FallbackValue=ContentView}"/>
-                <metro:ProgressRing Visibility="{Binding Path=IsLoading, Converter={StaticResource BoolToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}" IsActive="True" Width="6" Height="6" />
-                <!-- TODO: style this button, invisible if disabled -->
-                <Button Content="X" Background="{x:Null}" Foreground="White" Command="{Binding Path=Delete}"/>
-            </StackPanel>
-        </DataTemplate>
-
+        <templates:TabControlItemHeaderTemplate/>
     </Window.Resources>
+    
     <Grid>
         <TabControl SelectedIndex="0" 
                     ItemsSource="{Binding ContentViewModels}" 
                     ContentTemplateSelector="{StaticResource ContentViewModelTemplateSelector}" 
-                    ItemTemplate="{StaticResource TabControlItemHeaderTemplate}">
+                    ItemTemplate="{DynamicResource TabControlItemHeaderTemplate}">
             <!-- <TabItem Header="{Binding Path=HeroViewModel.ActualHero.Name, FallbackValue=HeroView}">
                 <ContentControl Content="{Binding HeroViewModel}" ContentTemplate="{DynamicResource HeroViewModelTemplate}" />
             </TabItem> -->
