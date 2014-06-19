@@ -1,13 +1,14 @@
 ﻿<Application x:Class="D3ApiDotNet.WpfUI.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:styles="clr-namespace:D3ApiDotNet.WpfUI.Assets.Styles">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <!-- Values -->
                 <ResourceDictionary Source="Assets/Values/Colors.xaml"/>
 
-                <!-- Styles -->
+                <!-- Window/Control Styles -->
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
@@ -16,7 +17,8 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/basedark.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/blue.xaml" />
 
-                <ResourceDictionary Source="Assets/Styles/ItemStyles.xaml"/>
+                <!-- User Styles -->
+                <styles:ItemStyles />
 
                 <!-- Data Templates -->
                 <ResourceDictionary Source="DataTemplates.xaml" />

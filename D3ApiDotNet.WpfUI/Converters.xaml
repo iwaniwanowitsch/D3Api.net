@@ -11,4 +11,5 @@
     <l:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     <l:ObjectNullToVisibilityConverter x:Key="ObjectNullToVisibilityConverter" />
     <l:TermEvaluateConverter x:Key="TermEvaluateConverter" />
+    <l:HeroClassColorConverter x:Key="HeroClassColorConverter" />
 </ResourceDictionary>

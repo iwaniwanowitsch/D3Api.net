@@ -63,6 +63,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Assets\Styles\HeroStatsStyle.xaml.cs">
+      <DependentUpon>HeroStatsStyle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Styles\HeroViewStyles.xaml.cs">
+      <DependentUpon>HeroViewStyles.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Styles\ItemStyles.xaml.cs">
+      <DependentUpon>ItemStyles.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Assets\Styles\Templates\ItemAttributesTemplates.xaml.cs">
       <DependentUpon>ItemAttributesTemplates.xaml</DependentUpon>
     </Compile>
@@ -75,6 +84,7 @@
     <Compile Include="Converters\AffixTypeColorConverter.cs" />
     <Compile Include="Converters\BoolToHardcoreConverter.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\HeroClassColorConverter.cs" />
     <Compile Include="Converters\ImageBitmapSourceConverter.cs" />
     <Compile Include="Converters\ItemBorderColorConverter.cs" />
     <Compile Include="Converters\ItemColorConverter.cs" />
@@ -133,7 +143,7 @@
     <Compile Include="Views\StatsHeroView.xaml.cs">
       <DependentUpon>StatsHeroView.xaml</DependentUpon>
     </Compile>
-    <Page Include="Assets\Styles\HeroAttributesStyle.xaml">
+    <Page Include="Assets\Styles\HeroStatsStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
