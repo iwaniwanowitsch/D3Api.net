@@ -11,7 +11,7 @@
     <d:UserControl.DataContext>
         <sampleData:StatsHeroViewModelSampleData />
     </d:UserControl.DataContext>
-    
+
     <UserControl.Resources>
         <styles:HeroStatsStyle />
     </UserControl.Resources>
@@ -23,9 +23,9 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" MinWidth="200">
             <TextBlock Text="{Binding Path=HeroViewModel.ActualHero.Name, FallbackValue=''}" FontFamily="Segoe UI Light" FontSize="20" TextWrapping="Wrap"/>
-            
+
             <!-- TODO: ich finde es nicht gut, hier ein grid zu verwenden. mir würde ein vertikales stackpanel besser gefallen. ist flexibler beim erweitern -->
-            
+
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -37,38 +37,43 @@
                 <TextBlock Grid.Column="2" Text="{Binding Path=HeroViewModel.ActualHero.HeroClass, FallbackValue=''}" HorizontalAlignment="Right" VerticalAlignment="Center"
                            Foreground="{Binding Path=HeroViewModel.ActualHero.HeroClass, Converter={StaticResource HeroClassColorConverter}, FallbackValue={x:Null}}"/>
             </Grid>
-            <Grid Margin="0,10,0,0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <TextBlock Grid.Row="1" Grid.Column="0" Text="Profile Dps:" Style="{DynamicResource AttributeNameStyle}"/>
-                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding StringFormat='{}{0:n}', Path=HeroViewModel.ActualHero.Stats.Damage, FallbackValue=''}" Style="{DynamicResource NumberValueStyle}" />
-                <TextBlock Grid.Row="2" Grid.Column="0" Text="Elites killed:" Style="{DynamicResource AttributeNameStyle}" />
-                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding StringFormat='{}{0:0,0}', Path=HeroViewModel.ActualHero.Kills.Elites, FallbackValue=''}" Style="{DynamicResource NumberValueStyle}" />
-                
+            <StackPanel Margin="0,10,0,0">
+                <Grid>
+                    <TextBlock Text="Profile Dps:" Style="{DynamicResource AttributeNameStyle}"/>
+                    <TextBlock Text="{Binding StringFormat='{}{0:n}', Path=HeroViewModel.ActualHero.Stats.Damage, FallbackValue=''}" Style="{DynamicResource NumberValueStyle}" />
+                </Grid>
+
+                <Grid>
+                    <TextBlock Text="Elites killed:" Style="{DynamicResource AttributeNameStyle}" />
+                    <TextBlock Text="{Binding StringFormat='{}{0:0,0}', Path=HeroViewModel.ActualHero.Kills.Elites, FallbackValue=''}" Style="{DynamicResource NumberValueStyle}" />
+                </Grid>
+
                 <!-- neu eingefügt: berechnete Werte -->
-                <TextBlock Grid.Row="3" Grid.Column="0" Text="Calculated Damage:" Style="{StaticResource AttributeNameStyle}" />
-                <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding StringFormat='{}{0:n}', Path=DamageTerms.DamageTerm, Converter={StaticResource TermEvaluateConverter}, FallbackValue='', UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NumberValueStyle}" />
-                <TextBlock Grid.Row="4" Grid.Column="0" Text="Weapon Dmg:" Style="{StaticResource AttributeNameStyle}" />
-                <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding StringFormat='{}{0:n}', Path=DamageTerms.WeaponDmgTerm, Converter={StaticResource TermEvaluateConverter}, FallbackValue='', UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NumberValueStyle}" />
-                <TextBlock Grid.Row="5" Grid.Column="0" Text="Weapon Aps:" Style="{StaticResource AttributeNameStyle}" />
-                <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding StringFormat='{}{0:n}', Path=DamageTerms.WeaponApsTerm, Converter={StaticResource TermEvaluateConverter}, FallbackValue='', UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NumberValueStyle}" />
-                <TextBlock Grid.Row="6" Grid.Column="0" Text="Weapon Dps:" Style="{StaticResource AttributeNameStyle}" />
-                <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding StringFormat='{}{0:n}', Path=DamageTerms.WeaponDpsTerm, Converter={StaticResource TermEvaluateConverter}, FallbackValue='', UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NumberValueStyle}" />
-                <TextBlock Grid.Row="7" Grid.Column="0" Text="Ehp:" Style="{StaticResource AttributeNameStyle}" />
-                <TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding StringFormat='{}{0:n}', Path=EhpTerms.EhpTerm, Converter={StaticResource TermEvaluateConverter}, FallbackValue='', UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NumberValueStyle}" />
-            </Grid>
+                <Grid>
+                    <TextBlock Text="Calculated Damage:" Style="{StaticResource AttributeNameStyle}" />
+                    <TextBlock Text="{Binding StringFormat='{}{0:n}', Path=DamageTerms.DamageTerm, Converter={StaticResource TermEvaluateConverter}, FallbackValue='', UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NumberValueStyle}" />
+                </Grid>
+
+                <Grid>
+                    <TextBlock Text="Weapon Dmg:" Style="{StaticResource AttributeNameStyle}" />
+                    <TextBlock Text="{Binding StringFormat='{}{0:n}', Path=DamageTerms.WeaponDmgTerm, Converter={StaticResource TermEvaluateConverter}, FallbackValue='', UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NumberValueStyle}" />
+                </Grid>
+
+                <Grid>
+                    <TextBlock Text="Weapon Aps:" Style="{StaticResource AttributeNameStyle}" />
+                    <TextBlock Text="{Binding StringFormat='{}{0:n}', Path=DamageTerms.WeaponApsTerm, Converter={StaticResource TermEvaluateConverter}, FallbackValue='', UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NumberValueStyle}" />
+                </Grid>
+
+                <Grid>
+                    <TextBlock Text="Weapon Dps:" Style="{StaticResource AttributeNameStyle}" />
+                    <TextBlock Text="{Binding StringFormat='{}{0:n}', Path=DamageTerms.WeaponDpsTerm, Converter={StaticResource TermEvaluateConverter}, FallbackValue='', UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NumberValueStyle}" />
+                </Grid>
+
+                <Grid>
+                    <TextBlock Text="Ehp:" Style="{StaticResource AttributeNameStyle}" />
+                    <TextBlock Text="{Binding StringFormat='{}{0:n}', Path=EhpTerms.EhpTerm, Converter={StaticResource TermEvaluateConverter}, FallbackValue='', UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NumberValueStyle}" />
+                </Grid>
+            </StackPanel>
         </StackPanel>
         <TextBlock Grid.Row="1" Text="{Binding StringFormat='Last updated: {0:G}', Path=HeroViewModel.ActualHero.LastUpdated, FallbackValue=''}" 
                        Foreground="Gray" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" TextWrapping="Wrap"/>
