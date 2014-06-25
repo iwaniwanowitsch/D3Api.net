@@ -55,6 +55,21 @@
                 </Grid>
 
                 <Grid>
+                    <TextBlock Text="Elemental Damage:" Style="{StaticResource AttributeNameStyle}" />
+                    <TextBlock Text="{Binding StringFormat='{}{0:n}', Path=DamageTerms.DamageWithElemental, Converter={StaticResource TermEvaluateConverter}, FallbackValue='', UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NumberValueStyle}" />
+                </Grid>
+
+                <Grid>
+                    <TextBlock Text="vs Elites Damage:" Style="{StaticResource AttributeNameStyle}" />
+                    <TextBlock Text="{Binding StringFormat='{}{0:n}', Path=DamageTerms.DamageWithElementalAndVsElites, Converter={StaticResource TermEvaluateConverter}, FallbackValue='', UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NumberValueStyle}" />
+                </Grid>
+
+                <Grid>
+                    <TextBlock Text="Attacks per second:" Style="{StaticResource AttributeNameStyle}" />
+                    <TextBlock Text="{Binding StringFormat='{}{0:n}', Path=DamageTerms.AttacksPerSecond, Converter={StaticResource TermEvaluateConverter}, FallbackValue='', UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NumberValueStyle}" />
+                </Grid>
+
+                <Grid>
                     <TextBlock Text="Weapon Dmg:" Style="{StaticResource AttributeNameStyle}" />
                     <TextBlock Text="{Binding StringFormat='{}{0:n}', Path=DamageTerms.WeaponDmgTerm, Converter={StaticResource TermEvaluateConverter}, FallbackValue='', UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NumberValueStyle}" />
                 </Grid>

@@ -16,6 +16,8 @@ namespace D3ApiDotNet.Core.Calculation
         private int? _heroLvl;
         private IAttributeFetcher _mainStatFetcher;
 
+        private readonly ElementalTermFactories _elementalTermsFactory;
+
         private readonly WeaponAvgDmgFormulaFactory _weaponAvgDmgFactory;
         private readonly WeaponDmgFormulaFactory _weaponDmgFactory;
         private readonly WeaponApsFormulaFactory _weaponApsFactory;
@@ -25,11 +27,8 @@ namespace D3ApiDotNet.Core.Calculation
         private readonly BonusAtkSpdFormulaFactory _bonusAtkSpdFactory;
         private readonly MainAttributeFormulaFactory _mainStatFactory;
         private readonly DamageFormulaFactory _damageFactory;
-        private readonly ITerm _attacksPerSecond;
         private readonly ElementalDamageFormulaFactory _elementalDamageFactory;
         private readonly VsElitesDamageFormulaFactory _vsElitesDamageFactory;
-        private readonly ITerm _damageWithElemental;
-        private readonly ITerm _damageWithElementalAndVsElites;
         private readonly ResourceCostReductionFormulaFactory _resourceCostReductionFactory;
         private readonly CooldownReductionFormulaFactory _cooldownReductionFactory;
 
@@ -44,52 +43,47 @@ namespace D3ApiDotNet.Core.Calculation
             var sumFactory = new SumTermFactory();
             var productFactory = new ProductTermFactory();
             var divisionFactory = new DivisionTermFactory();
-            var elementalTermsFactory = new ElementalTermFactories(new BaseTermFactory(), sumFactory, productFactory, new SubstractionTermFactory(), divisionFactory, new PercentSumTermFactory(), new AverageTermFactory(sumFactory, productFactory, divisionFactory), new MaxTermFactory());
+            _elementalTermsFactory = new ElementalTermFactories(new BaseTermFactory(), sumFactory, productFactory, new SubstractionTermFactory(), divisionFactory, new PercentSumTermFactory(), new AverageTermFactory(sumFactory, productFactory, divisionFactory), new MaxTermFactory());
 
-            _weaponAvgDmgFactory = new WeaponAvgDmgFormulaFactory(elementalTermsFactory, itemListData, new MinWeaponDamageFetcher(), new DeltaWeaponDamageFetcher(), new PercentWeaponDamageFetcher());
-            _weaponDmgFactory = new WeaponDmgFormulaFactory(elementalTermsFactory, itemListData, _weaponAvgDmgFactory, new BonusAvgDmgFormulaFactory(elementalTermsFactory, itemListData, new MinDamageFetcher(), new DeltaDamageFetcher()));
-            _weaponApsFactory = new WeaponApsFormulaFactory(elementalTermsFactory, itemListData, new ApsWeaponFetcher(), new ApsPercentWeaponFetcher());
-            _weaponDpsFactory = new WeaponDpsFormulaFactory(elementalTermsFactory, _weaponDmgFactory, _weaponApsFactory);
+            _weaponAvgDmgFactory = new WeaponAvgDmgFormulaFactory(_elementalTermsFactory, itemListData, new MinWeaponDamageFetcher(), new DeltaWeaponDamageFetcher(), new PercentWeaponDamageFetcher());
+            _weaponDmgFactory = new WeaponDmgFormulaFactory(_elementalTermsFactory, itemListData, _weaponAvgDmgFactory, new BonusAvgDmgFormulaFactory(_elementalTermsFactory, itemListData, new MinDamageFetcher(), new DeltaDamageFetcher()));
+            _weaponApsFactory = new WeaponApsFormulaFactory(_elementalTermsFactory, itemListData, new ApsWeaponFetcher(), new ApsPercentWeaponFetcher());
+            _weaponDpsFactory = new WeaponDpsFormulaFactory(_elementalTermsFactory, _weaponDmgFactory, _weaponApsFactory);
 
-            _criticalHitDamageFactory = new CriticalHitDamageFormulaFactory(elementalTermsFactory, itemListData, new CritDamageFetcher());
-            _criticalHitChanceFactory = new CriticalHitChanceFormulaFactory(elementalTermsFactory, itemListData, new CritPercentFetcher());
-            _bonusAtkSpdFactory = new BonusAtkSpdFormulaFactory(elementalTermsFactory, itemListData, new ApsPercentFetcher());
-            _mainStatFactory = new MainAttributeFormulaFactory(elementalTermsFactory, MainStatFetcher, itemListData, HeroLvl.Value);
+            _criticalHitDamageFactory = new CriticalHitDamageFormulaFactory(_elementalTermsFactory, itemListData, new CritDamageFetcher());
+            _criticalHitChanceFactory = new CriticalHitChanceFormulaFactory(_elementalTermsFactory, itemListData, new CritPercentFetcher());
+            _bonusAtkSpdFactory = new BonusAtkSpdFormulaFactory(_elementalTermsFactory, itemListData, new ApsPercentFetcher());
+            _mainStatFactory = new MainAttributeFormulaFactory(_elementalTermsFactory, MainStatFetcher, itemListData, HeroLvl.Value);
 
-            _damageFactory = new DamageFormulaFactory(elementalTermsFactory, _weaponDpsFactory, _criticalHitDamageFactory, _criticalHitChanceFactory, _bonusAtkSpdFactory, _mainStatFactory);
+            _damageFactory = new DamageFormulaFactory(_elementalTermsFactory, _weaponDpsFactory, _criticalHitDamageFactory, _criticalHitChanceFactory, _bonusAtkSpdFactory, _mainStatFactory);
 
-            _attacksPerSecond = elementalTermsFactory.ProductFactory.CreateFormulaTerm(_weaponApsFactory.CreateFormula(), elementalTermsFactory.PercentSumFactory.CreateFormulaTerm(_bonusAtkSpdFactory.CreateFormula()));
-
-            _elementalDamageFactory = new ElementalDamageFormulaFactory(elementalTermsFactory,
-                new SingleElementalDamageFormulaFactory<PhysicalBonusDamageFetcher>(elementalTermsFactory, itemListData, new PhysicalBonusDamageFetcher()),
-                new SingleElementalDamageFormulaFactory<ColdBonusDamageFetcher>(elementalTermsFactory, itemListData, new ColdBonusDamageFetcher()),
-                new SingleElementalDamageFormulaFactory<FireBonusDamageFetcher>(elementalTermsFactory, itemListData, new FireBonusDamageFetcher()),
-                new SingleElementalDamageFormulaFactory<LightningBonusDamageFetcher>(elementalTermsFactory, itemListData, new LightningBonusDamageFetcher()),
-                new SingleElementalDamageFormulaFactory<PoisonBonusDamageFetcher>(elementalTermsFactory, itemListData, new PoisonBonusDamageFetcher()),
-                new SingleElementalDamageFormulaFactory<ArcaneBonusDamageFetcher>(elementalTermsFactory, itemListData, new ArcaneBonusDamageFetcher())
+            _elementalDamageFactory = new ElementalDamageFormulaFactory(_elementalTermsFactory,
+                new SingleElementalDamageFormulaFactory<PhysicalBonusDamageFetcher>(_elementalTermsFactory, itemListData, new PhysicalBonusDamageFetcher()),
+                new SingleElementalDamageFormulaFactory<ColdBonusDamageFetcher>(_elementalTermsFactory, itemListData, new ColdBonusDamageFetcher()),
+                new SingleElementalDamageFormulaFactory<FireBonusDamageFetcher>(_elementalTermsFactory, itemListData, new FireBonusDamageFetcher()),
+                new SingleElementalDamageFormulaFactory<LightningBonusDamageFetcher>(_elementalTermsFactory, itemListData, new LightningBonusDamageFetcher()),
+                new SingleElementalDamageFormulaFactory<PoisonBonusDamageFetcher>(_elementalTermsFactory, itemListData, new PoisonBonusDamageFetcher()),
+                new SingleElementalDamageFormulaFactory<ArcaneBonusDamageFetcher>(_elementalTermsFactory, itemListData, new ArcaneBonusDamageFetcher())
             );
-            _vsElitesDamageFactory = new VsElitesDamageFormulaFactory(elementalTermsFactory, itemListData, new ElitesBonusDamageFetcher());
+            _vsElitesDamageFactory = new VsElitesDamageFormulaFactory(_elementalTermsFactory, itemListData, new ElitesBonusDamageFetcher());
 
-            _damageWithElemental = elementalTermsFactory.ProductFactory.CreateFormulaTerm(_damageFactory.CreateFormula(), elementalTermsFactory.PercentSumFactory.CreateFormulaTerm(_elementalDamageFactory.CreateFormula()));
-            _damageWithElementalAndVsElites = elementalTermsFactory.ProductFactory.CreateFormulaTerm(DamageWithElemental, elementalTermsFactory.PercentSumFactory.CreateFormulaTerm(_vsElitesDamageFactory.CreateFormula()));
-
-            _resourceCostReductionFactory = new ResourceCostReductionFormulaFactory(elementalTermsFactory, itemListData, new ResourceCostReductionFetcher());
-            _cooldownReductionFactory = new CooldownReductionFormulaFactory(elementalTermsFactory, itemListData, new CooldownReductionFetcher());
+            _resourceCostReductionFactory = new ResourceCostReductionFormulaFactory(_elementalTermsFactory, itemListData, new ResourceCostReductionFetcher());
+            _cooldownReductionFactory = new CooldownReductionFormulaFactory(_elementalTermsFactory, itemListData, new CooldownReductionFetcher());
         }
 
         public ITerm DamageWithElemental
         {
-            get { return _damageWithElemental; }
+            get { return _elementalTermsFactory.ProductFactory.CreateFormulaTerm(_damageFactory.CreateFormula(), _elementalTermsFactory.PercentSumFactory.CreateFormulaTerm(_elementalDamageFactory.CreateFormula())); }
         }
 
         public ITerm DamageWithElementalAndVsElites
         {
-            get { return _damageWithElementalAndVsElites; }
+            get { return _elementalTermsFactory.ProductFactory.CreateFormulaTerm(DamageWithElemental, _elementalTermsFactory.PercentSumFactory.CreateFormulaTerm(_vsElitesDamageFactory.CreateFormula())); }
         }
 
         public ITerm AttacksPerSecond
         {
-            get { return _attacksPerSecond; }
+            get { return _elementalTermsFactory.ProductFactory.CreateFormulaTerm(_weaponApsFactory.CreateFormula(), _elementalTermsFactory.PercentSumFactory.CreateFormulaTerm(_bonusAtkSpdFactory.CreateFormula())); }
         }
 
         public ITerm WeaponAvgDmgTerm
