@@ -106,7 +106,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="SampleData\HeroNotifyPropertyChangedSampleData.cs" />
+    <Compile Include="SampleData\HeroViewModelSampleData.cs" />
     <Compile Include="SampleData\ItemDetailNotifyPropertyChangedSampleData.cs" />
     <Compile Include="SampleData\ItemViewModelSampleData.cs" />
     <Compile Include="SampleData\LoadDataViewModelSampleData.cs" />
